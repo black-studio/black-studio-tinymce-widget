@@ -1,0 +1,46 @@
+/* CSS Document */
+
+#mce_fullscreen_container {
+	background-color: white;
+}
+.editor_container {
+	border-color: #CCC #CCC #DFDFDF;
+	border-style: solid;
+	border-width: 1px;
+	border-collapse: separate;
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-top-left-radius: 3px;
+	-khtml-border-top-right-radius: 3px;
+	-khtml-border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+}
+.editor_toggle_buttons {
+	height: 30px;
+	margin-right: 15px;
+}
+.editor_toggle_buttons a {
+	height: 18px;
+	margin: 5px 5px 0 0;
+	padding: 4px 5px 2px;
+	float: right;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-top-left-radius: 3px;
+	-khtml-border-top-right-radius: 3px;
+	-khtml-border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	background-color: #F1F1F1;
+	border-color: #DFDFDF #DFDFDF #CCC;
+	color: #999;
+}
+.editor_toggle_buttons a.active {
+	border-color: #CCC #CCC #E9E9E9;
+	background-color: #E9E9E9;
+	color: #333;
+}
