@@ -19,6 +19,7 @@
 .editor_toggle_buttons {
 	height: 30px;
 	margin-right: 15px;
+	float: right;
 }
 .editor_toggle_buttons a {
 	height: 18px;
@@ -43,4 +44,16 @@
 	border-color: #CCC #CCC #E9E9E9;
 	background-color: #E9E9E9;
 	color: #333;
+}
+.editor_media_buttons {
+	cursor: default;
+	padding: 8px 8px 0;
+	height: 22px;
+}
+.editor_media_buttons a {
+	cursor: pointer;
+	padding: 0 0 5px 10px;
+}
+.editor_media_buttons img {
+	vertical-align: middle;
 }
