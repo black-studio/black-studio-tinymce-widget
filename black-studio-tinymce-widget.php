@@ -3,11 +3,14 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.6.2
+Version: 0.6.3
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
+
+global $black_studio_tinymce_widget_version;
+$black_studio_tinymce_widget_version = "0.6.3";
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
@@ -60,15 +63,6 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 			<textarea class="widefat" rows="16" cols="40" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
         </div>
         <?php
-		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' && $type == 'visual') {
-			?>
-			<script type="text/javascript" language="javascript">
-                /* <![CDATA[ */
-                black_studio_activate_visual_editor('<?php echo $this->get_field_id('text'); ?>');
-                /* ]]> */
-            </script>
-			<?php
-		}
 	}
 }
 
@@ -79,7 +73,7 @@ function black_studio_tinymce_load_tiny_mce() {
 	wp_tiny_mce(false, array());
 }
 
-/* tinyMCE setup customization */
+/* TinyMCE setup customization */
 add_filter('tiny_mce_before_init', 'black_studio_tinymce_init_editor');
 function black_studio_tinymce_init_editor($initArray) {
 	// Remove WP fullscreen mode and set the native tinyMCE fullscreen mode
@@ -108,9 +102,10 @@ function black_studio_tinymce_init() {
 /* Widget js loading */
 add_action("admin_print_scripts", "black_studio_tinymce_scripts");
 function black_studio_tinymce_scripts() {
+	global $black_studio_tinymce_widget_version;
 	add_thickbox();
 	wp_enqueue_script('media-upload');
-    wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.js', __FILE__), array('jquery', 'editor', 'thickbox', 'media-upload'));
+    wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.js', __FILE__), array('jquery', 'editor', 'thickbox', 'media-upload'), $black_studio_tinymce_widget_version);
 }
 
 /* Widget css loading */
