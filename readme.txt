@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/pagamento/
 Tags: wysiwyg, widget, tinymce, editor, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, visual editor widget
 Requires at least: 3.2.0
 Tested up to: 3.2.1
-Stable tag: 0.6
+Stable tag: 0.6.1
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -33,6 +33,9 @@ This section describes how to install the plugin and get it working.
 1. A screenshot of the TinyMCE Widget
 
 == Changelog ==
+
+= 0.6.1 =
+* Fixed Javascript issue preventing editor to show up in some cases
 
 = 0.6 =
 * Added support for Wordpress Media Library

@@ -15,11 +15,15 @@ function black_studio_deactivate_visual_editor(id) {
     }
 }
 // Show editor (used upon opening the widget)
-function black_studio_show_visual_editor() {
-	jQuery('input[id^=widget-black-studio-tinymce][id$=type][value=visual]').each(function() {
-		txt_area = jQuery('textarea[id^=widget-black-studio-tinymce]', jQuery(this).parents('div.widget'));
-		if (!txt_area.is(':hidden')) {
+function black_studio_deferred_show_visual_editor(id) {
+	jQuery('div.widget:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]').each(function() {
+		// If textarea is visible and animation has completed then trigger a click to Visual button and enable the editor
+		if (typeof(tinyMCE.get(id)) != "object" && jQuery('div.widget:has(#' + id + ') :animated').size() == 0 && jQuery('#' + id).is(':visible')) {
 			jQuery('a[id^=widget-black-studio-tinymce][id$=visual]', jQuery(this).parents('div.widget')).click();
+		}
+		// Otherwise wait and retry later (animation ongoing)
+		else {
+			setTimeout(function(){black_studio_deferred_show_visual_editor(id);id=null;}, 100);
 		}
 	});
 }
@@ -27,7 +31,8 @@ function black_studio_show_visual_editor() {
 jQuery(document).ready(function(){
 	// Event handler for widget opening button
 	jQuery('div.widget:has(textarea[id^=widget-black-studio-tinymce]) a.widget-action').live('click', function(){
- 		setTimeout(black_studio_show_visual_editor, 500); // This is delayed to let the animation be completed
+		txt_area = jQuery('textarea[id^=widget-black-studio-tinymce]', jQuery(this).parents('div.widget'));
+		black_studio_deferred_show_visual_editor(txt_area.attr('id'));
 		return false;
     });
 	// Event handler for widget saving button
