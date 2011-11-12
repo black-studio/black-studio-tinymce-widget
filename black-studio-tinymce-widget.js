@@ -28,6 +28,7 @@ function black_studio_deferred_show_visual_editor(id) {
 	});
 }
 
+	var edCanvas;
 jQuery(document).ready(function(){
 	// Event handler for widget opening button
 	jQuery('div.widget:has(textarea[id^=widget-black-studio-tinymce]) a.widget-action').live('click', function(){
@@ -52,7 +53,7 @@ jQuery(document).ready(function(){
 		jQuery('input[id^=widget-black-studio-tinymce][id$=type]', jQuery(this).parents('div.widget')).val('visual');
 		black_studio_activate_visual_editor(jQuery('textarea[id^=widget-black-studio-tinymce]', jQuery(this).parents('div.widget')).attr('id'));
  		return false;
-  });
+	});
 	// Event handler for html switch button
 	jQuery('a[id^=widget-black-studio-tinymce][id$=html]').live('click', function(){
 		jQuery(this).addClass('active');
@@ -60,5 +61,9 @@ jQuery(document).ready(function(){
 		jQuery('input[id^=widget-black-studio-tinymce][id$=type]', jQuery(this).parents('div.widget')).val('html');
 		black_studio_deactivate_visual_editor(jQuery('textarea[id^=widget-black-studio-tinymce]', jQuery(this).parents('div.widget')).attr('id'));
 		return false;
-   });
+	});
+	// Set edCanvas variable when adding from media library (necessary when used in HTML mode)
+	jQuery('.editor_media_buttons a').live('click', function(){
+		edCanvas = jQuery('textarea[id^=widget-black-studio-tinymce]', jQuery(this).parents('div.widget')).get();
+	});
 });
