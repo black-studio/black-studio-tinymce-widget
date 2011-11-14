@@ -3,14 +3,14 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.6.3
+Version: 0.6.4
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
 
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = "0.6.3";
+$black_studio_tinymce_widget_version = "0.6.4"; // This is used internally - should be the same reported on the plugin header
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
@@ -66,15 +66,37 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 	}
 }
 
+/* Load localization */
+load_plugin_textdomain('black-studio-tinymce-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' ); 
+
+/* Widget initialization */
+add_action('widgets_init', 'black_studio_tinymce_init');
+function black_studio_tinymce_init() {
+	if ( !is_blog_installed() )
+		return;
+	register_widget('WP_Widget_Black_Studio_TinyMCE');
+}
+
+/* Add actions and filter (only in widgets admin page) */
+if ($pagenow == "widgets.php") {
+	add_action( 'admin_head', 'black_studio_tinymce_load_tiny_mce');
+	add_filter( 'tiny_mce_before_init', 'black_studio_tinymce_init_editor', 15);
+	add_action( 'admin_print_scripts', 'black_studio_tinymce_scripts');
+	add_action( 'admin_print_styles', 'black_studio_tinymce_styles');
+	add_action( 'admin_print_footer_scripts', 'black_studio_tinymce_preload_dialogs');
+}
+
 /* Instantiate tinyMCE editor */
-add_action('admin_head', 'black_studio_tinymce_load_tiny_mce');
 function black_studio_tinymce_load_tiny_mce() {
+	// Remove filters added from "After the deadline" plugin, to avoid conflicts
+	remove_filter( 'mce_external_plugins', 'add_AtD_tinymce_plugin' );
+	remove_filter( 'mce_buttons', 'register_AtD_button' );
+	remove_filter( 'tiny_mce_before_init', 'AtD_change_mce_settings' );
 	//remove_all_filters('mce_external_plugins');
 	wp_tiny_mce(false, array());
 }
 
 /* TinyMCE setup customization */
-add_filter('tiny_mce_before_init', 'black_studio_tinymce_init_editor');
 function black_studio_tinymce_init_editor($initArray) {
 	// Remove WP fullscreen mode and set the native tinyMCE fullscreen mode
 	$plugins = explode(',', $initArray['plugins']);
@@ -91,16 +113,7 @@ function black_studio_tinymce_init_editor($initArray) {
 	return $initArray;
 }
 
-/* Widget initialization */
-add_action('widgets_init', 'black_studio_tinymce_init');
-function black_studio_tinymce_init() {
-	if ( !is_blog_installed() )
-		return;
-	register_widget('WP_Widget_Black_Studio_TinyMCE');
-}
-
 /* Widget js loading */
-add_action("admin_print_scripts", "black_studio_tinymce_scripts");
 function black_studio_tinymce_scripts() {
 	global $black_studio_tinymce_widget_version;
 	add_thickbox();
@@ -109,18 +122,14 @@ function black_studio_tinymce_scripts() {
 }
 
 /* Widget css loading */
-add_action("admin_print_styles", "black_studio_tinymce_styles");
 function black_studio_tinymce_styles() {
 	wp_enqueue_style('thickbox');
     wp_enqueue_style('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.css', __FILE__));
 }
 
 /* Preload WP editor dialogs */
-add_action( 'admin_print_footer_scripts', 'black_studio_tinymce_preload_dialogs');
 function black_studio_tinymce_preload_dialogs() {
 	wp_preload_dialogs( array( 'plugins' => 'wpdialogs,wplink,wpfullscreen' ) );
 }
 
-/* Load localization */
-load_plugin_textdomain('black-studio-tinymce-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' ); 
 ?>

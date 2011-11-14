@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/pagamento/
 Tags: wysiwyg, widget, tinymce, editor, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, visual editor widget
 Requires at least: 3.2.0
 Tested up to: 3.2.1
-Stable tag: 0.6.3
+Stable tag: 0.6.4
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -33,6 +33,10 @@ This section describes how to install the plugin and get it working.
 1. A screenshot of the TinyMCE Widget
 
 == Changelog ==
+
+= 0.6.4 =
+* Fixed compatibility issue with "Jetpack / After the Deadline" plugin
+* Optimization of js/css loading
 
 = 0.6.3 =
 * Fixed Javascript issue preventing the plugin working correctly with some browsers
