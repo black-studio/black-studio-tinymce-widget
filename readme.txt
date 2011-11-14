@@ -39,7 +39,7 @@ This section describes how to install the plugin and get it working.
 * Optimization of js/css loading
 
 = 0.6.3 =
-* Fixed Javascript issue preventing the plugin working correctly with some browsers
+* Fixed Javascript issue preventing the plugin from working correctly with some browsers
 
 = 0.6.2 =
 * Fixed Javascript issue with Media Library inserts in HTML mode
