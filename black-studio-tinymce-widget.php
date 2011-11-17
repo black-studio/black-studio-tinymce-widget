@@ -3,14 +3,14 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.6.4
+Version: 0.6.5
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
 
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = "0.6.4"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "0.6.5"; // This is used internally - should be the same reported on the plugin header
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
@@ -80,7 +80,7 @@ function black_studio_tinymce_init() {
 /* Add actions and filter (only in widgets admin page) */
 if ($pagenow == "widgets.php") {
 	add_action( 'admin_head', 'black_studio_tinymce_load_tiny_mce');
-	add_filter( 'tiny_mce_before_init', 'black_studio_tinymce_init_editor', 15);
+	add_filter( 'tiny_mce_before_init', 'black_studio_tinymce_init_editor', 20);
 	add_action( 'admin_print_scripts', 'black_studio_tinymce_scripts');
 	add_action( 'admin_print_styles', 'black_studio_tinymce_styles');
 	add_action( 'admin_print_footer_scripts', 'black_studio_tinymce_preload_dialogs');
@@ -109,6 +109,20 @@ function black_studio_tinymce_init_editor($initArray) {
 	$initArray['plugins'] = implode(',', $plugins);
 	// Remove the "More" toolbar button
 	$initArray['theme_advanced_buttons1'] = str_replace(',wp_more', '', $initArray['theme_advanced_buttons1']);
+	// Do not remove linebreaks
+	$initArray['remove_linebreaks'] = false;
+	// Convert newline characters to BR tags
+	$initArray['convert_newlines_to_brs'] = false; 
+	// Force P newlines
+	$initArray['force_p_newlines'] = true; 
+	// Force P newlines
+	$initArray['force_br_newlines'] = false; 
+	// Do not remove redundant BR tags
+	$initArray['remove_redundant_brs'] = false;
+	// Force p block
+	$initArray['forced_root_block'] = 'p';
+	// Apply source formatting
+	$initArray['apply_source_formatting '] = true;
 	// Return modified settings
 	return $initArray;
 }

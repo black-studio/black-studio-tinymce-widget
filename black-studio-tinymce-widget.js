@@ -10,7 +10,9 @@ function black_studio_activate_visual_editor(id) {
 function black_studio_deactivate_visual_editor(id) {
 	if ( typeof( tinyMCE ) == "object" && typeof( tinyMCE.execCommand ) == "function" ) {
 		if (typeof(tinyMCE.get(id)) == "object") {
+			content = tinyMCE.get(id).getContent();
 			tinyMCE.execCommand("mceRemoveControl", false, id);
+			jQuery('textarea#'+id).val(content);
 		}
     }
 }
@@ -57,10 +59,7 @@ jQuery(document).ready(function(){
 	// Event handler for widget saving button
 	jQuery('input[id^=widget-black-studio-tinymce][id$=savewidget]').live('click', function(){
 		txt_area = jQuery('textarea[id^=widget-black-studio-tinymce]', jQuery(this).parents('div.widget'));
-		editor = tinyMCE.get(txt_area.attr('id'));
-		if (typeof(editor) == "object") {
-			content = editor.getContent()
-			txt_area.val(content);
+		if (typeof(tinyMCE.get(txt_area.attr('id'))) == "object") {
 			black_studio_deactivate_visual_editor(txt_area.attr('id'));
 		}
 		// Event handler for ajax complete
@@ -70,11 +69,6 @@ jQuery(document).ready(function(){
 		});
 		return true;
     });
-	// Event handler for ajax complete
-	//jQuery('input[id^=widget-black-studio-tinymce][id$=savewidget]').ajaxSuccess(function(event, xhr, settings) {
-	//	txt_area = jQuery('textarea[id^=widget-black-studio-tinymce]', jQuery(this).parents('div.widget'));
-	//	black_studio_ajax_deferred_activate_visual_editor(txt_area.attr('id'));
-	//});
 	// Event handler for visual switch button
 	jQuery('a[id^=widget-black-studio-tinymce][id$=visual]').live('click', function(){
 		jQuery(this).addClass('active');
