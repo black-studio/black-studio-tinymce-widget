@@ -3,6 +3,11 @@
 #mce_fullscreen_container {
 	background-color: white;
 }
+
+#wp-black-studio-tinymce-widget-wrap {
+	display: none;
+}
+
 .editor_container {
 	border-color: #CCC #CCC #DFDFDF;
 	border-style: solid;
@@ -52,8 +57,11 @@
 }
 .editor_media_buttons a {
 	cursor: pointer;
-	padding: 0 0 5px 10px;
+	text-decoration: none;
+	color: #333;
+	font-size: 12px;
 }
 .editor_media_buttons img {
 	vertical-align: middle;
+	padding: 0 4px;
 }

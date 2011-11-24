@@ -3,14 +3,14 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.6.5
+Version: 0.7
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
 
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = "0.6.5"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "0.7"; // This is used internally - should be the same reported on the plugin header
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
@@ -46,8 +46,13 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 	function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'type' => 'visual' ) );
 		$title = strip_tags($instance['title']);
-		$text = esc_textarea($instance['text']);
-		$type = esc_textarea($instance['type']);
+		if (function_exists('esc_textarea')) {
+			$text = esc_textarea($instance['text']);
+		}
+		else {
+			$text = stripslashes( wp_filter_post_kses( addslashes( $instance['text'] ) ) );
+		}
+		$type = esc_attr($instance['type']);
 ?>
 		<input id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>" type="hidden" value="<?php echo esc_attr($type); ?>" />
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
@@ -77,13 +82,13 @@ function black_studio_tinymce_init() {
 	register_widget('WP_Widget_Black_Studio_TinyMCE');
 }
 
-/* Add actions and filter (only in widgets admin page) */
+/* Add actions and filters (only in widgets admin page) */
 if ($pagenow == "widgets.php") {
 	add_action( 'admin_head', 'black_studio_tinymce_load_tiny_mce');
 	add_filter( 'tiny_mce_before_init', 'black_studio_tinymce_init_editor', 20);
 	add_action( 'admin_print_scripts', 'black_studio_tinymce_scripts');
 	add_action( 'admin_print_styles', 'black_studio_tinymce_styles');
-	add_action( 'admin_print_footer_scripts', 'black_studio_tinymce_preload_dialogs');
+	add_action( 'admin_print_footer_scripts', 'black_studio_tinymce_footer_scripts');
 }
 
 /* Instantiate tinyMCE editor */
@@ -93,20 +98,21 @@ function black_studio_tinymce_load_tiny_mce() {
 	remove_filter( 'mce_buttons', 'register_AtD_button' );
 	remove_filter( 'tiny_mce_before_init', 'AtD_change_mce_settings' );
 	//remove_all_filters('mce_external_plugins');
-	wp_tiny_mce(false, array());
 }
 
 /* TinyMCE setup customization */
 function black_studio_tinymce_init_editor($initArray) {
 	// Remove WP fullscreen mode and set the native tinyMCE fullscreen mode
-	$plugins = explode(',', $initArray['plugins']);
-	if (isset($plugins['wpfullscreen'])) {
-		unset($plugins['wpfullscreen']);
+	if (get_bloginfo('version') < "3.3") {
+		$plugins = explode(',', $initArray['plugins']);
+		if (isset($plugins['wpfullscreen'])) {
+			unset($plugins['wpfullscreen']);
+		}
+		if (!isset($plugins['fullscreen'])) {
+			$plugins[] = 'fullscreen';
+		}
+		$initArray['plugins'] = implode(',', $plugins);
 	}
-	if (!isset($plugins['fullscreen'])) {
-		$plugins[] = 'fullscreen';
-	}
-	$initArray['plugins'] = implode(',', $plugins);
 	// Remove the "More" toolbar button
 	$initArray['theme_advanced_buttons1'] = str_replace(',wp_more', '', $initArray['theme_advanced_buttons1']);
 	// Do not remove linebreaks
@@ -131,19 +137,53 @@ function black_studio_tinymce_init_editor($initArray) {
 function black_studio_tinymce_scripts() {
 	global $black_studio_tinymce_widget_version;
 	add_thickbox();
-	wp_enqueue_script('media-upload');
-    wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.js', __FILE__), array('jquery', 'editor', 'thickbox', 'media-upload'), $black_studio_tinymce_widget_version);
+	if (get_bloginfo('version') >= "3.3") {
+		wp_enqueue_script('wplink');
+		wp_enqueue_script('wpdialogs-popup');
+	}
+	else {
+		wp_enqueue_script('media-upload');
+	}
+    wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.js', __FILE__), array('jquery'), $black_studio_tinymce_widget_version);
 }
 
 /* Widget css loading */
 function black_studio_tinymce_styles() {
-	wp_enqueue_style('thickbox');
-    wp_enqueue_style('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.css', __FILE__));
+	global $black_studio_tinymce_widget_version;
+	if (get_bloginfo('version') < "3.3") {
+		wp_enqueue_style('thickbox');
+	}
+	else {
+		wp_enqueue_style('wp-jquery-ui-dialog');
+	}
+    wp_enqueue_style('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.css', __FILE__), array(), $black_studio_tinymce_widget_version);
 }
 
-/* Preload WP editor dialogs */
-function black_studio_tinymce_preload_dialogs() {
-	wp_preload_dialogs( array( 'plugins' => 'wpdialogs,wplink,wpfullscreen' ) );
+
+/* Footer script */
+function black_studio_tinymce_footer_scripts() {
+	// Setup for WP 3.1 and previous versions
+	if (get_bloginfo('version') < "3.2") {
+		if (function_exists('wp_tiny_mce')) {
+			wp_tiny_mce(false, array());
+		}
+		if(function_exists('wp_tiny_mce_preload_dialogs')) {
+			wp_tiny_mce_preload_dialogs();
+		}
+	}
+	// Setup for WP 3.2.x
+	else if (get_bloginfo('version') < "3.3") {
+		if (function_exists('wp_tiny_mce')) {
+			wp_tiny_mce(false, array());
+		}
+		if(function_exists('wp_preload_dialogs')) {
+			wp_preload_dialogs( array( 'plugins' => 'wpdialogs,wplink,wpfullscreen' ) );
+		}
+	}
+	// Setup for WP 3.3 - New Editor API
+	else {
+		wp_editor('', 'black-studio-tinymce-widget');
+	}
 }
 
 ?>
