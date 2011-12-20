@@ -44,7 +44,7 @@ This section describes how to install the plugin and get it working.
 * Added support for Wordpress networks (Multisite)
 
 = 0.7 =
-* Added compatibility for upcoming Wordpress 3.3 (currently beta 4)
+* Added compatibility for upcoming Wordpress 3.3
 * Added compatibility for previous Wordpress 3.0 and 3.1
 * Optimization/compression of javascript code
 
