@@ -3,14 +3,14 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.8
+Version: 0.8.1
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
 
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = "0.8"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "0.8.1"; // This is used internally - should be the same reported on the plugin header
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
@@ -145,9 +145,7 @@ function black_studio_tinymce_scripts() {
 		wp_enqueue_script('wplink');
 		wp_enqueue_script('wpdialogs-popup');
 	}
-	else {
-		wp_enqueue_script('media-upload');
-	}
+	wp_enqueue_script('media-upload');
     wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.js', __FILE__), array('jquery'), $black_studio_tinymce_widget_version);
 }
 
