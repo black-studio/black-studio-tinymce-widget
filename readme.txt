@@ -3,8 +3,8 @@ Contributors: marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/pagamento/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
-Tested up to: 3.3-beta4
-Stable tag: 0.7
+Tested up to: 3.3
+Stable tag: 0.8.1
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -18,6 +18,7 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 * Insert images/videos from Wordpress Media Library
 * Insert links to existing Wordpress pages/posts
 * Fullscreen editing mode supported
+* Wordpress networks (Multisite) supported
 * No annoying ads/nag-screens
 
 == Installation ==
@@ -35,6 +36,12 @@ This section describes how to install the plugin and get it working.
 1. A screenshot of the TinyMCE Widget
 
 == Changelog ==
+
+= 0.8.1 =
+* Fixed issue when inserting images on Wordpress 3.3
+
+= 0.8 =
+* Added support for Wordpress networks (Multisite)
 
 = 0.7 =
 * Added compatibility for upcoming Wordpress 3.3 (currently beta 4)
