@@ -3,14 +3,14 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.8.2
+Version: 0.9
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
 
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = "0.8.2"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "0.9"; // This is used internally - should be the same reported on the plugin header
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
@@ -24,7 +24,12 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract($args);
 		$title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title'], $instance, $this->id_base);
-		$text = do_shortcode( apply_filters( 'widget_text', $instance['text'], $instance ) );
+		$text = apply_filters( 'widget_text', $instance['text'], $instance );
+		if( function_exists( 'icl_t' )) {
+			$title = icl_t( "Widgets", 'widget title - ' . md5 ( $title ), $title, $hasTranslation, true );
+			$text = icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number /*md5 ( $text )*/, $text, $hasTranslation, true );
+		}
+		$text = do_shortcode( $text );
 		echo $before_widget;
 		if ( !empty( $title ) ) { echo $before_title . $title . $after_title; } ?>
 			<div class="textwidget"><?php echo $text; ?></div>
@@ -40,6 +45,10 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 		else
 			$instance['text'] = stripslashes( wp_filter_post_kses( addslashes($new_instance['text']) ) ); // wp_filter_post_kses() expects slashed
 		$instance['type'] = strip_tags($new_instance['type']);
+		if( function_exists( 'icl_register_string' )) {
+			//icl_register_string( "Widgets", 'widget title - ' . $this->id_base . '-' . $this->number /* md5 ( apply_filters( 'widget_title', $instance['title'] ))*/, apply_filters( 'widget_title', $instance['title'] )); // This is handled automatically by WPML
+			icl_register_string( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number  /* md5 ( apply_filters( 'widget_text', $instance['text'] ))*/, apply_filters( 'widget_text', $instance['text'] ));
+		}
 		return $instance;
 	}
 
