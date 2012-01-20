@@ -75,4 +75,4 @@ This section describes how to install the plugin and get it working.
 * Added support for Wordpress Media Library
 
 = 0.5 =
-* First Beta release
+* First Beta release 
