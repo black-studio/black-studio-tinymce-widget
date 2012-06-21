@@ -1,10 +1,10 @@
 === Black Studio TinyMCE Widget ===
 Contributors: marcochiesi, thedarkmist
-Donate link: http://www.blackstudio.it/pagamento/
+Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 0.9.1
+Tested up to: 3.4
+Stable tag: 0.9.2
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -22,6 +22,12 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 * WPML (Multilanguage) supported
 * No annoying ads/nag-screens
 
+= Links =
+
+* [Plugin's web page](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
+* [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget)
+
+
 == Installation ==
 
 This section describes how to install the plugin and get it working.
@@ -34,9 +40,13 @@ This section describes how to install the plugin and get it working.
 
 == Screenshots ==
 
-1. A screenshot of the TinyMCE Widget
+1. Black Studio TinyMCE Widget editor window
+2. Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin
 
 == Changelog ==
+
+= 0.9.2 =
+* Optimized for use in conjunction with Ultimate TinyMCE plugin
 
 = 0.9.1 =
 * Added spanish translation (Contributor: Lucia García Martínez)

@@ -3,21 +3,21 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.9.1
+Version: 0.9.2
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
 
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = "0.9.1"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "0.9.2"; // This is used internally - should be the same reported on the plugin header
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 
 	function __construct() {
 		$widget_ops = array('classname' => 'widget_black_studio_tinymce', 'description' => __('Arbitrary text or HTML with visual editor', 'black-studio-tinymce-widget'));
-		$control_ops = array('width' => 730, 'height' => 500);
+		$control_ops = array('width' => 800, 'height' => 800);
 		parent::__construct('black-studio-tinymce', __('Black Studio TinyMCE', 'black-studio-tinymce-widget'), $widget_ops, $control_ops);
 	}
 
@@ -74,7 +74,7 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 			<?php	do_action( 'media_buttons' ); ?>
 		</div>
 		<div class="editor_container">
-			<textarea class="widefat" rows="16" cols="40" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
+			<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
         </div>
         <?php
 	}
