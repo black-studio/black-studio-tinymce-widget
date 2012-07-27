@@ -18,30 +18,49 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 * Insert images/videos from Wordpress Media Library
 * Insert links to existing Wordpress pages/posts
 * Fullscreen editing mode supported
-* Wordpress networks (Multisite) supported
-* WPML (Multilanguage) supported
+* Wordpress networks (Multi-site) supported
+* WPML (Multi-language) supported
 * No annoying ads/nag-screens
 
 = Links =
 
 * [Plugin's web page](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
 * [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget)
+* [Follow us on Twitter](https://twitter.com/blackstudioita)
 
 
 == Installation ==
 
 This section describes how to install the plugin and get it working.
 
-1. Upload the entire `black-studio-tinymce-widget` folder to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to Widgets Screen
-4. Drag Widget to desired sidebar
+1. Install automatically through the `Plugins` menu and `Add New` button, or upload the entire `black-studio-tinymce-widget` folder to the `/wp-content/plugins/` directory
+2. Activate the plugin
+3. Go to `Widgets` panel
+4. Drag and drop the `Black Studio TinyMCE Widget` to the desired sidebar
 5. Fill in the widget title and (rich) text
 
 == Screenshots ==
 
 1. Black Studio TinyMCE Widget editor window
 2. Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin
+
+== Frequently Asked Questions ==
+
+= How to translate widgets using WPML =
+
+The current version of `Black Studio TinyMCE Widget` plugin works together with the `WPML String translation` plugin. To translate a widget created with `Black Studio TinyMCE Widget` plugin you have to create it on the widgets panel and then go to WPML -> String translation and translate the title and text from there (unfortunately the translation textarea has no wysywyg editor).
+Note: If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String Translation list.
+
+= The plugin doesn't work as expected =
+
+Please post a message in the [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget), providing the following information:
+
+* Description of the problem and steps to reproduce it
+* Error messages if any (in particular in browser's javascript console)
+* Browser / OS in use
+* Wordpress version in use
+* Wordpress theme in use
+* List of other Wordpress plugins installed
 
 == Changelog ==
 
