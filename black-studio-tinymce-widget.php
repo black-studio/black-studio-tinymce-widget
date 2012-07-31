@@ -3,14 +3,14 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.9.2
+Version: 0.9.3
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
 
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = "0.9.2"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "0.9.3"; // This is used internally - should be the same reported on the plugin header
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
@@ -76,6 +76,7 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 		<div class="editor_container">
 			<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
         </div>
+        <div class="editor_links"><a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php echo __('Donate', 'black-studio-tinymce-widget'); ?></a> | <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php echo __('Support', 'black-studio-tinymce-widget'); ?></a> | <a href="https://twitter.com/blackstudioita" target="_blank"><?php echo __('Follow', 'black-studio-tinymce-widget'); ?></a></div>
         <?php
 	}
 }

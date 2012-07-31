@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 0.9.2
+Stable tag: 0.9.3
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -18,9 +18,9 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 * Insert images/videos from Wordpress Media Library
 * Insert links to existing Wordpress pages/posts
 * Fullscreen editing mode supported
+* Widgets accessibility mode supported
 * Wordpress networks (Multi-site) supported
 * WPML (Multi-language) supported
-* No annoying ads/nag-screens
 
 = Links =
 
@@ -28,16 +28,15 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 * [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget)
 * [Follow us on Twitter](https://twitter.com/blackstudioita)
 
-
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+This section describes how to install and use the plugin.
 
-1. Install automatically through the `Plugins` menu and `Add New` button, or upload the entire `black-studio-tinymce-widget` folder to the `/wp-content/plugins/` directory
+1. Install automatically through the `Plugins` menu and `Add New` button (or upload the entire `black-studio-tinymce-widget` folder to the `/wp-content/plugins/` directory)
 2. Activate the plugin
-3. Go to `Widgets` panel
-4. Drag and drop the `Black Studio TinyMCE Widget` to the desired sidebar
-5. Fill in the widget title and (rich) text
+3. Go to `Appearance` -> `Widgets`
+4. Drag and drop the `Black Studio TinyMCE Widget` to the desired sidebar (or, if using Accesibility mode, click the `Add` link)
+5. Fill in title and (rich) text
 
 == Screenshots ==
 
@@ -48,8 +47,8 @@ This section describes how to install the plugin and get it working.
 
 = How to translate widgets using WPML =
 
-The current version of `Black Studio TinyMCE Widget` plugin works together with the `WPML String translation` plugin. To translate a widget created with `Black Studio TinyMCE Widget` plugin you have to create it on the widgets panel and then go to WPML -> String translation and translate the title and text from there (unfortunately the translation textarea has no wysywyg editor).
-Note: If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String Translation list.
+The current version of `Black Studio TinyMCE Widget` plugin works together with the `WPML String translation` plugin. To translate a widget created with `Black Studio TinyMCE Widget` plugin you have to create it on the widgets panel and then go to `WPML` -> `String translation` and translate the title and text from there (unfortunately the translation textarea has no wysywyg editor).
+Note: If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String translation list.
 
 = The plugin doesn't work as expected =
 
@@ -63,6 +62,9 @@ Please post a message in the [Support forum](http://wordpress.org/support/plugin
 * List of other Wordpress plugins installed
 
 == Changelog ==
+
+= 0.9.3 =
+* Added support for accessibility mode
 
 = 0.9.2 =
 * Optimized for use in conjunction with Ultimate TinyMCE plugin

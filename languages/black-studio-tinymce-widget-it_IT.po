@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 17:15+0100\n"
-"PO-Revision-Date: 2011-11-10 17:15+0100\n"
+"POT-Creation-Date: 2012-07-31 10:19+0100\n"
+"PO-Revision-Date: 2012-07-31 11:21+0100\n"
 "Last-Translator: Marco <marco@blackstudio.it>\n"
 "Language-Team: Black Studio <info@blackstudio.it>\n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,23 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: black-studio-tinymce-widget.php:17
+#: black-studio-tinymce-widget.php:19
 msgid "Arbitrary text or HTML with visual editor"
 msgstr "Testo o HTML libero con editor visuale"
 
-#: black-studio-tinymce-widget.php:19
+#: black-studio-tinymce-widget.php:21
 msgid "Black Studio TinyMCE"
 msgstr "Black Studio TinyMCE"
+
+#: black-studio-tinymce-widget.php:79
+msgid "Donate"
+msgstr "Donazione"
+
+#: black-studio-tinymce-widget.php:79
+msgid "Support"
+msgstr "Supporto"
+
+#: black-studio-tinymce-widget.php:79
+msgid "Follow"
+msgstr "Seguici"
 

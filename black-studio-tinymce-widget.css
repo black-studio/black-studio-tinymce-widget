@@ -65,3 +65,9 @@
 	vertical-align: middle;
 	padding: 0 4px;
 }
+.editor_links {
+	font-size: 10px;
+	text-align: right;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
