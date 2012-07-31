@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 0.9.3
+Stable tag: 0.9.4
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -62,6 +62,9 @@ Please post a message in the [Support forum](http://wordpress.org/support/plugin
 * List of other Wordpress plugins installed
 
 == Changelog ==
+
+= 0.9.4 =
+* Bug fixes
 
 = 0.9.3 =
 * Added support for accessibility mode

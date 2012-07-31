@@ -3,14 +3,16 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.9.3
+Version: 0.9.4
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
 */
 
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = "0.9.3"; // This is used internally - should be the same reported on the plugin header
+global $black_studio_tinymce_widget_dev_mode;
+$black_studio_tinymce_widget_version = "0.9.4"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_dev_mode = false;
 
 /* Widget class */
 class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
@@ -149,14 +151,14 @@ function black_studio_tinymce_init_editor($initArray) {
 
 /* Widget js loading */
 function black_studio_tinymce_scripts() {
-	global $black_studio_tinymce_widget_version;
+	global $black_studio_tinymce_widget_version, $black_studio_tinymce_widget_dev_mode;
 	add_thickbox();
 	if (get_bloginfo('version') >= "3.3") {
 		wp_enqueue_script('wplink');
 		wp_enqueue_script('wpdialogs-popup');
 	}
 	wp_enqueue_script('media-upload');
-    wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.js', __FILE__), array('jquery'), $black_studio_tinymce_widget_version);
+    wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget'.($black_studio_tinymce_widget_dev_mode?'.dev':'').'.js', __FILE__), array('jquery'), $black_studio_tinymce_widget_version);
 }
 
 /* Widget css loading */
