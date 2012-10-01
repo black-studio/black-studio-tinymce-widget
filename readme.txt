@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 0.9.4
+Stable tag: 0.9.5
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -61,7 +61,15 @@ Please post a message in the [Support forum](http://wordpress.org/support/plugin
 * Wordpress theme in use
 * List of other Wordpress plugins installed
 
+= How to embed video and other contents =
+
+Wordpress has a nice [autoembed feature](http://codex.wordpress.org/Embeds) that allows you to embed videos in an easy way, by just putting the URL in the content area. This is also possible for widgets created with this plugin, but for best results it is recommended to put the URL in an `[embed]` shortcode. Example: `[embed]http://www.youtube.com/watch?v=XXXXXXXXXXX[/embed]`
+Alternatively, if you don't want to use `[embed]` shortcode ensure that your URL is not surrounded by a `<p>` tag, which is added automatically by the WYSIWYG editor (switch to HTML mode to remove `<p>` tags).
+
 == Changelog ==
+
+= 0.9.5 =
+* Added support for autoembed urls (youtube, etc)
 
 = 0.9.4 =
 * Bug fixes

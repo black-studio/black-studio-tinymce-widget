@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.9.4
+Version: 0.9.5
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
@@ -11,7 +11,7 @@ License: GPL2
 
 global $black_studio_tinymce_widget_version;
 global $black_studio_tinymce_widget_dev_mode;
-$black_studio_tinymce_widget_version = "0.9.4"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "0.9.5"; // This is used internally - should be the same reported on the plugin header
 $black_studio_tinymce_widget_dev_mode = false;
 
 /* Widget class */
@@ -24,12 +24,17 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
+		if ( get_option('embed_autourls') ) {
+			$wp_embed = $GLOBALS['wp_embed'];
+			add_filter( 'widget_text', array( $wp_embed, 'run_shortcode' ), 8 );
+			add_filter( 'widget_text', array( $wp_embed, 'autoembed' ), 8 );
+		}
 		extract($args);
 		$title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title'], $instance, $this->id_base);
 		$text = apply_filters( 'widget_text', $instance['text'], $instance );
 		if( function_exists( 'icl_t' )) {
 			$title = icl_t( "Widgets", 'widget title - ' . md5 ( $title ), $title, $hasTranslation, true );
-			$text = icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number /*md5 ( $text )*/, $text, $hasTranslation, true );
+			$text = icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number, $text, $hasTranslation, true );
 		}
 		$text = do_shortcode( $text );
 		echo $before_widget;
