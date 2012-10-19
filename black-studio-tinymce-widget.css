@@ -9,6 +9,7 @@
 }
 
 .editor_container {
+	background-color: #FFF;
 	border-color: #CCC #CCC #DFDFDF;
 	border-style: solid;
 	border-width: 1px;

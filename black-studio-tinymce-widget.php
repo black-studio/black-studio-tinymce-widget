@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 0.9.5
+Version: 1.0.0
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
@@ -11,7 +11,7 @@ License: GPL2
 
 global $black_studio_tinymce_widget_version;
 global $black_studio_tinymce_widget_dev_mode;
-$black_studio_tinymce_widget_version = "0.9.5"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "1.0.0"; // This is used internally - should be the same reported on the plugin header
 $black_studio_tinymce_widget_dev_mode = false;
 
 /* Widget class */
@@ -103,7 +103,15 @@ function black_studio_tinymce_widgets_init() {
 add_action('admin_init', 'black_studio_tinymce_admin_init');
 function black_studio_tinymce_admin_init() {
 	global $pagenow;
+	$load_editor = false;
 	if ($pagenow == "widgets.php") {
+		$load_editor = true;
+	}
+	// Compatibility for WP Pafe Widget plugin
+	if (is_plugin_active('wp-page-widget/wp-page-widgets.php') && ( $pagenow == "post-new.php" ||  $pagenow == "post.php" )) {
+		$load_editor = true;
+	}
+	if ($load_editor) {
 		add_action( 'admin_head', 'black_studio_tinymce_load_tiny_mce');
 		add_filter( 'tiny_mce_before_init', 'black_studio_tinymce_init_editor', 20);
 		add_action( 'admin_print_scripts', 'black_studio_tinymce_scripts');
@@ -205,4 +213,13 @@ function black_studio_tinymce_footer_scripts() {
 	}
 }
 
-?>
+/* Hack needed to enable full media options when adding content form media library */
+/* (this is done excluding post_id parameter in Thickbox iframe url) */
+add_filter('_upload_iframe_src', 'black_studio_tinymce_upload_iframe_src');
+function black_studio_tinymce_upload_iframe_src ($upload_iframe_src) {
+	global $pagenow;
+	if ($pagenow == "widgets.php" || ($pagenow == "admin-ajax.php" && isset ($_POST['id_base']) && $_POST['id_base'] == "black-studio-tinymce") ) {
+		$upload_iframe_src = str_replace('post_id=0', '', $upload_iframe_src);
+	}
+	return $upload_iframe_src;
+}
