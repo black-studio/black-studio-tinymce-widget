@@ -25,6 +25,7 @@
 .editor_toggle_buttons {
 	height: 30px;
 	margin-right: 15px;
+	margin-top: 8px;
 	float: right;
 }
 .editor_toggle_buttons a {
@@ -47,13 +48,17 @@
 	color: #999;
 }
 .editor_toggle_buttons a.active {
-	border-color: #CCC #CCC #E9E9E9;
-	background-color: #E9E9E9;
+	border-color: #CCC #CCC #F4F4F4;
+	background-color: #F4F4F4;
 	color: #333;
 }
+.editor_toggle_buttons_legacy a.active {
+	border-color: #CCC #CCC #E9E9E9;
+	background-color: #E9E9E9;
+} 
 .editor_media_buttons {
 	cursor: default;
-	padding: 8px 8px 0;
+	padding: 8px 8px;
 	height: 22px;
 }
 .editor_media_buttons a {
@@ -61,6 +66,7 @@
 	text-decoration: none;
 	color: #333;
 	font-size: 12px;
+	margin-right: 8px;
 }
 .editor_media_buttons img {
 	vertical-align: middle;

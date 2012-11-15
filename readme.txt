@@ -3,8 +3,8 @@ Contributors: marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
-Tested up to: 3.4
-Stable tag: 1.0.0
+Tested up to: 3.5
+Stable tag: 1.1.0
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -67,6 +67,11 @@ Wordpress has a nice [autoembed feature](http://codex.wordpress.org/Embeds) that
 Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL is not surrounded by a `<p>` tag, which is added automatically by the WYSIWYG editor (switch to HTML mode to remove enclosing `<p>` tags).
 
 == Changelog ==
+
+= 1.1.0 =
+* Compatibility fixes for upcoming Wordpress 3.5
+* Added support for the new Wordpress media library dialog
+* Enhanced javascript event handling using jquery .on(...) method
 
 = 1.0.0 =
 * Added full image options when adding content from media library

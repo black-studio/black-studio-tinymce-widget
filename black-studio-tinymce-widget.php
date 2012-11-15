@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 1.0.0
+Version: 1.1.0
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
@@ -11,7 +11,7 @@ License: GPL2
 
 global $black_studio_tinymce_widget_version;
 global $black_studio_tinymce_widget_dev_mode;
-$black_studio_tinymce_widget_version = "1.0.0"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "1.1.0"; // This is used internally - should be the same reported on the plugin header
 $black_studio_tinymce_widget_dev_mode = false;
 
 /* Widget class */
@@ -69,16 +69,24 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 			$text = stripslashes( wp_filter_post_kses( addslashes( $instance['text'] ) ) );
 		}
 		$type = esc_attr($instance['type']);
+		if (get_bloginfo('version') < "3.5") {
+			$toggle_buttons_extra_class = "editor_toggle_buttons_legacy";
+			$media_buttons_extra_class = "editor_media_buttons_legacy";
+		}
+		else {
+			$toggle_buttons_extra_class = "wp-toggle-buttons";
+			$media_buttons_extra_class = "wp-media-buttons";
+		}
 ?>
 		<input id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>" type="hidden" value="<?php echo esc_attr($type); ?>" />
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
-        <div class="editor_toggle_buttons hide-if-no-js">
+        <div class="editor_toggle_buttons hide-if-no-js <?php echo $toggle_buttons_extra_class; ?>">
             <a id="widget-<?php echo $this->id_base; ?>-<?php echo $this->number; ?>-html"<?php if ($type == 'html') {?> class="active"<?php }?>><?php _e('HTML'); ?></a>
             <a id="widget-<?php echo $this->id_base; ?>-<?php echo $this->number; ?>-visual"<?php if($type == 'visual') {?> class="active"<?php }?>><?php _e('Visual'); ?></a>
         </div>
-		<div class="editor_media_buttons hide-if-no-js">
-			<?php	do_action( 'media_buttons' ); ?>
+		<div class="editor_media_buttons hide-if-no-js <?php echo $media_buttons_extra_class; ?>">
+			<?php do_action( 'media_buttons' ); ?>
 		</div>
 		<div class="editor_container">
 			<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
@@ -107,7 +115,7 @@ function black_studio_tinymce_admin_init() {
 	if ($pagenow == "widgets.php") {
 		$load_editor = true;
 	}
-	// Compatibility for WP Pafe Widget plugin
+	// Compatibility for WP Page Widget plugin
 	if (is_plugin_active('wp-page-widget/wp-page-widgets.php') && ( $pagenow == "post-new.php" ||  $pagenow == "post.php" )) {
 		$load_editor = true;
 	}
@@ -126,7 +134,12 @@ function black_studio_tinymce_load_tiny_mce() {
 	remove_filter( 'mce_external_plugins', 'add_AtD_tinymce_plugin' );
 	remove_filter( 'mce_buttons', 'register_AtD_button' );
 	remove_filter( 'tiny_mce_before_init', 'AtD_change_mce_settings' );
-	//remove_all_filters('mce_external_plugins');
+	// Add support for thickbox media dialog
+	add_thickbox();
+	// New media modal dialog (WP 3.5+)
+	if (function_exists('wp_enqueue_media')) {
+		wp_enqueue_media(); 
+	}
 }
 
 /* TinyMCE setup customization */
@@ -165,13 +178,15 @@ function black_studio_tinymce_init_editor($initArray) {
 /* Widget js loading */
 function black_studio_tinymce_scripts() {
 	global $black_studio_tinymce_widget_version, $black_studio_tinymce_widget_dev_mode;
-	add_thickbox();
+	wp_enqueue_script('media-upload');
 	if (get_bloginfo('version') >= "3.3") {
 		wp_enqueue_script('wplink');
 		wp_enqueue_script('wpdialogs-popup');
+		wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget'.($black_studio_tinymce_widget_dev_mode?'.dev':'').'.js', __FILE__), array('jquery'), $black_studio_tinymce_widget_version);
 	}
-	wp_enqueue_script('media-upload');
-    wp_enqueue_script('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget'.($black_studio_tinymce_widget_dev_mode?'.dev':'').'.js', __FILE__), array('jquery'), $black_studio_tinymce_widget_version);
+	else {
+		wp_enqueue_script('black-studio-tinymce-widget-legacy', plugins_url('black-studio-tinymce-widget-legacy'.($black_studio_tinymce_widget_dev_mode?'.dev':'').'.js', __FILE__), array('jquery'), $black_studio_tinymce_widget_version);
+	}
 }
 
 /* Widget css loading */
@@ -183,6 +198,7 @@ function black_studio_tinymce_styles() {
 	else {
 		wp_enqueue_style('wp-jquery-ui-dialog');
 	}
+	wp_print_styles('editor-buttons');
     wp_enqueue_style('black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget.css', __FILE__), array(), $black_studio_tinymce_widget_version);
 }
 
