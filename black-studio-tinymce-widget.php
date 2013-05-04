@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 1.1.1
+Version: 1.2.0
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
@@ -11,7 +11,7 @@ License: GPL2
 
 global $black_studio_tinymce_widget_version;
 global $black_studio_tinymce_widget_dev_mode;
-$black_studio_tinymce_widget_version = "1.1.1"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "1.2.0"; // This is used internally - should be the same reported on the plugin header
 $black_studio_tinymce_widget_dev_mode = false;
 
 /* Widget class */
@@ -33,8 +33,8 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 		$title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title'], $instance, $this->id_base);
 		$text = apply_filters( 'widget_text', $instance['text'], $instance );
 		if( function_exists( 'icl_t' )) {
-			$title = icl_t( "Widgets", 'widget title - ' . md5 ( $title ), $title, $hasTranslation, true );
-			$text = icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number, $text, $hasTranslation, true );
+			$title = icl_t( "Widgets", 'widget title - ' . md5 ( $title ), $title );
+			$text = icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number, $text );
 		}
 		$text = do_shortcode( $text );
 		echo $before_widget;
@@ -116,7 +116,11 @@ function black_studio_tinymce_admin_init() {
 		$load_editor = true;
 	}
 	// Compatibility for WP Page Widget plugin
-	if (is_plugin_active('wp-page-widget/wp-page-widgets.php') && ( $pagenow == "post-new.php" ||  $pagenow == "post.php" )) {
+	if (is_plugin_active('wp-page-widget/wp-page-widgets.php') && (
+			(in_array($pagenow, array('post-new.php', 'post.php'))) ||
+			(in_array($pagenow, array('edit-tags.php')) && isset($_GET['action']) && $_GET['action'] == 'edit') || 
+			(in_array($pagenow, array('admin.php')) && isset($_GET['page']) && in_array($_GET['page'], array('pw-front-page', 'pw-search-page')))
+	)) {
 		$load_editor = true;
 	}
 	if ($load_editor) {
@@ -238,4 +242,14 @@ function black_studio_tinymce_upload_iframe_src ($upload_iframe_src) {
 		$upload_iframe_src = str_replace('post_id=0', '', $upload_iframe_src);
 	}
 	return $upload_iframe_src;
+}
+
+/* Hack for widgets accessibility mode */
+add_filter('wp_default_editor', 'black_studio_tinymce_editor_accessibility_mode');
+function black_studio_tinymce_editor_accessibility_mode($editor) {
+	global $pagenow;
+	if ($pagenow == "widgets.php" && isset($_GET['editwidget']) && strpos($_GET['editwidget'], 'black-studio-tinymce') === 0 ) {
+		$editor = 'html';
+	}
+	return $editor;
 }
