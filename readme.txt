@@ -3,8 +3,8 @@ Contributors: marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
-Tested up to: 3.6
-Stable tag: 1.2.0
+Tested up to: 3.9
+Stable tag: 1.3.0
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -68,6 +68,18 @@ Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL
 
 == Changelog ==
 
+= 1.3.0 =
+* Added support for smilies conversion (based on the general Wordpress option)
+* Updated styling to match the new default Wordpress editor appearence
+* Refactoring of PHP and JS code to be compliant with Wordpress coding standard
+* Fixed compatibility issue with Wordpress 3.9 alpha and TinyMCE 4.0
+* Fixed compatibility issue with Jetpack / After the Deadline plugin
+* Fixed editor behavior on widget title clicks
+* Fixed CSS issue affecting Firefox on Wordpress 3.8
+* Added finnish translation (Contributor: Timo Leiniö)
+* Better handling of "More tag" button
+* Included JS dev version
+
 = 1.2.0 =
 * Fixed issue with Wordpress widgets accessibility mode
 * Fixed compatibility issue with WPML plugin generating an error in debug mode
@@ -129,7 +141,7 @@ Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL
 * Forced TinyMCE editor to not automatically add/remove paragraph tags when switching to HTML mode (you may need to re-edit your widgets to adjust linebreaks, if you were using multiple paragraphs)
 
 = 0.6.4 =
-* Fixed compatibility issue with "Jetpack / After the Deadline" plugin
+* Fixed compatibility issue with Jetpack / After the Deadline plugin
 * Optimization of javascript/css loading
 
 = 0.6.3 =
