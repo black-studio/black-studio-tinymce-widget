@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
 Tested up to: 3.9
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -68,10 +68,14 @@ Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL
 
 == Changelog ==
 
+= 1.3.1 =
+* Renamed the widget to "Visual Editor" for better user friendliness
+* Fixed compatibility issue with FirmaSite Theme Enhancer plugin
+
 = 1.3.0 =
 * Added support for smilies conversion (based on the general Wordpress option)
 * Updated styling to match the new default Wordpress editor appearence
-* Refactoring of PHP and JS code to be compliant with Wordpress coding standard
+* Refactoring of PHP and JS code to be compliant to Wordpress coding standard
 * Fixed compatibility issue with Wordpress 3.9 alpha and TinyMCE 4.0
 * Fixed compatibility issue with Jetpack / After the Deadline plugin
 * Fixed editor behavior on widget title clicks

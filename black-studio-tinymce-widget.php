@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 1.3.0
+Version: 1.3.1
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPL2
@@ -11,7 +11,7 @@ License: GPL2
 
 global $black_studio_tinymce_widget_version;
 global $black_studio_tinymce_widget_dev_mode;
-$black_studio_tinymce_widget_version = "1.3.0"; // This is used internally - should be the same reported on the plugin header
+$black_studio_tinymce_widget_version = "1.3.1"; // This is used internally - should be the same reported on the plugin header
 $black_studio_tinymce_widget_dev_mode = false;
 
 /* Widget class */
@@ -20,7 +20,7 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 	function __construct() {
 		$widget_ops = array( 'classname' => 'widget_black_studio_tinymce', 'description' => __( 'Arbitrary text or HTML with visual editor', 'black-studio-tinymce-widget' ) );
 		$control_ops = array( 'width' => 800, 'height' => 800 );
-		parent::__construct( 'black-studio-tinymce', __( 'Black Studio TinyMCE', 'black-studio-tinymce-widget' ), $widget_ops, $control_ops );
+		parent::__construct( 'black-studio-tinymce', __( 'Visual Editor', 'black-studio-tinymce-widget' ), $widget_ops, $control_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -192,10 +192,10 @@ function black_studio_tinymce_scripts() {
 	if ( get_bloginfo( 'version' ) >= "3.3" ) {
 		wp_enqueue_script( 'wplink' );
 		wp_enqueue_script( 'wpdialogs-popup' );
-		wp_enqueue_script( 'black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget' . ($black_studio_tinymce_widget_dev_mode ? '.dev' : '' ) . '.js', __FILE__ ), array( 'jquery' ), $black_studio_tinymce_widget_version );
+		wp_enqueue_script( 'black-studio-tinymce-widget', plugins_url('black-studio-tinymce-widget' . ($black_studio_tinymce_widget_dev_mode ? '.dev' : '' ) . '.js', __FILE__ ), array( 'jquery', 'editor' ), $black_studio_tinymce_widget_version, true );
 	}
 	else {
-		wp_enqueue_script( 'black-studio-tinymce-widget-legacy', plugins_url('black-studio-tinymce-widget-legacy' . ($black_studio_tinymce_widget_dev_mode? '.dev' : '' ) . '.js', __FILE__ ), array( 'jquery' ), $black_studio_tinymce_widget_version );
+		wp_enqueue_script( 'black-studio-tinymce-widget-legacy', plugins_url('black-studio-tinymce-widget-legacy' . ($black_studio_tinymce_widget_dev_mode? '.dev' : '' ) . '.js', __FILE__ ), array( 'jquery', 'editor' ), $black_studio_tinymce_widget_version, true );
 	}
 }
 
