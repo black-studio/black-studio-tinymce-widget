@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
 Tested up to: 3.9
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -35,7 +35,7 @@ This section describes how to install and use the plugin.
 1. Install automatically through the `Plugins` menu and `Add New` button (or upload the entire `black-studio-tinymce-widget` folder to the `/wp-content/plugins/` directory)
 2. Activate the plugin
 3. Go to `Appearance` -> `Widgets`
-4. Drag and drop the `Black Studio TinyMCE Widget` to the desired sidebar (or, if using Accesibility mode, click the `Add` link)
+4. Drag and drop the `Visual Editor` widget to the desired sidebar (or, if using Accesibility mode, click the `Add` link)
 5. Fill in title and (rich) text
 
 == Screenshots ==
@@ -66,7 +66,18 @@ Please post a message in the [Support forum](http://wordpress.org/support/plugin
 Wordpress has a nice [autoembed feature](http://codex.wordpress.org/Embeds) that allows you to embed videos and other stuff in an easy way, by just putting the URL in the content area. This is also possible for widgets created with this plugin, but for best results it is recommended to put the URL inside an `[embed]` shortcode. Example: `[embed]http://www.youtube.com/watch?v=XXXXXXXXXXX[/embed]`. Ensure that the URL has not an hyperlink on it.
 Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL is not surrounded by a `<p>` tag, which is added automatically by the WYSIWYG editor (switch to HTML mode to remove enclosing `<p>` tags).
 
+= Widgets disappeared after migrating or changing the site URL =
+
+When dealing with a WordPress site URL change it is necessary to face the "serialized fields" issue: data may become corrupted if using a simple search/replace (see the [Codex](http://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiviation. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.
+
 == Changelog ==
+
+= 1.3.2 =
+* Fixed compatibility issue with Wordpress 3.9 Beta 3
+* Added support for Wordpress 3.9 Theme Customizer
+* Added swedish translation (Contributor: macsolve)
+* Updated installation documentation
+* Updated FAQ
 
 = 1.3.1 =
 * Renamed the widget to "Visual Editor" for better user friendliness

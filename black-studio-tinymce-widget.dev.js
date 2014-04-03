@@ -23,7 +23,7 @@ var wpActiveEditor;
 	// Deactivate visual editor
 	function black_studio_deactivate_visual_editor( id ) {
 		if ( typeof tinyMCE == 'object' && typeof tinyMCE.execCommand == 'function' ) {
-			if ( typeof tinyMCE.get( id ) == 'object' && typeof tinyMCE.get( id ).getContent == 'function' ) {
+			if ( tinyMCE.get( id ) != null && typeof tinyMCE.get( id ).getContent == 'function' ) {
 				var content = tinyMCE.get( id ).getContent();
 				// tinyMCE.execCommand('mceRemoveControl', false, id);
 				tinyMCE.get( id ).remove();
@@ -35,11 +35,11 @@ var wpActiveEditor;
 	function black_studio_open_deferred_activate_visual_editor( id ) {
 		$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
 			// If textarea is visible and animation/ajax has completed (or in accessibility mode) then trigger a click to Visual button and enable the editor
-			if ( $('div.widget:has(#' + id + ') :animated' ).size() == 0 && typeof tinyMCE.get( id ) != 'object' && $( '#' + id ).is( ':visible' ) ) {
+			if ( $('div.widget:has(#' + id + ') :animated' ).size() == 0 && tinyMCE.get( id ) != null && $( '#' + id ).is( ':visible' ) ) {
 				$( 'a[id^=widget-black-studio-tinymce][id$=visual]', $( this ).closest( 'div.widget-inside' ) ).click();
 			}
 			// Otherwise wait and retry later (animation ongoing)
-			else if ( typeof tinyMCE.get( id ) != 'object' ) {
+			else if ( tinyMCE.get( id ) != null ) {
 				setTimeout(function() {
 					black_studio_open_deferred_activate_visual_editor( id );
 					id = null;
@@ -56,11 +56,11 @@ var wpActiveEditor;
 	function black_studio_ajax_deferred_activate_visual_editor( id ) {
 		$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
 			// If textarea is visible and animation/ajax has completed then trigger a click to Visual button and enable the editor
-			if ( $.active == 0 && typeof tinyMCE.get( id ) != 'object' && $( '#' + id ).is( ':visible' ) ) {
+			if ( $.active == 0 && tinyMCE.get( id ) != null && $( '#' + id ).is( ':visible' ) ) {
 				$( 'a[id^=widget-black-studio-tinymce][id$=visual]', $( this ).closest( 'div.widget-inside' ) ).click();
 			}
 			// Otherwise wait and retry later (animation ongoing)
-			else if ( $( 'div.widget:has(#' + id + ') div.widget-inside' ).is( ':visible' ) && typeof tinyMCE.get( id ) != 'object') {
+			else if ( $( 'div.widget:has(#' + id + ') div.widget-inside' ).is( ':visible' ) && tinyMCE.get( id ) != null ) {
 				setTimeout(function() {
 					black_studio_ajax_deferred_activate_visual_editor( id );
 					id=null;
