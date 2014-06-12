@@ -73,6 +73,9 @@ When dealing with a WordPress site URL change it is necessary to face the "seria
 
 == Changelog ==
 
+= 1.4.1 =
+* Enhanced HTML source code formatting
+
 = 1.4 =
 * HTML and CSS optimization by using WordPress native editor markup and styles
 * Adoption of WordPress JS minification conventions (".min" suffix)
