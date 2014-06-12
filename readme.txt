@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.0
 Tested up to: 3.9
-Stable tag: 1.3.3
+Stable tag: 1.4
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -13,7 +13,7 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 
 = Features =
 
-* Add rich text widgets to your sidebar using visual editor
+* Add rich text widgets to your sidebars using visual editor
 * Switch between Visual mode and HTML mode
 * Insert images/videos from WordPress Media Library
 * Insert links to existing WordPress pages/posts
@@ -21,6 +21,7 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 * Widgets accessibility mode supported
 * WordPress networks (Multi-site) supported
 * WPML (Multi-language) supported
+* Live preview of widgets in Theme customizer supported (since WordPress 3.9)
 
 = Links =
 
@@ -71,6 +72,19 @@ Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL
 When dealing with a WordPress site URL change it is necessary to face the "serialized fields" issue: data may become corrupted if using a simple search/replace (see the [Codex](http://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiviation. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.
 
 == Changelog ==
+
+= 1.4 =
+* HTML and CSS optimization by using WordPress native editor markup and styles
+* Adoption of WordPress JS minification conventions (".min" suffix)
+* Integration with WordPress SCRIPT_DEBUG constant for javascript debugging purposes
+* Enhanced compatibility with 3rd party media buttons provider (i.e. Shortcodes Ultimate)
+* Enhanced plugin internal version handling
+* Duplicated widget IDs detection
+* Added Rate link
+* Added compatibility with WordPress Language packs
+* Added ukrainian translation (Contributor: Michael Yunat [getvoip.com](http://getvoip.com/blog))
+* Fixed notice on theme_advanced_buttons1 parameter
+* Fixed z-index issue with WordPress 3.9 admin menu on small screens
 
 = 1.3.3 =
 * Fixed visualization bug upon widget saving
