@@ -106,7 +106,7 @@ var wpActiveEditor;
 				});
 			});
 			$( '#wpbody-content' ).css( 'overflow', 'visible' ); // needed for small screens
-			$widget.css( 'position', 'relative' ).css( 'z-index', '10000' ); // needed for small screens
+			$widget.css( 'position', 'relative' ).css( 'z-index', '100010' ); // needed for small screens and for fullscreen mode
 			black_studio_open_deferred_activate_visual_editor( $text_area.attr( 'id' ) );
 			$( '.insert-media', $widget ).data( 'editor', $text_area.attr( 'id' ) );
 		});
