@@ -111,6 +111,9 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 
 == Changelog ==
 
+= 1.4.4 =
+* Fixed z-index compatibility issue with Shortcodes Ultimate plugin
+
 = 1.4.3 =
 * Added filter hooks to modify the markup before and after the widget text
 * Fixed z-index issue in fullscreen mode
