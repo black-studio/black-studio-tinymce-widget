@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 1.4.5
+Version: 1.4.6
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPLv3
@@ -33,7 +33,7 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 		$text = apply_filters( 'widget_text', $instance['text'], $instance );
 		if ( function_exists( 'icl_t' )  && ! empty( $this->number ) ) {
 			$title = icl_t( "Widgets", 'widget title - ' . md5 ( $title ), $title );
-			$text = var_export($instance, true) . icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number, $text );
+			$text = icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number, $text );
 		}
 		$text = do_shortcode( $text );
 		echo $before_widget;
