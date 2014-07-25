@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 1.4.4
+Version: 1.4.5
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPLv3
@@ -31,9 +31,9 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 		$after_text = apply_filters( 'black_studio_tinymce_after_text', '</div>', $instance );
 		$title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title'], $instance, $this->id_base );
 		$text = apply_filters( 'widget_text', $instance['text'], $instance );
-		if ( function_exists( 'icl_t' ) ) {
+		if ( function_exists( 'icl_t' )  && ! empty( $this->number ) ) {
 			$title = icl_t( "Widgets", 'widget title - ' . md5 ( $title ), $title );
-			$text = icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number, $text );
+			$text = var_export($instance, true) . icl_t( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number, $text );
 		}
 		$text = do_shortcode( $text );
 		echo $before_widget;
@@ -47,14 +47,14 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
-		if ( current_user_can('unfiltered_html') ) {
+		if ( current_user_can( 'unfiltered_html' ) ) {
 			$instance['text'] =  $new_instance['text'];
 		}
 		else {
-			$instance['text'] = stripslashes( wp_filter_post_kses( addslashes($new_instance['text']) ) ); // wp_filter_post_kses() expects slashed
+			$instance['text'] = stripslashes( wp_filter_post_kses( addslashes( $new_instance['text'] ) ) ); // wp_filter_post_kses() expects slashed
 		}
 		$instance['type'] = strip_tags( $new_instance['type'] );
-		if ( function_exists( 'icl_register_string' )) {
+		if ( function_exists( 'icl_register_string' ) && ! empty( $this->number ) ) {
 			//icl_register_string( "Widgets", 'widget title - ' . $this->id_base . '-' . $this->number /* md5 ( apply_filters( 'widget_title', $instance['title'] ))*/, apply_filters( 'widget_title', $instance['title'] ) ); // This is handled automatically by WPML
 			icl_register_string( "Widgets", 'widget body - ' . $this->id_base . '-' . $this->number, apply_filters( 'widget_text', $instance['text'] ) );
 		}
@@ -271,7 +271,7 @@ function black_studio_tinymce_apply_smilies_to_widget_text( $text ) {
 	return $text;
 }
 
-/* Hack needed to enable full media options when adding content form media library */
+/* Hack needed to enable full media options when adding content from media library */
 /* (this is done excluding post_id parameter in Thickbox iframe url) */
 add_filter( '_upload_iframe_src', 'black_studio_tinymce_upload_iframe_src' );
 function black_studio_tinymce_upload_iframe_src ( $upload_iframe_src ) {
@@ -290,4 +290,13 @@ function black_studio_tinymce_editor_accessibility_mode($editor) {
 		$editor = 'html';
 	}
 	return $editor;
+}
+
+/* Hack for compatibility with Page Builder + WPML String Translation */
+add_filter( 'siteorigin_panels_widget_object', 'black_studio_tinymce_siteorigin_panels_widget_object', 10, 2 );
+function black_studio_tinymce_siteorigin_panels_widget_object( $the_widget, $widget ) {
+	if ( $the_widget->id_base == 'black-studio-tinymce' ) {
+		$the_widget->number = '';
+	}
+	return $the_widget;
 }
