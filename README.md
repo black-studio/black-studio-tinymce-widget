@@ -1,5 +1,4 @@
 # Black Studio TinyMCE Widget #
-===========================
 **Contributors:** marcochiesi, thedarkmist
   
 **Donate link:** http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
@@ -188,7 +187,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 * Fixed compatibility issue with Jetpack / After the Deadline plugin
 * Fixed editor behavior on widget title clicks
 * Fixed CSS issue affecting Firefox on WordPress 3.8
-* Added finnish translation (Contributor: Timo Leiniö)
+* Added finnish translation (Contributor: Timo LeiniÃ¶)
 * Better handling of "More tag" button
 * Included JS dev version
 
@@ -229,7 +228,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 * Optimized for use in conjunction with Ultimate TinyMCE plugin
 
 ### 0.9.1 ###
-* Added spanish translation (Contributor: Lucia García Martínez)
+* Added spanish translation (Contributor: Lucia GarcÃ­a MartÃ­nez)
 * Increased width of editor window
 
 ### 0.9 ###
