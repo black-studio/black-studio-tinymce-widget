@@ -25,7 +25,10 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 				add_filter( 'widget_text', array( $wp_embed, 'run_shortcode' ), 8 );
 				add_filter( 'widget_text', array( $wp_embed, 'autoembed' ), 8 );
 			}
-			extract( $args );
+			$before_widget = $args['before_widget'];
+			$after_widget = $args['after_widget'];
+			$before_title = $args['before_title'];
+			$after_title = $args['after_title'];
 			$before_text = apply_filters( 'black_studio_tinymce_before_text', '<div class="textwidget">', $instance );
 			$after_text = apply_filters( 'black_studio_tinymce_after_text', '</div>', $instance );
 			$title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title'], $instance, $this->id_base );

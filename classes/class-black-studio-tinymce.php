@@ -23,7 +23,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			add_filter( 'widget_text', array( $this, 'apply_smilies_to_widget_text' ) );
 			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
-			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10, 2 );
+			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10 );
 		}
 
 		/* Get plugin version */
@@ -204,8 +204,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 		}
 		
 		/* Hack for compatibility with Page Builder + WPML String Translation */
-		function siteorigin_panels_widget_object( $the_widget, $widget ) {
-			if ( $the_widget->id_base == 'black-studio-tinymce' ) {
+		function siteorigin_panels_widget_object( $the_widget ) {
+			if ( isset($the_widget->id_base) && $the_widget->id_base == 'black-studio-tinymce' ) {
 				$the_widget->number = '';
 			}
 			return $the_widget;
