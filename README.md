@@ -1,5 +1,7 @@
 # Black Studio TinyMCE Widget #
 **Contributors:** marcochiesi, thedarkmist
+
+**Plugin page:** https://wordpress.org/plugins/black-studio-tinymce-widget/
   
 **Donate link:** http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
   
