@@ -12,7 +12,9 @@ Domain Path: /languages
 */
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 define( 'BLACK_STUDIO_TINYMCE_WIDGET_DIR', plugin_dir_path( __FILE__ ) );
 define( 'BLACK_STUDIO_TINYMCE_WIDGET_URL', plugin_dir_url( __FILE__ ) );

@@ -7,16 +7,18 @@
  */
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 
 	class Black_Studio_TinyMCE {
-		
+
 		/* Class constructor */
 		function __construct() {
 			// Load localization
-			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' ); 
+			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 			// Register action and filter hooks
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
@@ -35,8 +37,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 
 		/* Widget initialization */
 		function widgets_init() {
-			if ( ! is_blog_installed() )
+			if ( ! is_blog_installed() ) {
 				return;
+			}
 			register_widget( 'WP_Widget_Black_Studio_TinyMCE' );
 		}
 		
@@ -44,13 +47,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 		function admin_init() {
 			global $pagenow;
 			$load_editor = false;
-			if ( $pagenow == "widgets.php" || $pagenow == "customize.php" ) {
+			if ( $pagenow == 'widgets.php' || $pagenow == 'customize.php' ) {
 				$load_editor = true;
 			}
 			// Compatibility for WP Page Widget plugin
-			if ( is_plugin_active('wp-page-widget/wp-page-widgets.php' ) && (
+			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) && (
 					( in_array( $pagenow, array( 'post-new.php', 'post.php') ) ) ||
-					( in_array( $pagenow, array( 'edit-tags.php' ) ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) || 
+					( in_array( $pagenow, array( 'edit-tags.php' ) ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) ||
 					( in_array( $pagenow, array( 'admin.php' ) ) && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) )
 			) ) {
 				$load_editor = true;
@@ -62,10 +65,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
-				add_filter( 'atd_load_scripts', '__return_true'); // Compatibility with Jetpack After the deadline
+				add_filter( 'atd_load_scripts', '__return_true' ); // Compatibility with Jetpack After the deadline
 			}
 		}
-		
+
 		/* Instantiate tinyMCE editor */
 		function load_tiny_mce() {
 			// Add support for thickbox media dialog
@@ -75,13 +78,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				wp_enqueue_media(); 
 			}
 		}
-		
+
 		/* TinyMCE setup customization */
 		function init_editor( $initArray ) {
 			global $pagenow;
 			// Remove WP fullscreen mode and set the native tinyMCE fullscreen mode
 			if ( version_compare( get_bloginfo( 'version' ), '3.3', '<' ) ) {
-				$plugins = explode(',', $initArray['plugins']);
+				$plugins = explode( ',', $initArray['plugins'] );
 				if ( isset( $plugins['wpfullscreen'] ) ) {
 					unset( $plugins['wpfullscreen'] );
 				}
@@ -91,7 +94,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				$initArray['plugins'] = implode( ',', $plugins );
 			}
 			// Remove the "More" toolbar button (only in widget screen)
-			if ( $pagenow == "widgets.php" && version_compare( get_bloginfo( 'version' ), '3.8', '<' )) {
+			if ( $pagenow == 'widgets.php' && version_compare( get_bloginfo( 'version' ), '3.8', '<' )) {
 				$initArray['theme_advanced_buttons1'] = str_replace( ',wp_more', '', $initArray['theme_advanced_buttons1'] );
 			}
 			// Do not remove linebreaks
@@ -113,7 +116,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			// Return modified settings
 			return $initArray;
 		}
-		
+
 		/* Enqueue styles */
 		function admin_print_styles() {
 			if ( version_compare( get_bloginfo( 'version' ), '3.3', '<' ) ) {
@@ -134,13 +137,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				BLACK_STUDIO_TINYMCE_WIDGET_VERSION
 			);
 		}
-		
+
 		/* Enqueue header scripts */
 		function admin_print_scripts() {
-			wp_enqueue_script('media-upload');
-			$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+			wp_enqueue_script( 'media-upload' );
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			if ( version_compare( get_bloginfo( 'version' ), '3.3', '>=' ) ) {
-				$local_data = array( 'error_duplicate_id' => __('ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget') );
+				$local_data = array( 'error_duplicate_id' => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget' ) );
 				wp_enqueue_script( 'wplink' );
 				wp_enqueue_script( 'wpdialogs-popup' );
 				echo BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget' . $suffix . '.js';
@@ -164,7 +167,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				);
 			}
 		}
-		
+
 		/* Enqueue footer scripts */
 		function admin_print_footer_scripts() {
 			// Setup for WP 3.1 and previous versions
@@ -181,7 +184,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				if ( function_exists( 'wp_tiny_mce' ) ) {
 					wp_tiny_mce( false, array() );
 				}
-				if ( function_exists( 'wp_preload_dialogs') ) {
+				if ( function_exists( 'wp_preload_dialogs' ) ) {
 					wp_preload_dialogs( array( 'plugins' => 'wpdialogs,wplink,wpfullscreen' ) );
 				}
 			}
@@ -190,7 +193,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				wp_editor( '', 'black-studio-tinymce-widget' );
 			}
 		}
-		
+
 		/* Support for smilies */
 		function apply_smilies_to_widget_text( $text ) {
 			if ( get_option( 'use_smilies' ) ) {
@@ -198,26 +201,26 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			}
 			return $text;
 		}
-		
+
 		/* Hack needed to enable full media options when adding content from media library */
 		/* (this is done excluding post_id parameter in Thickbox iframe url) */
-		function _upload_iframe_src ( $upload_iframe_src ) {
+		function _upload_iframe_src( $upload_iframe_src ) {
 			global $pagenow;
-			if ( $pagenow == "widgets.php" || ( $pagenow == "admin-ajax.php" && isset ( $_POST['id_base'] ) && $_POST['id_base'] == "black-studio-tinymce" ) ) {
+			if ( $pagenow == 'widgets.php' || ( $pagenow == 'admin-ajax.php' && isset ( $_POST['id_base'] ) && $_POST['id_base'] == 'black-studio-tinymce' ) ) {
 				$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
 			}
 			return $upload_iframe_src;
 		}
-		
+
 		/* Hack for widgets accessibility mode */
-		function editor_accessibility_mode($editor) {
+		function editor_accessibility_mode( $editor ) {
 			global $pagenow;
-			if ( $pagenow == "widgets.php" && isset( $_GET['editwidget'] ) && strpos( $_GET['editwidget'], 'black-studio-tinymce' ) === 0 ) {
+			if ( $pagenow == 'widgets.php' && isset( $_GET['editwidget'] ) && strpos( $_GET['editwidget'], 'black-studio-tinymce' ) === 0 ) {
 				$editor = 'html';
 			}
 			return $editor;
 		}
-		
+
 		/* Hack for compatibility with Page Builder + WPML String Translation */
 		function siteorigin_panels_widget_object( $the_widget ) {
 			if ( isset($the_widget->id_base) && $the_widget->id_base == 'black-studio-tinymce' ) {

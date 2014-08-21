@@ -10,7 +10,7 @@ var wpActiveEditor;
 		if ( typeof tinyMCE == 'object' && typeof tinyMCE.execCommand == 'function' ) {
 			black_studio_deactivate_visual_editor( id );
 			tinyMCEPreInit.mceInit[id] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
-			tinyMCEPreInit.mceInit[id]['selector'] = '#' + id;
+			tinyMCEPreInit.mceInit[id].selector = '#' + id;
 			try {
 				// Instantiate new TinyMCE editor
 				tinymce.init( tinymce.extend( {}, tinyMCEPreInit.mceInit['black-studio-tinymce-widget'], tinyMCEPreInit.mceInit[id] ) );
@@ -94,7 +94,7 @@ var wpActiveEditor;
 			}
 			// Event handler for widget saving button (for new instances)
 			$( 'input[name=savewidget]', $widget ).on( 'click', function( event ) {
-				var $widget = $( this ).closest( 'div.widget' )
+				var $widget = $( this ).closest( 'div.widget' );
 				var $text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $widget );
 				if ( tinyMCE.get( $text_area.attr( 'id' ) ) != null ) {
 					black_studio_deactivate_visual_editor( $text_area.attr( 'id' ) );
@@ -112,7 +112,7 @@ var wpActiveEditor;
 		});
 		// Event handler for widget saving button (for existing instances)
 		$( 'div.widget[id*=black-studio-tinymce] input[name=savewidget]').on( 'click', function( event ) {
-			var $widget = $( this ).closest( 'div.widget' )
+			var $widget = $( this ).closest( 'div.widget' );
 			var $text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $widget );
 			if ( tinyMCE.get( $text_area.attr( 'id' ) ) != null ) {
 				black_studio_deactivate_visual_editor( $text_area.attr( 'id' ) );
@@ -128,7 +128,7 @@ var wpActiveEditor;
 			//event.preventDefault();
 			var $widget_inside = $( this ).closest( 'div.widget-inside,div.panel-dialog' );
 			var $wrap_id = $( 'div[id^=wp-widget-black-studio-tinymce][id$=-wrap]', $widget_inside );
-			var $textarea_id = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' )
+			var $textarea_id = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );
 			tinymce.DOM.removeClass( $wrap_id, 'html-active' );
 			tinymce.DOM.addClass( $wrap_id, 'tmce-active' );
 			$( 'input[id^=widget-black-studio-tinymce][id$=type]', $widget_inside ).val( 'visual' );
@@ -139,7 +139,7 @@ var wpActiveEditor;
 			//event.preventDefault();
 			var $widget_inside = $( this ).closest( 'div.widget-inside,div.panel-dialog' );
 			var $wrap_id = $( 'div[id^=wp-widget-black-studio-tinymce][id$=-wrap]', $widget_inside );
-			var $textarea_id = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' )
+			var $textarea_id = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );
 			$( 'input[id^=widget-black-studio-tinymce][id$=type]', $widget_inside ).val( 'visual' );
 			tinymce.DOM.removeClass( $wrap_id, 'tmce-active' );
 			tinymce.DOM.addClass( $wrap_id, 'html-active' );

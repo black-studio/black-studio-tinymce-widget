@@ -13,7 +13,7 @@ var wpActiveEditor;
 			black_studio_deactivate_visual_editor(id);
 			if (typeof (tinyMCEPreInit.mceInit['black-studio-tinymce-widget']) == "object") { // WP 3.3+
 				tinyMCEPreInit.mceInit[id] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
-				tinyMCEPreInit.mceInit[id]["elements"] = id;
+				tinyMCEPreInit.mceInit[id].elements = id;
 				try {
 					// Instantiate new TinyMCE editor
 					tinymce.init(tinymce.extend( {}, tinyMCEPreInit.mceInit['black-studio-tinymce-widget'], tinyMCEPreInit.mceInit[id] ));
@@ -85,7 +85,7 @@ var wpActiveEditor;
 		// Event handler for widget saving button
 		$('div.widget[id*=black-studio-tinymce] input[name=savewidget]').live('click', function(event){
 			event.preventDefault();
-			var $widget = $(this).closest('div.widget')
+			var $widget = $(this).closest('div.widget');
 			var $text_area = $('textarea[id^=widget-black-studio-tinymce]', $widget);
 			if (typeof(tinyMCE.get($text_area.attr('id'))) == "object") {
 				black_studio_deactivate_visual_editor($text_area.attr('id'));
@@ -101,7 +101,7 @@ var wpActiveEditor;
 		// Event handler for visual switch button
 		$('a[id^=widget-black-studio-tinymce][id$=visual]').live('click', function(event){
 			event.preventDefault();
-			var $widget_inside = $(this).closest('div.widget-inside')
+			var $widget_inside = $(this).closest('div.widget-inside');
 			$('input[id^=widget-black-studio-tinymce][id$=type]', $widget_inside).val('visual');
 			$(this).addClass('active');
 			$('a[id^=widget-black-studio-tinymce][id$=html]', $widget_inside).removeClass('active');
@@ -110,7 +110,7 @@ var wpActiveEditor;
 		// Event handler for html switch button
 		$('a[id^=widget-black-studio-tinymce][id$=html]').live('click', function(event){
 			event.preventDefault();
-			var $widget_inside = $(this).closest('div.widget-inside')
+			var $widget_inside = $(this).closest('div.widget-inside');
 			$('input[id^=widget-black-studio-tinymce][id$=type]', $widget_inside).val('html');
 			$(this).addClass('active');
 			$('a[id^=widget-black-studio-tinymce][id$=visual]', $widget_inside).removeClass('active');

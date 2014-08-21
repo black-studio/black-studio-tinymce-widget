@@ -1,7 +1,9 @@
 <?php
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 global $black_studio_tinymce_widget_version;
 $black_studio_tinymce_widget_version = BLACK_STUDIO_TINYMCE_WIDGET_VERSION;
