@@ -46,7 +46,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 		/* Add actions and filters (only in widgets admin page) */
 		function admin_init() {
 			// Load editor features
-			if ( $this->should_be_loaded ) {
+			if ( $this->should_be_loaded() ) {
 				add_action( 'admin_head', array( $this, 'load_tiny_mce' ) );
 				add_filter( 'tiny_mce_before_init', array( $this, 'init_editor' ), 20 );
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
@@ -55,23 +55,24 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				add_filter( 'atd_load_scripts', '__return_true' ); // Compatibility with Jetpack After the deadline
 			}
 		}
-		
+
 		/* Check if editor should be loaded */
 		function should_be_loaded() {
 			global $pagenow;
-			$load_editor = false;
+			$should_be_loaded = false;
 			if ( $pagenow == 'widgets.php' || $pagenow == 'customize.php' ) {
-				$load_editor = true;
+				$should_be_loaded = true;
 			}
 			// Compatibility for WP Page Widget plugin
-			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) && (
-					( in_array( $pagenow, array( 'post-new.php', 'post.php' ) ) ) ||
-					( in_array( $pagenow, array( 'edit-tags.php' ) ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) ||
-					( in_array( $pagenow, array( 'admin.php' ) ) && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) )
-			) ) {
-				$load_editor = true;
+			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) ) {
+				$is_post = in_array( $pagenow, array( 'post-new.php', 'post.php' ) );
+				$is_tags = in_array( $pagenow, array( 'edit-tags.php' ) ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit';
+				$is_special = in_array( $pagenow, array( 'admin.php' ) ) && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) );
+				if ( $is_post || $is_tags || $is_special ) {
+					$should_be_loaded = true;
+				}
 			}
-			return $load_editor;
+			return $should_be_loaded;
 		}
 
 		/* Instantiate tinyMCE editor */

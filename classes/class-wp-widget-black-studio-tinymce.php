@@ -101,7 +101,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 						<a id="<?php echo $this->get_field_id( 'text' ); ?>-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
 						<a id="<?php echo $this->get_field_id( 'text' ); ?>-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
 					</div>
-					<div class="<?php echo $media_buttons_class; ?>">
+					<div class="<?php echo esc_attr( $media_buttons_class ); ?>">
 						<?php do_action( 'media_buttons', $this->get_field_id( 'text' ) ); ?>
 					</div>
 				</div>
@@ -109,7 +109,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 					<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
 				</div>
 			</div>
-			<div class="wp-editor-bstw-links" style="font-size: 10px; text-align: right; padding: 5px 0;"><a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php echo __( 'Donate', 'black-studio-tinymce-widget' ); ?></a> | <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php echo __( 'Support', 'black-studio-tinymce-widget' ); ?></a> | <a href="http://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget" target="_blank"><?php echo __( 'Rate', 'black-studio-tinymce-widget' ); ?></a> | <a href="https://twitter.com/blackstudioita" target="_blank"><?php echo esc_html( __( 'Follow', 'black-studio-tinymce-widget' ) ); ?></a></div>
+			<div class="wp-editor-bstw-links" style="font-size: 10px; text-align: right; padding: 5px 0;"><a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php echo esc_html( __( 'Donate', 'black-studio-tinymce-widget' ) ); ?></a> | <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php echo esc_html( __( 'Support', 'black-studio-tinymce-widget' ) ) ; ?></a> | <a href="http://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget" target="_blank"><?php echo esc_html( __( 'Rate', 'black-studio-tinymce-widget' ) ); ?></a> | <a href="https://twitter.com/blackstudioita" target="_blank"><?php echo esc_html( __( 'Follow', 'black-studio-tinymce-widget' ) ); ?></a></div>
 	<?php
 		}
 

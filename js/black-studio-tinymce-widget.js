@@ -43,7 +43,7 @@ var wpActiveEditor;
 	function black_studio_open_deferred_activate_visual_editor( id ) {
 		$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
 			// If textarea is visible and animation/ajax has completed (or in accessibility mode) then trigger a click to Visual button and enable the editor
-			if ( $('div.widget:has(#' + id + ') :animated' ).size() === 0 && tinyMCE.get( id ) == null && $( '#' + id ).is( ':visible' ) ) {
+			if ( $('div.widget:has(#' + id + ') :animated' ).size() === 0 && tinyMCE.get( id ) === null && $( '#' + id ).is( ':visible' ) ) {
 				$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
 			}
 			// Otherwise wait and retry later (animation ongoing)
