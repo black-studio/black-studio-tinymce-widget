@@ -63,7 +63,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			if ( $pagenow == 'widgets.php' || $pagenow == 'customize.php' ) {
 				$should_be_loaded = true;
 			}
-			// Compatibility for WP Page Widget plugin
+			if ( check_wp_page_widget_plugin() ) {
+				$should_be_loaded = true;
+			}
+			return $should_be_loaded;
+		}
+		
+		/* Compatibility for WP Page Widget plugin */
+		function check_wp_page_widget_plugin() {
+			global $pagenow;
+			$check = false;
 			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) ) {
 				$is_post = in_array( $pagenow, array( 'post-new.php', 'post.php' ) );
 				$is_tags = in_array( $pagenow, array( 'edit-tags.php' ) );
@@ -71,12 +80,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				if (
 					$is_post ||
 					( $is_tags  && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) ||
-					( $is_special && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) )
+					( $is_admin && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) )
 				) {
-					$should_be_loaded = true;
+					$check = true;
 				}
 			}
-			return $should_be_loaded;
+			return $check;
 		}
 
 		/* Instantiate tinyMCE editor */
