@@ -40,12 +40,14 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 				$text = icl_t( 'Widgets', 'widget body - ' . $this->id_base . '-' . $this->number, $text );
 			}
 			$text = do_shortcode( $text );
-			echo $before_widget;
+			$output = '';
+			$output .= $before_widget;
 			if ( ! empty( $title ) ) {
-				echo $before_title . $title . $after_title;
+				$output .= $before_title . $title . $after_title;
 			}
-			echo $before_text . $text . $after_text;
-			echo $after_widget;
+			$output .= $before_text . $text . $after_text;
+			$output .= $after_widget;
+			echo wp_kses_post( $output );
 		}
 
 		function update( $new_instance, $old_instance ) {
@@ -93,9 +95,9 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			<input id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>" type="hidden" value="<?php echo esc_attr( $type ); ?>" />
 			<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
-			<div id="wp-<?php echo $this->get_field_id( 'text' ); ?>-wrap" class="wp-core-ui wp-editor-wrap <?php echo $switch_class; ?>">
+			<div id="wp-<?php echo $this->get_field_id( 'text' ); ?>-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?>">
 				<div class="wp-editor-tools hide-if-no-js">
-					<div class="<?php echo $toggle_buttons_class; ?>">
+					<div class="<?php echo esc_attr( $toggle_buttons_class ); ?>">
 						<a id="<?php echo $this->get_field_id( 'text' ); ?>-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
 						<a id="<?php echo $this->get_field_id( 'text' ); ?>-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
 					</div>
@@ -104,13 +106,13 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 					</div>
 				</div>
 				<div class="wp-editor-container">
-					<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo $text; ?></textarea>
+					<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
 				</div>
 			</div>
-			<div class="wp-editor-bstw-links" style="font-size: 10px; text-align: right; padding: 5px 0;"><a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php echo __( 'Donate', 'black-studio-tinymce-widget' ); ?></a> | <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php echo __( 'Support', 'black-studio-tinymce-widget' ); ?></a> | <a href="http://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget" target="_blank"><?php echo __( 'Rate', 'black-studio-tinymce-widget' ); ?></a> | <a href="https://twitter.com/blackstudioita" target="_blank"><?php echo __( 'Follow', 'black-studio-tinymce-widget' ); ?></a></div>
+			<div class="wp-editor-bstw-links" style="font-size: 10px; text-align: right; padding: 5px 0;"><a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php echo __( 'Donate', 'black-studio-tinymce-widget' ); ?></a> | <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php echo __( 'Support', 'black-studio-tinymce-widget' ); ?></a> | <a href="http://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget" target="_blank"><?php echo __( 'Rate', 'black-studio-tinymce-widget' ); ?></a> | <a href="https://twitter.com/blackstudioita" target="_blank"><?php echo esc_html( __( 'Follow', 'black-studio-tinymce-widget' ) ); ?></a></div>
 	<?php
 		}
-		
+
 	} // class declaration
-	
+
 } // class_exists check
