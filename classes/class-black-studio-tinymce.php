@@ -141,7 +141,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 			if ( version_compare( get_bloginfo( 'version' ), '3.3', '>=' ) ) {
 				$local_data = array( 'error_duplicate_id' => __('ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget') );
-				wp_enqueue_script( 'editor' );
 				wp_enqueue_script( 'wplink' );
 				wp_enqueue_script( 'wpdialogs-popup' );
 				echo BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget' . $suffix . '.js';
