@@ -68,7 +68,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			}
 			return $should_be_loaded;
 		}
-		
+
 		/* Compatibility for WP Page Widget plugin */
 		function check_wp_page_widget_plugin() {
 			global $pagenow;
