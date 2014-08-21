@@ -66,9 +66,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			// Compatibility for WP Page Widget plugin
 			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) ) {
 				$is_post = in_array( $pagenow, array( 'post-new.php', 'post.php' ) );
-				$is_tags = in_array( $pagenow, array( 'edit-tags.php' ) ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit';
-				$is_special = in_array( $pagenow, array( 'admin.php' ) ) && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) );
-				if ( $is_post || $is_tags || $is_special ) {
+				$is_tags = in_array( $pagenow, array( 'edit-tags.php' ) );
+				$is_admin = in_array( $pagenow, array( 'admin.php' ) );
+				if (
+					$is_post ||
+					( $is_tags  && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) ||
+					( $is_special && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) )
+				) {
 					$should_be_loaded = true;
 				}
 			}
