@@ -26,6 +26,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10, 2 );
 		}
 
+		/* Get plugin version */
+		function get_version() {
+			$plugin_data = get_plugin_data( __FILE__ );
+			$plugin_version = $plugin_data['Version'];
+			return $plugin_version;
+		}
+
 		/* Widget initialization */
 		function widgets_init() {
 			if ( ! is_blog_installed() )
@@ -116,12 +123,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				$local_data = array( 'error_duplicate_id' => __('ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget') );
 				wp_enqueue_script( 'wplink' );
 				wp_enqueue_script( 'wpdialogs-popup' );
-				wp_enqueue_script( 'black-studio-tinymce-widget', BLACK_STUDIO_TINYMCE_URL . '/js/black-studio-tinymce-widget' . $suffix . '.js', array( 'jquery', 'editor' ), $version, true );
+				wp_enqueue_script( 'black-studio-tinymce-widget', BLACK_STUDIO_TINYMCE_WIDGET_URL . '/js/black-studio-tinymce-widget' . $suffix . '.js', array( 'jquery', 'editor' ), $version, true );
 				wp_localize_script( 'black-studio-tinymce-widget', 'black_studio_tinymce_local', $local_data );
 				do_action( 'wp_enqueue_editor', array( 'tinymce' => true ) ); // Advanced Image Styles compatibility
 			}
 			else {
-				wp_enqueue_script( 'black-studio-tinymce-widget-legacy', BLACK_STUDIO_TINYMCE_URL . '/js/black-studio-tinymce-widget-legacy' . $suffix . '.js', array( 'jquery', 'editor' ), $version, true );
+				wp_enqueue_script( 'black-studio-tinymce-widget-legacy', BLACK_STUDIO_TINYMCE_WIDGET_URL . '/js/black-studio-tinymce-widget-legacy' . $suffix . '.js', array( 'jquery', 'editor' ), $version, true );
 			}
 		}
 		
@@ -139,7 +146,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
 				$style .= '-legacy';
 			} 
-			wp_enqueue_style( $style, BLACK_STUDIO_TINYMCE_URL . '/css/' . $style . '.css', array(), $version );
+			wp_enqueue_style( $style, BLACK_STUDIO_TINYMCE_WIDGET_URL . '/css/' . $style . '.css', array(), $version );
 		}
 		
 		
