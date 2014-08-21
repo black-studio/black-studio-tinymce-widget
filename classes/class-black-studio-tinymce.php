@@ -18,11 +18,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			// Load localization
 			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' ); 
 			// Register action and filter hooks
-			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
+			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 			add_filter( 'widget_text', array( $this, 'apply_smilies_to_widget_text' ) );
-			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
+			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
 			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10 );
 		}
 
@@ -114,25 +114,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			return $initArray;
 		}
 		
-		/* Widget js loading */
-		function admin_print_scripts() {
-			wp_enqueue_script('media-upload');
-			$version = black_studio_tinymce_get_version();
-			$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-			if ( version_compare( get_bloginfo( 'version' ), '3.3', '>=' ) ) {
-				$local_data = array( 'error_duplicate_id' => __('ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget') );
-				wp_enqueue_script( 'wplink' );
-				wp_enqueue_script( 'wpdialogs-popup' );
-				wp_enqueue_script( 'black-studio-tinymce-widget', BLACK_STUDIO_TINYMCE_WIDGET_URL . '/js/black-studio-tinymce-widget' . $suffix . '.js', array( 'jquery', 'editor' ), $version, true );
-				wp_localize_script( 'black-studio-tinymce-widget', 'black_studio_tinymce_local', $local_data );
-				do_action( 'wp_enqueue_editor', array( 'tinymce' => true ) ); // Advanced Image Styles compatibility
-			}
-			else {
-				wp_enqueue_script( 'black-studio-tinymce-widget-legacy', BLACK_STUDIO_TINYMCE_WIDGET_URL . '/js/black-studio-tinymce-widget-legacy' . $suffix . '.js', array( 'jquery', 'editor' ), $version, true );
-			}
-		}
-		
-		/* Widget css loading */
+		/* Enqueue styles */
 		function admin_print_styles() {
 			if ( version_compare( get_bloginfo( 'version' ), '3.3', '<' ) ) {
 				wp_enqueue_style( 'thickbox' );
@@ -141,16 +123,50 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				wp_enqueue_style( 'wp-jquery-ui-dialog' );
 			}
 			$style = 'black-studio-tinymce-widget';
-			$version = black_studio_tinymce_get_version();
 			wp_enqueue_style( 'editor-buttons' );
 			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
 				$style .= '-legacy';
 			} 
-			wp_enqueue_style( $style, BLACK_STUDIO_TINYMCE_WIDGET_URL . '/css/' . $style . '.css', array(), $version );
+			wp_enqueue_style(
+				$style,
+				BLACK_STUDIO_TINYMCE_WIDGET_URL . 'css/' . $style . '.css',
+				array(),
+				BLACK_STUDIO_TINYMCE_WIDGET_VERSION
+			);
 		}
 		
+		/* Enqueue header scripts */
+		function admin_print_scripts() {
+			wp_enqueue_script('media-upload');
+			$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+			if ( version_compare( get_bloginfo( 'version' ), '3.3', '>=' ) ) {
+				$local_data = array( 'error_duplicate_id' => __('ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget') );
+				wp_enqueue_script( 'editor' );
+				wp_enqueue_script( 'wplink' );
+				wp_enqueue_script( 'wpdialogs-popup' );
+				echo BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget' . $suffix . '.js';
+				wp_enqueue_script(
+					'black-studio-tinymce-widget',
+					BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget' . $suffix . '.js',
+					array( 'jquery', 'editor' ),
+					BLACK_STUDIO_TINYMCE_WIDGET_VERSION,
+					true
+				);
+				wp_localize_script( 'black-studio-tinymce-widget', 'black_studio_tinymce_local', $local_data );
+				do_action( 'wp_enqueue_editor', array( 'tinymce' => true ) ); // Advanced Image Styles compatibility
+			}
+			else {
+				wp_enqueue_script(
+					'black-studio-tinymce-widget-legacy',
+					BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget-legacy' . $suffix . '.js',
+					array( 'jquery', 'editor' ),
+					BLACK_STUDIO_TINYMCE_WIDGET_VERSION,
+					true
+				);
+			}
+		}
 		
-		/* Footer script */
+		/* Enqueue footer scripts */
 		function admin_print_footer_scripts() {
 			// Setup for WP 3.1 and previous versions
 			if ( version_compare( get_bloginfo( 'version' ), '3.2', '<' ) ) {
@@ -176,7 +192,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			}
 		}
 		
-		/* Support for Smilies */
+		/* Support for smilies */
 		function apply_smilies_to_widget_text( $text ) {
 			if ( get_option( 'use_smilies' ) ) {
 				$text = convert_smilies( $text );
