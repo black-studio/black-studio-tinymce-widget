@@ -54,8 +54,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
 			// Handle compatibility code
-			new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
-			new Black_Studio_TinyMCE_Compatibility_Plugins();
+			self::$_instance->compat_plugins = new Black_Studio_TinyMCE_Compatibility_Plugins();
+			self::$_instance->compat_wp      = new Black_Studio_TinyMCE_Compatibility_Wordpress( self::$_instance );
 		}
 
 		/* Get plugin version */
