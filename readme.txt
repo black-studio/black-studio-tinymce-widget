@@ -2,9 +2,9 @@
 Contributors: marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
-Requires at least: 3.0
+Requires at least: 3.1
 Tested up to: 4.0
-Stable tag: 1.4.6
+Stable tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -30,6 +30,7 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 
 * [Plugin's web page](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
 * [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget)
+* [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget)
 * [Follow us on Twitter](https://twitter.com/blackstudioita)
 
 == Installation ==
@@ -110,6 +111,14 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 `
 
 == Changelog ==
+
+= 2.0.0. =
+* Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
+* Total refactoring of source code
+* Improved code quality and organization
+* Added black_studio_tinymce_enable filter hook
+* Added black_studio_tinymce_load action hook
+* Special thanks to Christian Foellmann for his support and suggestions
 
 = 1.4.6 =
 * Bugfix on widget display
