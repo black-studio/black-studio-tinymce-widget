@@ -62,12 +62,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/* Compatibility with Jetpack After the deadline */
 		function jetpack_after_the_deadline() {
 			add_action( 'black_studio_tinymce_load', array( $this, 'jetpack_after_the_deadline_load' ) );
-		} 
+		}
 
 		/* Load Jetpack After the deadline scripts */
 		function jetpack_after_the_deadline_load() {
 			add_filter( 'atd_load_scripts', '__return_true' );
-		} 
+		}
 
 	} // class declaration
 

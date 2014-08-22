@@ -47,9 +47,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		}
 
 		/* Enqueue styles for WordPress prior to 3.8 */
-		function wp_pre_38_style( $style ) {
-			$style = 'black-studio-tinymce-widget-legacy';
-			return $style;
+		function wp_pre_38_style( ) {
+			return 'black-studio-tinymce-widget-legacy';
 		}
 
 		/* Compatibility for WordPress prior 3.3 */
@@ -91,9 +90,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		}
 
 		/* Enqueue script for WordPress prior to 3.3 */
-		function wp_pre_33_script( $script ) {
-			$script = 'black-studio-tinymce-widget-legacy';
-			return $script;
+		function wp_pre_33_script() {
+			return 'black-studio-tinymce-widget-legacy';
 		}
 
 		/* Enqueue footer scripts for WordPress prior to 3.3 */

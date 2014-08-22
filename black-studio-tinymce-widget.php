@@ -25,11 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 
 	final class Black_Studio_TinyMCE_Plugin {
-		
+
 		/* Plugin version*/
 		public $version = '2.0.0';
 
-		/* The single instance of the class */		
+		/* The single instance of the class */
 		protected static $_instance = null;
 
 		/* Return the main plugin instance */
@@ -216,9 +216,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 } // class_exists check
 
 /* Return the main instance to prevent the need to use globals */
-function BSTW() {
+function bstw() {
 	return Black_Studio_TinyMCE_Plugin::instance();
 }
 
 /* Create the main instance */
-BSTW();
+bstw();
