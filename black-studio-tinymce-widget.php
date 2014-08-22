@@ -84,7 +84,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			// Load editor features
 			$enable = apply_filters( 'black_studio_tinymce_enable', false );
 			if ( $enable ) {
-				add_action( 'admin_head', array( $this, 'load_tiny_mce' ) );
+				add_action( 'admin_head', array( $this, 'enqueue_media' ) );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 20 );
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 
 
 		/* Instantiate tinyMCE editor */
-		function load_tiny_mce() {
+		function enqueue_media() {
 			// Add support for thickbox media dialog
 			add_thickbox();
 			// New media modal dialog (WP 3.5+)
@@ -124,8 +124,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				'forced_root_block' => 'p',
 				'apply_source_formatting ' => true,
 				'indent' => true,
-				// TODO: it should not be necessary to set plugins (it looks like a bug)
-				'plugins' => 'charmap,hr,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview',
 			);
 			// Return modified settings
 			return array_merge( $settings, $custom_settings );

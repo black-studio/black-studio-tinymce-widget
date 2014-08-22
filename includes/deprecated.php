@@ -5,12 +5,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* Set global var with plugin version for backward compatibility */
 global $black_studio_tinymce_widget_version;
-$black_studio_tinymce_widget_version = bstw()->get_version();
+add_action( 'init', '_black_studio_tinymce_widget_set_global_version' );
+function _black_studio_tinymce_widget_set_global_version() {
+	global $black_studio_tinymce_widget_version;
+	$black_studio_tinymce_widget_version = bstw()->get_version();
+}
 
 function black_studio_tinymce_load_tiny_mce() {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->load_tiny_mce()' );
-	bstw()->load_tiny_mce();
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->enqueue_media()' );
+	bstw()->enqueue_media();
 }
 
 function black_studio_tinymce_init_editor( $arg ) {
