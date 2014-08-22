@@ -58,10 +58,6 @@ module.exports = function( grunt ) {
 				],
 				tasks: ['uglify']
 			},
-			makepot: {
-				files: '**/*.php',
-				tasks: ['makepot']
-			}
 		},
 
 		makepot: {
@@ -128,7 +124,7 @@ module.exports = function( grunt ) {
 		wp_readme_to_markdown: {
 			convert: {
 				files: {
-					'readme.md': 'readme.txt'
+					'README.md': 'readme.txt'
 				}
 			},
 			options : {
@@ -149,14 +145,23 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
-	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	grunt.loadNpmTasks( 'grunt-checktextdomain' );
-	grunt.loadNpmTasks('grunt-po2mo');
+	grunt.loadNpmTasks( 'grunt-wp-i18n' );
+	grunt.loadNpmTasks( 'grunt-po2mo' );
+	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
 
 	// Register tasks
 	grunt.registerTask( 'default', [
 		'cssmin',
 		'uglify'
+	]);
+	grunt.registerTask( 'languages', [ 
+		'checktextdomain',
+		'makepot',
+		'po2mo'
+	]);
+	grunt.registerTask( 'readme', [ 
+		'wp_readme_to_markdown'
 	]);
 
 };

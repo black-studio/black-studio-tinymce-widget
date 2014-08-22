@@ -1,22 +1,12 @@
 # Black Studio TinyMCE Widget #
-**Contributors:** marcochiesi, thedarkmist
-
-**Plugin page:** https://wordpress.org/plugins/black-studio-tinymce-widget/
-  
-**Donate link:** http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
-  
-**Tags:** wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
-  
-**Requires at least:** 3.0
-  
-**Tested up to:** 4.0
-  
-**Stable tag:** 1.4.6
-  
-**License:** GPLv3
-  
-**License URI:** http://www.gnu.org/licenses/gpl.html
-  
+**Contributors:** marcochiesi, thedarkmist  
+**Donate link:** http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/  
+**Tags:** wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget  
+**Requires at least:** 3.1  
+**Tested up to:** 4.0  
+**Stable tag:** 2.0.0  
+**License:** GPLv3  
+**License URI:** http://www.gnu.org/licenses/gpl.html  
 
 Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
 
@@ -40,6 +30,7 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 
 * [Plugin's web page](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
 * [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget)
+* [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget)
 * [Follow us on Twitter](https://twitter.com/blackstudioita)
 
 ## Installation ##
@@ -54,15 +45,11 @@ This section describes how to install and use the plugin.
 
 ## Screenshots ##
 
-###1. Black Studio TinyMCE Widget editor window
-###
-![Black Studio TinyMCE Widget editor window
-](https://s.w.org/plugins/black-studio-tinymce-widget/screenshot-1.png)
+### 1. Black Studio TinyMCE Widget editor window ###
+![Black Studio TinyMCE Widget editor window](http://s.wordpress.org/extend/plugins/black-studio-tinymce-widget/screenshot-1.png)
 
-###2. Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin
-###
-![Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin
-](https://s.w.org/plugins/black-studio-tinymce-widget/screenshot-2.png)
+### 2. Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin ###
+![Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin](http://s.wordpress.org/extend/plugins/black-studio-tinymce-widget/screenshot-2.png)
 
 
 ## Frequently Asked Questions ##
@@ -88,12 +75,12 @@ When you post a message in the [support forum](http://wordpress.org/support/plug
 
 ### Widgets disappeared after migrating or changing the site URL ###
 
-When dealing with a WordPress site URL change it is necessary to face the "serialized fields" issue: data may become corrupted if using a simple search/replace (see the [Codex](http://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiviation. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.
+**When dealing with a WordPress site URL change it is necessary to face the "serialized fields" issue:** data may become corrupted if using a simple search/replace (see the [Codex](http://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiviation. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.  
 
 ### How to translate widgets using WPML ###
 
 The current version of `Black Studio TinyMCE Widget` plugin works together with the `WPML String translation` plugin. To translate a widget created with `Black Studio TinyMCE Widget` plugin you have to create it on the widgets panel and then go to `WPML` -> `String translation` and translate the title and text from there (unfortunately the translation textarea has not the visual editor).
-Note: If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String translation list.
+**Note:** If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String translation list.  
 
 ### How to embed video and other contents ###
 
@@ -109,7 +96,7 @@ Most of the HTML markup around widgets is generated by WordPress and you can con
 `<div class="textwidget"> ... widget text ... </div>`
 You may customize it using the `black_studio_tinymce_before_text` and `black_studio_tinymce_after_text` filter hooks. They both take two parameters, the first one is the default text and the second is the widget instance. See examples below.
 
-Example 1: Custom markup
+**Example 1:** Custom markup  
 `
 add_filter( 'black_studio_tinymce_before_text', 'my_widget_before_text', 10, 2 );
 function my_widget_before_text( $before_text, $instance ) {
@@ -121,13 +108,21 @@ function my_widget_after_text( $after_text, $instance ) {
 }
 `
 
-Example 2: Totally remove markup
+**Example 2:** Totally remove markup  
 `
 add_filter( 'black_studio_tinymce_before_text', '__return_empty_string' );
 add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 `
 
 ## Changelog ##
+
+### 2.0.0. ###
+* Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
+* Total refactoring of source code
+* Improved code quality and security
+* Added black_studio_tinymce_enable filter hook
+* Added black_studio_tinymce_load action hook
+* Special thanks to @cfoellmann for his support and suggestions
 
 ### 1.4.6 ###
 * Bugfix on widget display
