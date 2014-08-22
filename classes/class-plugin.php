@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Widget class
+ * Main plugin class
  *
  * @package Black Studio TinyMCE Widget
  */
@@ -11,9 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 
-	class Black_Studio_TinyMCE {
+	class Black_Studio_TinyMCE_Plugin {
 
 		/* Class constructor */
 		function __construct() {
@@ -22,17 +22,18 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			// Register action and filter hooks
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
+			add_filter( 'black_studio_tinymce_enable', array( $this, 'enable' ) );
 			add_filter( 'widget_text', array( $this, 'apply_smilies_to_widget_text' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
 			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
-			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10 );
+			// Handle compatibility code
+			$compat_wordpress = new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
+			$compat_plugins = new Black_Studio_TinyMCE_Compatibility_Plugins( $this );
 		}
 
 		/* Get plugin version */
 		function get_version() {
-			$plugin_data = get_plugin_data( __FILE__ );
-			$plugin_version = $plugin_data['Version'];
-			return $plugin_version;
+			return BLACK_STUDIO_TINYMCE_WIDGET_VERSION;
 		}
 
 		/* Widget initialization */
@@ -46,47 +47,26 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 		/* Add actions and filters (only in widgets admin page) */
 		function admin_init() {
 			// Load editor features
-			if ( $this->should_be_loaded() ) {
+			$enable = apply_filters( 'black_studio_tinymce_enable', false );
+			if ( $enable ) {
 				add_action( 'admin_head', array( $this, 'load_tiny_mce' ) );
 				add_filter( 'tiny_mce_before_init', array( $this, 'init_editor' ), 20 );
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
-				add_filter( 'atd_load_scripts', '__return_true' ); // Compatibility with Jetpack After the deadline
+				do_action( 'black_studio_tinymce_load' );
 			}
 		}
 
 		/* Check if editor should be loaded */
-		function should_be_loaded() {
+		function enable( $enable ) {
 			global $pagenow;
-			$should_be_loaded = false;
 			if ( $pagenow == 'widgets.php' || $pagenow == 'customize.php' ) {
-				$should_be_loaded = true;
+				$enable = true;
 			}
-			if ( check_wp_page_widget_plugin() ) {
-				$should_be_loaded = true;
-			}
-			return $should_be_loaded;
+			return $enable;
 		}
 
-		/* Compatibility for WP Page Widget plugin */
-		function check_wp_page_widget_plugin() {
-			global $pagenow;
-			$check = false;
-			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) ) {
-				$is_post = in_array( $pagenow, array( 'post-new.php', 'post.php' ) );
-				$is_tags = in_array( $pagenow, array( 'edit-tags.php' ) );
-				$is_admin = in_array( $pagenow, array( 'admin.php' ) );
-				if (
-					$is_post ||
-					( $is_tags  && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) ||
-					( $is_admin && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) )
-				) {
-					$check = true;
-				}
-			}
-			return $check;
-		}
 
 		/* Instantiate tinyMCE editor */
 		function load_tiny_mce() {
@@ -161,7 +141,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 		function admin_print_scripts() {
 			wp_enqueue_script( 'media-upload' );
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			if ( version_compare( get_bloginfo( 'version' ), '3.3', '>=' ) ) {
+			if ( version_compare( get_bloginfo( 'version' ), '3.3', '<' ) ) {
+				wp_enqueue_script(
+					'black-studio-tinymce-widget-legacy',
+					esc_url( BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget-legacy' . $suffix . '.js' ),
+					array( 'jquery', 'editor' ),
+					BLACK_STUDIO_TINYMCE_WIDGET_VERSION,
+					true
+				);
+			}
+			else {
 				$local_data = array( 'error_duplicate_id' => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget' ) );
 				wp_enqueue_script( 'wplink' );
 				wp_enqueue_script( 'wpdialogs-popup' );
@@ -174,15 +163,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 				);
 				wp_localize_script( 'black-studio-tinymce-widget', 'black_studio_tinymce_local', $local_data );
 				do_action( 'wp_enqueue_editor', array( 'tinymce' => true ) ); // Advanced Image Styles compatibility
-			}
-			else {
-				wp_enqueue_script(
-					'black-studio-tinymce-widget-legacy',
-					esc_url( BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget-legacy' . $suffix . '.js' ),
-					array( 'jquery', 'editor' ),
-					BLACK_STUDIO_TINYMCE_WIDGET_VERSION,
-					true
-				);
 			}
 		}
 
@@ -239,13 +219,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE' ) ) {
 			return $editor;
 		}
 
-		/* Hack for compatibility with Page Builder + WPML String Translation */
-		function siteorigin_panels_widget_object( $the_widget ) {
-			if ( isset($the_widget->id_base) && $the_widget->id_base == 'black-studio-tinymce' ) {
-				$the_widget->number = '';
-			}
-			return $the_widget;
-		}
 
 	} // class declaration
 
