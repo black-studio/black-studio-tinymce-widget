@@ -15,10 +15,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 
 	class Black_Studio_TinyMCE_Compatibility_Wordpress {
 
-		private $main;
+		private $plugin;
 
 		/* Class constructor */
 		function __construct( $plugin ) {
+			$this->plugin = $plugin;
 			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
 				wp_pre_38();
 			}
@@ -44,12 +45,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		/* Compatibility for WordPress prior 3.3 */
 		function wp_pre_33() {
 			add_filter( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 10 );
-			remove_action( 'admin_print_styles', array( $this->main, 'admin_print_styles' ) );
+			remove_action( 'admin_print_styles', array( $this->plugin, 'admin_print_styles' ) );
 			add_action( 'admin_print_styles', array( $this, 'wp_pre_33_admin_print_styles' ) );
-			remove_action( 'admin_print_scripts', array( $this->main, 'admin_print_scripts' ) );
+			remove_action( 'admin_print_scripts', array( $this->plugin, 'admin_print_scripts' ) );
 			add_action( 'admin_print_scripts', array( $this, 'wp_pre_33_admin_print_scripts' ) );
-			remove_action( 'admin_print_footer_scripts', array( $this->main, 'admin_print_footer_scripts' ) );
+			remove_action( 'admin_print_footer_scripts', array( $this->plugin, 'admin_print_footer_scripts' ) );
 			add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_33_admin_print_footer_scripts' ) );
+			add_filter( 'black-studio-tinymce-widget-script', array( $this, 'wp_pre_33_script' ) );
 		}
 
 		/* Remove WP fullscreen mode and set the native tinyMCE fullscreen mode */
@@ -69,20 +71,19 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		function wp_pre_33_admin_print_styles() {
 			wp_enqueue_style( 'thickbox' );
 			wp_enqueue_style( 'editor-buttons' );
-			$this->main->enqueue_style( 'black-studio-tinymce-widget-legacy' );
+			$this->plugin->enqueue_style();
 		}
 
 		/* Enqueue header scripts for WordPress prior to 3.3 */
 		function wp_pre_33_admin_print_scripts() {
 			wp_enqueue_script( 'media-upload' );
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			wp_enqueue_script(
-				'black-studio-tinymce-widget-legacy',
-				esc_url( BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget-legacy' . $suffix . '.js' ),
-				array( 'jquery', 'editor' ),
-				BLACK_STUDIO_TINYMCE_WIDGET_VERSION,
-				true
-			);
+			$this->plugin->enqueue_script();
+		}
+		
+		/* Enqueue script for WordPress prior to 3.3 */
+		function wp_pre_33_script( $script ) {
+			$script = 'black-studio-tinymce-widget-legacy';
+			return $script;
 		}
 
 		/* Enqueue footer scripts for WordPress prior to 3.3 */
@@ -97,13 +98,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 
 		/* Compatibility for WordPress prior to 3.2 */
 		function wp_pre_32() {
-			remove_action( 'admin_print_styles', array( $this->main, 'admin_print_styles' ) );
-			add_action( 'admin_print_styles', array( $this, 'wp_pre_33_admin_print_styles' ) );
-			remove_action( 'admin_print_footer_scripts', array( $this->main, 'admin_print_footer_scripts' ) );
 			remove_action( 'admin_print_footer_scripts', array( $thi, 'wp_pre_33_admin_print_footer_scripts' ) );
 			add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_32_admin_print_footer_scripts' ) );
 		}
-		
+
 		/* Enqueue footer scripts for WordPress prior to 3.2 */
 		function  wp_pre_32_admin_print_footer_scripts() {
 			if ( function_exists( 'wp_tiny_mce' ) ) {

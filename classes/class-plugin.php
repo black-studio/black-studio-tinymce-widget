@@ -103,6 +103,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		function admin_print_styles() {
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
 			wp_enqueue_style( 'editor-buttons' );
+			$this->enqueue_style();
+		}
+
+		/* Helper function to enqueue style */
+		function enqueue_style() {
 			$style = apply_filters( 'black-studio-tinymce-widget-style', 'black-studio-tinymce-widget' );
 			wp_enqueue_style(
 				$style,
@@ -111,22 +116,34 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				BLACK_STUDIO_TINYMCE_WIDGET_VERSION
 			);
 		}
+
 		/* Enqueue header scripts */
 		function admin_print_scripts() {
 			wp_enqueue_script( 'media-upload' );
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			$local_data = array( 'error_duplicate_id' => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget' ) );
 			wp_enqueue_script( 'wplink' );
 			wp_enqueue_script( 'wpdialogs-popup' );
+			$this->enqueue_script();
+			$this->localize_script();
+			do_action( 'wp_enqueue_editor', array( 'tinymce' => true ) );
+		}
+
+		/* Helper function to enqueue script */
+		function enqueue_script() {
+			$script = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			wp_enqueue_script(
-				'black-studio-tinymce-widget',
-				esc_url( BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/black-studio-tinymce-widget' . $suffix . '.js' ),
+				$script,
+				esc_url( BLACK_STUDIO_TINYMCE_WIDGET_URL . 'js/' . $script . $suffix . '.js' ),
 				array( 'jquery', 'editor' ),
 				BLACK_STUDIO_TINYMCE_WIDGET_VERSION,
 				true
 			);
+		}
+
+		/* Helper function to enqueue localized script */
+		function localize_script() {
+			$local_data = array( 'error_duplicate_id' => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new one with the same content and then delete this widget.', 'black-studio-tinymce-widget' ) );
 			wp_localize_script( 'black-studio-tinymce-widget', 'black_studio_tinymce_local', $local_data );
-			do_action( 'wp_enqueue_editor', array( 'tinymce' => true ) );
 		}
 
 		/* Enqueue footer scripts */

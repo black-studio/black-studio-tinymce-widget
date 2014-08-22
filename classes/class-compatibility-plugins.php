@@ -15,12 +15,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 
 	class Black_Studio_TinyMCE_Compatibility_Plugins {
 
-		private $plugin;
-
 		/* Class constructor */
-		function __construct( $plugin ) {
-			// Save plugin instance
-			$this->plugin = $plugin;
+		function __construct() {
 			// Call compatibility methods
 			$this->wp_page_widget();
 			$this->jetpack_after_the_deadline();
