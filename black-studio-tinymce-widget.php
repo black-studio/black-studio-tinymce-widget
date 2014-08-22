@@ -124,6 +124,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				'forced_root_block' => 'p',
 				'apply_source_formatting ' => true,
 				'indent' => true,
+				// TODO: it should not be necessary to set plugins (it looks like a bug)
+				'plugins' => 'charmap,hr,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview',
 			);
 			// Return modified settings
 			return array_merge( $settings, $custom_settings );
