@@ -15,9 +15,9 @@ function black_studio_tinymce_load_tiny_mce() {
 }
 
 function black_studio_tinymce_init_editor( $arg ) {
-	_deprecated_function( __FUNCTION__, '2.0.0', '$black_studio_tinymce_plugin->init_editor()' );
+	_deprecated_function( __FUNCTION__, '2.0.0', '$black_studio_tinymce_plugin->tiny_mce_before_init()' );
 	global $black_studio_tinymce_plugin;
-	return $black_studio_tinymce_plugin->init_editor( $arg );
+	return $black_studio_tinymce_plugin->tiny_mce_before_init( $arg );
 }
 
 function black_studio_tinymce_styles() {

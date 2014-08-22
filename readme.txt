@@ -115,7 +115,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 = 2.0.0. =
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
 * Total refactoring of source code
-* Improved code quality and organization
+* Improved code quality and security
 * Added black_studio_tinymce_enable filter hook
 * Added black_studio_tinymce_load action hook
 * Special thanks to Christian Foellmann for his support and suggestions
