@@ -118,7 +118,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 * Improved code quality and security
 * Added black_studio_tinymce_enable filter hook
 * Added black_studio_tinymce_load action hook
-* Special thanks to Christian Foellmann for his support and suggestions
+* Special thanks to @cfoellmann for his support and suggestions
 
 = 1.4.6 =
 * Bugfix on widget display

@@ -70,13 +70,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'type' => 'visual' ) );
 			$title = strip_tags( $instance['title'] );
-			if ( function_exists( 'esc_textarea' ) ) {
-				$text = esc_textarea( $instance['text'] );
-			}
-			else {
-				$text = stripslashes( wp_filter_post_kses( addslashes( $instance['text'] ) ) );
-			}
-			$type = esc_attr( $instance['type'] );
+			$text = $instance['text'];
+			$type = $instance['type'];
 			$switch_class = $type == 'visual' ? 'html-active' : 'tmce-active';
 			if ( version_compare( get_bloginfo( 'version' ), '3.5', '<' ) ) {
 				$toggle_buttons_class = 'editor_toggle_buttons_legacy';
@@ -106,7 +101,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 					</div>
 				</div>
 				<div class="wp-editor-container">
-					<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_html( $text ); ?></textarea>
+					<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
 				</div>
 			</div>
 			<div class="wp-editor-bstw-links" style="font-size: 10px; text-align: right; padding: 5px 0;"><a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php echo esc_html( __( 'Donate', 'black-studio-tinymce-widget' ) ); ?></a> | <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php echo esc_html( __( 'Support', 'black-studio-tinymce-widget' ) ); ?></a> | <a href="http://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget" target="_blank"><?php echo esc_html( __( 'Rate', 'black-studio-tinymce-widget' ) ); ?></a> | <a href="https://twitter.com/blackstudioita" target="_blank"><?php echo esc_html( __( 'Follow', 'black-studio-tinymce-widget' ) ); ?></a></div>

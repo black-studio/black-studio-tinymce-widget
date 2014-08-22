@@ -33,7 +33,17 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 
 		/* Compatibility for WordPress prior to 3.8 */
 		function wp_pre_38() {
+			add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_38_tiny_mce_before_init' ), 20 );
 			add_filter( 'black-studio-tinymce-widget-style', array( $this, 'wp_pre_38_style' ) );
+		}
+
+		/* Remove the "More" toolbar button (only in widget screen) for WordPress prior to 3.8 */
+		function wp_pre_38_tiny_mce_before_init( $settings ) {
+			global $pagenow;
+			if ( $pagenow == 'widgets.php' ) {
+				$settings['theme_advanced_buttons1'] = str_replace( ',wp_more', '', $settings['theme_advanced_buttons1'] );
+			}
+			return $settings;
 		}
 
 		/* Enqueue styles for WordPress prior to 3.8 */
@@ -44,7 +54,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 
 		/* Compatibility for WordPress prior 3.3 */
 		function wp_pre_33() {
-			add_filter( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 10 );
+			add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_33_tiny_mce_before_init' ), 20 );
 			remove_action( 'admin_print_styles', array( $this->plugin, 'admin_print_styles' ) );
 			add_action( 'admin_print_styles', array( $this, 'wp_pre_33_admin_print_styles' ) );
 			remove_action( 'admin_print_scripts', array( $this->plugin, 'admin_print_scripts' ) );
@@ -54,7 +64,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			add_filter( 'black-studio-tinymce-widget-script', array( $this, 'wp_pre_33_script' ) );
 		}
 
-		/* Remove WP fullscreen mode and set the native tinyMCE fullscreen mode */
+		/* Remove WP fullscreen mode and set the native tinyMCE fullscreen mode for WordPress prior to 3.3 */
 		function wp_pre_33_tiny_mce_before_init( $settings ) {
 			$plugins = explode( ',', $settings['plugins'] );
 			if ( isset( $plugins['wpfullscreen'] ) ) {
@@ -79,7 +89,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			wp_enqueue_script( 'media-upload' );
 			$this->plugin->enqueue_script();
 		}
-		
+
 		/* Enqueue script for WordPress prior to 3.3 */
 		function wp_pre_33_script( $script ) {
 			$script = 'black-studio-tinymce-widget-legacy';
