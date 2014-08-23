@@ -41,7 +41,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/* Class constructor */
-		public function __construct() {
+		protected function __construct() {
 			// Include required files
 			$this->includes();
 			// Load localization
@@ -53,9 +53,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			add_filter( 'widget_text', array( $this, 'apply_smilies_to_widget_text' ) );
 			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
-			// Handle compatibility code
-			self::$_instance->compat_plugins = new Black_Studio_TinyMCE_Compatibility_Plugins();
-			self::$_instance->compat_wp      = new Black_Studio_TinyMCE_Compatibility_Wordpress( self::$_instance );
+		}
+
+		protected function __clone() {
+			// Cloning instances of the class is forbidden
+			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
 		/* Get plugin version */
