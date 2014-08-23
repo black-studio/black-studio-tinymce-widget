@@ -15,7 +15,7 @@ module.exports = function( grunt ) {
 			},
 			all: [
 				'Gruntfile.js',
-				'<%= dirs.js %>/*.js',
+				'<%= dirs.js %>/*.js'
 			]
 		},
 
@@ -36,7 +36,7 @@ module.exports = function( grunt ) {
 					dest: '<%= dirs.js %>/',
 					ext: '.min.js'
 				}]
-			},
+			}
 		},
 
 		// Minify all .css files.
@@ -54,10 +54,10 @@ module.exports = function( grunt ) {
 		watch: {
 			js: {
 				files: [
-					'<%= dirs.js %>/*.js',
+					'<%= dirs.js %>/*.js'
 				],
 				tasks: ['uglify']
-			},
+			}
 		},
 
 		makepot: {
@@ -117,8 +117,8 @@ module.exports = function( grunt ) {
 		po2mo: {
 			files: {
 				src: 'languages/*.po',
-				expand: true,
-			},
+				expand: true
+			}
 		},
 
 		wp_readme_to_markdown: {
@@ -136,7 +136,7 @@ module.exports = function( grunt ) {
 					suffix: '.png'
 				}
 			}
-		},
+		}
 		
 	});
 
