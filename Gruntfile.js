@@ -2,6 +2,7 @@ module.exports = function( grunt ) {
 	'use strict';
 
 	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
 		// setting folder templates
 		dirs: {
 			css: 'css',
@@ -22,7 +23,8 @@ module.exports = function( grunt ) {
 		// Minify .js files.
 		uglify: {
 			options: {
-				preserveComments: 'some'
+				preserveComments: 'some',
+				banner: '/*! <%= pkg.title %> - v<%= pkg.version %> */\n'
 			},
 			admin: {
 				files: [{
