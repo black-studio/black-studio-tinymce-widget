@@ -1,4 +1,4 @@
-/* CSS Document */
+/* Black Studio TinyMCE Widget - CSS */
 
 #mce_fullscreen_container {
 	background-color: white;
@@ -19,6 +19,7 @@
 	padding: 0 1px 1px 1px;
 	clear: both;
 }
+
 .editor_toggle_buttons {
 	margin-right: 15px;
 	margin-top: 8px;
@@ -36,21 +37,25 @@
     position: relative;
     top: 1px;
 }
+
 .editor_toggle_buttons a.active {
     background: none repeat scroll 0 0 #F5F5F5;
     border-bottom: 0 none;
     color: #555555;
     height: 20px;
 }
+
 .editor_toggle_buttons_legacy a.active {
 	border-color: #CCC #CCC #E9E9E9;
 	background-color: #E9E9E9;
-} 
+}
+
 .editor_media_buttons {
 	cursor: default;
 	padding: 8px 8px;
 	height: 22px;
 }
+
 .editor_media_buttons a {
 	cursor: pointer;
 	text-decoration: none;
@@ -58,13 +63,21 @@
 	font-size: 12px;
 	margin-right: 8px;
 }
+
 .editor_media_buttons img {
 	vertical-align: middle;
 	padding: 0 4px;
 }
+
 .editor_links {
 	font-size: 10px;
 	text-align: right;
 	padding-top: 3px;
 	padding-bottom: 3px;
+}
+
+.wp-editor-bstw-links {
+	font-size: 10px;
+	padding: 5px 0;
+	text-align: right;
 }
