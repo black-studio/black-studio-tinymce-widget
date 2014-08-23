@@ -64,7 +64,7 @@ module.exports = function( grunt ) {
 					'<%= dirs.js %>/*.js'
 				],
 				tasks: ['uglify']
-			}
+			},
 			css: {
 				files: [
 					'<%= dirs.css %>/*.css'
