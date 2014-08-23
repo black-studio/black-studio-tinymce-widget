@@ -65,6 +65,12 @@ module.exports = function( grunt ) {
 				],
 				tasks: ['uglify']
 			}
+			css: {
+				files: [
+					'<%= dirs.css %>/*.css'
+				],
+				tasks: ['cssmin']
+			}
 		},
 
 		makepot: {
