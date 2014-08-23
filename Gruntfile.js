@@ -2,6 +2,7 @@ module.exports = function( grunt ) {
 	'use strict';
 
 	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
 		// setting folder templates
 		dirs: {
 			css: 'css',
@@ -15,14 +16,15 @@ module.exports = function( grunt ) {
 			},
 			all: [
 				'Gruntfile.js',
-				'<%= dirs.js %>/*.js',
+				'<%= dirs.js %>/*.js'
 			]
 		},
 
 		// Minify .js files.
 		uglify: {
 			options: {
-				preserveComments: 'some'
+				preserveComments: 'some',
+				banner: '/*! <%= pkg.title %> - v<%= pkg.version %> */\n'
 			},
 			admin: {
 				files: [{
@@ -36,7 +38,7 @@ module.exports = function( grunt ) {
 					dest: '<%= dirs.js %>/',
 					ext: '.min.js'
 				}]
-			},
+			}
 		},
 
 		// Minify all .css files.
@@ -54,10 +56,10 @@ module.exports = function( grunt ) {
 		watch: {
 			js: {
 				files: [
-					'<%= dirs.js %>/*.js',
+					'<%= dirs.js %>/*.js'
 				],
 				tasks: ['uglify']
-			},
+			}
 		},
 
 		makepot: {
@@ -117,8 +119,8 @@ module.exports = function( grunt ) {
 		po2mo: {
 			files: {
 				src: 'languages/*.po',
-				expand: true,
-			},
+				expand: true
+			}
 		},
 
 		wp_readme_to_markdown: {
@@ -136,7 +138,7 @@ module.exports = function( grunt ) {
 					suffix: '.png'
 				}
 			}
-		},
+		}
 		
 	});
 

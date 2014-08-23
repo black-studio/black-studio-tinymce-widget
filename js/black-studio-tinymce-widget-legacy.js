@@ -1,3 +1,5 @@
+/* Black Studio TinyMCE Widget - JS */
+
 // TinyMCE initialization parameters
 var tinyMCEPreInit;
 // Current editor (backward compatibility)
