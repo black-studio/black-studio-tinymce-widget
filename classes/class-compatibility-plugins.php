@@ -72,3 +72,5 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 	} // class declaration
 
 } // class_exists check
+
+return new Black_Studio_TinyMCE_Compatibility_Plugins();
