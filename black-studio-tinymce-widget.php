@@ -44,9 +44,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		protected function __construct() {
 			// Include required files
 			$this->includes();
-			// Load localization
-			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
 			// Register action and filter hooks
+			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 			add_filter( 'black_studio_tinymce_enable', array( $this, 'enable' ) );
@@ -71,6 +71,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-wordpress.php' );
 			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-plugins.php' );
 			include_once( plugin_dir_path( __FILE__ ) . '/includes/deprecated.php' );
+		}
+
+		/* Load language files */
+		public function load_textdomain() {
+			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		}
 
 		/* Widget initialization */
