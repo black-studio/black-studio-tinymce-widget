@@ -188,15 +188,7 @@ module.exports = function( grunt ) {
 	});
 
 	// Load NPM tasks to be used here
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
-	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-contrib-watch' );
-	grunt.loadNpmTasks( 'grunt-checktextdomain' );
-	grunt.loadNpmTasks( 'grunt-wp-i18n' );
-	grunt.loadNpmTasks( 'grunt-po2mo' );
-	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
-	grunt.loadNpmTasks( 'grunt-checkwpversion' );
+	require( 'load-grunt-tasks' )( grunt );
 
 	// Register tasks
 	grunt.registerTask( 'default', [
