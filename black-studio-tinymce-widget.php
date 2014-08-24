@@ -6,6 +6,8 @@ Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visua
 Version: 2.0.0
 Author: Black Studio
 Author URI: http://www.blackstudio.it
+Requires at least: 3.1
+Tested up to: 4.0
 License: GPLv3
 Text Domain: black-studio-tinymce-widget
 Domain Path: /languages

@@ -100,6 +100,14 @@ module.exports = function( grunt ) {
 						pot.headers['x-poedit-bookmarks'] = '\n';
 						pot.headers['x-poedit-searchpath-0'] = '.\n';
 						pot.headers['x-textdomain-support'] = 'yes\n';
+						// Exclude string without textdomain
+						var exclude = [ 'Title:', 'Visual', 'HTML', 'Cheatin&#8217; uh?' ];
+						for ( var translation in pot.translations[""] ) {
+							if ( exclude.indexOf( translation ) >= 0 ) {
+								delete pot.translations[""][translation];
+								console.log( 'Excluded string: ' + translation );
+							}
+						}
 						return pot;
 					},
 					type: 'wp-plugin'

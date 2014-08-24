@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget 2.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-08-24 13:26:33+00:00\n"
+"POT-Creation-Date: 2014-08-24 17:48:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,10 +25,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-#: black-studio-tinymce-widget.php:69
-msgid "Cheatin&#8217; uh?"
-msgstr ""
-
 #: black-studio-tinymce-widget.php:189
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
@@ -41,18 +37,6 @@ msgstr ""
 
 #: classes/class-wp-widget-black-studio-tinymce.php:21
 msgid "Visual Editor"
-msgstr ""
-
-#: classes/class-wp-widget-black-studio-tinymce.php:80
-msgid "Title:"
-msgstr ""
-
-#: classes/class-wp-widget-black-studio-tinymce.php:85
-msgid "HTML"
-msgstr ""
-
-#: classes/class-wp-widget-black-studio-tinymce.php:86
-msgid "Visual"
 msgstr ""
 
 #: classes/class-wp-widget-black-studio-tinymce.php:97
