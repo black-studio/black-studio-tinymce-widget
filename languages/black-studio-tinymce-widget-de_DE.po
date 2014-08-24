@@ -2,38 +2,74 @@
 # This file is distributed under the same license as the Black Studio TinyMCE Widget package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2012-10-03 09:57:33+0000\n"
+"Project-Id-Version: Black Studio TinyMCE Widget\n"
+"Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-"
+"widget/issues\n"
+"POT-Creation-Date: 2014-08-24 18:23:32+00:00\n"
+"PO-Revision-Date: 2014-08-24 20:27+0100\n"
+"Last-Translator: Christian Foellmann <foellmann@foe-services.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/0.1\n"
-"Project-Id-Version: Black Studio TinyMCE Widget\n"
+"X-Generator: Poedit 1.6.8\n"
 
-#: black-studio-tinymce-widget.php:70
-msgid "HTML"
-msgstr "HTML"
+#: black-studio-tinymce-widget.php:191
+msgid ""
+"ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
+"new one with the same content and then delete this widget."
+msgstr ""
+"FEHLER: Doppelte Widget-ID gefunden. Um den Verlust von Daten zu verhindern, "
+"erstelle ein neues Widget mit dem gleichen Inhalt und lösche das Aktuelle."
 
-#: black-studio-tinymce-widget.php:71
-msgid "Visual"
-msgstr "Visual"
-
-#: black-studio-tinymce-widget.php:79
-msgid "Donate"
-msgstr "Spende"
-
-#: black-studio-tinymce-widget.php:79
-msgid "Support"
-msgstr "Support"
-
-#: black-studio-tinymce-widget.php:79
-msgid "Follow"
-msgstr "Folgen"
-
-#: black-studio-tinymce-widget.php:19
+#: classes/class-wp-widget-black-studio-tinymce.php:19
 msgid "Arbitrary text or HTML with visual editor"
 msgstr "Normaler Text oder HTML mit Editor"
 
-#: black-studio-tinymce-widget.php:21
-msgid "Black Studio TinyMCE"
-msgstr "Black Studio TinyMCE"
+#: classes/class-wp-widget-black-studio-tinymce.php:21
+msgid "Visual Editor"
+msgstr "Visual Editor"
+
+#: classes/class-wp-widget-black-studio-tinymce.php:98
+msgid "Donate"
+msgstr "Spende"
+
+#: classes/class-wp-widget-black-studio-tinymce.php:99
+msgid "Support"
+msgstr "Support"
+
+#: classes/class-wp-widget-black-studio-tinymce.php:100
+msgid "Rate"
+msgstr "Bewerten"
+
+#: classes/class-wp-widget-black-studio-tinymce.php:101
+msgid "Follow"
+msgstr "Folgen"
+
+#. Plugin Name of the plugin/theme
+msgid "Black Studio TinyMCE Widget"
+msgstr "Black Studio TinyMCE Widget"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/black-studio-tinymce-widget/"
+msgstr "https://wordpress.org/plugins/black-studio-tinymce-widget/"
+
+#. Description of the plugin/theme
+msgid ""
+"Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor."
+msgstr ""
+"Ein WYSIWYG Widget basierend auf dem Standard TinyMCE WordPress Visual "
+"Editor."
+
+#. Author of the plugin/theme
+msgid "Black Studio"
+msgstr "Black Studio"
+
+#. Author URI of the plugin/theme
+msgid "http://www.blackstudio.it"
+msgstr "http://www.blackstudio.it"
+
+#~ msgid "HTML"
+#~ msgstr "HTML"
