@@ -27,7 +27,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 	final class Black_Studio_TinyMCE_Plugin {
 
 		/* Plugin version*/
-		public $version = '2.0.0';
+		public static $version = '2.0.0';
 
 		/* The single instance of the class */
 		protected static $_instance = null;
@@ -38,6 +38,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				self::$_instance = new self();
 			}
 			return self::$_instance;
+		}
+
+		/* Get plugin version */
+		public static function get_version() {
+			return self::$version;
 		}
 
 		/* Class constructor */
@@ -60,11 +65,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		protected function __clone() {
 			// Cloning instances of the class is forbidden
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
-		}
-
-		/* Get plugin version */
-		function get_version() {
-			return $this->version;
 		}
 
 		/* Include additional files */

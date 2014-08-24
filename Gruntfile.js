@@ -124,7 +124,8 @@ module.exports = function( grunt ) {
 					'_nx:1,2,4c,5d',
 					'_n_noop:1,2,3d',
 					'_nx_noop:1,2,3c,4d'
-				]
+				],
+				report_missing: false
 			},
 			files: {
 				src:  [
@@ -159,8 +160,31 @@ module.exports = function( grunt ) {
 					suffix: '.png'
 				}
 			}
+		},
+
+		// Check version
+		checkwpversion: {
+			options:{
+				readme: 'readme.txt',
+				plugin: 'black-studio-tinymce-widget.php',
+			},
+			plugin_vs_readme: { //Check plug-in version and stable tag match
+				version1: 'plugin',
+				version2: 'readme',
+				compare: '==',
+			},
+			plugin_vs_grunt: { //Check plug-in version and package.json match
+				version1: 'plugin',
+				version2: '<%= pkg.version %>',
+				compare: '==',
+			},
+			plugin_vs_internal: { //Check plug-in version and internal defined version
+				version1: 'plugin',
+				version2: grunt.file.read('black-studio-tinymce-widget.php').match( /version = '(.*)'/ )[1],
+				compare: '==',
+			}
 		}
-		
+
 	});
 
 	// Load NPM tasks to be used here
@@ -172,6 +196,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	grunt.loadNpmTasks( 'grunt-po2mo' );
 	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
+	grunt.loadNpmTasks( 'grunt-checkwpversion' );
 
 	// Register tasks
 	grunt.registerTask( 'default', [
@@ -182,6 +207,10 @@ module.exports = function( grunt ) {
 		'checktextdomain',
 		'makepot',
 		'po2mo'
+	]);
+	grunt.registerTask( 'check', [ 
+		'checkwpversion',
+		'checktextdomain'
 	]);
 	grunt.registerTask( 'readme', [ 
 		'wp_readme_to_markdown'
