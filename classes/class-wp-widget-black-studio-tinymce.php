@@ -73,19 +73,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			$text = $instance['text'];
 			$type = $instance['type'];
 			$switch_class = $type == 'visual' ? 'html-active' : 'tmce-active';
-			if ( version_compare( get_bloginfo( 'version' ), '3.5', '<' ) ) {
-				$toggle_buttons_class = 'editor_toggle_buttons_legacy';
-				$media_buttons_class = 'editor_media_buttons_legacy';
-			}
-			else if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
-				$toggle_buttons_class = 'wp-toggle-buttons';
-				$media_buttons_class = 'wp-media-buttons';
-			}
-			else {
-				$toggle_buttons_class = 'wp-editor-tabs';
-				$media_buttons_class = 'wp-media-buttons';
-			}
-
+			$toggle_buttons_class = apply_filters( 'black_studio_tinymce_toggle_buttons_class', 'wp-editor-tabs' );
+			$media_buttons_class = apply_filters( 'black_studio_tinymce_media_buttons_class', 'wp-media-buttons' );
 			?>
 			<input id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>" type="hidden" value="<?php echo esc_attr( $type ); ?>" />
 			<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
@@ -109,7 +98,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
                 <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php _e( 'Support', 'black-studio-tinymce-widget' ); ?></a> |
                 <a href="http://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget" target="_blank"><?php _e( 'Rate', 'black-studio-tinymce-widget' ); ?></a> |
                 <a href="https://twitter.com/blackstudioita" target="_blank"><?php _e( 'Follow', 'black-studio-tinymce-widget' ); ?></a>
-			</div>	<?php
+			</div>
+            <?php
 		}
 
 	} // class declaration

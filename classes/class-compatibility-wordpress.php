@@ -23,6 +23,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
 				wp_pre_38();
 			}
+			if ( version_compare( get_bloginfo( 'version' ), '3.5', '<' ) ) {
+				wp_pre_35();
+			}
 			if ( version_compare( get_bloginfo( 'version' ), '3.3', '<' ) ) {
 				wp_pre_33();
 			}
@@ -35,6 +38,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		function wp_pre_38() {
 			add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_38_tiny_mce_before_init' ), 20 );
 			add_filter( 'black-studio-tinymce-widget-style', array( $this, 'wp_pre_38_style' ) );
+			add_filter( 'black_studio_tinymce_toggle_buttons_class',  array( $this, 'wp_pre_38_toggle_buttons_class' ) );
 		}
 
 		/* Remove the "More" toolbar button (only in widget screen) for WordPress prior to 3.8 */
@@ -51,7 +55,28 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			return 'black-studio-tinymce-widget-legacy';
 		}
 
-		/* Compatibility for WordPress prior 3.3 */
+		/* Set toggle button class for WordPress prior to 3.8 */
+		function wp_pre_38_toggle_buttons_class() {
+			return 'wp-toggle-buttons';
+		}
+
+		/* Compatibility for WordPress prior to 3.5 */
+		function wp_pre_35() {
+			add_filter( 'black_studio_tinymce_toggle_buttons_class',  array( $this, 'wp_pre_35_toggle_buttons_class' ) );
+			add_filter( 'black_studio_tinymce_media_buttons_class',  array( $this, 'wp_pre_35_media_buttons_class' ) );
+		}
+		
+		/* Set toggle button class for WordPress prior to 3.5 */
+		function wp_pre_35_toggle_buttons_class() {
+			return 'editor_toggle_buttons_legacy';
+		}
+
+		/* Set media button class for WordPress prior to 3.5 */
+		function wp_pre_35_media_buttons_class() {
+			return 'editor_media_buttons_legacy';
+		}
+
+		/* Compatibility for WordPress prior to 3.3 */
 		function wp_pre_33() {
 			add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_33_tiny_mce_before_init' ), 20 );
 			remove_action( 'admin_print_styles', array( $this->plugin, 'admin_print_styles' ) );

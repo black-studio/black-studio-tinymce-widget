@@ -59,7 +59,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
 			// Handle compatibility code
 			new Black_Studio_TinyMCE_Compatibility_Plugins();
-			new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
+			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
+				new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
+			}
 		}
 
 		protected function __clone() {
@@ -69,10 +71,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 
 		/* Include additional files */
 		private function includes() {
-			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-wp-widget-black-studio-tinymce.php' );
-			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-wordpress.php' );
-			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-plugins.php' );
 			include_once( plugin_dir_path( __FILE__ ) . '/includes/deprecated.php' );
+			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-wp-widget-black-studio-tinymce.php' );
+			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-plugins.php' );
+			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
+				include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-wordpress.php' );
+			}
 		}
 
 		/* Load language files */
@@ -153,7 +157,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				$style,
 				plugins_url( 'css/' . $style . $suffix. '.css', __FILE__ ),
 				array(),
-				$this->version
+				self::$version
 			);
 		}
 
@@ -175,7 +179,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				$script,
 				plugins_url( 'js/' . $script . $suffix . '.js', __FILE__ ),
 				array( 'jquery', 'editor' ),
-				$this->version,
+				self::$version,
 				true
 			);
 		}
