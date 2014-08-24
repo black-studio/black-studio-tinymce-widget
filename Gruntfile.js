@@ -1,3 +1,4 @@
+/* jshint node:true */
 module.exports = function( grunt ) {
 	'use strict';
 
@@ -19,7 +20,8 @@ module.exports = function( grunt ) {
 			},
 			all: [
 				'Gruntfile.js',
-				'<%= dirs.js %>/*.js'
+				'<%= dirs.js %>/*.js',
+				'!<%= dirs.js %>/*.min.js'
 			]
 		},
 
@@ -85,7 +87,7 @@ module.exports = function( grunt ) {
 				options: {
 					domainPath: '/languages',
 					potFilename: 'black-studio-tinymce-widget.pot',
-					processPot: function( pot, options ) {
+					processPot: function( pot ) {
 						pot.headers['report-msgid-bugs-to'] = 'https://github.com/black-studio/black-studio-tinymce-widget/issues\n';
 						pot.headers['plural-forms'] = 'nplurals=2; plural=n != 1;';
 						pot.headers['last-translator'] = 'Black Studio <info@blackstudio.it>\n';
@@ -166,22 +168,22 @@ module.exports = function( grunt ) {
 		checkwpversion: {
 			options:{
 				readme: 'readme.txt',
-				plugin: 'black-studio-tinymce-widget.php',
+				plugin: 'black-studio-tinymce-widget.php'
 			},
 			plugin_vs_readme: { //Check plug-in version and stable tag match
 				version1: 'plugin',
 				version2: 'readme',
-				compare: '==',
+				compare: '=='
 			},
 			plugin_vs_grunt: { //Check plug-in version and package.json match
 				version1: 'plugin',
 				version2: '<%= pkg.version %>',
-				compare: '==',
+				compare: '=='
 			},
 			plugin_vs_internal: { //Check plug-in version and internal defined version
 				version1: 'plugin',
 				version2: grunt.file.read('black-studio-tinymce-widget.php').match( /version = '(.*)'/ )[1],
-				compare: '==',
+				compare: '=='
 			}
 		}
 
