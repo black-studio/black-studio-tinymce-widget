@@ -44,7 +44,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		protected function __construct() {
 			// Include required files
 			$this->includes();
-
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -53,6 +52,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			add_filter( 'widget_text', array( $this, 'apply_smilies_to_widget_text' ) );
 			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
+			// Handle compatibility code
+			new Black_Studio_TinyMCE_Compatibility_Plugins();
+			new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
 		}
 
 		protected function __clone() {
