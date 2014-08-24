@@ -104,8 +104,11 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 					<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
 				</div>
 			</div>
-			<div class="wp-editor-bstw-links" style="font-size: 10px; text-align: right; padding: 5px 0;">
-				<a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php _e( 'Donate', 'black-studio-tinymce-widget' ); ?></a> | <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php _e( 'Support', 'black-studio-tinymce-widget' ); ?></a> | <a href="http://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget" target="_blank"><?php _e( 'Rate', 'black-studio-tinymce-widget' ); ?></a> | <a href="https://twitter.com/blackstudioita" target="_blank"><?php _e( 'Follow', 'black-studio-tinymce-widget' ); ?></a>
+			<div class="bstw-links">
+				<a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php _e( 'Donate', 'black-studio-tinymce-widget' ); ?></a> |
+                <a href="http://wordpress.org/support/plugin/black-studio-tinymce-widget" target="_blank"><?php _e( 'Support', 'black-studio-tinymce-widget' ); ?></a> |
+                <a href="http://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget" target="_blank"><?php _e( 'Rate', 'black-studio-tinymce-widget' ); ?></a> |
+                <a href="https://twitter.com/blackstudioita" target="_blank"><?php _e( 'Follow', 'black-studio-tinymce-widget' ); ?></a>
 			</div>	<?php
 		}
 

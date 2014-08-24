@@ -146,9 +146,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		/* Helper function to enqueue style */
 		function enqueue_style() {
 			$style = apply_filters( 'black-studio-tinymce-widget-style', 'black-studio-tinymce-widget' );
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			wp_enqueue_style(
 				$style,
-				plugins_url( 'css/' . $style . '.css', __FILE__ ),
+				plugins_url( 'css/' . $style . $suffix. '.css', __FILE__ ),
 				array(),
 				$this->version
 			);

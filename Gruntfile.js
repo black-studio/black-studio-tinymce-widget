@@ -2,14 +2,17 @@ module.exports = function( grunt ) {
 	'use strict';
 
 	grunt.initConfig({
+
+		// Load package data
 		pkg: grunt.file.readJSON('package.json'),
-		// setting folder templates
+
+		// Set folder vars
 		dirs: {
 			css: 'css',
 			js: 'js'
 		},
 
-		// javascript linting with jshint.
+		// Javascript linting with jshint
 		jshint: {
 			options: {
 				jshintrc: '.jshintrc'
@@ -20,11 +23,11 @@ module.exports = function( grunt ) {
 			]
 		},
 
-		// Minify .js files.
+		// Minify .js files
 		uglify: {
 			options: {
 				preserveComments: 'some',
-				banner: '/*! <%= pkg.title %> - v<%= pkg.version %> */\n'
+				banner: '/* <%= pkg.title %> - v<%= pkg.version %> */\n'
 			},
 			admin: {
 				files: [{
@@ -41,16 +44,19 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		// Minify all .css files.
+		// Minify .css files
 		cssmin: {
 			minify: {
 				options: {
-					banner: '/* <%= pkg.title %> <%= pkg.version %> */'
+					banner: '/* <%= pkg.title %> - v<%= pkg.version %> */'
 				},
 				files: [{
 					expand: true,
 					cwd: '<%= dirs.css %>/',
-					src: ['*.css'],
+					src: [
+						'*.css',
+						'!*.min.css'
+					],
 					dest: '<%= dirs.css %>/',
 					ext: '.min.css'
 				}]
@@ -73,6 +79,7 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// Generate .pot file
 		makepot: {
 			target: {
 				options: {
@@ -98,6 +105,7 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// Check plugin text domain
 		checktextdomain: {
 			options:{
 				text_domain: 'black-studio-tinymce-widget',
@@ -127,6 +135,7 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// Generate .mo files from .po files
 		po2mo: {
 			files: {
 				src: 'languages/*.po',
@@ -134,6 +143,7 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// Generate README.md from readme.txt
 		wp_readme_to_markdown: {
 			convert: {
 				files: {
