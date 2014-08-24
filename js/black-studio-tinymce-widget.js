@@ -154,10 +154,10 @@ var wpActiveEditor;
 		// Set wpActiveEditor variables used when adding media from media library dialog
 		$( document ).on( 'click', '.wp-media-buttons a', function() {
 			var $widget_inside = $( this ).closest( 'div.widget-inside' );
-			wpActiveEditor = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );	
+			wpActiveEditor = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );
 		});
 		// Activate editor when in accessibility mode
-		if ( $( 'body.widgets_access' ).size() > 0) {
+		if ( $( 'body.widgets_access' ).size() > 0 ) {
 			var $text_area = $( 'textarea[id^=widget-black-studio-tinymce]' );
 			black_studio_open_deferred_activate_visual_editor( $text_area.attr( 'id' ) );
 		}

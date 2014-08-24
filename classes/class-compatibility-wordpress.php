@@ -65,7 +65,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			add_filter( 'black_studio_tinymce_toggle_buttons_class',  array( $this, 'wp_pre_35_toggle_buttons_class' ) );
 			add_filter( 'black_studio_tinymce_media_buttons_class',  array( $this, 'wp_pre_35_media_buttons_class' ) );
 		}
-		
+
 		/* Set toggle button class for WordPress prior to 3.5 */
 		function wp_pre_35_toggle_buttons_class() {
 			return 'editor_toggle_buttons_legacy';

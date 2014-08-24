@@ -197,16 +197,16 @@ module.exports = function( grunt ) {
 		'cssmin',
 		'uglify'
 	]);
-	grunt.registerTask( 'languages', [ 
+	grunt.registerTask( 'languages', [
 		'checktextdomain',
 		'makepot',
 		'po2mo'
 	]);
-	grunt.registerTask( 'check', [ 
+	grunt.registerTask( 'check', [
 		'checkwpversion',
 		'checktextdomain'
 	]);
-	grunt.registerTask( 'readme', [ 
+	grunt.registerTask( 'readme', [
 		'wp_readme_to_markdown'
 	]);
 

@@ -136,7 +136,7 @@ var wpActiveEditor;
 		$( '.editor_media_buttons a' ).live( 'click', function() {
 			var $widget_inside = $( this ).closest( 'div.widget-inside' );
 			edCanvas = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).get();
-			wpActiveEditor = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );	
+			wpActiveEditor = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );
 		});
 		// Activate editor when in accessibility mode
 		if ( $( 'body.widgets_access' ).size() > 0) {
