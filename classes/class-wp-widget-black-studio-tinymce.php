@@ -15,13 +15,13 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 
 	class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 
-		function __construct() {
+		public function __construct() {
 			$widget_ops = array( 'classname' => 'widget_black_studio_tinymce', 'description' => __( 'Arbitrary text or HTML with visual editor', 'black-studio-tinymce-widget' ) );
 			$control_ops = array( 'width' => 800, 'height' => 800 );
 			parent::__construct( 'black-studio-tinymce', __( 'Visual Editor', 'black-studio-tinymce-widget' ), $widget_ops, $control_ops );
 		}
 
-		function widget( $args, $instance ) {
+		public function widget( $args, $instance ) {
 			if ( get_option( 'embed_autourls' ) ) {
 				$wp_embed = $GLOBALS['wp_embed'];
 				add_filter( 'widget_text', array( $wp_embed, 'run_shortcode' ), 8 );
@@ -50,7 +50,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			echo wp_kses_post( $output );
 		}
 
-		function update( $new_instance, $old_instance ) {
+		public function update( $new_instance, $old_instance ) {
 			$instance = $old_instance;
 			$instance['title'] = strip_tags( $new_instance['title'] );
 			if ( current_user_can( 'unfiltered_html' ) ) {
@@ -67,7 +67,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			return $instance;
 		}
 
-		function form( $instance ) {
+		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'type' => 'visual' ) );
 			$title = strip_tags( $instance['title'] );
 			$text = $instance['text'];

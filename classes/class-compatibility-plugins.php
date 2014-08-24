@@ -16,7 +16,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 	class Black_Studio_TinyMCE_Compatibility_Plugins {
 
 		/* Class constructor */
-		function __construct() {
+		public function __construct() {
 			// Call compatibility methods
 			$this->wp_page_widget();
 			$this->jetpack_after_the_deadline();
@@ -24,12 +24,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/* Compatibility for WP Page Widget plugin */
-		function wp_page_widget() {
+		public function wp_page_widget() {
 			add_filter( 'black_studio_tinymce_enable', array( $this, 'wp_page_widget_enable' ) );
 		}
 
 		/* Enable filter for WP Page Widget plugin */
-		function wp_page_widget_enable( $enable ) {
+		public function wp_page_widget_enable( $enable ) {
 			global $pagenow;
 			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) ) {
 				$is_post = in_array( $pagenow, array( 'post-new.php', 'post.php' ) );
@@ -47,12 +47,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/* Compatibility with Page Builder + WPML String Translation */
-		function siteorigin_panels() {
+		public function siteorigin_panels() {
 			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10 );
 		}
 
 		/* Remove widget number to prevent translation when using Page Builder + WPML String Translation */
-		function siteorigin_panels_widget_object( $the_widget ) {
+		public function siteorigin_panels_widget_object( $the_widget ) {
 			if ( isset($the_widget->id_base) && $the_widget->id_base == 'black-studio-tinymce' ) {
 				$the_widget->number = '';
 			}
@@ -60,12 +60,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/* Compatibility with Jetpack After the deadline */
-		function jetpack_after_the_deadline() {
+		public function jetpack_after_the_deadline() {
 			add_action( 'black_studio_tinymce_load', array( $this, 'jetpack_after_the_deadline_load' ) );
 		}
 
 		/* Load Jetpack After the deadline scripts */
-		function jetpack_after_the_deadline_load() {
+		public function jetpack_after_the_deadline_load() {
 			add_filter( 'atd_load_scripts', '__return_true' );
 		}
 
