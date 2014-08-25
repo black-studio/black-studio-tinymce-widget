@@ -10,7 +10,8 @@ module.exports = function( grunt ) {
 		// Set folder vars
 		dirs: {
 			css: 'css',
-			js: 'js'
+			js: 'js',
+			languages: 'languages'
 		},
 
 		// Javascript linting with jshint
@@ -147,10 +148,19 @@ module.exports = function( grunt ) {
 		},
 
 		// Generate .mo files from .po files
-		po2mo: {
-			files: {
-				src: 'languages/*.po',
-				expand: true
+		potomo: {
+			dist: {
+				options: {
+					poDel: false
+				},
+				files: [{
+					expand: true,
+					cwd: '<%= dirs.languages %>',
+					src: ['*.po'],
+					dest: '<%= dirs.languages %>',
+					ext: '.mo',
+					nonull: true
+				}]
 			}
 		},
 
@@ -208,7 +218,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'languages', [
 		'checktextdomain',
 		'makepot',
-		'po2mo'
+		'potomo'
 	]);
 	grunt.registerTask( 'check', [
 		'checkwpversion',
