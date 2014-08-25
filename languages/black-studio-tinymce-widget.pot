@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget 2.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-08-24 17:48:43+00:00\n"
+"POT-Creation-Date: 2014-08-24 18:23:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,7 +25,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-#: black-studio-tinymce-widget.php:189
+#: black-studio-tinymce-widget.php:191
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new one with the same content and then delete this widget."
@@ -39,19 +39,19 @@ msgstr ""
 msgid "Visual Editor"
 msgstr ""
 
-#: classes/class-wp-widget-black-studio-tinymce.php:97
+#: classes/class-wp-widget-black-studio-tinymce.php:98
 msgid "Donate"
 msgstr ""
 
-#: classes/class-wp-widget-black-studio-tinymce.php:98
+#: classes/class-wp-widget-black-studio-tinymce.php:99
 msgid "Support"
 msgstr ""
 
-#: classes/class-wp-widget-black-studio-tinymce.php:99
+#: classes/class-wp-widget-black-studio-tinymce.php:100
 msgid "Rate"
 msgstr ""
 
-#: classes/class-wp-widget-black-studio-tinymce.php:100
+#: classes/class-wp-widget-black-studio-tinymce.php:101
 msgid "Follow"
 msgstr ""
 
@@ -60,7 +60,7 @@ msgid "Black Studio TinyMCE Widget"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://wordpress.org/extend/plugins/black-studio-tinymce-widget/"
+msgid "https://wordpress.org/plugins/black-studio-tinymce-widget/"
 msgstr ""
 
 #. Description of the plugin/theme
