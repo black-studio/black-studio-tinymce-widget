@@ -167,18 +167,9 @@ module.exports = function( grunt ) {
 
 		// Generate README.md from readme.txt
 		wp_readme_to_markdown: {
-			convert: {
+			readme: {
 				files: {
 					'README.md': 'readme.txt'
-				}
-			},
-			options : {
-				banner: 'https://ps.w.org/black-studio-tinymce-widget/assets/banner-772x250.png',
-				afterBannerMarkdown: '[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/black-studio/black-studio-tinymce-widget/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/black-studio/black-studio-tinymce-widget/badges/build.png?b=develop)',
-				screenshots: {
-					enabled: true,
-					prefix: 'https://ps.w.org/black-studio-tinymce-widget/assets/screenshot-',
-					suffix: '.png'
 				}
 			}
 		},
