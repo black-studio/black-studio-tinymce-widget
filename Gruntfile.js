@@ -213,8 +213,8 @@ module.exports = function( grunt ) {
 			},
 			txpush: { // Push pot to Transifex - grunt exec:txpush
 				cmd: 'tx push -s'
-			},
-		},
+			}
+		}
 	});
 
 	// Load NPM tasks to be used here
@@ -222,6 +222,7 @@ module.exports = function( grunt ) {
 
 	// Register tasks
 	grunt.registerTask( 'default', [
+		'jshint',
 		'cssmin',
 		'uglify'
 	]);

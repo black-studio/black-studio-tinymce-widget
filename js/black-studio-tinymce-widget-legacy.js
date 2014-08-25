@@ -90,8 +90,9 @@ var wpActiveEditor;
 		// Event handler for widget opening button
 		$( 'div.widget:has(textarea[id^=widget-black-studio-tinymce]) a.widget-action' ).live( 'click', function( event ) {
 			event.preventDefault();
-			var $widget = $( this ).closest( 'div.widget' );
-			var $text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $widget );
+			var $widget,  $text_area;
+			$widget = $( this ).closest( 'div.widget' );
+			$text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $widget );
 			$( '#wpbody-content' ).css( 'overflow', 'visible' ); // needed for small screens
 			$widget.css( 'position', 'relative' ).css( 'z-index', '100' ); // needed for small screens
 			black_studio_open_deferred_activate_visual_editor( $text_area.attr( 'id' ) );
@@ -101,8 +102,9 @@ var wpActiveEditor;
 		// Event handler for widget saving button
 		$( 'div.widget[id*=black-studio-tinymce] input[name=savewidget]' ).live( 'click', function( event ) {
 			event.preventDefault();
-			var $widget = $( this ).closest( 'div.widget' );
-			var $text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $widget );
+			var $widget,  $text_area;
+			$widget = $( this ).closest( 'div.widget' );
+			$text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $widget );
 			if ( typeof( tinymce.get( $text_area.attr( 'id' ) ) ) === 'object' ) {
 				black_studio_deactivate_visual_editor( $text_area.attr( 'id' ) );
 			}
