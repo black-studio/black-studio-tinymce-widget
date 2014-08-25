@@ -111,7 +111,8 @@ module.exports = function( grunt ) {
 						}
 						return pot;
 					},
-					type: 'wp-plugin'
+					type: 'wp-plugin',
+					updateTimestamp: true
 				}
 			}
 		},
@@ -203,8 +204,17 @@ module.exports = function( grunt ) {
 				version2: grunt.file.read('black-studio-tinymce-widget.php').match( /version = '(.*)'/ )[1],
 				compare: '=='
 			}
-		}
+		},
 
+		// Transifex integration
+		exec: {
+			txpull: { // Pull Transifex translation - grunt exec:txpull
+				cmd: 'tx pull -a'
+			},
+			txpush: { // Push pot to Transifex - grunt exec:txpush
+				cmd: 'tx push -s'
+			},
+		},
 	});
 
 	// Load NPM tasks to be used here
@@ -218,6 +228,8 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'languages', [
 		'checktextdomain',
 		'makepot',
+		'exec:txpush',
+		'exec:txpull',
 		'potomo'
 	]);
 	grunt.registerTask( 'check', [

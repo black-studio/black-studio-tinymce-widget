@@ -30,8 +30,12 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 
 * [Plugin's web page](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
 * [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget)
-* [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget)
 * [Follow us on Twitter](https://twitter.com/blackstudioita)
+
+### Get involved ###
+
+* Developers can contribute to the source code on our [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget).
+* Translators can contribute through [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/).
 
 ## Installation ##
 

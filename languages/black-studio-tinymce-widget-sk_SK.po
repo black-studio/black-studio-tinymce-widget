@@ -8,12 +8,12 @@ msgstr ""
 "POT-Creation-Date: 2014-08-25 15:19:27+00:00\n"
 "PO-Revision-Date: 2014-08-25 15:09+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
-"Language-Team: Finnish (Finland) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/fi_FI/)\n"
+"Language-Team: Slovak (Slovakia) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/sk_SK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi_FI\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sk_SK\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: grunt-wp-i18n 0.4.7\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Bookmarks: \n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: classes/class-wp-widget-black-studio-tinymce.php:19
 msgid "Arbitrary text or HTML with visual editor"
-msgstr "Lisää sisältöä visuaalisella editorilla"
+msgstr "Ľubovoľné textové alebo HTML s vizuálny editor"
 
 #: classes/class-wp-widget-black-studio-tinymce.php:21
 msgid "Visual Editor"
@@ -40,11 +40,11 @@ msgstr ""
 
 #: classes/class-wp-widget-black-studio-tinymce.php:98
 msgid "Donate"
-msgstr "Lahjoita"
+msgstr "Darovať"
 
 #: classes/class-wp-widget-black-studio-tinymce.php:99
 msgid "Support"
-msgstr "Tue"
+msgstr "Podpora"
 
 #: classes/class-wp-widget-black-studio-tinymce.php:100
 msgid "Rate"
@@ -52,7 +52,7 @@ msgstr ""
 
 #: classes/class-wp-widget-black-studio-tinymce.php:101
 msgid "Follow"
-msgstr "Seuraa"
+msgstr "Postupujte podľa"
 
 #. Plugin Name of the plugin/theme
 msgid "Black Studio TinyMCE Widget"
