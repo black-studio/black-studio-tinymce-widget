@@ -8,6 +8,10 @@
 	content: "\f116"; 
 }
 
+.wp-customizer .mce-floatpanel.mce-popover {
+	z-index: 500000 !important;
+}
+
 .bstw-links {
 	font-size: 10px;
 	padding: 5px 0;
