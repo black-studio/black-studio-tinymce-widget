@@ -6,20 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * @deprecated 2.0.0
- */
-global $black_studio_tinymce_widget_version;
-
-/**
- * Set global var with plugin version for backward compatibility
+ * Global var with plugin version for backward compatibility
  *
  * @deprecated 2.0.0
  */
-function _black_studio_tinymce_widget_set_global_version() {
-	global $black_studio_tinymce_widget_version;
-	$black_studio_tinymce_widget_version = bstw()->get_version();
-}
-add_action( 'init', '_black_studio_tinymce_widget_set_global_version' );
+$black_studio_tinymce_widget_version = bstw()->get_version();
 
 /**
  * @deprecated 2.0.0
