@@ -49,8 +49,9 @@ This section describes how to install and use the plugin.
 
 == Screenshots ==
 
-1. Black Studio TinyMCE Widget editor window
-2. Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin
+1. Black Studio TinyMCE Widget in Visual mode
+2. Black Studio TinyMCE Widget in HTML mode
+3. Black Studio TinyMCE Widget combined with WP Edit plugin
 
 == Frequently Asked Questions ==
 
@@ -117,12 +118,15 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 == Changelog ==
 
 = 2.0.0. =
+* Total refactoring of plugin's source code
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
-* Total refactoring of source code
-* Improved code quality and security
-* Added black_studio_tinymce_enable filter hook
+* Added project to [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/) translation platform, with the support of the [WP-Translation.org](http://wp-translations.org/) team
+* Improved code quality and security thanks to [Scrutinizer](https://scrutinizer-ci.com/g/black-studio/black-studio-tinymce-widget/) service
+* Improved development workflow thanks to [Grunt](http://gruntjs.com/)
 * Added black_studio_tinymce_load action hook
-* Special thanks to @cfoellmann for his support and suggestions
+* Added black_studio_tinymce_enable filter hook
+* Added black_studio_tinymce_whitelabel filter hook
+* Special thanks to @cfoellmann for his precious support and contributions
 
 = 1.4.6 =
 * Bugfix on widget display

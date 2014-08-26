@@ -170,6 +170,9 @@ module.exports = function( grunt ) {
 			readme: {
 				files: {
 					'README.md': 'readme.txt'
+				},
+				options: {
+					screenshot_url: 'https://raw.githubusercontent.com/black-studio/{plugin}/assets/{screenshot}.png'
 				}
 			}
 		},
