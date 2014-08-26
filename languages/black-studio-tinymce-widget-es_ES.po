@@ -1,57 +1,77 @@
+# Copyright (C) 2014 Black Studio
+# This file is distributed under the GPLv3.
+# Translators:
+# marcochiesi <marco@blackstudio.it>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-31 10:19+0100\n"
-"PO-Revision-Date: 2012-07-31 10:22+0100\n"
-"Last-Translator: Marco <marco@blackstudio.it>\n"
-"Language-Team: Black Studio <info@blackstudio.it>\n"
+"Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
+"POT-Creation-Date: 2014-08-26 10:09:08+00:00\n"
+"PO-Revision-Date: 2014-08-26 10:09+0000\n"
+"Last-Translator: marcochiesi <marco@blackstudio.it>\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
-"X-Poedit-Basepath: ..\n"
-"X-Textdomain-Support: yes\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: grunt-wp-i18n 0.4.7\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Language: English\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Textdomain-Support: yes\n"
 
-# @ black-studio-tinymce-widget
-#: black-studio-tinymce-widget.php:19
+#: black-studio-tinymce-widget.php:191
+msgid ""
+"ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
+"new widget with the same content and then delete this one."
+msgstr ""
+
+#: classes/class-wp-widget-black-studio-tinymce.php:19
 msgid "Arbitrary text or HTML with visual editor"
 msgstr "Texto arbitrario o HTML con un editor visual"
 
-# @ black-studio-tinymce-widget
-#: black-studio-tinymce-widget.php:21
-msgid "Black Studio TinyMCE"
-msgstr "Black Studio TinyMCE"
+#: classes/class-wp-widget-black-studio-tinymce.php:21
+msgid "Visual Editor"
+msgstr "Editor visual"
 
-# @ default
-#: black-studio-tinymce-widget.php:67
-msgid "Title:"
-msgstr "Título:"
-
-# @ default
-#: black-studio-tinymce-widget.php:70
-msgid "HTML"
-msgstr "HTML"
-
-# @ default
-#: black-studio-tinymce-widget.php:71
-msgid "Visual"
-msgstr "Visual"
-
-#: black-studio-tinymce-widget.php:79
+#: classes/class-wp-widget-black-studio-tinymce.php:98
 msgid "Donate"
 msgstr "Donación"
 
-#: black-studio-tinymce-widget.php:79
+#: classes/class-wp-widget-black-studio-tinymce.php:99
 msgid "Support"
 msgstr "Soporte"
 
-#: black-studio-tinymce-widget.php:79
+#: classes/class-wp-widget-black-studio-tinymce.php:100
+msgid "Rate"
+msgstr "Puntuar"
+
+#: classes/class-wp-widget-black-studio-tinymce.php:101
 msgid "Follow"
 msgstr "Seguir"
 
+#. Plugin Name of the plugin/theme
+msgid "Black Studio TinyMCE Widget"
+msgstr "Black Studio TinyMCE Widget"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/black-studio-tinymce-widget/"
+msgstr "https://wordpress.org/plugins/black-studio-tinymce-widget/"
+
+#. Description of the plugin/theme
+msgid ""
+"Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Black Studio"
+msgstr "Black Studio"
+
+#. Author URI of the plugin/theme
+msgid "http://www.blackstudio.it"
+msgstr "http://www.blackstudio.it"

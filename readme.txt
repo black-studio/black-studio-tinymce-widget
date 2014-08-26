@@ -2,9 +2,9 @@
 Contributors: marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
-Requires at least: 3.0
+Requires at least: 3.1
 Tested up to: 4.0
-Stable tag: 1.4.6
+Stable tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -32,6 +32,11 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 * [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget)
 * [Follow us on Twitter](https://twitter.com/blackstudioita)
 
+= Get involved =
+
+* Developers can contribute to the source code on our [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget).
+* Translators can contribute through [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/).
+
 == Installation ==
 
 This section describes how to install and use the plugin.
@@ -44,8 +49,9 @@ This section describes how to install and use the plugin.
 
 == Screenshots ==
 
-1. Black Studio TinyMCE Widget editor window
-2. Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin
+1. Black Studio TinyMCE Widget in Visual mode
+2. Black Studio TinyMCE Widget in HTML mode
+3. Black Studio TinyMCE Widget combined with WP Edit plugin
 
 == Frequently Asked Questions ==
 
@@ -99,7 +105,7 @@ function my_widget_before_text( $before_text, $instance ) {
 }
 add_filter( 'black_studio_tinymce_after_text', 'my_widget_after_text', 10, 2 );
 function my_widget_after_text( $after_text, $instance ) {
-	return '';
+	return '</div>';
 }
 `
 
@@ -110,6 +116,17 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 `
 
 == Changelog ==
+
+= 2.0.0. =
+* Total refactoring of plugin's source code
+* Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
+* Added project to [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/) translation platform, with the support of the [WP-Translation.org](http://wp-translations.org/) team
+* Improved code quality and security thanks to [Scrutinizer](https://scrutinizer-ci.com/g/black-studio/black-studio-tinymce-widget/) service
+* Improved development workflow thanks to [Grunt](http://gruntjs.com/)
+* Added black_studio_tinymce_load action hook
+* Added black_studio_tinymce_enable filter hook
+* Added black_studio_tinymce_whitelabel filter hook
+* Special thanks to @cfoellmann for his precious support and contributions
 
 = 1.4.6 =
 * Bugfix on widget display

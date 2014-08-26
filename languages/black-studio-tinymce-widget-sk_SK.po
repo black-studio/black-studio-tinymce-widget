@@ -1,28 +1,28 @@
 # Copyright (C) 2014 Black Studio
 # This file is distributed under the GPLv3.
+# Translators:
+# marcochiesi <marco@blackstudio.it>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Black Studio TinyMCE Widget 2.0.0\n"
-"Report-Msgid-Bugs-To: "
-"https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
+"Project-Id-Version: Black Studio TinyMCE Widget\n"
+"Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
 "POT-Creation-Date: 2014-08-26 10:09:08+00:00\n"
+"PO-Revision-Date: 2014-08-26 10:09+0000\n"
+"Last-Translator: marcochiesi <marco@blackstudio.it>\n"
+"Language-Team: Slovak (Slovakia) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/sk_SK/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Black Studio <info@blackstudio.it>\n"
-"Language-Team: Black Studio <info@blackstudio.it>\n"
+"Language: sk_SK\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: grunt-wp-i18n 0.4.7\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-Country: United States\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_"
-"x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
 "X-Poedit-Bookmarks: \n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Language: English\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
 "X-Textdomain-Support: yes\n"
 
 #: black-studio-tinymce-widget.php:191
@@ -33,44 +33,45 @@ msgstr ""
 
 #: classes/class-wp-widget-black-studio-tinymce.php:19
 msgid "Arbitrary text or HTML with visual editor"
-msgstr ""
+msgstr "Ľubovoľné textové alebo HTML s vizuálny editor"
 
 #: classes/class-wp-widget-black-studio-tinymce.php:21
 msgid "Visual Editor"
-msgstr ""
+msgstr "Vizuálny editor"
 
 #: classes/class-wp-widget-black-studio-tinymce.php:98
 msgid "Donate"
-msgstr ""
+msgstr "Darovať"
 
 #: classes/class-wp-widget-black-studio-tinymce.php:99
 msgid "Support"
-msgstr ""
+msgstr "Podpora"
 
 #: classes/class-wp-widget-black-studio-tinymce.php:100
 msgid "Rate"
-msgstr ""
+msgstr "Sadzba"
 
 #: classes/class-wp-widget-black-studio-tinymce.php:101
 msgid "Follow"
-msgstr ""
+msgstr "Postupujte podľa"
 
 #. Plugin Name of the plugin/theme
 msgid "Black Studio TinyMCE Widget"
-msgstr ""
+msgstr "Black Studio TinyMCE Widget"
 
 #. Plugin URI of the plugin/theme
 msgid "https://wordpress.org/plugins/black-studio-tinymce-widget/"
-msgstr ""
+msgstr "https://wordpress.org/plugins/black-studio-tinymce-widget/"
 
 #. Description of the plugin/theme
-msgid "Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor."
+msgid ""
+"Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor."
 msgstr ""
 
 #. Author of the plugin/theme
 msgid "Black Studio"
-msgstr ""
+msgstr "Black Studio"
 
 #. Author URI of the plugin/theme
 msgid "http://www.blackstudio.it"
-msgstr ""
+msgstr "http://www.blackstudio.it"
