@@ -33,8 +33,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			$after_title = $args['after_title'];
 			$before_text = apply_filters( 'black_studio_tinymce_before_text', '<div class="textwidget">', $instance );
 			$after_text = apply_filters( 'black_studio_tinymce_after_text', '</div>', $instance );
-			$title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title'], $instance, $this->id_base );
-			$text = apply_filters( 'widget_text', $instance['text'], $instance );
+			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+			$text = apply_filters( 'widget_text', empty( $instance['text'] ) ? '' : $instance['text'], $instance );
 			if ( function_exists( 'icl_t' )  && ! empty( $this->number ) ) {
 				$title = icl_t( 'Widgets', 'widget title - ' . md5( $title ), $title );
 				$text = icl_t( 'Widgets', 'widget body - ' . $this->id_base . '-' . $this->number, $text );

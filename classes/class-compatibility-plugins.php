@@ -46,9 +46,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			return $enable;
 		}
 
-		/* Compatibility with Page Builder + WPML String Translation */
+		/* Compatibility with Page Builder */
 		public function siteorigin_panels() {
 			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10 );
+			add_filter( 'black_studio_tinymce_container_selectors', array( $this, 'siteorigin_panels_container_selectors' ) );
 		}
 
 		/* Remove widget number to prevent translation when using Page Builder + WPML String Translation */
@@ -57,6 +58,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 				$the_widget->number = '';
 			}
 			return $the_widget;
+		}
+
+		/* Add selector for widget detection for Page Builder */
+		public function siteorigin_panels_container_selectors( $selectors ) {
+			$selectors[] = 'div.panel-dialog';
+			return $selectors;
 		}
 
 		/* Compatibility with Jetpack After the deadline */

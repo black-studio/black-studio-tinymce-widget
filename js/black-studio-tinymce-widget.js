@@ -1,163 +1,225 @@
 /* Black Studio TinyMCE Widget - JS */
 
 /* global tinymce */
-/* global bstw_local */
-
-// TinyMCE initialization parameters
-var tinyMCEPreInit;
-// Current editor
-var wpActiveEditor;
+/* global bstw_data */
+/* global tinyMCEPreInit */
+/* global wpActiveEditor: true */
 
 (function( $ ) {
 
-	// Main object
-	var bstw = {
-		
-		// Activate visual editor
-		activate: function ( id ) {
-			$( '#' + id ).addClass( 'mceEditor' );
-			if ( typeof tinymce === 'object' && typeof tinymce.execCommand === 'function' ) {
-				this.deactivate( id );
-				tinyMCEPreInit.mceInit[id] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
-				tinyMCEPreInit.mceInit[id].selector = '#' + id;
-				try {
-					// Instantiate new TinyMCE editor
-					tinymce.init( tinymce.extend( {}, tinyMCEPreInit.mceInit['black-studio-tinymce-widget'], tinyMCEPreInit.mceInit[id] ) );
-					tinymce.execCommand( 'mceAddControl', false, id );
-				} catch( e ) {
-					window.alert( e );
-				}
-				if ( tinymce.get( id ) !== null) {
-					if ( typeof tinymce.get( id ).on === 'function' ) {
-						tinymce.get( id ).on( 'keyup change', function() {
-							var content = tinymce.get( id ).getContent();
-							$( 'textarea#' + id ).val( content ).change();
-						});
+	// Returns bstw instance given the textarea ID or any jQuery object inside the widget object
+	function bstw( arg ) {
+
+		var id = null;
+
+		// ID initialization
+		if ( typeof arg === 'string' ) {
+			id = arg;
+		}
+		// jQuery object initialization
+		else if ( typeof arg === 'object' && arg instanceof jQuery ) {
+			id = $( 'textarea[id^=widget-black-studio-tinymce]', arg.closest( bstw_data.container_selectors ) ).attr( 'id' );
+		}
+
+		// Create and return instance
+		return {
+
+			// Activate visual editor
+			activate: function () {
+				$( '#' + id ).addClass( 'mceEditor' );
+				if ( typeof tinymce === 'object' && typeof tinymce.execCommand === 'function' ) {
+					this.deactivate();
+					tinyMCEPreInit.mceInit[id] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
+					tinyMCEPreInit.mceInit[id].selector = '#' + id;
+					try {
+						// Instantiate new TinyMCE editor
+						tinymce.init( tinymce.extend( {}, tinyMCEPreInit.mceInit['black-studio-tinymce-widget'], tinyMCEPreInit.mceInit[id] ) );
+						tinymce.execCommand( 'mceAddControl', false, id );
+					} catch( e ) {
+						window.alert( e );
+					}
+					// Real time preview (Theme customizer)
+					if ( tinymce.get( id ) !== null) {
+						if ( typeof tinymce.get( id ).on === 'function' ) {
+							tinymce.get( id ).on( 'keyup change', function() {
+								var content = tinymce.get( id ).getContent();
+								$( '#' + id ).val( content ).change();
+							});
+						}
 					}
 				}
+				return this;
+			},
+
+			// Deactivate visual editor
+			deactivate: function() {
+				if ( typeof tinymce === 'object' && typeof tinymce.execCommand === 'function' ) {
+					if ( tinymce.get( id ) !== null && typeof tinymce.get( id ).getContent === 'function' ) {
+						var content = tinymce.get( id ).getContent();
+						// tinymce.execCommand('mceRemoveControl', false, id);
+						tinymce.get( id ).remove();
+						$( '#' + id ).val( content );
+					}
+				}
+				return this;
+			},
+
+			// Activate editor deferred (after widget opening)
+			activate_after_open: function() {
+				$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
+					// If textarea is visible and animation/ajax has completed (or in accessibility mode) then trigger a click to Visual button and enable the editor
+					if ( $('div.widget:has(#' + id + ') :animated' ).size() === 0 && tinymce.get( id ) === null && $( '#' + id ).is( ':visible' ) ) {
+						$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
+					}
+					// Otherwise wait and retry later (animation ongoing)
+					else if ( tinymce.get( id ) === null ) {
+						setTimeout(function() {
+							bstw( id ).activate_after_open();
+							id = null;
+						}, 100 );
+					}
+					// If editor instance is already existing (i.e. dragged from another sidebar) just activate it
+					else {
+						$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
+					}
+				});
+				return this;
+			},
+
+			// Activate editor deferred (after ajax requests)
+			activate_after_ajax: function () {
+				$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
+					// If textarea is visible and animation/ajax has completed then trigger a click to Visual button and enable the editor
+					if ( $.active === 0 && tinymce.get( id ) === null && $( '#' + id ).is( ':visible' ) ) {
+						$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
+					}
+					// Otherwise wait and retry later (animation ongoing)
+					else if ( $( 'div.widget:has(#' + id + ') div.widget-inside' ).is( ':visible' ) && tinymce.get( id ) === null ) {
+						setTimeout(function() {
+							bstw( id ).activate_after_ajax();
+							id=null;
+						}, 100 );
+					}
+				});
+				return this;
+			},
+
+			// Return the div.widget jQuery object containing the instance
+			get_widget: function() {
+				return $( '#' + id ).closest( 'div.widget' );
+			},
+
+			// Return the div.widget-inside jQuery object containing the instance
+			get_widget_inside: function() {
+				return $( '#' + id ).closest( 'div.widget-inside' );
+			},
+
+			// Return the div.wp-editor-wrap jQuery object containing the instance
+			get_editor_wrap: function() {
+				return $( '#' + id ).closest( 'div.wp-editor-wrap' );
+			},
+
+			// Return the textarea jQuery object related to the instance
+			get_textarea: function() {
+				return $( '#' + id );
+			},
+
+			// Return the textarea ID related to the instance
+			get_id: function() {
+				return id;
+			},
+
+			// Return the tinymce instance related to the instance
+			get_tinymce: function() {
+				return tinymce.get( id );
+			},
+
+			// Check if the connected tinymce instance is active
+			is_tinymce_active: function() {
+				return tinymce.get( id ) !== null;
+			},
+
+			// Set the value of the hidden input "type" ( visual / html )
+			switch_to: function( value ) {
+				var add_class = ( value === 'visual' ? 'tmce-active' : 'html-active' ),
+					remove_class = ( value === 'visual' ? 'html-active' : 'tmce-active' );
+				this.get_editor_wrap().removeClass( remove_class ).addClass( add_class );
+				$( 'input[id^=widget-black-studio-tinymce][id$=type]', this.get_widget_inside() ).val( value );
+				return this;
+			},
+
+			// Check for widgets with duplicate ids
+			check_duplicates: function() {
+				if ( $( '[name="' + this.get_textarea().attr('name') + '"]' ).size() > 1) {
+					if ( $( 'div.error', this.get_widget_inside() ).length === 0 ) {
+						this.get_widget_inside().prepend('<div class="error"><strong>' + bstw_data.error_duplicate_id + '</strong></div>');
+					}
+				}
+				return this;
+			},
+
+			// Fix CSS
+			fix_css: function() {
+				this.get_widget().css( 'position', 'relative' ).css( 'z-index', '100000' ); // needed for small screens and for fullscreen mode
+				$( '#wpbody-content' ).css( 'overflow', 'visible' ); // needed for small screens
+				return this;
+			},
+
+			// Set target on media buttons
+			set_media_target: function() {
+				$( '.insert-media', this.get_widget() ).data( 'editor', id );
+				return this;
 			}
-		},
-		
-		// Deactivate visual editor
-		deactivate: function( id ) {
-			if ( typeof tinymce === 'object' && typeof tinymce.execCommand === 'function' ) {
-				if ( tinymce.get( id ) !== null && typeof tinymce.get( id ).getContent === 'function' ) {
-					var content = tinymce.get( id ).getContent();
-					// tinymce.execCommand('mceRemoveControl', false, id);
-					tinymce.get( id ).remove();
-					$( 'textarea#' + id ).val( content );
-				}
-			}
-		},
-	
-		// Activate editor deferred (used upon opening the widget)
-		activate_after_open: function( id ) {
-			$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
-				// If textarea is visible and animation/ajax has completed (or in accessibility mode) then trigger a click to Visual button and enable the editor
-				if ( $('div.widget:has(#' + id + ') :animated' ).size() === 0 && tinymce.get( id ) === null && $( '#' + id ).is( ':visible' ) ) {
-					$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
-				}
-				// Otherwise wait and retry later (animation ongoing)
-				else if ( tinymce.get( id ) === null ) {
-					setTimeout(function() {
-						bstw.activate_after_open( id );
-						id = null;
-					}, 100 );
-				}
-				// If editor instance is already existing (i.e. dragged from another sidebar) just activate it
-				else {
-					$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
-				}
-			});
-		},
-		
-		// Activate editor deferred (used upon ajax requests)
-		activate_after_ajax: function ( id ) {
-			$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
-				// If textarea is visible and animation/ajax has completed then trigger a click to Visual button and enable the editor
-				if ( $.active === 0 && tinymce.get( id ) === null && $( '#' + id ).is( ':visible' ) ) {
-					$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
-				}
-				// Otherwise wait and retry later (animation ongoing)
-				else if ( $( 'div.widget:has(#' + id + ') div.widget-inside' ).is( ':visible' ) && tinymce.get( id ) === null ) {
-					setTimeout(function() {
-						bstw.activate_after_ajax( id );
-						id=null;
-					}, 100 );
-				}
-			});
-		}
-		
-	};
-	
+		};
+	}
+
 	// Document ready stuff
 	$( document ).ready(function() {
+
 		// Event handler for widget opening button
-		$( document ).on( 'click', 'div.widget:has(textarea[id^=widget-black-studio-tinymce]) .widget-title, div.widget:has(textarea[id^=widget-black-studio-tinymce]) a.widget-action', function() {
-			//event.preventDefault();
-			var $widget, $text_area, $widget_inside;
-			$widget = $( this ).closest( 'div.widget' );
-			$text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $widget );
-			if ( $( '[name="' + $( '#' + $text_area.attr('id') ).attr('name') + '"]' ).size() > 1) {
-				$widget_inside = $( 'div.widget-inside', $widget );
-				if ( $( 'div.error', $widget_inside).length === 0 ) {
-					$widget_inside.prepend('<div class="error"><strong>' + bstw_local.error_duplicate_id + '</strong></div>');
-				}
-			}
-			$( '#wpbody-content' ).css( 'overflow', 'visible' ); // needed for small screens
-			$widget.css( 'position', 'relative' ).css( 'z-index', '100000' ); // needed for small screens and for fullscreen mode
-			bstw.activate_after_open( $text_area.attr( 'id' ) );
-			$( '.insert-media', $widget ).data( 'editor', $text_area.attr( 'id' ) );
+		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] a.widget-action', function() {
+			bstw( $( this ) ).check_duplicates().fix_css().set_media_target().activate_after_open();
 		});
+
 		// Event handler for widget save button
 		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] input[name=savewidget]', function() {
-			var $widget, $text_area;
-			$widget = $( this ).closest( 'div.widget' );
-			$text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $widget );
-			if ( tinymce.get( $text_area.attr( 'id' ) ) !== null ) {
-				bstw.deactivate( $text_area.attr( 'id' ) );
+			if ( bstw( $( this ) ).is_tinymce_active() ) {
+				bstw( $( this ) ).deactivate();
 			}
 			// Event handler for ajax complete
 			$( this ).unbind( 'ajaxSuccess' ).ajaxSuccess(function() {
-				var $text_area = $( 'textarea[id^=widget-black-studio-tinymce]', $( this ).closest( 'div.widget-inside' ) );
-				bstw.activate_after_ajax( $text_area.attr( 'id' ) );
+				bstw( $( this ) ).activate_after_ajax();
 			});
 		});
+
 		// Event handler for visual switch button
 		$( document ).on( 'click', 'a[id^=widget-black-studio-tinymce][id$=tmce]', function() {
-			//event.preventDefault();
-			var $widget_inside, $wrap_id, $textarea_id;
-			$widget_inside = $( this ).closest( 'div.widget-inside, div.panel-dialog' );
-			$wrap_id = $( 'div[id^=wp-widget-black-studio-tinymce][id$=-wrap]', $widget_inside );
-			$textarea_id = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );
-			tinymce.DOM.removeClass( $wrap_id, 'html-active' );
-			tinymce.DOM.addClass( $wrap_id, 'tmce-active' );
-			$( 'input[id^=widget-black-studio-tinymce][id$=type]', $widget_inside ).val( 'visual' );
-			bstw.activate( $textarea_id );
+			bstw( $( this ) ).switch_to( 'visual' ).activate();
 		});
+
 		// Event handler for html switch button
 		$( document ).on( 'click', 'a[id^=widget-black-studio-tinymce][id$=html]', function() {
-			//event.preventDefault();
-			var $widget_inside, $wrap_id, $textarea_id;
-			$widget_inside = $( this ).closest( 'div.widget-inside,div.panel-dialog' );
-			$wrap_id = $( 'div[id^=wp-widget-black-studio-tinymce][id$=-wrap]', $widget_inside );
-			$textarea_id = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );
-			$( 'input[id^=widget-black-studio-tinymce][id$=type]', $widget_inside ).val( 'visual' );
-			tinymce.DOM.removeClass( $wrap_id, 'tmce-active' );
-			tinymce.DOM.addClass( $wrap_id, 'html-active' );
-			$( 'input[id^=widget-black-studio-tinymce][id$=type]', $widget_inside ).val( 'html' );
-			bstw.deactivate( $textarea_id );
+			bstw( $( this ) ).switch_to( 'html' ).deactivate();
 		});
+
+		// Event handler for widget added (i.e. with Theme Customizer */
+		$( document ).on( 'widget-added', function( event, $widget ) {
+			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
+				event.preventDefault();
+				bstw( $widget ).activate_after_open();
+			}
+		});
+
 		// Set wpActiveEditor variables used when adding media from media library dialog
 		$( document ).on( 'click', '.wp-media-buttons a', function() {
-			var $widget_inside = $( this ).closest( 'div.widget-inside' );
-			wpActiveEditor = $( 'textarea[id^=widget-black-studio-tinymce]', $widget_inside ).attr( 'id' );
+			wpActiveEditor = bstw( $( this ) ).get_id();
 		});
+
 		// Activate editor when in accessibility mode
 		if ( $( 'body.widgets_access' ).size() > 0 ) {
-			var $text_area = $( 'textarea[id^=widget-black-studio-tinymce]' );
-			bstw.activate_after_open( $text_area.attr( 'id' ) );
+			bstw( $( 'textarea[id^=widget-black-studio-tinymce]' ).attr( 'id' ) ).activate_after_open();
 		}
+
 	});
 
 })( jQuery ); // end self-invoked wrapper function

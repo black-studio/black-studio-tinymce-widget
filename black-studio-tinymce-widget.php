@@ -188,8 +188,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 
 		/* Helper function to enqueue localized script */
 		public function localize_script() {
-			$local_data = array( 'error_duplicate_id' => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new widget with the same content and then delete this one.', 'black-studio-tinymce-widget' ) );
-			wp_localize_script( 'black-studio-tinymce-widget', 'bstw_local', $local_data );
+			$container_selectors = apply_filters( 'black_studio_tinymce_container_selectors', array(  'div.widget', 'div.widget-inside' ) );
+			$data = array(
+				'container_selectors' => implode( ', ', $container_selectors ),
+				'error_duplicate_id' => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new widget with the same content and then delete this one.', 'black-studio-tinymce-widget' )
+			);
+			wp_localize_script( 'black-studio-tinymce-widget', 'bstw_data', $data );
 		}
 
 		/* Enqueue footer scripts */
