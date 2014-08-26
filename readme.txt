@@ -104,7 +104,7 @@ function my_widget_before_text( $before_text, $instance ) {
 }
 add_filter( 'black_studio_tinymce_after_text', 'my_widget_after_text', 10, 2 );
 function my_widget_after_text( $after_text, $instance ) {
-	return '';
+	return '</div>';
 }
 `
 
