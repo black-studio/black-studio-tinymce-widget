@@ -1,12 +1,13 @@
 # Copyright (C) 2014 Black Studio
 # This file is distributed under the GPLv3.
 # Translators:
+# marcochiesi <marco@blackstudio.it>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-08-25 15:19:27+00:00\n"
-"PO-Revision-Date: 2014-08-25 15:09+0000\n"
+"POT-Creation-Date: 2014-08-26 07:36:12+00:00\n"
+"PO-Revision-Date: 2014-08-26 07:34+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Ukrainian (Ukraine) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/uk_UA/)\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +18,7 @@ msgstr ""
 "X-Generator: grunt-wp-i18n 0.4.7\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Bookmarks: \n"
-"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-Country: United States\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
 "X-Poedit-Language: English\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -56,11 +57,11 @@ msgstr "Слідувати"
 
 #. Plugin Name of the plugin/theme
 msgid "Black Studio TinyMCE Widget"
-msgstr ""
+msgstr "Black Studio TinyMCE Widget"
 
 #. Plugin URI of the plugin/theme
 msgid "https://wordpress.org/plugins/black-studio-tinymce-widget/"
-msgstr ""
+msgstr "https://wordpress.org/plugins/black-studio-tinymce-widget/"
 
 #. Description of the plugin/theme
 msgid ""
@@ -69,8 +70,8 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "Black Studio"
-msgstr ""
+msgstr "Black Studio"
 
 #. Author URI of the plugin/theme
 msgid "http://www.blackstudio.it"
-msgstr ""
+msgstr "http://www.blackstudio.it"
