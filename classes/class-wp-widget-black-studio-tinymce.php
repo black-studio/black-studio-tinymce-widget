@@ -22,11 +22,6 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		}
 
 		public function widget( $args, $instance ) {
-			if ( get_option( 'embed_autourls' ) ) {
-				$wp_embed = $GLOBALS['wp_embed'];
-				add_filter( 'widget_text', array( $wp_embed, 'run_shortcode' ), 8 );
-				add_filter( 'widget_text', array( $wp_embed, 'autoembed' ), 8 );
-			}
 			$before_widget = $args['before_widget'];
 			$after_widget = $args['after_widget'];
 			$before_title = $args['before_title'];
@@ -34,14 +29,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			$before_text = apply_filters( 'black_studio_tinymce_before_text', '<div class="textwidget">', $instance );
 			$after_text = apply_filters( 'black_studio_tinymce_after_text', '</div>', $instance );
 			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-			$text = apply_filters( 'widget_text', empty( $instance['text'] ) ? '' : $instance['text'], $instance );
-			if ( function_exists( 'icl_t' )  && ! empty( $this->number ) ) {
-				$title = icl_t( 'Widgets', 'widget title - ' . md5( $title ), $title );
-				$text = icl_t( 'Widgets', 'widget body - ' . $this->id_base . '-' . $this->number, $text );
-			}
-			$text = do_shortcode( $text );
-			$output = '';
-			$output .= $before_widget;
+			$text = apply_filters( 'widget_text', empty( $instance['text'] ) ? '' : $instance['text'], $instance, $this );
+			$output = $before_widget;
 			if ( ! empty( $title ) ) {
 				$output .= $before_title . $title . $after_title;
 			}
@@ -60,10 +49,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 				$instance['text'] = stripslashes( wp_filter_post_kses( addslashes( $new_instance['text'] ) ) ); // wp_filter_post_kses() expects slashed
 			}
 			$instance['type'] = strip_tags( $new_instance['type'] );
-			if ( function_exists( 'icl_register_string' ) && ! empty( $this->number ) ) {
-				//icl_register_string( "Widgets", 'widget title - ' . $this->id_base . '-' . $this->number /* md5 ( apply_filters( 'widget_title', $instance['title'] ))*/, apply_filters( 'widget_title', $instance['title'] ) ); // This is handled automatically by WPML
-				icl_register_string( 'Widgets', 'widget body - ' . $this->id_base . '-' . $this->number, apply_filters( 'widget_text', $instance['text'] ) );
-			}
+			$instance = apply_filters( 'black_studio_tinymce_widget_update',  $instance, $this );
 			return $instance;
 		}
 

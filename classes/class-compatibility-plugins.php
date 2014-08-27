@@ -17,10 +17,34 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 
 		/* Class constructor */
 		public function __construct() {
-			// Call compatibility methods
+			$this->wpml();
 			$this->wp_page_widget();
 			$this->jetpack_after_the_deadline();
 			$this->siteorigin_panels();
+		}
+
+		/* Compatibility with WPML */
+		public function wpml() {
+			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'wpml_widget_update' ), 10, 2 );
+			add_filter( 'widget_text', array( $this, 'wpml_widget_text' ), 5, 3 );
+		}
+		
+		/* Add widget text to WPML String translation */
+		public function wpml_widget_update( $instance, $widget ) {
+			if ( function_exists( 'icl_register_string' ) && ! empty( $widget->number ) ) {
+				icl_register_string( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $instance['text'] );
+			}
+			return $instance;
+		}
+
+		/* Translate widget text */
+		public function wpml_widget_text( $text, $instance, $widget ) {
+			if ( function_exists( 'icl_t' ) ) {
+				if ( ! empty( $instance ) && $widget->id_base == 'black-studio-tinymce' ) {
+					$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
+				}
+			}
+			return $text;
 		}
 
 		/* Compatibility for WP Page Widget plugin */

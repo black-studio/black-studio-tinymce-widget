@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @deprecated 2.0.0
  */
-$black_studio_tinymce_widget_version = bstw()->get_version();
+$black_studio_tinymce_widget_version = Black_Studio_TinyMCE_Plugin::get_version();
 
 /**
  * @deprecated 2.0.0

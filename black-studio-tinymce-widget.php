@@ -56,9 +56,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 			add_filter( 'black_studio_tinymce_enable', array( $this, 'enable' ) );
-			add_filter( 'widget_text', array( $this, 'apply_smilies_to_widget_text' ) );
 			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
+			// Support for autoembed urls in widget text
+			if ( get_option( 'embed_autourls' ) ) {
+				global $wp_embed;
+				add_filter( 'widget_text', array( $wp_embed, 'run_shortcode' ), 8 );
+				add_filter( 'widget_text', array( $wp_embed, 'autoembed' ), 8 );
+			}
+			// Support for smilies in widget text
+			if ( get_option( 'use_smilies' ) ) {
+				add_filter( 'widget_text', 'convert_smilies' );
+			}
+			// Support for shortcodes in widget text
+			add_filter( 'widget_text', 'do_shortcode' );
 			// Handle compatibility code
 			new Black_Studio_TinyMCE_Compatibility_Plugins();
 			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
@@ -99,11 +110,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			// Load editor features
 			$enable = apply_filters( 'black_studio_tinymce_enable', false );
 			if ( $enable ) {
+				// Add plugin hooks
 				add_action( 'admin_head', array( $this, 'enqueue_media' ) );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 20 );
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
+				// Action hook on plugin load
 				do_action( 'black_studio_tinymce_load' );
 			}
 		}
@@ -116,7 +129,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			}
 			return $enable;
 		}
-
 
 		/* Instantiate tinyMCE editor */
 		public function enqueue_media() {
@@ -199,14 +211,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		/* Enqueue footer scripts */
 		public function admin_print_footer_scripts() {
 			wp_editor( '', 'black-studio-tinymce-widget' );
-		}
-
-		/* Support for smilies */
-		public function apply_smilies_to_widget_text( $text ) {
-			if ( get_option( 'use_smilies' ) ) {
-				$text = convert_smilies( $text );
-			}
-			return $text;
 		}
 
 		/* Hack needed to enable full media options when adding content from media library */
