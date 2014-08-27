@@ -16,11 +16,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 	class Black_Studio_TinyMCE_Compatibility_Plugins {
 
 		/* Class constructor */
-		public function __construct() {
-			$this->wpml();
-			$this->wp_page_widget();
-			$this->jetpack_after_the_deadline();
-			$this->siteorigin_panels();
+		public function __construct( $compat_plugins ) {
+			foreach ( $compat_plugins as $compat_plugin ) {
+				if ( is_callable( array( $this, $compat_plugin ), false ) ) {
+					$this->$compat_plugin();
+				}
+			}
 		}
 
 		/* Compatibility with WPML */
@@ -28,7 +29,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'wpml_widget_update' ), 10, 2 );
 			add_filter( 'widget_text', array( $this, 'wpml_widget_text' ), 5, 3 );
 		}
-		
+
 		/* Add widget text to WPML String translation */
 		public function wpml_widget_update( $instance, $widget ) {
 			if ( function_exists( 'icl_register_string' ) && ! empty( $widget->number ) ) {

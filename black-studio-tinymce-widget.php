@@ -49,8 +49,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 
 		/* Class constructor */
 		protected function __construct() {
-			// Include required files
-			$this->includes();
+			// Include required file(s)
+			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-wp-widget-black-studio-tinymce.php' );
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -66,29 +66,38 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			}
 			// Support for smilies in widget text
 			if ( get_option( 'use_smilies' ) ) {
-				add_filter( 'widget_text', 'convert_smilies' );
+				add_filter( 'widget_text', 'convert_smilies', 12 );
 			}
 			// Support for shortcodes in widget text
-			add_filter( 'widget_text', 'do_shortcode' );
+			add_filter( 'widget_text', 'do_shortcode', 15 );
 			// Handle compatibility code
-			new Black_Studio_TinyMCE_Compatibility_Plugins();
-			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
-				new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
-			}
+			$this->compatibility();
 		}
 
+		/* Cloning instances of the class is forbidden */
 		protected function __clone() {
-			// Cloning instances of the class is forbidden
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
-		/* Include additional files */
-		public function includes() {
-			include_once( plugin_dir_path( __FILE__ ) . '/includes/deprecated.php' );
-			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-wp-widget-black-studio-tinymce.php' );
-			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-plugins.php' );
+		/* Include compatibility code */
+		public function compatibility() {
+			// Compatibility load flag (for both deprecated functions and other plugins)
+			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );
+			// Compatibility with previous BSTW versions 
+			$load_deprecated = apply_filters( 'black_studio_tinymce_load_deprecated', true );
+			if ( $load_compatibility && $load_deprecated ) {
+				include_once( plugin_dir_path( __FILE__ ) . '/includes/deprecated.php' );
+			}
+			// Compatibility with other plugins
+			$compat_plugins = apply_filters( 'black_studio_tinymce_load_compatibility_plugins', array( 'siteorigin_panels', 'wpml', 'jetpack_after_the_deadline', 'wp_page_widget' ) );
+			if ( $load_compatibility && ! empty( $compat_plugins ) ) {
+				include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-plugins.php' );
+				new Black_Studio_TinyMCE_Compatibility_Plugins( $compat_plugins );
+			}
+			// Compatibility with previous WordPress versions
 			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
 				include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-wordpress.php' );
+				new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
 			}
 		}
 
