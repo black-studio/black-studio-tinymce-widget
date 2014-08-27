@@ -15,12 +15,30 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 
 	class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 
+		/**
+		 * Widget Class constructor
+		 *
+		 * @uses WP_Widget::__construct()
+		 *
+		 * @return void
+		 */
 		public function __construct() {
 			$widget_ops = array( 'classname' => 'widget_black_studio_tinymce', 'description' => __( 'Arbitrary text or HTML with visual editor', 'black-studio-tinymce-widget' ) );
 			$control_ops = array( 'width' => 800, 'height' => 800 );
 			parent::__construct( 'black-studio-tinymce', __( 'Visual Editor', 'black-studio-tinymce-widget' ), $widget_ops, $control_ops );
 		}
 
+		/**
+		 * @todo DESC
+		 *
+		 * @uses apply_filters()
+		 * @uses wp_kses_post()
+		 * @uses WP_Widget::$id_base
+		 *
+		 * @param array $args
+		 * @param array $instance
+		 * @return string
+		 */
 		public function widget( $args, $instance ) {
 			$before_widget = $args['before_widget'];
 			$after_widget = $args['after_widget'];
@@ -39,6 +57,17 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			echo wp_kses_post( $output );
 		}
 
+		/**
+		 * @todo DESC
+		 *
+		 * @uses current_user_can()
+		 * @uses wp_filter_post_kses()
+		 * @uses apply_filters()
+		 *
+		 * @param array $new_instance
+		 * @param array $old_instance
+		 * @return array
+		 */
 		public function update( $new_instance, $old_instance ) {
 			$instance = $old_instance;
 			$instance['title'] = strip_tags( $new_instance['title'] );
@@ -53,6 +82,22 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			return $instance;
 		}
 
+		/**
+		 * @todo DESC
+		 *
+		 * @uses wp_parse_args()
+		 * @uses apply_filters()
+		 * @uses esc_attr()
+		 * @uses esc_textarea()
+		 * @uses WP_Widget::get_field_id()
+		 * @uses WP_Widget::get_field_name()
+		 * @uses _e()
+		 * @uses do_action()
+		 * @uses apply_filters()
+		 *
+		 * @param array $instance
+		 * @return string
+		 */
 		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'type' => 'visual' ) );
 			$title = strip_tags( $instance['title'] );
@@ -90,6 +135,6 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			<?php
 		}
 
-	} // class declaration
+	} // END class WP_Widget_Black_Studio_TinyMCE
 
 } // class_exists check
