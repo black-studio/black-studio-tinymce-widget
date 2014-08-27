@@ -10,7 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @deprecated 2.0.0
  */
-$black_studio_tinymce_widget_version = Black_Studio_TinyMCE_Plugin::get_version();
+global $black_studio_tinymce_widget_version; // global is necessary because this file is included in a non-global context
+$black_studio_tinymce_widget_version = Black_Studio_TinyMCE_Plugin::$version;
 
 /**
  * @deprecated 2.0.0
