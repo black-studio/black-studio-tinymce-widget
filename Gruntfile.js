@@ -116,7 +116,7 @@ module.exports = function( grunt ) {
 					'!**/_notes/**'
 				],
 				dest: 'build/<%= pkg.name %>/'
-			}		
+			}
 		},
 
 		// Create zip package
@@ -265,7 +265,7 @@ module.exports = function( grunt ) {
 
 		// Deploy to WP repository
 		wp_deploy: {
-			deploy: { 
+			deploy: {
 				options: {
 					plugin_slug: '<%= pkg.name %>',
 					build_dir: 'build'

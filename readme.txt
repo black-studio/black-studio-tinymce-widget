@@ -120,13 +120,12 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 = 2.0.0. =
 * Total refactoring of plugin's source code
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
-* Added project to [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/) translation platform, with the support of the [WP-Translation.org](http://wp-translations.org/) team
+* Added project to [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/) translation platform
+* Added french, greek, turkish and khmer translations thanks to [WP-Translation.org](http://wp-translations.org/) team
 * Improved code quality and security thanks to [Scrutinizer](https://scrutinizer-ci.com/g/black-studio/black-studio-tinymce-widget/) service
 * Improved development workflow thanks to [Grunt](http://gruntjs.com/)
-* Added black_studio_tinymce_load action hook
-* Added black_studio_tinymce_enable filter hook
-* Added black_studio_tinymce_whitelabel filter hook
-* Special thanks to @cfoellmann for his precious support and contributions
+* Added several filter and action hooks
+* A huge Thanks to @cfoellmann for his precious support and contributions
 
 = 1.4.6 =
 * Bugfix on widget display
