@@ -35,9 +35,9 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 * @uses wp_kses_post()
 		 * @uses WP_Widget::$id_base
 		 *
-		 * @param array $args
-		 * @param array $instance
-		 * @return string
+		 * @param string[] $args
+		 * @param mixed[] $instance
+		 * @return void
 		 */
 		public function widget( $args, $instance ) {
 			$before_widget = $args['before_widget'];
@@ -64,9 +64,9 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 * @uses wp_filter_post_kses()
 		 * @uses apply_filters()
 		 *
-		 * @param array $new_instance
-		 * @param array $old_instance
-		 * @return array
+		 * @param mixed[] $new_instance
+		 * @param mixed[] $old_instance
+		 * @return mixed[]
 		 */
 		public function update( $new_instance, $old_instance ) {
 			$instance = $old_instance;
@@ -95,8 +95,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 * @uses do_action()
 		 * @uses apply_filters()
 		 *
-		 * @param array $instance
-		 * @return string
+		 * @param mixed[] $instance
+		 * @return void
 		 */
 		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'type' => 'visual' ) );

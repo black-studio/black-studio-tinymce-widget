@@ -44,9 +44,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Add widget text to WPML String translation
 		 *
 		 * @uses icl_register_string() Part of WPML
-		 * @param array $instance
+		 * @param mixed[] $instance
 		 * @param object $widget
-		 * @return array
+		 * @return mixed[]
 		 */
 		public function wpml_widget_update( $instance, $widget ) {
 			if ( function_exists( 'icl_register_string' ) && ! empty( $widget->number ) ) {
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses icl_t() Part of WPML
 		 *
 		 * @param string $text
-		 * @param array $instance
+		 * @param mixed[] $instance
 		 * @param object $widget
 		 * @return string
 		 */
@@ -139,8 +139,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add selector for widget detection for Page Builder
 		 *
-		 * @param array $selectors
-		 * @return string
+		 * @param string[] $selectors
+		 * @return string[]
 		 */
 		public function siteorigin_panels_container_selectors( $selectors ) {
 			$selectors[] = 'div.panel-dialog';

@@ -225,8 +225,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		/**
 		 * TinyMCE setup customization
 		 *
-		 * @param array $settings
-		 * @return array
+		 * @param mixed[] $settings
+		 * @return mixed[]
 		 */
 		public function tiny_mce_before_init( $settings ) {
 			$custom_settings = array(
