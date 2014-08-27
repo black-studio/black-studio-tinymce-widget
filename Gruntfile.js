@@ -69,16 +69,67 @@ module.exports = function( grunt ) {
 		// Watch changes for assets
 		watch: {
 			js: {
-				files: [
-					'<%= dirs.js %>/*.js'
-				],
-				tasks: ['uglify']
+				files: ['<%= dirs.js %>/*.js'],
+				tasks: ['uglify'],
+				options: {
+					spawn: false
+				}
 			},
 			css: {
-				files: [
-					'<%= dirs.css %>/*.css'
+				files: ['<%= dirs.css %>/*.css'],
+				tasks: ['cssmin'],
+				options: {
+					spawn: false
+				}
+			},
+			readme: {
+				files: ['readme.txt'],
+				tasks: ['wp_readme_to_markdown'],
+				options: {
+					spawn: false
+				}
+			}
+		},
+
+		// Clean build dir
+		clean: {
+			main: ['build/<%= pkg.name %>']
+		},
+		
+		// Copy the plugin to a versioned release directory
+		copy: {
+			main: {
+				src:  [
+					'**',
+					'!.git/**',
+					'!.gitignore',
+					'!.gitmodules',
+					'!.jshintrc',
+					'!.scrutinizer.yml',
+					'!node_modules/**',
+					'!build/**',
+					'!Gruntfile.js',
+					'!package.json',
+					'!LICENSE',
+					'!README.md',
+					'!**/*.LCK',
+					'!**/_notes/**'
 				],
-				tasks: ['cssmin']
+				dest: 'build/<%= pkg.name %>/'
+			}		
+		},
+
+		// Create zip package
+		compress: {
+			main: {
+				options: {
+					mode: 'zip',
+					archive: './build/<%= pkg.name %>.<%= pkg.version %>.zip'
+				},
+				expand: true,
+				cwd: 'build/<%= pkg.name %>/',
+				src: ['**/*'],
+				dest: '<%= pkg.name %>/'
 			}
 		},
 
@@ -87,6 +138,7 @@ module.exports = function( grunt ) {
 			target: {
 				options: {
 					domainPath: '/languages',
+					exclude: ['build/.*'],
 					potFilename: 'black-studio-tinymce-widget.pot',
 					processPot: function( pot ) {
 						pot.headers['report-msgid-bugs-to'] = 'https://github.com/black-studio/black-studio-tinymce-widget/issues\n';
@@ -141,8 +193,9 @@ module.exports = function( grunt ) {
 			},
 			files: {
 				src:  [
-					'**/*.php', // Include all files
-					'!node_modules/**' // Exclude node_modules/
+					'**/*.php',
+					'!node_modules/**',
+					'!build/**'
 				],
 				expand: true
 			}
@@ -183,17 +236,17 @@ module.exports = function( grunt ) {
 				readme: 'readme.txt',
 				plugin: 'black-studio-tinymce-widget.php'
 			},
-			plugin_vs_readme: { //Check plug-in version and stable tag match
+			plugin_vs_readme: { //Check plugin header version againts stable tag in readme
 				version1: 'plugin',
 				version2: 'readme',
 				compare: '=='
 			},
-			plugin_vs_grunt: { //Check plug-in version and package.json match
+			plugin_vs_grunt: { //Check plugin header version against package.json version
 				version1: 'plugin',
 				version2: '<%= pkg.version %>',
 				compare: '=='
 			},
-			plugin_vs_internal: { //Check plug-in version and internal defined version
+			plugin_vs_internal: { //Check plugin header version against internal defined version
 				version1: 'plugin',
 				version2: grunt.file.read('black-studio-tinymce-widget.php').match( /version = '(.*)'/ )[1],
 				compare: '=='
@@ -208,7 +261,18 @@ module.exports = function( grunt ) {
 			txpush: { // Push pot to Transifex - grunt exec:txpush
 				cmd: 'tx push -s'
 			}
+		},
+
+		// Deploy to WP repository
+		wp_deploy: {
+			deploy: { 
+				options: {
+					plugin_slug: '<%= pkg.name %>',
+					build_dir: 'build'
+				}
+			}
 		}
+
 	});
 
 	// Load NPM tasks to be used here
@@ -220,6 +284,7 @@ module.exports = function( grunt ) {
 		'cssmin',
 		'uglify'
 	]);
+
 	grunt.registerTask( 'languages', [
 		'checktextdomain',
 		'makepot',
@@ -227,12 +292,29 @@ module.exports = function( grunt ) {
 		'exec:txpull',
 		'potomo'
 	]);
+
 	grunt.registerTask( 'check', [
+		'jshint',
 		'checkwpversion',
 		'checktextdomain'
 	]);
+
 	grunt.registerTask( 'readme', [
 		'wp_readme_to_markdown'
+	]);
+
+	grunt.registerTask( 'build', [
+		'check',
+		'languages',
+		'readme',
+		'clean',
+		'copy',
+		'compress'
+	]);
+
+	grunt.registerTask( 'deploy', [
+		'build',
+		'wp_deploy'
 	]);
 
 };

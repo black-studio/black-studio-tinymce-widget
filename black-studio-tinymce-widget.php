@@ -83,7 +83,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		public function compatibility() {
 			// Compatibility load flag (for both deprecated functions and other plugins)
 			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );
-			// Compatibility with previous BSTW versions 
+			// Compatibility with previous BSTW versions
 			$load_deprecated = apply_filters( 'black_studio_tinymce_load_deprecated', true );
 			if ( $load_compatibility && $load_deprecated ) {
 				include_once( plugin_dir_path( __FILE__ ) . '/includes/deprecated.php' );

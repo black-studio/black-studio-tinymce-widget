@@ -72,6 +72,7 @@ temp/
 
 # Development files #
 #####################
+build/**/*
 cache/**/*
 logs/*
 .svn*
