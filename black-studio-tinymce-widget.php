@@ -66,7 +66,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		/**
 		 * Class constructor
 		 *
-		 * @uses Black_Studio_TinyMCE_Plugin::includes
 		 * @uses add_action()
 		 * @uses add_filter()
 		 * @uses get_option()
@@ -76,8 +75,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @return void
 		 */
 		protected function __construct() {
-			// Include required files
-			$this->includes();
 			// Include required file(s)
 			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-wp-widget-black-studio-tinymce.php' );
 			// Register action and filter hooks
@@ -95,17 +92,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			}
 			// Support for smilies in widget text
 			if ( get_option( 'use_smilies' ) ) {
-				add_filter( 'widget_text', 'convert_smilies' );
 				add_filter( 'widget_text', 'convert_smilies', 12 );
 			}
 			// Support for shortcodes in widget text
-			add_filter( 'widget_text', 'do_shortcode' );
 			add_filter( 'widget_text', 'do_shortcode', 15 );
 			// Handle compatibility code
-			new Black_Studio_TinyMCE_Compatibility_Plugins();
-			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
-				new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
-			}
 			$this->compatibility();
 		}
 
@@ -118,16 +109,15 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
-		/* Include additional files */
-		public function includes() {
-			include_once( plugin_dir_path( __FILE__ ) . '/includes/deprecated.php' );
-			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-wp-widget-black-studio-tinymce.php' );
-			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-compatibility-plugins.php' );
-
-
-
-
-		/* Include compatibility code */
+		/**
+		 * Include compatibility code
+		 *
+		 * @uses apply_filters()
+		 * @uses get_bloginfo()
+		 * @uses plugin_dir_path()
+		 *
+		 * @return void
+		 */
 		public function compatibility() {
 			// Compatibility load flag (for both deprecated functions and other plugins)
 			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );

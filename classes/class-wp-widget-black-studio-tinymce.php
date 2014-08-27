@@ -29,7 +29,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		}
 
 		/**
-		 * @todo DESC
+		 * Output widget HTML code
 		 *
 		 * @uses apply_filters()
 		 * @uses wp_kses_post()
@@ -58,7 +58,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		}
 
 		/**
-		 * @todo DESC
+		 * Update widget data
 		 *
 		 * @uses current_user_can()
 		 * @uses wp_filter_post_kses()
@@ -83,7 +83,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		}
 
 		/**
-		 * @todo DESC
+		 * Output widget form
 		 *
 		 * @uses wp_parse_args()
 		 * @uses apply_filters()

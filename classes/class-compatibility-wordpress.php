@@ -16,9 +16,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 	class Black_Studio_TinyMCE_Compatibility_Wordpress {
 
 		/**
-		 * @todo DESC
+		 * Reference to main plugin instance
 		 *
-		 * @var string
+		 * @var object
 		 */
 		private $plugin;
 
