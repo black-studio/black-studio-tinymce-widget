@@ -97,8 +97,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		/**
 		 * Remove WP fullscreen mode and set the native tinyMCE fullscreen mode for WordPress prior to 3.3
 		 *
-		 * @param string[] $settings
-		 * @return string[]
+		 * @param mixed[] $settings
+		 * @return mixed[]
 		 */
 		public function wp_pre_33_tiny_mce_before_init( $settings ) {
 			$plugins = explode( ',', $settings['plugins'] );
@@ -211,8 +211,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Remove the "More" toolbar button (only in widget screen) for WordPress prior to 3.8
 		 *
 		 * @global string $pagenow
-		 * @param string[] $settings
-		 * @return string[]
+		 * @param mixed[] $settings
+		 * @return mixed[]
 		 */
 		public function wp_pre_38_tiny_mce_before_init( $settings ) {
 			global $pagenow;
