@@ -39,7 +39,7 @@
 						window.alert( e );
 					}
 					// Real time preview (Theme customizer)
-					if ( tinymce.get( id ) !== null) {
+					if ( this.is_tinymce_active() ) {
 						if ( typeof tinymce.get( id ).on === 'function' ) {
 							tinymce.get( id ).on( 'keyup change', function() {
 								var content = tinymce.get( id ).getContent();
@@ -54,7 +54,7 @@
 			// Deactivate visual editor
 			deactivate: function() {
 				if ( typeof tinymce === 'object' && typeof tinymce.execCommand === 'function' ) {
-					if ( tinymce.get( id ) !== null && typeof tinymce.get( id ).getContent === 'function' ) {
+					if ( this.is_tinymce_active() ) {
 						var content = tinymce.get( id ).getContent();
 						// tinymce.execCommand('mceRemoveControl', false, id);
 						tinymce.get( id ).remove();
@@ -66,86 +66,107 @@
 
 			// Activate editor deferred (after widget opening)
 			activate_after_open: function() {
-				$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
+				// Activate only if type is set to visual
+				if ( this.get_mode() === 'visual' ) {
 					// If textarea is visible and animation/ajax has completed (or in accessibility mode) then trigger a click to Visual button and enable the editor
-					if ( $('div.widget:has(#' + id + ') :animated' ).size() === 0 && tinymce.get( id ) === null && $( '#' + id ).is( ':visible' ) ) {
-						$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
+					if ( $('div.widget:has(#' + id + ') :animated' ).size() === 0 && ! this.is_tinymce_active() && this.is_textearea_visible() ) {
+						this.set_mode( 'visual' );
 					}
 					// Otherwise wait and retry later (animation ongoing)
-					else if ( tinymce.get( id ) === null ) {
+					else if ( ! this.is_tinymce_active() ) {
 						setTimeout(function() {
 							bstw( id ).activate_after_open();
-							id = null;
 						}, 100 );
 					}
 					// If editor instance is already existing (i.e. dragged from another sidebar) just activate it
 					else {
-						$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
+						this.set_mode( 'visual' );
 					}
-				});
+				}
 				return this;
 			},
 
 			// Activate editor deferred (after ajax requests)
 			activate_after_ajax: function () {
-				$( 'div.widget-inside:has(#' + id + ') input[id^=widget-black-studio-tinymce][id$=type][value=visual]' ).each(function() {
+				// Activate only if type is set to visual
+				if ( this.get_mode() === 'visual' ) {
 					// If textarea is visible and animation/ajax has completed then trigger a click to Visual button and enable the editor
-					if ( $.active === 0 && tinymce.get( id ) === null && $( '#' + id ).is( ':visible' ) ) {
-						$( 'a[id^=widget-black-studio-tinymce][id$=tmce]', $( this ).closest( 'div.widget-inside' ) ).click();
+					if ( $.active === 0 && ! this.is_tinymce_active() && this.is_textearea_visible() ) {
+						this.set_mode( 'visual' );
 					}
 					// Otherwise wait and retry later (animation ongoing)
-					else if ( $( 'div.widget:has(#' + id + ') div.widget-inside' ).is( ':visible' ) && tinymce.get( id ) === null ) {
+					else if ( this.is_widget_inside_visible() && ! this.is_tinymce_active() ) {
 						setTimeout(function() {
 							bstw( id ).activate_after_ajax();
-							id=null;
 						}, 100 );
 					}
-				});
+				}
 				return this;
 			},
 
-			// Return the div.widget jQuery object containing the instance
+			// Get the div.widget jQuery object containing the instance
 			get_widget: function() {
 				return $( '#' + id ).closest( 'div.widget' );
 			},
 
-			// Return the div.widget-inside jQuery object containing the instance
+			// Get the div.widget-inside jQuery object containing the instance
 			get_widget_inside: function() {
 				return $( '#' + id ).closest( 'div.widget-inside' );
 			},
 
-			// Return the div.wp-editor-wrap jQuery object containing the instance
+			// Get the div.wp-editor-wrap jQuery object containing the instance
 			get_editor_wrap: function() {
 				return $( '#' + id ).closest( 'div.wp-editor-wrap' );
 			},
 
-			// Return the textarea jQuery object related to the instance
+			// Get the textarea jQuery object related to the instance
 			get_textarea: function() {
 				return $( '#' + id );
 			},
 
-			// Return the textarea ID related to the instance
+			// Get the textarea ID related to the instance
 			get_id: function() {
 				return id;
 			},
 
-			// Return the tinymce instance related to the instance
+			// Get the tinymce instance related to the instance
 			get_tinymce: function() {
 				return tinymce.get( id );
 			},
 
-			// Check if the connected tinymce instance is active
-			is_tinymce_active: function() {
-				return tinymce.get( id ) !== null;
+			// Get the current editor mode ( visual / html )
+			get_mode: function() {
+				return  $( 'input[id^=widget-black-studio-tinymce][id$=type]', this.get_widget_inside() ).val();
+
 			},
 
-			// Set the value of the hidden input "type" ( visual / html )
-			switch_to: function( value ) {
-				var add_class = ( value === 'visual' ? 'tmce-active' : 'html-active' ),
-					remove_class = ( value === 'visual' ? 'html-active' : 'tmce-active' );
-				this.get_editor_wrap().removeClass( remove_class ).addClass( add_class );
+			// Set editor mode ( visual / html )
+			set_mode: function( value ) {
+				if ( value === 'visual' ) {
+					this.get_editor_wrap().removeClass( 'html-active' ).addClass( 'tmce-active' );
+					this.activate();
+				}
+				if ( value === 'html' ) {
+					this.get_editor_wrap().removeClass( 'tmce-active' ).addClass( 'html-active' );
+					this.deactivate();
+				}
 				$( 'input[id^=widget-black-studio-tinymce][id$=type]', this.get_widget_inside() ).val( value );
 				return this;
+			},
+
+			// Check if the connected tinymce instance is active
+			is_tinymce_active: function() {
+				return typeof tinymce === 'object' && typeof tinymce.get( id ) === 'object' && tinymce.get( id ) !== null;
+			},
+
+			// Check if the textarea is visible
+			is_textearea_visible: function() {
+				return $( '#' + id ).is( ':visible' );
+			},
+
+			// Check if the widget inside is visible
+			is_widget_inside_visible: function() {
+				return $( ' div.widget-inside:has(#' + id + ')' ).is( ':visible' );
 			},
 
 			// Check for widgets with duplicate ids
@@ -179,10 +200,22 @@
 		// Event handler for widget opening button
 		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] a.widget-action', function() {
 			bstw( $( this ) ).check_duplicates().fix_css().set_media_target().activate_after_open();
+			// Event handler for widget save button (for new instances)
+			// Note: this event handler is intentionally attached to the save button instead of document
+			// to let the the textarea content be updated before the ajax request is run
+			$( 'input[name=savewidget]',  bstw( $( this ) ).get_widget() ).on( 'click', function() {
+				if ( bstw( $( this ) ).is_tinymce_active() ) {
+					bstw( $( this ) ).deactivate();
+				}
+				// Event handler for ajax complete
+				$( this ).unbind( 'ajaxSuccess' ).ajaxSuccess(function() {
+					bstw( $( this ) ).activate_after_ajax();
+				});
+			});
 		});
 
-		// Event handler for widget save button
-		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] input[name=savewidget]', function() {
+		// Event handler for widget save button (for existing instances)
+		$( 'div.widget[id*=black-studio-tinymce] input[name=savewidget]' ).on( 'click', function() {
 			if ( bstw( $( this ) ).is_tinymce_active() ) {
 				bstw( $( this ) ).deactivate();
 			}
@@ -194,12 +227,12 @@
 
 		// Event handler for visual switch button
 		$( document ).on( 'click', 'a[id^=widget-black-studio-tinymce][id$=tmce]', function() {
-			bstw( $( this ) ).switch_to( 'visual' ).activate();
+			bstw( $( this ) ).set_mode( 'visual' );
 		});
 
 		// Event handler for html switch button
 		$( document ).on( 'click', 'a[id^=widget-black-studio-tinymce][id$=html]', function() {
-			bstw( $( this ) ).switch_to( 'html' ).deactivate();
+			bstw( $( this ) ).set_mode( 'html' );
 		});
 
 		// Event handler for widget added (i.e. with Theme Customizer */

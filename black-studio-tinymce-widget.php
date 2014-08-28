@@ -79,6 +79,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			include_once( plugin_dir_path( __FILE__ ) . '/classes/class-wp-widget-black-studio-tinymce.php' );
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+			add_action( 'plugins_loaded', array( $this, 'compatibility' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 			add_filter( 'black_studio_tinymce_enable', array( $this, 'enable' ) );
@@ -96,8 +97,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			}
 			// Support for shortcodes in widget text
 			add_filter( 'widget_text', 'do_shortcode', 15 );
-			// Handle compatibility code
-			$this->compatibility();
 		}
 
 		/**
@@ -333,7 +332,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				'container_selectors' => implode( ', ', $container_selectors ),
 				'error_duplicate_id' => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new widget with the same content and then delete this one.', 'black-studio-tinymce-widget' )
 			);
-			wp_localize_script( 'black-studio-tinymce-widget', 'bstw_data', $data );
+			wp_localize_script( apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' ), 'bstw_data', $data );
 		}
 
 		/**

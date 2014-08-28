@@ -31,16 +31,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			$this->plugin = $plugin;
 			$wp_version = get_bloginfo( 'version' );
 			if ( version_compare( $wp_version, '3.2', '<' ) ) {
-				wp_pre_32();
+				add_action( 'admin_init', array($this, 'wp_pre_32' ), 20 );
 			}
 			if ( version_compare( $wp_version, '3.3', '<' ) ) {
-				wp_pre_33();
+				add_action( 'admin_init', array($this, 'wp_pre_33' ), 20 );
 			}
 			if ( version_compare( $wp_version, '3.5', '<' ) ) {
-				wp_pre_35();
+				add_action( 'admin_init', array($this, 'wp_pre_35' ), 20 );
 			}
 			if ( version_compare( $wp_version, '3.8', '<' ) ) {
-				wp_pre_38();
+				add_action( 'admin_init', array($this, 'wp_pre_38' ), 20 );
 			}
 		}
 
@@ -89,6 +89,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			add_action( 'admin_print_styles', array( $this, 'wp_pre_33_admin_print_styles' ) );
 			remove_action( 'admin_print_scripts', array( $this->plugin, 'admin_print_scripts' ) );
 			add_action( 'admin_print_scripts', array( $this, 'wp_pre_33_admin_print_scripts' ) );
+			remove_action( 'admin_print_footer_scripts', array( $this->plugin, 'admin_print_footer_scripts' ) );
 			remove_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_32_admin_print_footer_scripts' ) );
 			add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_33_admin_print_footer_scripts' ) );
 			add_filter( 'black-studio-tinymce-widget-script', array( $this, 'wp_pre_33_script' ) );
@@ -137,6 +138,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		public function wp_pre_33_admin_print_scripts() {
 			wp_enqueue_script( 'media-upload' );
 			$this->plugin->enqueue_script();
+			$this->plugin->localize_script();
 		}
 
 		/**
