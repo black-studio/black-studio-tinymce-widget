@@ -1,2 +1,2 @@
 /* Black Studio TinyMCE Widget - v2.0.0 */
-#wp-black-studio-tinymce-widget-wrap{display:none}#available-widgets [class*=black-studio-tinymce] .widget-title:before{content:"\f116"}.wp-customizer .mce-floatpanel.mce-popover{z-index:500000!important}.bstw-links{font-size:10px;padding:5px 0;text-align:right}
+.bstw-links{font-size:10px;padding:5px 0;text-align:right}#wp-black-studio-tinymce-widget-wrap{display:none}#available-widgets [class*=black-studio-tinymce] .widget-title:before{content:"\f116"}.wp-customizer .mce-floatpanel.mce-popover{z-index:500000!important}#TB_overlay,#TB_window{z-index:999999!important}

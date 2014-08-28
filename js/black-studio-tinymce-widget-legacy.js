@@ -3,6 +3,7 @@
 /* global tinymce */
 /* global bstw_data */
 /* global wpActiveEditor: true */
+/* global edCanvas: true */
 
 (function( $ ) {
 
@@ -184,12 +185,12 @@
 	$( document ).ready(function() {
 
 		// Event handler for widget opening button
-		$( 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] a.widget-action' ).click(function() {
+		$( 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] a.widget-action' ).live( 'click', function() {
 			bstw( $( this ) ).check_duplicates().fix_css().set_media_target().activate_after_open();
 			// Event handler for widget save button (for new instances)
 			// Note: this event handler is intentionally attached to the save button instead of document
 			// to let the the textarea content be updated before the ajax request is run
-			$( 'input[name=savewidget]',  bstw( $( this ) ).get_widget() ).click(function() {
+			$( 'input[name=savewidget]',  bstw( $( this ) ).get_widget() ).live( 'click', function() {
 				if ( bstw( $( this ) ).is_tinymce_active() ) {
 					bstw( $( this ) ).deactivate();
 				}
@@ -201,7 +202,7 @@
 		});
 
 		// Event handler for widget save button (for existing instances)
-		$( 'div.widget[id*=black-studio-tinymce] input[name=savewidget]' ).click(function() {
+		$( 'div.widget[id*=black-studio-tinymce] input[name=savewidget]' ).live( 'click', function() {
 			if ( bstw( $( this ) ).is_tinymce_active() ) {
 				bstw( $( this ) ).deactivate();
 			}
@@ -212,17 +213,18 @@
 		});
 
 		// Event handler for visual switch button
-		$( 'a[id^=widget-black-studio-tinymce][id$=tmce]' ).click(function() {
+		$( 'a[id^=widget-black-studio-tinymce][id$=tmce]' ).live( 'click', function() {
 			bstw( $( this ) ).set_mode( 'visual' );
 		});
 
 		// Event handler for html switch button
-		$( 'a[id^=widget-black-studio-tinymce][id$=html]' ).click(function() {
+		$( 'a[id^=widget-black-studio-tinymce][id$=html]' ).live( 'click', function() {
 			bstw( $( this ) ).set_mode( 'html' );
 		});
 
 		// Set wpActiveEditor variables used when adding media from media library dialog
-		$( '.wp-media-buttons a' ).click(function() {
+		$( '.wp-media-buttons a' ).live( 'click', function() {
+			edCanvas = bstw( $( this ) ).get_textarea().get();
 			wpActiveEditor = bstw( $( this ) ).get_id();
 		});
 

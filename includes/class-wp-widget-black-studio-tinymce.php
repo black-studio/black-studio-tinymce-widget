@@ -104,19 +104,17 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			$text = $instance['text'];
 			$type = $instance['type'];
 			$switch_class = $type == 'visual' ? 'html-active' : 'tmce-active';
-			$toggle_buttons_class = apply_filters( 'black_studio_tinymce_toggle_buttons_class', 'wp-editor-tabs' );
-			$media_buttons_class = apply_filters( 'black_studio_tinymce_media_buttons_class', 'wp-media-buttons' );
 			?>
 			<input id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>" type="hidden" value="<?php echo esc_attr( $type ); ?>" />
 			<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
-			<div id="wp-<?php echo $this->get_field_id( 'text' ); ?>-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?>">
-				<div class="wp-editor-tools hide-if-no-js">
-					<div class="<?php echo esc_attr( $toggle_buttons_class ); ?>">
-						<a id="<?php echo $this->get_field_id( 'text' ); ?>-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
-						<a id="<?php echo $this->get_field_id( 'text' ); ?>-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
+			<div id="<?php echo $this->get_field_id( 'text' ); ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
+				<div id="<?php echo $this->get_field_id( 'text' ); ?>-wp-content-editor-tools" class="wp-editor-tools hide-if-no-js">
+					<div class="wp-editor-tabs">
+						<a id="<?php echo $this->get_field_id( 'text' ); ?>-content-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
+						<a id="<?php echo $this->get_field_id( 'text' ); ?>-content-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
 					</div>
-					<div class="<?php echo esc_attr( $media_buttons_class ); ?>">
+					<div id="<?php echo $this->get_field_id( 'text' ); ?>-wp-content-media-buttons" class="wp-media-buttons">
 						<?php do_action( 'media_buttons', $this->get_field_id( 'text' ) ); ?>
 					</div>
 				</div>
