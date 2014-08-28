@@ -289,12 +289,10 @@ module.exports = function( grunt ) {
 		'checktextdomain',
 		'makepot',
 		'exec:txpush',
-		'exec:txpull',
-		'potomo'
+		'exec:txpull'
 	]);
 
 	grunt.registerTask( 'check', [
-		'jshint',
 		'checkwpversion',
 		'checktextdomain'
 	]);
@@ -304,8 +302,10 @@ module.exports = function( grunt ) {
 	]);
 
 	grunt.registerTask( 'build', [
+		'default',
 		'check',
-		'languages',
+		'exec:txpull',
+		'potomo',
 		'readme',
 		'clean',
 		'copy',
