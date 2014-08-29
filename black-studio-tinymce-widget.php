@@ -83,7 +83,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 			add_filter( 'black_studio_tinymce_enable', array( $this, 'enable' ) );
-			add_filter( '_upload_iframe_src', array( $this, '_upload_iframe_src' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
 			// Support for autoembed urls in widget text
 			if ( get_option( 'embed_autourls' ) ) {
@@ -347,23 +346,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/**
-		 * Hack needed to enable full media options when adding content from media library
-		 * (this is done excluding post_id parameter in Thickbox iframe url)
-		 *
-		 * @global string $pagenow
-		 * @param string $upload_iframe_src
-		 * @return string
-		 */
-		public function _upload_iframe_src( $upload_iframe_src ) {
-			global $pagenow;
-			if ( $pagenow == 'widgets.php' || ( $pagenow == 'admin-ajax.php' && isset ( $_POST['id_base'] ) && $_POST['id_base'] == 'black-studio-tinymce' ) ) {
-				$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
-			}
-			return $upload_iframe_src;
-		}
-
-		/**
-		 * Hack for widgets accessibility mode
+		 * Suppord edit widgets in accessibility mode
 		 *
 		 * @global string $pagenow
 		 * @param string $editor

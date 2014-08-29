@@ -36,6 +36,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			if ( version_compare( $wp_version, '3.3', '<' ) ) {
 				add_action( 'admin_init', array( $this, 'wp_pre_33' ), 33 );
 			}
+			if ( version_compare( $wp_version, '3.5', '<' ) ) {
+				add_action( 'admin_init', array( $this, 'wp_pre_35' ), 35 );
+			}
 			if ( version_compare( $wp_version, '3.8', '<' ) ) {
 				add_action( 'admin_init', array( $this, 'wp_pre_38' ), 38 );
 			}
@@ -162,6 +165,33 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			if ( function_exists( 'wp_preload_dialogs' ) ) {
 				wp_preload_dialogs( array( 'plugins' => 'wpdialogs,wplink,wpfullscreen' ) );
 			}
+		}
+
+		/**
+		 * Compatibility for WordPress prior to 3.5
+		 *
+		 * @uses add_filter()
+		 * 
+		 * @return void
+		 */
+		public function wp_pre_35() {
+			add_filter( '_upload_iframe_src', array( $this, 'wp_pre_35_upload_iframe_src' ) );
+		}
+
+		/**
+		 * Enable full media options in upload dialog for WordPress prior to 3.5
+		 * (this is done excluding post_id parameter in Thickbox iframe url)
+		 *
+		 * @global string $pagenow
+		 * @param string $upload_iframe_src
+		 * @return string
+		 */
+		public function wp_pre_35_upload_iframe_src( $upload_iframe_src ) {
+			global $pagenow;
+			if ( $pagenow == 'widgets.php' || ( $pagenow == 'admin-ajax.php' && isset ( $_POST['id_base'] ) && $_POST['id_base'] == 'black-studio-tinymce' ) ) {
+				$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
+			}
+			return $upload_iframe_src;
 		}
 
 		/**
