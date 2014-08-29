@@ -50,13 +50,13 @@ This section describes how to install and use the plugin.
 ## Screenshots ##
 
 ### 1. Black Studio TinyMCE Widget in Visual mode ###
-![Black Studio TinyMCE Widget in Visual mode](https://raw.githubusercontent.com/black-studio/black-studio-tinymce-widget/assets/screenshot-1.png)
+![Black Studio TinyMCE Widget in Visual mode](https://raw.githubusercontent.com/black-studio/black-studio-tinymce-widget/develop/assets/screenshot-1.png)
 
 ### 2. Black Studio TinyMCE Widget in HTML mode ###
-![Black Studio TinyMCE Widget in HTML mode](https://raw.githubusercontent.com/black-studio/black-studio-tinymce-widget/assets/screenshot-2.png)
+![Black Studio TinyMCE Widget in HTML mode](https://raw.githubusercontent.com/black-studio/black-studio-tinymce-widget/develop/assets/screenshot-2.png)
 
 ### 3. Black Studio TinyMCE Widget combined with WP Edit plugin ###
-![Black Studio TinyMCE Widget combined with WP Edit plugin](https://raw.githubusercontent.com/black-studio/black-studio-tinymce-widget/assets/screenshot-3.png)
+![Black Studio TinyMCE Widget combined with WP Edit plugin](https://raw.githubusercontent.com/black-studio/black-studio-tinymce-widget/develop/assets/screenshot-3.png)
 
 
 ## Frequently Asked Questions ##
