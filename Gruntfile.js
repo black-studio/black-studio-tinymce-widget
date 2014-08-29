@@ -240,7 +240,7 @@ module.exports = function( grunt ) {
 					'README.md': 'readme.txt'
 				},
 				options: {
-					screenshot_url: 'https://raw.githubusercontent.com/black-studio/{plugin}/assets/{screenshot}.png'
+					screenshot_url: 'https://raw.githubusercontent.com/black-studio/{plugin}/develop/assets/{screenshot}.png'
 				}
 			}
 		},
@@ -283,7 +283,8 @@ module.exports = function( grunt ) {
 			deploy: {
 				options: {
 					plugin_slug: '<%= pkg.name %>',
-					build_dir: 'build'
+					build_dir: 'build',
+					assets_dir: 'assets'
 				}
 			}
 		}
