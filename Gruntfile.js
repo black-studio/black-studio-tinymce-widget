@@ -119,6 +119,21 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// Convert line endings to LF
+		lineending: {
+			build: {
+				options: {
+					eol: 'lf',
+					overwrite: true
+				},
+				files: [{
+					expand: true,
+					cwd: 'build/<%= pkg.name %>/',
+					src: ['**/*.{php,css,js,po,txt}']
+				}]
+			}
+		},
+		
 		// Create zip package
 		compress: {
 			main: {
@@ -292,23 +307,20 @@ module.exports = function( grunt ) {
 		'exec:txpull'
 	]);
 
-	grunt.registerTask( 'check', [
-		'checkwpversion',
-		'checktextdomain'
-	]);
-
 	grunt.registerTask( 'readme', [
 		'wp_readme_to_markdown'
 	]);
 
 	grunt.registerTask( 'build', [
 		'default',
-		'check',
+		'checkwpversion',
+		'checktextdomain',
 		'exec:txpull',
 		'potomo',
 		'readme',
 		'clean',
 		'copy',
+		'lineending',
 		'compress'
 	]);
 
