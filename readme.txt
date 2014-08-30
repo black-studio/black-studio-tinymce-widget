@@ -119,6 +119,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 
 = 2.0.0. =
 * Total refactoring of plugin's source code
+* Added support for mobile devices (responsive)
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
 * Added project to [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/) translation platform
 * Added french, greek, turkish and khmer translations thanks to [WP-Translation.org](http://wp-translations.org/) team

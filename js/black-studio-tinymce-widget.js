@@ -4,6 +4,7 @@
 /* global bstw_data */
 /* global tinyMCEPreInit */
 /* global wpActiveEditor: true */
+/* global isRtl */
 
 (function( $ ) {
 
@@ -212,6 +213,23 @@
 					bstw( $( this ) ).activate_after_ajax();
 				});
 			});
+			// Responsive: adjust widget width if it can't fit into the screen
+			if ( ! $( this ).parents( '#available-widgets' ).length ) {
+				var target_width = parseInt( $( 'input[name=widget-width]', bstw( $( this ) ).get_widget() ).val(), 10 ),
+					window_width = $( window ).width(),
+					widget_width = bstw( $( this ) ).get_widget().parent().width(),
+					menu_width = parseInt( $( '#wpcontent' ).css( 'margin-left' ), 10 ),
+					isRTL = !! ( 'undefined' !== typeof isRtl && isRtl ),
+					margin;
+				if ( target_width + menu_width + 30 > window_width ) {
+					if ( bstw( $( this ) ).get_widget().closest( 'div.widget-liquid-right' ).length ) {
+						margin = isRTL ? 'margin-right' : 'margin-left';
+					} else {
+						margin = isRTL ? 'margin-left' : 'margin-right';
+					}
+					$( bstw( $( this ) ).get_widget() ).css( margin, ( widget_width - ( window_width - 30 - menu_width) ) + 'px' );
+				}
+			}	
 		});
 
 		// Event handler for widget save button (for existing instances)
