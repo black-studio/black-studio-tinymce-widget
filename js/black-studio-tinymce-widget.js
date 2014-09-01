@@ -229,7 +229,7 @@
 					}
 					$( bstw( $( this ) ).get_widget() ).css( margin, ( widget_width - ( window_width - 30 - menu_width) ) + 'px' );
 				}
-			}	
+			}
 		});
 
 		// Event handler for widget save button (for existing instances)
