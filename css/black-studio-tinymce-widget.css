@@ -21,3 +21,7 @@
 #TB_overlay, #TB_window {
 	z-index: 999999 !important;
 }
+
+body.wait, body.wait * {
+	cursor: wait !important;   
+}

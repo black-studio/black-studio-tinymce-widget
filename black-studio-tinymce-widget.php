@@ -88,20 +88,19 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			add_action( 'plugins_loaded', array( $this, 'compatibility' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
-			add_filter( 'black_studio_tinymce_enable', array( $this, 'enable' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
 			// Support for autoembed urls in widget text
 			if ( get_option( 'embed_autourls' ) ) {
-				global $wp_embed;
-				add_filter( 'widget_text', array( $wp_embed, 'run_shortcode' ), 8 );
-				add_filter( 'widget_text', array( $wp_embed, 'autoembed' ), 8 );
+				add_filter( 'widget_text', array( $this, 'widget_text_autoembed' ), 10, 3 );
 			}
 			// Support for smilies in widget text
 			if ( get_option( 'use_smilies' ) ) {
-				add_filter( 'widget_text', 'convert_smilies', 12 );
+				add_filter( 'widget_text', array( $this, 'widget_text_convert_smilies' ), 20, 3 );
 			}
+			// Support for wpautop in widget text
+			add_filter( 'widget_text', array( $this, 'widget_text_wpautop' ), 30, 3 );
 			// Support for shortcodes in widget text
-			add_filter( 'widget_text', 'do_shortcode', 15 );
+			add_filter( 'widget_text', array( $this, 'widget_text_do_shortcode' ), 40, 3 );
 		}
 
 		/**
@@ -185,34 +184,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function admin_init() {
-			// Load editor features
-			$enable = apply_filters( 'black_studio_tinymce_enable', false );
+			global $pagenow;
+			// Check if the plugin stuff should be loaded
+			$enabled_pages = apply_filters( 'black_studio_tinymce_enable_pages', array( 'widgets.php', 'customize.php' ) );
+			$enable = apply_filters( 'black_studio_tinymce_enable', in_array( $pagenow, $enabled_pages ) );
 			if ( $enable ) {
 				// Add plugin hooks
 				add_action( 'admin_head', array( $this, 'enqueue_media' ) );
-				add_filter( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 20 );
+				//add_filter( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 20 );
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
 				// Action hook on plugin load
 				do_action( 'black_studio_tinymce_load' );
 			}
-		}
-
-		/**
-		 * Check if editor should be loaded
-		 *
-		 * @global string $pagenow
-		 * @param boolean $enable
-		 * @return boolean
-		 * @since 2.0.0
-		 */
-		public function enable( $enable ) {
-			global $pagenow;
-			if ( $pagenow == 'widgets.php' || $pagenow == 'customize.php' ) {
-				$enable = true;
-			}
-			return $enable;
 		}
 
 		/**
@@ -242,14 +227,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 */
 		public function tiny_mce_before_init( $settings ) {
 			$custom_settings = array(
-				'remove_linebreaks' => false,
-				'convert_newlines_to_brs' => false,
-				'force_p_newlines' => true,
-				'force_br_newlines' => false,
-				'remove_redundant_brs' => false,
-				'forced_root_block' => 'p',
-				'apply_source_formatting ' => true,
-				'indent' => true,
+				'wp_skip_init' => true,
 			);
 			// Return modified settings
 			return array_merge( $settings, $custom_settings );
@@ -329,7 +307,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			wp_enqueue_script(
 				$script,
 				plugins_url( 'js/' . $script . $suffix . '.js', __FILE__ ),
-				array( 'jquery', 'editor' ),
+				array( 'jquery', 'editor', 'quicktags' ),
 				self::$version,
 				true
 			);
@@ -346,8 +324,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 */
 		public function localize_script() {
 			$container_selectors = apply_filters( 'black_studio_tinymce_container_selectors', array(  'div.widget', 'div.widget-inside' ) );
+			$activate_events = apply_filters( 'black_studio_tinymce_activate_events', array() );
+			$deactivate_events = apply_filters( 'black_studio_tinymce_deactivate_events', array() );
 			$data = array(
 				'container_selectors' => implode( ', ', $container_selectors ),
+				'activate_events' => $activate_events,
+				'deactivate_events' => $deactivate_events,
 				'error_duplicate_id' => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new widget with the same content and then delete this one.', 'black-studio-tinymce-widget' )
 			);
 			wp_localize_script( apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' ), 'bstw_data', $data );
@@ -362,7 +344,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function admin_print_footer_scripts() {
-			wp_editor( '', 'black-studio-tinymce-widget' );
+			$editor_settings = array(
+				'default_editor' => 'html',
+				'tinymce' => array( 'wp_skip_init' => true ),
+				'editor_height' => 250,
+			);
+			wp_editor( '', 'black-studio-tinymce-widget', $editor_settings );
 		}
 
 		/**
@@ -379,6 +366,75 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				$editor = 'html';
 			}
 			return $editor;
+		}
+
+		/**
+		 * Apply auto_embed to widget text
+		 *
+		 * @param string $text
+		 * @return string
+		 * @since 2.0.0
+		 */
+		public function widget_text_autoembed( $text, $instance, $widget = null ) {
+			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
+				global $wp_embed;
+				$text = $wp_embed->run_shortcode( $text );
+				$text = $wp_embed->autoembed( $text );
+			}
+			return $text;
+		}
+
+		/**
+		 * Apply smilies conversion to widget text
+		 *
+		 * @param string $text
+		 * @return string
+		 * @since 2.0.0
+		 */
+		public function widget_text_convert_smilies( $text, $instance, $widget = null ) {
+			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
+				$text = convert_smilies( $text );
+			}
+			return $text;
+		}
+
+		/**
+		 * Apply automatic paragraphs in widget text
+		 *
+		 * @param string $text
+		 * @return string
+		 * @since 2.0.0
+		 */
+		public function widget_text_wpautop( $text, $instance, $widget = null ) {
+			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
+				$text = wpautop( $text );
+			}
+			return $text;
+		}
+
+		/**
+		 * Process shortcodes in widget text
+		 *
+		 * @param string $text
+		 * @return string
+		 * @since 2.0.0
+		 */
+		public function widget_text_do_shortcode( $text, $instance, $widget = null ) {
+			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
+				$text = do_shortcode( $text );
+			}
+			return $text;
+		}
+
+		/**
+		 * Check if a widget is a Black Studio Tinyme Widget instance
+		 *
+		 * @param object $widget
+		 * @return boolean
+		 * @since 2.0.0
+		 */
+		public function check_widget( $widget ) {
+			return gettype( $widget) == 'object' && get_class( $widget ) == 'WP_Widget_Black_Studio_TinyMCE';
 		}
 
 	} // END class Black_Studio_TinyMCE_Plugin

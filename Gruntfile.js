@@ -112,6 +112,7 @@ module.exports = function( grunt ) {
 					'!package.json',
 					'!LICENSE',
 					'!README.md',
+					'!assets/**',
 					'!**/*.LCK',
 					'!**/_notes/**'
 				],

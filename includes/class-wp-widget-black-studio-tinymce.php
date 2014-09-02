@@ -25,7 +25,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 */
 		public function __construct() {
 			$widget_ops = array( 'classname' => 'widget_black_studio_tinymce', 'description' => __( 'Arbitrary text or HTML with visual editor', 'black-studio-tinymce-widget' ) );
-			$control_ops = array( 'width' => 800, 'height' => 800 );
+			$control_ops = array( 'width' => 800, 'height' => 600 );
 			parent::__construct( 'black-studio-tinymce', __( 'Visual Editor', 'black-studio-tinymce-widget' ), $widget_ops, $control_ops );
 		}
 
@@ -112,7 +112,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			<input id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>" type="hidden" value="<?php echo esc_attr( $type ); ?>" />
 			<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
-			<div id="<?php echo $this->get_field_id( 'text' ); ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
+			<?php /*
+            <div id="<?php echo $this->get_field_id( 'text' ); ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
 				<div id="<?php echo $this->get_field_id( 'text' ); ?>-wp-content-editor-tools" class="wp-editor-tools hide-if-no-js">
 					<div class="wp-editor-tabs">
 						<a id="<?php echo $this->get_field_id( 'text' ); ?>-content-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
@@ -126,6 +127,17 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 					<textarea class="widefat" rows="20" cols="40" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
 				</div>
 			</div>
+			*/
+			?>
+			<?php
+			$editor_settings = array(
+				'default_editor' => 'html',
+				'tinymce' => array( 'wp_skip_init' => true ),
+				'textarea_name' => $this->get_field_name( 'text' ),
+				'editor_height' => 250,
+			);
+            wp_editor( $text, $this->get_field_id( 'text' ), $editor_settings );
+			?>
 			<div class="bstw-links">
 				<?php if ( false == apply_filters( 'black_studio_tinymce_whitelabel', false ) ) { // consider donating if you whitelabel ?>
 				<a href="http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/" target="_blank"><?php _e( 'Donate', 'black-studio-tinymce-widget' ); ?></a> |
