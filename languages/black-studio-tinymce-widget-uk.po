@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-08-26 10:09:08+00:00\n"
-"PO-Revision-Date: 2014-08-26 10:09+0000\n"
+"POT-Creation-Date: 2014-09-02 17:09:59+00:00\n"
+"PO-Revision-Date: 2014-09-02 11:38+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -25,33 +25,33 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Textdomain-Support: yes\n"
 
-#: black-studio-tinymce-widget.php:191
+#: black-studio-tinymce-widget.php:351
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr ""
 
-#: classes/class-wp-widget-black-studio-tinymce.php:19
+#: includes/class-wp-widget-black-studio-tinymce.php:27
 msgid "Arbitrary text or HTML with visual editor"
 msgstr "Довільний текст або HTML з візуальним редактором"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:21
+#: includes/class-wp-widget-black-studio-tinymce.php:29
 msgid "Visual Editor"
 msgstr "Візуальний редактор"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:98
+#: includes/class-wp-widget-black-studio-tinymce.php:131
 msgid "Donate"
 msgstr "Жертвувати"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:99
+#: includes/class-wp-widget-black-studio-tinymce.php:132
 msgid "Support"
 msgstr "Підтримка"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:100
+#: includes/class-wp-widget-black-studio-tinymce.php:133
 msgid "Rate"
-msgstr ""
+msgstr "Рейтинг"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:101
+#: includes/class-wp-widget-black-studio-tinymce.php:134
 msgid "Follow"
 msgstr "Слідувати"
 

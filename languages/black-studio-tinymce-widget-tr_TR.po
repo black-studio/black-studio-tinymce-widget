@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-08-27 17:15:52+00:00\n"
-"PO-Revision-Date: 2014-08-26 11:11+0000\n"
+"POT-Creation-Date: 2014-09-02 17:09:59+00:00\n"
+"PO-Revision-Date: 2014-09-02 11:38+0000\n"
 "Last-Translator: Batuhan Büyükgüzel <bbuyukguzel@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -25,33 +25,33 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Textdomain-Support: yes\n"
 
-#: black-studio-tinymce-widget.php:215
+#: black-studio-tinymce-widget.php:351
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr ""
 
-#: classes/class-wp-widget-black-studio-tinymce.php:19
+#: includes/class-wp-widget-black-studio-tinymce.php:27
 msgid "Arbitrary text or HTML with visual editor"
 msgstr ""
 
-#: classes/class-wp-widget-black-studio-tinymce.php:21
+#: includes/class-wp-widget-black-studio-tinymce.php:29
 msgid "Visual Editor"
 msgstr "Görsel Editör"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:84
+#: includes/class-wp-widget-black-studio-tinymce.php:131
 msgid "Donate"
 msgstr "Bağışta Bulunun"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:85
+#: includes/class-wp-widget-black-studio-tinymce.php:132
 msgid "Support"
-msgstr ""
+msgstr "Destek"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:86
+#: includes/class-wp-widget-black-studio-tinymce.php:133
 msgid "Rate"
 msgstr "Oylayın"
 
-#: classes/class-wp-widget-black-studio-tinymce.php:87
+#: includes/class-wp-widget-black-studio-tinymce.php:134
 msgid "Follow"
 msgstr "Takip Et"
 
