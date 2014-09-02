@@ -305,7 +305,8 @@ module.exports = function( grunt ) {
 		'checktextdomain',
 		'makepot',
 		'exec:txpush',
-		'exec:txpull'
+		'exec:txpull',
+		'potomo'
 	]);
 
 	grunt.registerTask( 'readme', [
@@ -316,8 +317,6 @@ module.exports = function( grunt ) {
 		'default',
 		'checkwpversion',
 		'checktextdomain',
-		'exec:txpull',
-		'potomo',
 		'readme',
 		'clean',
 		'copy',
