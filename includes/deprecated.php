@@ -141,16 +141,14 @@ function black_studio_tinymce_upload_iframe_src( $arg ){
 function black_studio_tinymce_editor_accessibility_mode( $editor ) {
 	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->editor_accessibility_mode( ... )' );
 	bstw()->editor_accessibility_mode( $editor );
-
 }
 
 /**
  * @since 1.4.5
  * @deprecated 2.0.0
  */
-function black_studio_tinymce_siteorigin_panels_widget_object( $the_widget, $widget ) {
+function black_studio_tinymce_siteorigin_panels_widget_object( $the_widget ) {
 	_deprecated_function( __FUNCTION__, '2.0.0', 'Black_Studio_TinyMCE_Compatibility_Plugins::siteorigin_panels_widget_object( ... )' );
-	$bstcp = new Black_Studio_TinyMCE_Compatibility_Plugins( );
+	$bstcp = new Black_Studio_TinyMCE_Compatibility_Plugins( array( 'siteorigin_panels' ) );
 	$bstcp->siteorigin_panels_widget_object( $the_widget );
-	
 }
