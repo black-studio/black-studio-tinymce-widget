@@ -121,7 +121,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 ```
 ## Changelog ##
 
-### 2.0.0. ###
+### 2.0.0 (2014-09-02) ###
 * Total refactoring of plugin's source code
 * Added support for mobile devices (responsive)
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
@@ -132,31 +132,31 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 * Added several filter and action hooks
 * A huge Thanks to @cfoellmann for his precious support and contributions
 
-### 1.4.6 ###
+### 1.4.6 (2014-07-25) ###
 * Bugfix on widget display
 
-### 1.4.5 ###
+### 1.4.5 (2014-07-25) ###
 * Fixed compatibility issue with Page Builder + WPML String Translation
 
-### 1.4.4 ###
+### 1.4.4 (2014-07-16) ###
 * Fixed z-index compatibility issue with Shortcodes Ultimate plugin
 
-### 1.4.3 ###
+### 1.4.3 (2014-07-13) ###
 * Added filter hooks to modify the markup before and after the widget text
 * Fixed z-index issue in fullscreen mode
 * Added widget icon for theme customizer
 * Updated danish translation
 * Updated FAQ and readme.txt
 
-### 1.4.2 ###
+### 1.4.2 (2014-07-07) ###
 * Added support for `wp_enqueue_editor` hook
 * Added compatibility with Advanced Image Styles plugin
 * Added danish translation (Contributor: Mikkel Rommelhoff)
 
-### 1.4.1 ###
+### 1.4.1 (2014-06-12) ###
 * Enhanced HTML source code formatting
 
-### 1.4 ###
+### 1.4 (2014-06-12) ###
 * HTML and CSS optimization by using WordPress native editor markup and styles
 * Adoption of WordPress JS minification conventions (".min" suffix)
 * Integration with WordPress SCRIPT_DEBUG constant for javascript debugging purposes
@@ -169,22 +169,22 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 * Fixed notice on theme_advanced_buttons1 parameter
 * Fixed z-index issue with WordPress 3.9 admin menu on small screens
 
-### 1.3.3 ###
+### 1.3.3 (2014-04-04) ###
 * Fixed visualization bug upon widget saving
 * Enhanced support WordPress 3.9 Theme Customizer (live edit)
 
-### 1.3.2 ###
+### 1.3.2 (2014-04-03) ###
 * Fixed compatibility issue with WordPress 3.9 Beta 3
 * Added support for WordPress 3.9 Theme Customizer
 * Added swedish translation (Contributor: macsolve)
 * Updated installation documentation
 * Updated FAQ
 
-### 1.3.1 ###
+### 1.3.1 (2014-03-06) ###
 * Renamed the widget to "Visual Editor" for better user friendliness
 * Fixed compatibility issue with FirmaSite Theme Enhancer plugin
 
-### 1.3.0 ###
+### 1.3.0 (2014-01-29) ###
 * Added support for smilies conversion (based on the general WordPress option)
 * Updated styling to match the new default WordPress editor appearence
 * Refactoring of PHP and JS code to be compliant to WordPress coding standard
@@ -196,22 +196,22 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 * Better handling of "More tag" button
 * Included JS dev version
 
-### 1.2.0 ###
+### 1.2.0 (2013-05-04) ###
 * Fixed issue with WordPress widgets accessibility mode
 * Fixed compatibility issue with WPML plugin generating an error in debug mode
 * Fixed compatibility issue with WP Page Widget plugin
 * Added slovak translation (Contributor: Branco Radenovich - [WebHostingGeeks.com](http://webhostinggeeks.com/user-reviews/))
 * Tested compatibility with Worpdress 3.6 beta
 
-### 1.1.1 ###
+### 1.1.1 (2012-12-31) ###
 * Fixed editor issue when dragging widgets from a sidebar to another
 
-### 1.1.0 ###
+### 1.1.0 (2012-11-15) ###
 * Compatibility fixes for upcoming WordPress 3.5
 * Added support for the new WordPress media library dialog
 * Enhanced javascript event handling using jquery .on(...) method
 
-### 1.0.0 ###
+### 1.0.0 (2012-10-19) ###
 * Added full image options when adding content from media library
 * Added german translation (Contributor: Christian Foellmann)
 * Overall Javascript code optimization
@@ -220,57 +220,57 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 * Fixed compatibility issue with "WP Page Widget" plugin
 * Fixed issue about editor partially hidden on narrow screens
 
-### 0.9.5 ###
+### 0.9.5 (2012-10-01) ###
 * Added support for autoembed urls (youtube, etc)
 
-### 0.9.4 ###
+### 0.9.4 (2012-07-31) ###
 * Bug fixes
 
-### 0.9.3 ###
+### 0.9.3 (2012-07-31) ###
 * Added support for accessibility mode
 
-### 0.9.2 ###
+### 0.9.2 (2012-07-27) ###
 * Optimized for use in conjunction with Ultimate TinyMCE plugin
 
-### 0.9.1 ###
+### 0.9.1 (2012-06-07) ###
 * Added spanish translation (Contributor: Lucia García Martínez)
 * Increased width of editor window
 
-### 0.9 ###
+### 0.9 (2012-01-20) ###
 * Added support for WPML plugin (for multilanguage sites)
 
-### 0.8.2 ###
+### 0.8.2 (2011-12-21) ###
 * Added support for shortcodes in widget text
 
-### 0.8.1 ###
+### 0.8.1 (2011-12-20) ###
 * Fixed issue when inserting images on WordPress 3.3
 
-### 0.8 ###
+### 0.8 (2011-11-29) ###
 * Added support for WordPress networks (Multisite)
 
-### 0.7 ###
+### 0.7 (2011-11-24) ###
 * Added compatibility for upcoming WordPress 3.3
 * Added compatibility for previous WordPress 3.0 and 3.1
 * Optimization/compression of javascript code
 
-### 0.6.5 ###
+### 0.6.5 (2011-11-17) ###
 * Forced TinyMCE editor to not automatically add/remove paragraph tags when switching to HTML mode (you may need to re-edit your widgets to adjust linebreaks, if you were using multiple paragraphs)
 
-### 0.6.4 ###
+### 0.6.4 (2011-11-14) ###
 * Fixed compatibility issue with Jetpack / After the Deadline plugin
 * Optimization of javascript/css loading
 
-### 0.6.3 ###
+### 0.6.3 (2011-11-13) ###
 * Fixed javascript issue preventing the plugin from working correctly with some browsers
 
-### 0.6.2 ###
+### 0.6.2 (2011-11-11) ###
 * Fixed javascript issue with WordPress Media Library inserts in HTML mode
 
-### 0.6.1 ###
+### 0.6.1 (2011-11-12) ###
 * Fixed javascript issue preventing editor to show up in some cases
 
-### 0.6 ###
+### 0.6 (2011-11-11) ###
 * Added support for WordPress Media Library
 
-### 0.5 ###
+### 0.5 (2011-11-10) ###
 * First Beta release
