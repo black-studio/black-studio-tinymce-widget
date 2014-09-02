@@ -3,7 +3,8 @@
 /**
  * Class that provides compatibility code with older WordPress versions
  *
- * @package Black Studio TinyMCE Widget
+ * @package Black_Studio_TinyMCE_Widget
+ * @since 2.0.0
  */
 
 // Exit if accessed directly
@@ -19,6 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Reference to main plugin instance
 		 *
 		 * @var object
+		 * @since 2.0.0
 		 */
 		private $plugin;
 
@@ -26,6 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Class constructor
 		 *
 		 * @param object $plugin
+		 * @since 2.0.0
 		 */
 		public function __construct( $plugin ) {
 			$this->plugin = $plugin;
@@ -51,6 +54,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @uses add_action()
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wp_pre_32() {
 			remove_action( 'admin_print_footer_scripts', array( $this->plugin, 'admin_print_footer_scripts' ) );
@@ -64,6 +68,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @uses wp_tiny_mce_preload_dialogs()
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function  wp_pre_32_admin_print_footer_scripts() {
 			if ( function_exists( 'wp_tiny_mce' ) ) {
@@ -82,6 +87,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @uses remove_action()
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wp_pre_33() {
 			add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_33_tiny_mce_before_init' ), 67 );
@@ -101,6 +107,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @param mixed[] $settings
 		 * @return mixed[]
+		 * @since 2.0.0
 		 */
 		public function wp_pre_33_tiny_mce_before_init( $settings ) {
 			$plugins = explode( ',', $settings['plugins'] );
@@ -121,6 +128,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @uses Black_Studio_TinyMCE_Plugin::enqueue_style()
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wp_pre_33_admin_print_styles() {
 			wp_enqueue_style( 'thickbox' );
@@ -135,6 +143,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @uses Black_Studio_TinyMCE_Plugin::enqueue_script()
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wp_pre_33_admin_print_scripts() {
 			wp_enqueue_script( 'media-upload' );
@@ -146,6 +155,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Filter to enqueue style / script for WordPress prior to 3.3
 		 *
 		 * @return string
+		 * @since 2.0.0
 		 */
 		public function wp_pre_33_handle() {
 			return 'black-studio-tinymce-widget-legacy';
@@ -156,7 +166,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @uses wp_tiny_mce()
 		 * @uses wp_preload_dialog()
+		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wp_pre_33_admin_print_footer_scripts() {
 			if ( function_exists( 'wp_tiny_mce' ) ) {
@@ -171,8 +183,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Compatibility for WordPress prior to 3.5
 		 *
 		 * @uses add_filter()
-		 * 
+		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wp_pre_35() {
 			add_filter( '_upload_iframe_src', array( $this, 'wp_pre_35_upload_iframe_src' ) );
@@ -185,6 +198,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @global string $pagenow
 		 * @param string $upload_iframe_src
 		 * @return string
+		 * @since 2.0.0
 		 */
 		public function wp_pre_35_upload_iframe_src( $upload_iframe_src ) {
 			global $pagenow;
@@ -198,8 +212,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Compatibility for WordPress prior to 3.8
 		 *
 		 * @uses add_filter()
-		 * 
+		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wp_pre_38() {
 			add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_38_tiny_mce_before_init' ), 62 );
@@ -211,6 +226,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @global string $pagenow
 		 * @param string[] $settings
 		 * @return string[]
+		 * @since 2.0.0
 		 */
 		public function wp_pre_38_tiny_mce_before_init( $settings ) {
 			global $pagenow;

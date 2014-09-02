@@ -1,10 +1,11 @@
 <?php
 
 /**
-* Widget class
-*
-* @package Black Studio TinyMCE Widget
-*/
+ * Widget class
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ * @since 0.5
+ */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,8 +20,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 * Widget Class constructor
 		 *
 		 * @uses WP_Widget::__construct()
-		 *
 		 * @return void
+		 * @since 0.5
 		 */
 		public function __construct() {
 			$widget_ops = array( 'classname' => 'widget_black_studio_tinymce', 'description' => __( 'Arbitrary text or HTML with visual editor', 'black-studio-tinymce-widget' ) );
@@ -38,6 +39,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 * @param string[] $args
 		 * @param mixed[] $instance
 		 * @return void
+		 * @since 0.5
 		 */
 		public function widget( $args, $instance ) {
 			$before_widget = $args['before_widget'];
@@ -67,6 +69,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 * @param mixed[] $new_instance
 		 * @param mixed[] $old_instance
 		 * @return mixed[]
+		 * @since 0.5
 		 */
 		public function update( $new_instance, $old_instance ) {
 			$instance = $old_instance;
@@ -97,6 +100,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 *
 		 * @param mixed[] $instance
 		 * @return void
+		 * @since 0.5
 		 */
 		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'type' => 'visual' ) );

@@ -3,7 +3,8 @@
 /**
  * Class that provides compatibility code with other plugins
  *
- * @package Black Studio TinyMCE Widget
+ * @package Black_Studio_TinyMCE_Widget
+ * @since 2.0.0
  */
 
 // Exit if accessed directly
@@ -19,6 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Class constructor
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function __construct( $compat_plugins ) {
 			foreach ( $compat_plugins as $compat_plugin ) {
@@ -34,6 +36,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses add_filter()
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wpml() {
 			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'wpml_widget_update' ), 10, 2 );
@@ -44,9 +47,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Add widget text to WPML String translation
 		 *
 		 * @uses icl_register_string() Part of WPML
+		 *
 		 * @param mixed[] $instance
 		 * @param object $widget
 		 * @return mixed[]
+		 * @since 2.0.0
 		 */
 		public function wpml_widget_update( $instance, $widget ) {
 			if ( function_exists( 'icl_register_string' ) && ! empty( $widget->number ) ) {
@@ -64,6 +69,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param mixed[] $instance
 		 * @param object $widget
 		 * @return string
+		 * @since 2.0.0
 		 */
 		public function wpml_widget_text( $text, $instance, $widget ) {
 			if ( function_exists( 'icl_t' ) ) {
@@ -80,6 +86,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses add_filter
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function wp_page_widget() {
 			add_filter( 'black_studio_tinymce_enable', array( $this, 'wp_page_widget_enable' ) );
@@ -93,6 +100,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @global string $pagenow
 		 * @param boolean $enable
 		 * @return boolean
+		 * @since 2.0.0
 		 */
 		public function wp_page_widget_enable( $enable ) {
 			global $pagenow;
@@ -117,6 +125,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses add_filter()
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function siteorigin_panels() {
 			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10 );
@@ -128,6 +137,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @param object $the_widget
 		 * @return object
+		 * @since 2.0.0
 		 */
 		public function siteorigin_panels_widget_object( $the_widget ) {
 			if ( isset($the_widget->id_base) && $the_widget->id_base == 'black-studio-tinymce' ) {
@@ -141,6 +151,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @param string[] $selectors
 		 * @return string[]
+		 * @since 2.0.0
 		 */
 		public function siteorigin_panels_container_selectors( $selectors ) {
 			$selectors[] = 'div.panel-dialog';
@@ -153,6 +164,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses add_action()
 		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function jetpack_after_the_deadline() {
 			add_action( 'black_studio_tinymce_load', array( $this, 'jetpack_after_the_deadline_load' ) );
@@ -162,8 +174,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Load Jetpack After the deadline scripts
 		 *
 		 * @uses add_filter()
-		 * 
+		 *
 		 * @return void
+		 * @since 2.0.0
 		 */
 		public function jetpack_after_the_deadline_load() {
 			add_filter( 'atd_load_scripts', '__return_true' );
