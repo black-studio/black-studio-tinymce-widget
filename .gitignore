@@ -72,6 +72,7 @@ temp/
 
 # Development files #
 #####################
+build/**/*
 cache/**/*
 logs/*
 .svn*
@@ -79,7 +80,14 @@ node_modules
 npm-debug.log
 .sass-cache
 
+# Dreamweaver files #
+#####################
+*.LCK
+_notes/
+dwsync.xml
 
+# Wordpress files #
+#####################
 .htaccess
 wp-content/uploads/
 wp-content/blogs.dir/
