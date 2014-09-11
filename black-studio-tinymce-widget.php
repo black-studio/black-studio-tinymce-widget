@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 1.4.6
+Version: 1.4.7
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPLv3
@@ -110,9 +110,11 @@ class WP_Widget_Black_Studio_TinyMCE extends WP_Widget {
 
 /* Get plugin version */
 function black_studio_tinymce_get_version() {
-	$plugin_data = get_plugin_data( __FILE__ );
-	$plugin_version = $plugin_data['Version'];
-	return $plugin_version;
+	if ( ! function_exists( 'get_plugins' ) )
+		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	$plugin_folder = get_plugins( '/' . plugin_basename( dirname( __FILE__ ) ) );
+	$plugin_file = basename( ( __FILE__ ) );
+	return $plugin_folder[$plugin_file]['Version'];
 }
 
 /* Load localization */
@@ -192,8 +194,6 @@ function black_studio_tinymce_init_editor( $initArray ) {
 	$initArray['remove_redundant_brs'] = false;
 	// Force p block
 	$initArray['forced_root_block'] = 'p';
-	// Apply source formatting
-	$initArray['apply_source_formatting '] = true;
 	// Add proper newlines to source (i.e. around divs)
 	$initArray['indent '] = true;
 	// Return modified settings
@@ -295,7 +295,7 @@ function black_studio_tinymce_editor_accessibility_mode($editor) {
 /* Hack for compatibility with Page Builder + WPML String Translation */
 add_filter( 'siteorigin_panels_widget_object', 'black_studio_tinymce_siteorigin_panels_widget_object', 10, 2 );
 function black_studio_tinymce_siteorigin_panels_widget_object( $the_widget, $widget ) {
-	if ( $the_widget->id_base == 'black-studio-tinymce' ) {
+	if ( isset($the_widget->id_base) && $the_widget->id_base == 'black-studio-tinymce' ) {
 		$the_widget->number = '';
 	}
 	return $the_widget;
