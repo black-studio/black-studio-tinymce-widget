@@ -8,7 +8,7 @@ Stable tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
-Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
+The visual editor widget for Wordpress.
 
 == Description ==
 
@@ -117,16 +117,21 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 
 == Changelog ==
 
-= 2.0.0 (2014-09-02) =
+= 2.0.0 (2014-09-12) =
 * Total refactoring of plugin's source code
+* Added support for QuickTags toolbar in HTML mode
 * Added support for mobile devices (responsive)
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
 * Added project to [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/) translation platform
-* Added french, greek, turkish and khmer translations thanks to [WP-Translation.org](http://wp-translations.org/) team
+* Added french, dutch, greek, turkish, hindi and khmer translations thanks to [WP-Translation.org](http://wp-translations.org/) team
 * Improved code quality and security thanks to [Scrutinizer](https://scrutinizer-ci.com/g/black-studio/black-studio-tinymce-widget/) service
 * Improved development workflow thanks to [Grunt](http://gruntjs.com/)
+* Improved performance and user experience
 * Added several filter and action hooks
 * A huge Thanks to @cfoellmann for his precious support and contributions
+
+= 1.4.7 (2014-09-11) =
+* Fixed bug on image captions on WordPress 4.0
 
 = 1.4.6 (2014-07-25) =
 * Bugfix on widget display
