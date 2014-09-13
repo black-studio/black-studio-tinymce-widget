@@ -1,7 +1,5 @@
 # Black Studio TinyMCE Widget #
 **Contributors:** marcochiesi, thedarkmist
-
-**Plugin page:** https://wordpress.org/plugins/black-studio-tinymce-widget/
   
 **Donate link:** http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
   
@@ -11,7 +9,7 @@
   
 **Tested up to:** 4.0
   
-**Stable tag:** 1.4.6
+**Stable tag:** 1.4.8
   
 **License:** GPLv3
   
@@ -57,12 +55,12 @@ This section describes how to install and use the plugin.
 ###1. Black Studio TinyMCE Widget editor window
 ###
 ![Black Studio TinyMCE Widget editor window
-](https://s.w.org/plugins/black-studio-tinymce-widget/screenshot-1.png)
+](https://ps.w.org/black-studio-tinymce-widget/assets/screenshot-1.png)
 
 ###2. Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin
 ###
 ![Black Studio TinyMCE Widget combined with Ultimate TinyMCE plugin
-](https://s.w.org/plugins/black-studio-tinymce-widget/screenshot-2.png)
+](https://ps.w.org/black-studio-tinymce-widget/assets/screenshot-2.png)
 
 
 ## Frequently Asked Questions ##
@@ -128,6 +126,12 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 `
 
 ## Changelog ##
+
+### 1.4.8 ###
+* Fixed bug on image captions on WordPress 4.0 (part 2)
+
+### 1.4.7 ###
+* Fixed bug on image captions on WordPress 4.0
 
 ### 1.4.6 ###
 * Bugfix on widget display
