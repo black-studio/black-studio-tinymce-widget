@@ -27,7 +27,7 @@ $black_studio_tinymce_widget_version = Black_Studio_TinyMCE_Plugin::$version;
  * @deprecated 
  */
 global $black_studio_tinymce_widget_dev_mode ; // global is necessary because this file is included in a non-global context
-$black_studio_tinymce_widget_dev_mode = defined( SCRIPT_DEBUG ) && SCRIPT_DEBUG;
+$black_studio_tinymce_widget_dev_mode = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 
 /**
  * @since 1.4.0
@@ -129,9 +129,8 @@ function black_studio_tinymce_apply_smilies_to_widget_text( $text ) {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_upload_iframe_src( $arg ){
-	_deprecated_function( __FUNCTION__, '2.0.0', 'Black_Studio_TinyMCE_Compatibility_Wordpress::wp_pre_35_upload_iframe_src( ... )' );
-	$bstcw = new Black_Studio_TinyMCE_Compatibility_Wordpress( bstw() );
-	$bstcw->wp_pre_35_upload_iframe_src( $arg );
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->compat_wordpress()->wp_pre_35_upload_iframe_src( ... )' );
+	bstw()->compat_wordpress()->wp_pre_35_upload_iframe_src( $arg );
 }
 
 /**
@@ -148,7 +147,6 @@ function black_studio_tinymce_editor_accessibility_mode( $editor ) {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_siteorigin_panels_widget_object( $the_widget ) {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'Black_Studio_TinyMCE_Compatibility_Plugins::siteorigin_panels_widget_object( ... )' );
-	$bstcp = new Black_Studio_TinyMCE_Compatibility_Plugins( array( 'siteorigin_panels' ) );
-	$bstcp->siteorigin_panels_widget_object( $the_widget );
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->compat_plugins()->siteorigin_panels_widget_object( ... )' );
+	bstw()->compat_plugins()->siteorigin_panels_widget_object( $the_widget );
 }

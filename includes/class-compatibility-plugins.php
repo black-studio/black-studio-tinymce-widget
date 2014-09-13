@@ -14,7 +14,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 
-	class Black_Studio_TinyMCE_Compatibility_Plugins {
+	final class Black_Studio_TinyMCE_Compatibility_Plugins {
+
+		/**
+		 * The single instance of the class
+		 *
+		 * @var object
+		 * @since 2.0.0
+		 */
+		protected static $_instance = null;
+
+		/**
+		 * Return the single class instance
+		 *
+		 * @param string[] $compat_plugins
+		 * @return object
+		 * @since 2.0.0
+		 */
+		public static function instance( $compat_plugins = array() ) {
+			if ( is_null( self::$_instance ) ) {
+				self::$_instance = new self( $compat_plugins );
+			}
+			return self::$_instance;
+		}
 
 		/**
 		 * Class constructor
@@ -23,12 +45,22 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function __construct( $compat_plugins ) {
+		protected function __construct( $compat_plugins ) {
 			foreach ( $compat_plugins as $compat_plugin ) {
 				if ( is_callable( array( $this, $compat_plugin ), false ) ) {
 					$this->$compat_plugin();
 				}
 			}
+		}
+
+		/**
+		 * Prevent the class from being cloned
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		protected function __clone() {
+			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
 		/**
@@ -90,7 +122,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_page_widget() {
-			add_filter( 'black_studio_tinymce_enable', array( $this, 'wp_page_widget_enable' ) );
+			add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'wp_page_widget_enable_pages' ) );
 		}
 
 		/**
@@ -99,25 +131,23 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses is_plugin_active()
 		 *
 		 * @global string $pagenow
-		 * @param boolean $enable
-		 * @return boolean
+		 * @param string[] $pages
+		 * @return string[]
 		 * @since 2.0.0
 		 */
-		public function wp_page_widget_enable( $enable ) {
+		public function wp_page_widget_enable_pages( $pages ) {
 			global $pagenow;
 			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) ) {
-				$is_post = in_array( $pagenow, array( 'post-new.php', 'post.php' ) );
-				$is_tags = in_array( $pagenow, array( 'edit-tags.php' ) );
-				$is_admin = in_array( $pagenow, array( 'admin.php' ) );
-				if (
-					$is_post ||
-					( $is_tags  && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) ||
-					( $is_admin && isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) )
-				) {
-					$enable = true;
+				$pages[] = 'post-new.php';
+				$pages[] = 'post.php';
+				if ( isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
+					$pages[] = 'edit-tags.php';
+				}
+				if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) ) {
+					$pages[] = 'admin.php';
 				}
 			}
-			return $enable;
+			return $pages;
 		}
 
 		/**

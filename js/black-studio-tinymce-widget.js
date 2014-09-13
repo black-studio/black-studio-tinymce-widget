@@ -4,7 +4,7 @@
 
 (function( $ ) {
 
-	// Returns bstw instance given the textarea ID or any jQuery object inside the widget object
+	// Return bstw instance given the textarea ID or any jQuery object inside the widget object
 	function bstw( arg ) {
 
 		var id = null;
@@ -23,8 +23,7 @@
 
 			// Activate editor
 			activate: function () {
-				if ( ! $( '#' + id ).hasClass( 'active' ) ) {
-					$( '#' + id ).addClass( 'active' );
+				if ( ! $( '#' + id ).hasClass( 'active' ) && ! $( '#' + id ).hasClass( 'activating' )) {
 					$( '#' + id ).addClass( 'activating' );
 					if ( ! this.is_quicktags_configured() ) {
 						tinyMCEPreInit.qtInit[id] = tinyMCEPreInit.qtInit['black-studio-tinymce-widget'];
@@ -45,18 +44,18 @@
 					}
 					if ( ! this.is_tinymce_active() ) {
 						tinyMCEPreInit.mceInit[id].wpautop = true;
-						tinyMCEPreInit.mceInit[id].init_instance_callback = function( ed ) {
+						tinyMCEPreInit.mceInit[id].setup = function( ed ) {
 							// Real time preview (Theme customizer)
 							ed.on( 'keyup change', function() {
 								var content = window.switchEditors.pre_wpautop( ed.getContent() );
 								$( '#' + id ).val( content ).change();
 							});
-							$( '#' + id ).removeClass( 'activating' );
+							$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
 						};
 						this.go();
 						//tinymce.init( tinyMCEPreInit.mceInit[id] );
 					} else {
-						$( '#' + id ).removeClass( 'activating' );
+						$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
 					}
 				}
 				return this;

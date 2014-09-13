@@ -38,12 +38,28 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		public static $version = '2.0.0';
 
 		/**
-		 * The single instance of the class
+		 * The single instance of the plugin class
 		 *
 		 * @var object
 		 * @since 2.0.0
 		 */
 		protected static $_instance = null;
+
+		/**
+		 * Instance of compatibility class for 3rd party plugins
+		 *
+		 * @var object
+		 * @since 2.0.0
+		 */
+		protected static $compat_plugins = null;
+
+		/**
+		 * Instance of compatibility class for WordPress old versions
+		 *
+		 * @var object
+		 * @since 2.0.0
+		 */
+		protected static $compat_wordpress = null;
 
 		/**
 		 * Return the main plugin instance
@@ -56,6 +72,26 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				self::$_instance = new self();
 			}
 			return self::$_instance;
+		}
+
+		/**
+		 * Return the instance of the compatibility class for 3rd party plugins
+		 *
+		 * @return object
+		 * @since 2.0.0
+		 */
+		public static function compat_plugins() {
+			return self::$compat_plugins;
+		}
+
+		/**
+		 * Return the instance of the compatibility class for WordPress old versions
+		 *
+		 * @return object
+		 * @since 2.0.0
+		 */
+		public static function compat_wordpress() {
+			return self::$compat_wordpress;
 		}
 
 		/**
@@ -85,7 +121,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			include_once( plugin_dir_path( __FILE__ ) . '/includes/class-wp-widget-black-studio-tinymce.php' );
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-			add_action( 'plugins_loaded', array( $this, 'compatibility' ) );
+			add_action( 'plugins_loaded', array( $this, 'compatibility' ), 20 );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
@@ -124,7 +160,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function compatibility() {
-			// Compatibility load flag (for both deprecated functions and other plugins)
+			// Compatibility load flag (for both deprecated functions and code for compatibility with other plugins)
 			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );
 			// Compatibility with previous BSTW versions
 			$load_deprecated = apply_filters( 'black_studio_tinymce_load_deprecated', true );
@@ -135,12 +171,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			$compat_plugins = apply_filters( 'black_studio_tinymce_load_compatibility_plugins', array( 'siteorigin_panels', 'wpml', 'jetpack_after_the_deadline', 'wp_page_widget' ) );
 			if ( $load_compatibility && ! empty( $compat_plugins ) ) {
 				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-compatibility-plugins.php' );
-				new Black_Studio_TinyMCE_Compatibility_Plugins( $compat_plugins );
+				self::$compat_plugins = Black_Studio_TinyMCE_Compatibility_Plugins::instance( $compat_plugins );
 			}
 			// Compatibility with previous WordPress versions
-			if ( version_compare( get_bloginfo( 'version' ), '3.8', '<' ) ) {
+			if ( version_compare( get_bloginfo( 'version' ), '3.9', '<' ) ) {
 				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-compatibility-wordpress.php' );
-				new Black_Studio_TinyMCE_Compatibility_Wordpress( $this );
+				self::$compat_wordpress = Black_Studio_TinyMCE_Compatibility_Wordpress::instance();
 			}
 		}
 
@@ -173,6 +209,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/**
+		 * Checks if the plugin admin code should be loaded
+		 *
+		 * @uses apply_filters()
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function enabled() {
+			global $pagenow;
+			$enabled_pages = apply_filters( 'black_studio_tinymce_enable_pages', array( 'widgets.php', 'customize.php', 'admin-ajax.php' ) );
+			return apply_filters( 'black_studio_tinymce_enable', in_array( $pagenow, $enabled_pages ) );
+		}
+
+		/**
 		 * Add actions and filters (only in widgets admin page)
 		 *
 		 * @uses apply_filters()
@@ -184,17 +234,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function admin_init() {
-			global $pagenow;
-			// Check if the plugin stuff should be loaded
-			$enabled_pages = apply_filters( 'black_studio_tinymce_enable_pages', array( 'widgets.php', 'customize.php' ) );
-			$enable = apply_filters( 'black_studio_tinymce_enable', in_array( $pagenow, $enabled_pages ) );
-			if ( $enable ) {
+			if ( $this->enabled() ) {
 				// Add plugin hooks
 				add_action( 'admin_head', array( $this, 'enqueue_media' ) );
-				//add_filter( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 20 );
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
+				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
 				// Action hook on plugin load
 				do_action( 'black_studio_tinymce_load' );
 			}
@@ -220,17 +266,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 
 		/**
 		 * TinyMCE setup customization
+		 * This method is deprecated but it is kept for compatibility reasons as it was present in 2.0.0 pre-release
 		 *
 		 * @param mixed[] $settings
 		 * @return mixed[]
 		 * @since 2.0.0
+		 * @deprecated 2.0.0
 		 */
 		public function tiny_mce_before_init( $settings ) {
-			$custom_settings = array(
-				'wp_skip_init' => true,
-			);
-			// Return modified settings
-			return array_merge( $settings, $custom_settings );
+			_deprecated_function( __FUNCTION__, '2.0.0' );
+			return $settings;
 		}
 
 		/**
@@ -344,12 +389,25 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function admin_print_footer_scripts() {
+			$this->editor( '', 'black-studio-tinymce-widget', 'black-studio-tinymce-widget' );
+		}
+
+		/**
+		 * Output the visual editor code
+		 *
+		 * @uses wp_editor()
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function editor( $text, $id, $name = '' ) {
 			$editor_settings = array(
 				'default_editor' => 'html',
 				'tinymce' => array( 'wp_skip_init' => true ),
+				'textarea_name' => $name,
 				'editor_height' => 250,
 			);
-			wp_editor( '', 'black-studio-tinymce-widget', $editor_settings );
+			wp_editor( $text, $id, $editor_settings );
 		}
 
 		/**

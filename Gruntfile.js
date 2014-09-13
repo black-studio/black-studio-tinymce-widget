@@ -113,6 +113,7 @@ module.exports = function( grunt ) {
 					'!LICENSE',
 					'!README.md',
 					'!assets/**',
+					'!nbproject/**',
 					'!**/*.LCK',
 					'!**/_notes/**'
 				],

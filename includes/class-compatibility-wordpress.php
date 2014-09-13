@@ -14,24 +14,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 
-	class Black_Studio_TinyMCE_Compatibility_Wordpress {
+	final class Black_Studio_TinyMCE_Compatibility_Wordpress {
 
 		/**
-		 * Reference to main plugin instance
+		 * The single instance of the class
 		 *
 		 * @var object
 		 * @since 2.0.0
 		 */
-		private $plugin;
+		protected static $_instance = null;
+
+		/**
+		 * Return the single class instance
+		 *
+		 * @return object
+		 * @since 2.0.0
+		 */
+		public static function instance() {
+			if ( is_null( self::$_instance ) ) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
 
 		/**
 		 * Class constructor
 		 *
+		 * @uses get_bloginfo()
+		 * 
 		 * @param object $plugin
 		 * @since 2.0.0
 		 */
-		public function __construct( $plugin ) {
-			$this->plugin = $plugin;
+		protected function __construct() {
 			$wp_version = get_bloginfo( 'version' );
 			if ( version_compare( $wp_version, '3.2', '<' ) ) {
 				add_action( 'admin_init', array( $this, 'wp_pre_32' ), 32 );
@@ -42,9 +56,19 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			if ( version_compare( $wp_version, '3.5', '<' ) ) {
 				add_action( 'admin_init', array( $this, 'wp_pre_35' ), 35 );
 			}
-			if ( version_compare( $wp_version, '3.8', '<' ) ) {
-				add_action( 'admin_init', array( $this, 'wp_pre_38' ), 38 );
+			if ( version_compare( $wp_version, '3.9', '<' ) ) {
+				add_action( 'admin_init', array( $this, 'wp_pre_39' ), 39 );
 			}
+		}
+
+		/**
+		 * Prevent the class from being cloned
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		protected function __clone() {
+			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
 		/**
@@ -57,8 +81,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_pre_32() {
-			remove_action( 'admin_print_footer_scripts', array( $this->plugin, 'admin_print_footer_scripts' ) );
-			add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_32_admin_print_footer_scripts' ) );
+			if ( bstw()->enabled() ) {
+				remove_action( 'admin_print_footer_scripts', array( bstw(), 'admin_print_footer_scripts' ) );
+				add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_32_admin_print_footer_scripts' ) );
+			}
 		}
 
 		/**
@@ -90,16 +116,18 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_pre_33() {
-			add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_33_tiny_mce_before_init' ), 67 );
-			remove_action( 'admin_print_styles', array( $this->plugin, 'admin_print_styles' ) );
-			add_action( 'admin_print_styles', array( $this, 'wp_pre_33_admin_print_styles' ) );
-			remove_action( 'admin_print_scripts', array( $this->plugin, 'admin_print_scripts' ) );
-			add_action( 'admin_print_scripts', array( $this, 'wp_pre_33_admin_print_scripts' ) );
-			remove_action( 'admin_print_footer_scripts', array( $this->plugin, 'admin_print_footer_scripts' ) );
-			remove_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_32_admin_print_footer_scripts' ) );
-			add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_33_admin_print_footer_scripts' ) );
-			add_filter( 'black-studio-tinymce-widget-script', array( $this, 'wp_pre_33_handle' ), 67 );
-			add_filter( 'black-studio-tinymce-widget-style', array( $this, 'wp_pre_33_handle' ), 67 );
+			if ( bstw()->enabled() ) {
+				add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_33_tiny_mce_before_init' ), 67 );
+				add_filter( 'black-studio-tinymce-widget-script', array( $this, 'wp_pre_33_handle' ), 67 );
+				add_filter( 'black-studio-tinymce-widget-style', array( $this, 'wp_pre_33_handle' ), 67 );
+				remove_action( 'admin_print_styles', array( bstw(), 'admin_print_styles' ) );
+				add_action( 'admin_print_styles', array( $this, 'wp_pre_33_admin_print_styles' ) );
+				remove_action( 'admin_print_scripts', array( bstw(), 'admin_print_scripts' ) );
+				add_action( 'admin_print_scripts', array( $this, 'wp_pre_33_admin_print_scripts' ) );
+				remove_action( 'admin_print_footer_scripts', array( bstw(), 'admin_print_footer_scripts' ) );
+				remove_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_32_admin_print_footer_scripts' ) );
+				add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_33_admin_print_footer_scripts' ) );
+			}
 		}
 
 		/**
@@ -133,7 +161,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		public function wp_pre_33_admin_print_styles() {
 			wp_enqueue_style( 'thickbox' );
 			wp_enqueue_style( 'editor-buttons' );
-			$this->plugin->enqueue_style();
+			bstw()->enqueue_style();
 		}
 
 		/**
@@ -147,8 +175,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 */
 		public function wp_pre_33_admin_print_scripts() {
 			wp_enqueue_script( 'media-upload' );
-			$this->plugin->enqueue_script();
-			$this->plugin->localize_script();
+			bstw()->enqueue_script();
+			bstw()->localize_script();
 		}
 
 		/**
@@ -158,7 +186,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_pre_33_handle() {
-			return 'black-studio-tinymce-widget-legacy';
+			return 'black-studio-tinymce-widget-pre33';
 		}
 
 		/**
@@ -188,7 +216,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_pre_35() {
-			add_filter( '_upload_iframe_src', array( $this, 'wp_pre_35_upload_iframe_src' ) );
+			if ( bstw()->enabled() ) {
+				add_filter( '_upload_iframe_src', array( $this, 'wp_pre_35_upload_iframe_src' ), 65 );
+			}
 		}
 
 		/**
@@ -209,32 +239,96 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		}
 
 		/**
-		 * Compatibility for WordPress prior to 3.8
+		 * Compatibility for WordPress prior to 3.9
 		 *
 		 * @uses add_filter()
 		 *
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function wp_pre_38() {
-			add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_38_tiny_mce_before_init' ), 62 );
+		public function wp_pre_39() {
+			if ( bstw()->enabled() ) {
+				add_filter( 'black-studio-tinymce-widget-script', array( $this, 'wp_pre_39_handle' ), 61 );
+				add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_39_tiny_mce_before_init' ), 61 );
+				add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_39_admin_print_footer_scripts' ) );
+				remove_action( 'admin_print_footer_scripts', array( bstw(), 'admin_print_footer_scripts' ) );
+				remove_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_32_admin_print_footer_scripts' ) );
+				remove_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_33_admin_print_footer_scripts' ) );
+				add_action( 'black_studio_tinymce_editor', array( $this, 'wp_pre_39_editor' ), 10, 4 );
+				remove_action( 'black_studio_tinymce_editor', array( bstw(), 'editor' ), 10, 3 );
+			}
 		}
 
 		/**
-		 * Remove the "More" toolbar button (only in widget screen) for WordPress prior to 3.8
+		 * Filter to enqueue style / script for WordPress prior to 3.9
 		 *
-		 * @global string $pagenow
-		 * @param string[] $settings
-		 * @return string[]
+		 * @return string
 		 * @since 2.0.0
 		 */
-		public function wp_pre_38_tiny_mce_before_init( $settings ) {
-			global $pagenow;
-			if ( $pagenow == 'widgets.php' ) {
-				$settings['theme_advanced_buttons1'] = str_replace( ',wp_more', '', $settings['theme_advanced_buttons1'] );
-			}
-			return $settings;
+		public function wp_pre_39_handle() {
+			return 'black-studio-tinymce-widget-pre39';
 		}
+
+		/**
+		 * TinyMCE initialization for WordPress prior to 3.9
+		 *
+		 * @param mixed[] $settings
+		 * @return mixed[]
+		 * @since 2.0.0
+		 */
+		public function wp_pre_39_tiny_mce_before_init( $settings ) {
+			$custom_settings = array(
+				'remove_linebreaks' => false,
+				'convert_newlines_to_brs' => false,
+				'force_p_newlines' => true,
+				'force_br_newlines' => false,
+				'remove_redundant_brs' => false,
+				'forced_root_block' => 'p',
+				'indent' => true,
+			);
+			// Return modified settings
+			return array_merge( $settings, $custom_settings );
+		}
+
+		/**
+		 * Enqueue footer scripts for WordPress prior to 3.9
+		 *
+		 * @uses wp_editor()
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function wp_pre_39_admin_print_footer_scripts() {
+			wp_editor( '', 'black-studio-tinymce-widget' );
+		}
+
+		/**
+		 * Output the visual editor code for WordPress prior to 3.9
+		 *
+		 * @uses wp_editor()
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function wp_pre_39_editor( $text, $id, $name = '', $type = 'visual' ) {
+ 			$switch_class = $type == 'visual' ? 'html-active' : 'tmce-active';
+			?>
+            <div id="<?php echo $id; ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
+                <div id="<?php echo $id; ?>-wp-content-editor-tools" class="wp-editor-tools hide-if-no-js">
+                    <div class="wp-editor-tabs">
+                        <a id="<?php echo $id; ?>-content-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
+                        <a id="<?php echo $id; ?>-content-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
+                    </div>
+                    <div id="<?php $id; ?>-wp-content-media-buttons" class="wp-media-buttons">
+						<?php do_action( 'media_buttons', $id ); ?>
+                    </div>
+                </div>
+                <div class="wp-editor-container">
+	                <textarea class="widefat" rows="20" cols="40" id="<?php echo $id; ?>" name="<?php echo $name; ?>"><?php echo esc_textarea( $text ); ?></textarea>
+                </div>
+            </div>
+            <?php
+		 }
 
 	} // END class Black_Studio_TinyMCE_Compatibility_Wordpress
 
