@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: http://wordpress.org/extend/plugins/black-studio-tinymce-widget/
 Description: Adds a WYSIWYG widget based on the standard TinyMCE WordPress visual editor.
-Version: 1.4.7
+Version: 1.4.8
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 License: GPLv3
@@ -194,8 +194,8 @@ function black_studio_tinymce_init_editor( $initArray ) {
 	$initArray['remove_redundant_brs'] = false;
 	// Force p block
 	$initArray['forced_root_block'] = 'p';
-	// Add proper newlines to source (i.e. around divs)
-	$initArray['indent '] = true;
+	// Apply source formatting
+	$initArray['apply_source_formatting'] = true;
 	// Return modified settings
 	return $initArray;
 }
