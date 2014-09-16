@@ -213,6 +213,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 *
 		 * @uses apply_filters()
 		 *
+		 * @global string $pagenow
 		 * @return void
 		 * @since 2.0.0
 		 */
@@ -533,7 +534,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 					if ( $counter++ > 0 ) {
 						echo ' | ';
 					}
-					echo '<a href="' . esc_url( $link['url'] ) . '" target="_blank">' . $link['text'] . '</a>';
+					echo '<a href="' . esc_url( $link['url'] ) . '" target="_blank">' . esc_html( $link['text'] ) . '</a>';
 				}
 				echo '</div>';
 			}

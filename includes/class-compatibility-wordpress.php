@@ -327,8 +327,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		public function wp_pre_39_editor( $text, $id, $name = '', $type = 'visual' ) {
 			$switch_class = $type == 'visual' ? 'html-active' : 'tmce-active';
 			?>
-            <div id="<?php echo $id; ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
-                <div id="<?php echo $id; ?>-wp-content-editor-tools" class="wp-editor-tools hide-if-no-js">
+            <div id="<?php echo esc_attr( $id ); ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
+                <div id="<?php echo esc_attr( $id ); ?>-wp-content-editor-tools" class="wp-editor-tools hide-if-no-js">
                     <div class="wp-editor-tabs">
                         <a id="<?php echo esc_attr( $id ); ?>-content-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
                         <a id="<?php echo esc_attr( $id ); ?>-content-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
@@ -338,7 +338,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
                     </div>
                 </div>
                 <div class="wp-editor-container">
-	                <textarea class="widefat" rows="20" cols="40" id="<?php echo $id; ?>" name="<?php echo esc_attr( $name ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
+	                <textarea class="widefat" rows="20" cols="40" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
                 </div>
             </div>
             <?php
