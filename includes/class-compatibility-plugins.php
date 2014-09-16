@@ -100,7 +100,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @param string $text
 		 * @param mixed[] $instance
-		 * @param object $widget
+		 * @param object|null $widget
 		 * @return string
 		 * @since 2.0.0
 		 */

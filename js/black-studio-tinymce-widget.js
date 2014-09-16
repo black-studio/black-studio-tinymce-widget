@@ -32,11 +32,12 @@ var bstw;
 						tinyMCEPreInit.qtInit[id].id = id;
 					}
 					if ( ! this.is_quicktags_active() ) {
-						var prevInstances = QTags.instances;
+						var prevInstances, newInstance;
+						prevInstances = QTags.instances;
 						QTags.instances = [];
 						quicktags( tinyMCEPreInit.qtInit[id] );
 						QTags._buttonsInit();
-						var newInstance = QTags.instances[id];
+						newInstance = QTags.instances[id];
 						QTags.instances = prevInstances;
 						QTags.instances[id] = newInstance;
 					}
@@ -67,7 +68,7 @@ var bstw;
 			deactivate: function() {
 				if ( ! $( '#' + id ).hasClass( 'activating' ) ) {
 					if ( this.is_tinymce_active() ) {
-						this.update_content();	
+						this.update_content();
 						tinymce.get( id ).remove();
 					}
 					if ( this.is_tinymce_configured() ) {

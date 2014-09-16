@@ -494,7 +494,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function check_widget( $widget ) {
-			return gettype( $widget) == 'object' && get_class( $widget ) == 'WP_Widget_Black_Studio_TinyMCE';
+			return gettype( $widget ) == 'object' && get_class( $widget ) == 'WP_Widget_Black_Studio_TinyMCE';
 		}
 
 		/**
@@ -533,7 +533,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 					if ( $counter++ > 0 ) {
 						echo ' | ';
 					}
-					echo '<a href="' . $link['url'] . '" target="_blank">' . $link['text'] . '</a>';
+					echo '<a href="' . esc_url( $link['url'] ) . '" target="_blank">' . $link['text'] . '</a>';
 				}
 				echo '</div>';
 			}

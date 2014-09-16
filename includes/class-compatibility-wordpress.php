@@ -236,7 +236,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 */
 		public function wp_pre_35_upload_iframe_src( $upload_iframe_src ) {
 			global $pagenow;
-			if ( $pagenow == 'widgets.php' || ( $pagenow == 'admin-ajax.php' && isset ( $_POST['id_base'] ) && $_POST['id_base'] == 'black-studio-tinymce' ) ) {
+			if ( $pagenow == 'widgets.php' || ( $pagenow == 'admin-ajax.php' && isset( $_POST['id_base'] ) && $_POST['id_base'] == 'black-studio-tinymce' ) ) {
 				$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
 			}
 			return $upload_iframe_src;
@@ -325,24 +325,24 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_pre_39_editor( $text, $id, $name = '', $type = 'visual' ) {
- 			$switch_class = $type == 'visual' ? 'html-active' : 'tmce-active';
+			$switch_class = $type == 'visual' ? 'html-active' : 'tmce-active';
 			?>
             <div id="<?php echo $id; ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
                 <div id="<?php echo $id; ?>-wp-content-editor-tools" class="wp-editor-tools hide-if-no-js">
                     <div class="wp-editor-tabs">
-                        <a id="<?php echo $id; ?>-content-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
-                        <a id="<?php echo $id; ?>-content-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
+                        <a id="<?php echo esc_attr( $id ); ?>-content-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
+                        <a id="<?php echo esc_attr( $id ); ?>-content-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
                     </div>
-                    <div id="<?php $id; ?>-wp-content-media-buttons" class="wp-media-buttons">
+                    <div id="<?php esc_attr( $id ); ?>-wp-content-media-buttons" class="wp-media-buttons">
 						<?php do_action( 'media_buttons', $id ); ?>
                     </div>
                 </div>
                 <div class="wp-editor-container">
-	                <textarea class="widefat" rows="20" cols="40" id="<?php echo $id; ?>" name="<?php echo $name; ?>"><?php echo esc_textarea( $text ); ?></textarea>
+	                <textarea class="widefat" rows="20" cols="40" id="<?php echo $id; ?>" name="<?php echo esc_attr( $name ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
                 </div>
             </div>
             <?php
-		 }
+		}
 
 	} // END class Black_Studio_TinyMCE_Compatibility_Wordpress
 
