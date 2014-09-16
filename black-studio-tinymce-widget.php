@@ -404,7 +404,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 */
 		public function editor( $text, $id, $name = '' ) {
 			$editor_settings = array(
-				'default_editor' => 'html',
+				'default_editor' => 'tmce',
 				'tinymce' => array( 'wp_skip_init' => true ),
 				'textarea_name' => $name,
 				'editor_height' => 350,
@@ -413,7 +413,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/**
-		 * Suppord edit widgets in accessibility mode
+		 * Edit widgets in accessibility mode
 		 *
 		 * @global string $pagenow
 		 * @param string $editor

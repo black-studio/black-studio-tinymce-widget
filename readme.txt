@@ -117,10 +117,10 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 
 == Changelog ==
 
-= 2.0.0 (2014-09-12) =
+= 2.0.0 (2014-09-17) =
 * Total refactoring of plugin's source code
 * Added support for QuickTags toolbar in HTML mode
-* Added support for mobile devices (responsive)
+* Added support for mobile devices (responsive width in widgets administration page)
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
 * Added project to [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/) translation platform
 * Added french, dutch, greek, turkish, hindi and khmer translations thanks to [WP-Translation.org](http://wp-translations.org/) team
@@ -129,6 +129,9 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 * Improved performance and user experience
 * Added several filter and action hooks
 * A huge Thanks to @cfoellmann for his precious support and contributions
+
+= 1.4.8 (2014-09-13) =
+* Fixed bug on image captions on WordPress 4.0 (part 2)
 
 = 1.4.7 (2014-09-11) =
 * Fixed bug on image captions on WordPress 4.0

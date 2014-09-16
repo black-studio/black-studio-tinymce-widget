@@ -2,10 +2,12 @@
 
 /* global bstw_data, tinymce, tinyMCEPreInit, QTags, quicktags, isRtl */
 
+var bstw;
+
 (function( $ ) {
 
 	// Return bstw instance given the textarea ID or any jQuery object inside the widget object
-	function bstw( arg ) {
+	bstw = function( arg ) {
 
 		var id = null;
 
@@ -188,12 +190,12 @@
 			}
 
 		};
-	}
+	};
 
 	// Document ready stuff
 	$( document ).ready(function() {
 
-		// Event handler for widget opening button
+		// Event handler for widget open button
 		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] .widget-action', function() {
 			if ( ! $( this ).parents( '#available-widgets' ).length ) {
 				bstw( $( this ) ).prepare().responsive().activate();
@@ -240,6 +242,14 @@
 
 		// Deactivate editor on drag & drop operations
 		$( document ).on( 'sortstart',  function( event, ui ) {
+			var open_widgets_selectors = [
+				'body.wp-customizer .expanded > div[id*=black-studio-tinymce].widget', // Theme Customizer
+				'.widget-liquid-right div[id*=black-studio-tinymce].widget' // Widgets page
+			];
+			$( open_widgets_selectors.join( ', ') ).filter( ':has(.widget-inside:visible)' ).each(function() {
+				$( '.widget-title', this ).trigger( 'click' );
+				bstw( $( this ) ).deactivate();
+			});
 			if ( ui.item.is( '[id*=black-studio-tinymce]' ) ){
 				bstw( ui.item.find('textarea[id^=widget-black-studio-tinymce]' ) ).deactivate();
 			}
@@ -249,14 +259,17 @@
 				bstw( ui.item.find('textarea[id^=widget-black-studio-tinymce]' ) ).activate();
 			}
 		});
-		$( document ).on( 'sortupdate',  function() {
+		$( document ).on( 'sortupdate',  function( event, ui ) {
+			if ( event !== null && $( ui.item ).is( '.ui-draggable' ) ) {
+				return;
+			}
 			$( 'body' ).addClass( 'wait' );
-			setTimeout( function() {
-				$( 'textarea[id^=widget-black-studio-tinymce].active' ).each(function(){
-					bstw( $( this ) ).deactivate().activate();
+			setTimeout(function() {
+				$( 'textarea[id^=widget-black-studio-tinymce].active' ).each(function() {
+					bstw( $( this ) ).deactivate();
 				});
 				$( 'body' ).removeClass( 'wait' );
-			}, 500);
+			}, 500 );
 		});
 		
 		// External events

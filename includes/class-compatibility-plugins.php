@@ -117,12 +117,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Compatibility for WP Page Widget plugin
 		 *
 		 * @uses add_filter
+		 * @uses add_action
 		 *
 		 * @return void
 		 * @since 2.0.0
 		 */
 		public function wp_page_widget() {
 			add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'wp_page_widget_enable_pages' ) );
+			add_action( 'admin_print_scripts', array( $this, 'wp_page_widget_enqueue_script' ) );
 		}
 
 		/**
@@ -148,6 +150,30 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 				}
 			}
 			return $pages;
+		}
+
+		/**
+		 * Enqueue script for WP Page Widget plugin
+		 *
+		 * @uses apply_filters()
+		 * @uses wp_enqueue_script()
+		 * @uses plugins_url()
+		 * @uses SCRIPT_DEBUG
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function wp_page_widget_enqueue_script() {
+			$main_script = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );
+			$compat_script = 'wp-page-widget';
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			wp_enqueue_script(
+				$compat_script,
+				plugins_url( 'js/' . $compat_script . $suffix . '.js', dirname( __FILE__ ) ),
+				array( 'jquery', 'editor', 'quicktags', $main_script ),
+				bstw()->get_version(),
+				true
+			);
 		}
 
 		/**

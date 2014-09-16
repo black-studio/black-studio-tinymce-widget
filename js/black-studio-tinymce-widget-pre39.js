@@ -194,7 +194,7 @@
 	// Document ready stuff
 	$( document ).ready(function() {
 
-		// Event handler for widget opening button
+		// Event handler for widget open button
 		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] a.widget-action', function() {
 			bstw( $( this ) ).check_duplicates().fix_css().set_media_target().activate_after_open();
 			// Event handler for widget save button (for new instances)
