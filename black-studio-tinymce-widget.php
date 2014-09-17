@@ -217,20 +217,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/**
-		 * TinyMCE setup customization
-		 * This method is deprecated but it is kept for compatibility reasons as it was present in 2.0.0 pre-release
-		 *
-		 * @param mixed[] $settings
-		 * @return mixed[]
-		 * @since 2.0.0
-		 * @deprecated 2.0.0
-		 */
-		public function tiny_mce_before_init( $settings ) {
-			_deprecated_function( __FUNCTION__, '2.0.0' );
-			return $settings;
-		}
-
-		/**
 		 * Apply auto_embed to widget text
 		 *
 		 * @param string $text
@@ -298,7 +284,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		public function check_widget( $widget ) {
 			return gettype( $widget ) == 'object' && get_class( $widget ) == 'WP_Widget_Black_Studio_TinyMCE';
 		}
-		
+
 	} // END class Black_Studio_TinyMCE_Plugin
 
 } // class_exists check

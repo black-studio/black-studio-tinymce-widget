@@ -24,7 +24,7 @@ $black_studio_tinymce_widget_version = Black_Studio_TinyMCE_Plugin::$version;
  * Global var used for development
  *
  * @since 0.9.4
- * @deprecated 
+ * @deprecated 1.4
  */
 global $black_studio_tinymce_widget_dev_mode ; // global is necessary because this file is included in a non-global context
 $black_studio_tinymce_widget_dev_mode = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;

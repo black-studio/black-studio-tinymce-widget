@@ -112,7 +112,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
-				add_action( 'black_studio_tinymce_after_editor', array( $this, 'links' ) ); // consider donating if you remove links 
+				add_action( 'black_studio_tinymce_after_editor', array( $this, 'links' ) ); // consider donating if you remove links
 				// Action hook on plugin load
 				do_action( 'black_studio_tinymce_load' );
 			}
@@ -312,7 +312,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			}
 			echo '</div>';
 		}
-		
+
 	} // END class Black_Studio_TinyMCE_Admin
 
 } // class_exists check

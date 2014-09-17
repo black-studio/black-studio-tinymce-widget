@@ -41,7 +41,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Class constructor
 		 *
 		 * @uses get_bloginfo()
-		 * 
+		 *
 		 * @param object $plugin
 		 * @since 2.0.0
 		 */
