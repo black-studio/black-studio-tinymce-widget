@@ -1,15 +1,15 @@
 <?php
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Deprecated functions
  *
  * @package Black_Studio_TinyMCE_Widget
  */
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 /**
  * Global var with plugin version for backward compatibility
@@ -52,8 +52,8 @@ function black_studio_tinymce_widgets_init() {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_admin_init() {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin_init()' );
-	bstw()->admin_init();
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin()->admin_init()' );
+	bstw()->admin()->admin_init();
 }
 
 /**
@@ -61,8 +61,8 @@ function black_studio_tinymce_admin_init() {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_load_tiny_mce() {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->enqueue_media()' );
-	bstw()->enqueue_media();
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin()->enqueue_media()' );
+	bstw()->admin()->enqueue_media();
 }
 
 /**
@@ -70,8 +70,8 @@ function black_studio_tinymce_load_tiny_mce() {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_init_editor( $arg ) {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->tiny_mce_before_init( ... )' );
-	return bstw()->tiny_mce_before_init( $arg );
+	_deprecated_function( __FUNCTION__, '2.0.0' );
+	return $arg;
 }
 
 /**
@@ -79,8 +79,8 @@ function black_studio_tinymce_init_editor( $arg ) {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_styles() {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin_print_styles()' );
-	bstw()->admin_print_styles();
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin()->admin_print_styles()' );
+	bstw()->admin()->admin_print_styles();
 }
 
 /**
@@ -88,8 +88,8 @@ function black_studio_tinymce_styles() {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_scripts() {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin_print_scripts()' );
-	bstw()->admin_print_scripts();
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin()->admin_print_scripts()' );
+	bstw()->admin()->admin_print_scripts();
 }
 
 /**
@@ -97,8 +97,8 @@ function black_studio_tinymce_scripts() {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_footer_scripts() {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin_print_footer_scripts()' );
-	bstw()->admin_print_footer_scripts();
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin()->admin_print_footer_scripts()' );
+	bstw()->admin()->admin_print_footer_scripts();
 }
 
 /**
@@ -106,8 +106,8 @@ function black_studio_tinymce_footer_scripts() {
  * @deprecated 0.7.0
  */
 function black_studio_tinymce_preload_dialogs() {
-	_deprecated_function( __FUNCTION__, '0.7', 'bstw()->admin_print_footer_scripts()' );
-	bstw()->admin_print_footer_scripts();
+	_deprecated_function( __FUNCTION__, '0.7', 'bstw()->admin()->admin_print_footer_scripts()' );
+	bstw()->admin()->admin_print_footer_scripts();
 }
 
 /**
@@ -138,8 +138,8 @@ function black_studio_tinymce_upload_iframe_src( $arg ){
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_editor_accessibility_mode( $editor ) {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->editor_accessibility_mode( ... )' );
-	bstw()->editor_accessibility_mode( $editor );
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->admin()->editor_accessibility_mode( ... )' );
+	bstw()->admin()->editor_accessibility_mode( $editor );
 }
 
 /**

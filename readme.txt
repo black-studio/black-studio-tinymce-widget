@@ -267,7 +267,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 = 0.6.3 (2011-11-13) =
 * Fixed javascript issue preventing the plugin from working correctly with some browsers
 
-= 0.6.2 (2011-11-11) =
+= 0.6.2 (2011-11-12) =
 * Fixed javascript issue with WordPress Media Library inserts in HTML mode
 
 = 0.6.1 (2011-11-12) =

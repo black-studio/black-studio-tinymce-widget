@@ -1,16 +1,16 @@
 <?php
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Widget class
  *
  * @package Black_Studio_TinyMCE_Widget
  * @since 0.5
  */
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 
