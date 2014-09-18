@@ -1,13 +1,37 @@
 /* Black Studio TinyMCE Widget - CSS */
 
 .bstw-links {
-	font-size: 10px;
-	padding: 5px 0;
+	font-size: 11px;
+	margin-bottom: 1em;
 	text-align: right;
+	position: absolute;
+	right: 18px;
+}
+
+.bstw-links .icon16:before {
+	padding: 0;
+}
+
+.bstw-links .icon16 {
+	float: right;
+	padding: 3px 6px;
+	margin: -6px -8px 0 -2px;
+}
+
+.bstw-links .bstw-links-list {
+	display: none;
+}
+
+.bstw-links a {
+	text-decoration: none;
 }
 
 #wp-black-studio-tinymce-widget-wrap {
 	display: none;
+}
+
+div[id*="black-studio-tinymce"] .wp-editor-wrap {
+	margin-bottom: 1em;
 }
 
 #available-widgets [class*="black-studio-tinymce"] .widget-title:before {

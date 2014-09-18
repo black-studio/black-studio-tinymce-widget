@@ -117,7 +117,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 
 == Changelog ==
 
-= 2.0.0 (2014-09-17) =
+= 2.0.0 (2014-09-22) =
 * Total refactoring of plugin's source code
 * Added support for QuickTags toolbar in HTML mode
 * Added support for mobile devices (responsive width in widgets administration page)

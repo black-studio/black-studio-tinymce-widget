@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-09-02 17:09:59+00:00\n"
-"PO-Revision-Date: 2014-09-02 11:38+0000\n"
+"POT-Creation-Date: 2014-09-18 11:43:36+00:00\n"
+"PO-Revision-Date: 2014-09-18 11:40+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: grunt-wp-i18n 0.4.7\n"
+"X-Generator: grunt-wp-i18n 0.4.8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-Country: United States\n"
@@ -25,35 +25,52 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Textdomain-Support: yes\n"
 
-#: black-studio-tinymce-widget.php:351
+#. translators: error message shown when a duplicated widget ID is detected
+#: includes/class-admin.php:237
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr ""
 
-#: includes/class-wp-widget-black-studio-tinymce.php:27
-msgid "Arbitrary text or HTML with visual editor"
-msgstr "Довільний текст або HTML з візуальним редактором"
+#. translators: text used for plugin home link
+#: includes/class-admin.php:297
+msgid "Home"
+msgstr "Головна"
 
-#: includes/class-wp-widget-black-studio-tinymce.php:29
-msgid "Visual Editor"
-msgstr "Візуальний редактор"
-
-#: includes/class-wp-widget-black-studio-tinymce.php:131
-msgid "Donate"
-msgstr "Жертвувати"
-
-#: includes/class-wp-widget-black-studio-tinymce.php:132
+#. translators: text used for support forum link
+#: includes/class-admin.php:299
 msgid "Support"
 msgstr "Підтримка"
 
-#: includes/class-wp-widget-black-studio-tinymce.php:133
+#. translators: text used for reviews link
+#: includes/class-admin.php:301
 msgid "Rate"
 msgstr "Рейтинг"
 
-#: includes/class-wp-widget-black-studio-tinymce.php:134
+#. translators: text used for follow on twitter link
+#: includes/class-admin.php:303
 msgid "Follow"
 msgstr "Слідувати"
+
+#. translators: text used for donation link
+#: includes/class-admin.php:305
+msgid "Donate"
+msgstr "Жертвувати"
+
+#. translators: text used for the icon that shows the plugin links
+#: includes/class-admin.php:318
+msgid "About Black Studio TinyMCE Widget plugin"
+msgstr ""
+
+#. translators: title of the widget
+#: includes/class-wp-widget-black-studio-tinymce.php:28
+msgid "Visual Editor"
+msgstr "Візуальний редактор"
+
+#. translators: description of the widget, shown in available widgets
+#: includes/class-wp-widget-black-studio-tinymce.php:30
+msgid "Arbitrary text or HTML with visual editor"
+msgstr "Довільний текст або HTML з візуальним редактором"
 
 #. Plugin Name of the plugin/theme
 msgid "Black Studio TinyMCE Widget"
