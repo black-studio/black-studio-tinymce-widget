@@ -145,18 +145,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'compatibility' ), 20 );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
+			// Support for wp_kses_post in widget text
+			add_filter( 'widget_text', array( $this, 'widget_text_wp_kses_post' ), 10, 3 );
 			// Support for autoembed urls in widget text
 			if ( get_option( 'embed_autourls' ) ) {
-				add_filter( 'widget_text', array( $this, 'widget_text_autoembed' ), 10, 3 );
+				add_filter( 'widget_text', array( $this, 'widget_text_autoembed' ), 20, 3 );
 			}
 			// Support for smilies in widget text
 			if ( get_option( 'use_smilies' ) ) {
-				add_filter( 'widget_text', array( $this, 'widget_text_convert_smilies' ), 20, 3 );
+				add_filter( 'widget_text', array( $this, 'widget_text_convert_smilies' ), 30, 3 );
 			}
 			// Support for wpautop in widget text
-			add_filter( 'widget_text', array( $this, 'widget_text_wpautop' ), 30, 3 );
+			add_filter( 'widget_text', array( $this, 'widget_text_wpautop' ), 40, 3 );
 			// Support for shortcodes in widget text
-			add_filter( 'widget_text', array( $this, 'widget_text_do_shortcode' ), 40, 3 );
+			add_filter( 'widget_text', array( $this, 'widget_text_do_shortcode' ), 50, 3 );
 		}
 
 		/**
@@ -217,6 +219,22 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/**
+		 * Apply wp_kses to widget text
+		 *
+		 * @uses wp_kses_post()
+		 * 
+		 * @param string $text
+		 * @return string
+		 * @since 2.0.0
+		 */
+		public function widget_text_wp_kses_post( $text, $instance, $widget = null ) {
+			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
+				$text = wp_kses_post( $text );
+			}
+			return $text;
+		}
+
+		/**
 		 * Apply auto_embed to widget text
 		 *
 		 * @param string $text
@@ -235,6 +253,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		/**
 		 * Apply smilies conversion to widget text
 		 *
+		 * @uses convert_smilies()
+		 * 
 		 * @param string $text
 		 * @return string
 		 * @since 2.0.0
@@ -249,6 +269,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		/**
 		 * Apply automatic paragraphs in widget text
 		 *
+		 * @uses wpautop()
+		 * 
 		 * @param string $text
 		 * @return string
 		 * @since 2.0.0
@@ -263,6 +285,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		/**
 		 * Process shortcodes in widget text
 		 *
+		 * @uses do_shortcode()
+		 * 
 		 * @param string $text
 		 * @return string
 		 * @since 2.0.0
