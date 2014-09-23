@@ -60,7 +60,12 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			}
 			$output .= $before_text . $text . $after_text;
 			$output .= $after_widget;
-			echo wp_kses_post( $output );
+			$allowed_html = wp_kses_allowed_html( 'post' );
+			// For themes not supporting HTML5 the style tag should be added to the allowed html tags
+			if ( ! current_theme_supports( 'html5', 'gallery' ) ) {
+				$allowed_html = array_merge( $allowed_html, array( 'style' => array( 'type' => true ) ) ); 
+			}
+			echo wp_kses( $output, $allowed_html );
 		}
 
 		/**
