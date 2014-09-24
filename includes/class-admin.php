@@ -60,7 +60,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		protected function __construct() {
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-			add_action( 'admin_init', array( $this, 'admin_init' ) );
+			add_action( 'admin_init', array( $this, 'admin_init' ), 20 );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
 			// Initialize links
 			self::init_links();

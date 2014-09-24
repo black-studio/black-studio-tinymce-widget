@@ -54,28 +54,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		protected static $admin = null;
 
 		/**
+		 * Instance of compatibility class
+		 *
+		 * @var object
+		 * @since 2.0.0
+		 */
+		protected static $compatibility = null;
+
+		/**
 		 * Instance of the text filters class
 		 *
 		 * @var object
 		 * @since 2.0.0
 		 */
 		protected static $text_filters = null;
-
-		/**
-		 * Instance of compatibility class for 3rd party plugins
-		 *
-		 * @var object
-		 * @since 2.0.0
-		 */
-		protected static $compat_plugins = null;
-
-		/**
-		 * Instance of compatibility class for WordPress old versions
-		 *
-		 * @var object
-		 * @since 2.0.0
-		 */
-		protected static $compat_wordpress = null;
 
 		/**
 		 * Return the main plugin instance
@@ -101,6 +93,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/**
+		 * Return the instance of the compatibility class
+		 *
+		 * @return object
+		 * @since 2.0.0
+		 */
+		public static function compatibility() {
+			return self::$compatibility;
+		}
+
+		/**
 		 * Return the instance of the text filters class
 		 *
 		 * @return object
@@ -108,26 +110,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 */
 		public static function text_filters() {
 			return self::$text_filters;
-		}
-
-		/**
-		 * Return the instance of the compatibility class for 3rd party plugins
-		 *
-		 * @return object
-		 * @since 2.0.0
-		 */
-		public static function compat_plugins() {
-			return self::$compat_plugins;
-		}
-
-		/**
-		 * Return the instance of the compatibility class for WordPress old versions
-		 *
-		 * @return object
-		 * @since 2.0.0
-		 */
-		public static function compat_wordpress() {
-			return self::$compat_wordpress;
 		}
 
 		/**
@@ -166,7 +148,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				self::$text_filters = Black_Studio_TinyMCE_Text_Filters::instance();
 			}
 			// Register action and filter hooks
-			add_action( 'plugins_loaded', array( $this, 'compatibility' ), 20 );
+			add_action( 'plugins_loaded', array( $this, 'load_compatibility' ), 20 );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 		}
 
@@ -181,7 +163,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/**
-		 * Include compatibility code
+		 * Load compatibility class
 		 *
 		 * @uses apply_filters()
 		 * @uses get_bloginfo()
@@ -190,24 +172,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function compatibility() {
+		public function load_compatibility() {
 			// Compatibility load flag (for both deprecated functions and code for compatibility with other plugins)
 			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );
-			// Compatibility with previous BSTW versions
-			$load_deprecated = apply_filters( 'black_studio_tinymce_load_deprecated', true );
-			if ( $load_compatibility && $load_deprecated ) {
-				include_once( plugin_dir_path( __FILE__ ) . '/includes/deprecated.php' );
-			}
-			// Compatibility with other plugins
-			$compat_plugins = apply_filters( 'black_studio_tinymce_load_compatibility_plugins', array( 'siteorigin_panels', 'wpml', 'jetpack_after_the_deadline', 'wp_page_widget' ) );
-			if ( $load_compatibility && ! empty( $compat_plugins ) ) {
-				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-compatibility-plugins.php' );
-				self::$compat_plugins = Black_Studio_TinyMCE_Compatibility_Plugins::instance( $compat_plugins );
-			}
-			// Compatibility with previous WordPress versions
-			if ( version_compare( get_bloginfo( 'version' ), '3.9', '<' ) ) {
-				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-compatibility-wordpress.php' );
-				self::$compat_wordpress = Black_Studio_TinyMCE_Compatibility_Wordpress::instance();
+			if ( $load_compatibility ) {
+				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-compatibility.php' );
+				self::$compatibility = Black_Studio_TinyMCE_Compatibility::instance();
 			}
 		}
 

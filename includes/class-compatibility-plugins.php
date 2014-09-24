@@ -27,13 +27,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Return the single class instance
 		 *
-		 * @param string[] $compat_plugins
+		 * @param string[] $plugins
 		 * @return object
 		 * @since 2.0.0
 		 */
-		public static function instance( $compat_plugins = array() ) {
+		public static function instance( $plugins = array() ) {
 			if ( is_null( self::$_instance ) ) {
-				self::$_instance = new self( $compat_plugins );
+				self::$_instance = new self( $plugins );
 			}
 			return self::$_instance;
 		}
@@ -41,14 +41,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Class constructor
 		 *
-		 * @param string[] $compat_plugins
+		 * @param string[] $plugins
 		 * @return void
 		 * @since 2.0.0
 		 */
-		protected function __construct( $compat_plugins ) {
-			foreach ( $compat_plugins as $compat_plugin ) {
-				if ( is_callable( array( $this, $compat_plugin ), false ) ) {
-					$this->$compat_plugin();
+		protected function __construct( $plugins ) {
+			foreach ( $plugins as $plugin ) {
+				if ( is_callable( array( $this, $plugin ), false ) ) {
+					$this->$plugin();
 				}
 			}
 		}
@@ -116,38 +116,48 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Compatibility for WP Page Widget plugin
 		 *
-		 * @uses add_filter
-		 * @uses add_action
+		 * @uses add_action()
 		 *
 		 * @return void
 		 * @since 2.0.0
 		 */
 		public function wp_page_widget() {
-			add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'wp_page_widget_enable_pages' ) );
-			add_action( 'admin_print_scripts', array( $this, 'wp_page_widget_enqueue_script' ) );
+			add_action( 'admin_init', array( $this, 'wp_page_widget_admin_init' ) );
+		}
+
+		/**
+		 * Initialize compatibility for WP Page Widget plugin (only for WordPress 3.3+)
+		 *
+		 * @uses add_filter()
+		 * @uses add_action()
+		 * @uses is_plugin_active()
+		 * @uses get_bloginfo()
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function wp_page_widget_admin_init() {
+			if ( is_admin() && is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) && version_compare( get_bloginfo( 'version' ), '3.3', '>=' ) ) {
+				add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'wp_page_widget_enable_pages' ) );
+				add_action( 'admin_print_scripts', array( $this, 'wp_page_widget_enqueue_script' ) );
+			}
 		}
 
 		/**
 		 * Enable filter for WP Page Widget plugin
 		 *
-		 * @uses is_plugin_active()
-		 *
-		 * @global string $pagenow
 		 * @param string[] $pages
 		 * @return string[]
 		 * @since 2.0.0
 		 */
 		public function wp_page_widget_enable_pages( $pages ) {
-			global $pagenow;
-			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) ) {
-				$pages[] = 'post-new.php';
-				$pages[] = 'post.php';
-				if ( isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
-					$pages[] = 'edit-tags.php';
-				}
-				if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) ) {
-					$pages[] = 'admin.php';
-				}
+			$pages[] = 'post-new.php';
+			$pages[] = 'post.php';
+			if ( isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
+				$pages[] = 'edit-tags.php';
+			}
+			if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) ) {
+				$pages[] = 'admin.php';
 			}
 			return $pages;
 		}
@@ -177,38 +187,54 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/**
-		 * Compatibility with Page Builder
+		 * Compatibility with Page Builder (SiteOrigin Panels)
 		 *
-		 * @uses add_filter()
+		 * @uses add_action()
 		 *
 		 * @return void
 		 * @since 2.0.0
 		 */
 		public function siteorigin_panels() {
-			add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10 );
-			add_filter( 'black_studio_tinymce_container_selectors', array( $this, 'siteorigin_panels_container_selectors' ) );
-			add_filter( 'black_studio_tinymce_activate_events', array( $this, 'siteorigin_panels_activate_events' ) );
-			add_filter( 'black_studio_tinymce_deactivate_events', array( $this, 'siteorigin_panels_deactivate_events' ) );
-			add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'siteorigin_panels_enable_pages' ) );
 			add_action( 'admin_init', array( $this, 'siteorigin_panels_disable_compat' ), 7 );
+			add_action( 'admin_init', array( $this, 'siteorigin_panels_admin_init' ) );
 		}
 
 		/**
-		 * Remove widget number to prevent translation when using Page Builder + WPML String Translation
+		 * Initialize compatibility for Page Builder (SiteOrigin Panels)
+		 *
+		 * @uses add_filter()
+		 * @uses add_action()
+		 * @uses is_plugin_active()
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function siteorigin_panels_admin_init() {
+			if ( is_admin() && is_plugin_active( 'siteorigin-panels/siteorigin-panels.php' ) ) {
+				add_filter( 'siteorigin_panels_widget_object', array( $this, 'siteorigin_panels_widget_object' ), 10 );
+				add_filter( 'black_studio_tinymce_container_selectors', array( $this, 'siteorigin_panels_container_selectors' ) );
+				add_filter( 'black_studio_tinymce_activate_events', array( $this, 'siteorigin_panels_activate_events' ) );
+				add_filter( 'black_studio_tinymce_deactivate_events', array( $this, 'siteorigin_panels_deactivate_events' ) );
+				add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'siteorigin_panels_enable_pages' ) );
+			}
+		}
+
+		/**
+		 * Remove widget number to prevent translation when using Page Builder (SiteOrigin Panels) + WPML String Translation
 		 *
 		 * @param object $the_widget
 		 * @return object
 		 * @since 2.0.0
 		 */
 		public function siteorigin_panels_widget_object( $the_widget ) {
-			if ( isset($the_widget->id_base) && $the_widget->id_base == 'black-studio-tinymce' ) {
+			if ( isset( $the_widget->id_base ) && $the_widget->id_base == 'black-studio-tinymce' ) {
 				$the_widget->number = '';
 			}
 			return $the_widget;
 		}
 
 		/**
-		 * Add selector for widget detection for Page Builder
+		 * Add selector for widget detection for Page Builder (SiteOrigin Panels)
 		 *
 		 * @param string[] $selectors
 		 * @return string[]
@@ -220,7 +246,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/**
-		 * Add activate events for Page Builder
+		 * Add activate events for Page Builder (SiteOrigin Panels)
 		 *
 		 * @param string[] $events
 		 * @return string[]
@@ -232,7 +258,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/**
-		 * Add deactivate events for Page Builder
+		 * Add deactivate events for Page Builder (SiteOrigin Panels)
 		 *
 		 * @param string[] $events
 		 * @return string[]
@@ -244,7 +270,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/**
-		 * Add pages filter to enable editor for Page Builder
+		 * Add pages filter to enable editor for Page Builder (SiteOrigin Panels)
 		 *
 		 * @param string[] $pages
 		 * @return string[]
@@ -260,7 +286,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 		
 		/**
-		 * Disable old compatibility code provided by Page Builder
+		 * Disable old compatibility code provided by Page Builder (SiteOrigin Panels)
 		 *
 		 * @return void
 		 * @since 2.0.0

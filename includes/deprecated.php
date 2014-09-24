@@ -129,8 +129,8 @@ function black_studio_tinymce_apply_smilies_to_widget_text( $text ) {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_upload_iframe_src( $arg ){
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->compat_wordpress()->wp_pre_35_upload_iframe_src( ... )' );
-	bstw()->compat_wordpress()->wp_pre_35_upload_iframe_src( $arg );
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->compatibility()->wordpress()->wp_pre_35_upload_iframe_src( ... )' );
+	bstw()->compatibility()->wordpress()->wp_pre_35_upload_iframe_src( $arg );
 }
 
 /**
@@ -147,6 +147,6 @@ function black_studio_tinymce_editor_accessibility_mode( $editor ) {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_siteorigin_panels_widget_object( $the_widget ) {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->compat_plugins()->siteorigin_panels_widget_object( ... )' );
-	bstw()->compat_plugins()->siteorigin_panels_widget_object( $the_widget );
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()-compatibility()->plugins()->siteorigin_panels_widget_object( ... )' );
+	bstw()->compatibility()->plugins()->siteorigin_panels_widget_object( $the_widget );
 }

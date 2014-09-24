@@ -268,7 +268,7 @@
 		}
 
 		// Plugin links toggle behavior
-		$( '.bstw-links-icon' ).on( 'click', function( event ) {
+		$( document ).on( 'click', '.bstw-links-icon', function( event ) {
 			event.preventDefault();
 			$( this ).closest( '.bstw-links' ).children( '.bstw-links-list' ).toggle();
 		});
