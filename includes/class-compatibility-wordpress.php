@@ -41,6 +41,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Class constructor
 		 *
 		 * @uses get_bloginfo()
+		 * @uses add_action()
 		 *
 		 * @param object $plugin
 		 * @since 2.0.0
@@ -157,7 +158,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Enqueue styles for WordPress prior to 3.3
 		 *
 		 * @uses wp_enqueue_style()
-		 * @uses Black_Studio_TinyMCE_Plugin::enqueue_style()
+		 * @uses Black_Studio_TinyMCE_Admin::enqueue_style()
 		 *
 		 * @return void
 		 * @since 2.0.0
@@ -172,7 +173,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Enqueue header scripts for WordPress prior to 3.3
 		 *
 		 * @uses wp_enqueue_script()
-		 * @uses Black_Studio_TinyMCE_Plugin::enqueue_script()
+		 * @uses Black_Studio_TinyMCE_Admin::enqueue_script()
+		 * @uses Black_Studio_TinyMCE_Admin::localize_script()
 		 *
 		 * @return void
 		 * @since 2.0.0
@@ -215,6 +217,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Compatibility for WordPress prior to 3.5
 		 *
 		 * @uses add_filter()
+		 * @uses Black_Studio_TinyMCE_Admin::enabled()
 		 *
 		 * @return void
 		 * @since 2.0.0
@@ -249,6 +252,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @uses remove_action()
 		 * @uses add_filter()
 		 * @uses get_bloginfo()
+		 * @uses Black_Studio_TinyMCE_Admin::enabled()
 		 *
 		 * @return void
 		 * @since 2.0.0
@@ -319,7 +323,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		/**
 		 * Output the visual editor code for WordPress prior to 3.9
 		 *
-		 * @uses wp_editor()
+		 * @uses esc_attr()
+		 * @uses esc_textarea()
+		 * @uses do_action()
 		 *
 		 * @return void
 		 * @since 2.0.0

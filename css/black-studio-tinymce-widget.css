@@ -2,7 +2,7 @@
 
 .bstw-links {
 	font-size: 11px;
-	margin-bottom: 1em;
+	margin-top: -3px;
 	text-align: right;
 	position: absolute;
 	right: 18px;
@@ -15,7 +15,7 @@
 .bstw-links .icon16 {
 	float: right;
 	padding: 3px 6px;
-	margin: -8px -8px 0 -2px;
+	margin: -6px -8px 0 -2px;
 }
 
 .bstw-links .bstw-links-list {

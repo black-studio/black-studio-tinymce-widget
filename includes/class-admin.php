@@ -25,6 +25,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		protected static $_instance = null;
 
 		/**
+		 * Array containing the plugin links
+		 *
+		 * @var array
+		 * @since 2.0.0
+		 */
+		protected static $links;
+
+		/**
 		 * Return the single class instance
 		 *
 		 * @return object
@@ -54,6 +62,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
+			// Initialize links
+			self::init_links();
 		}
 
 		/**
@@ -112,7 +122,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
-				add_action( 'black_studio_tinymce_before_editor', array( $this, 'links' ) ); // consider donating if you remove links
+				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
 				// Action hook on plugin load
 				do_action( 'black_studio_tinymce_load' );
 			}
@@ -286,13 +296,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		}
 
 		/**
-		 * Output plugin links below the editor
+		 * Initialize plugin links
 		 *
 		 * @return void
 		 * @since 2.0.0
 		 */
-		function links() {
-			$links = array(
+		public function init_links() {
+			self::$links = array(
 				/* translators: text used for plugin home link */
 				'https://wordpress.org/plugins/black-studio-tinymce-widget/' => __( 'Home', 'black-studio-tinymce-widget' ),
 				/* translators: text used for support forum link */
@@ -304,19 +314,25 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				/* translators: text used for donation link */
 				'http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/' => __( 'Donate', 'black-studio-tinymce-widget' ),
 			);
-			echo '<div class="bstw-links">';
-			echo '<span class="bstw-links-list">';
-			$counter = 0;
-			foreach ( $links as $url => $label ) {
-				if ( $counter++ > 0 ) {
-					echo ' | ';
-				}
-				echo '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $label ) . '</a>';
+		}
+
+		/**
+		 * Display plugin links below the editor
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		function display_links() {
+			echo "\t<div class='bstw-links'>\n";
+			echo "\t\t<span class='bstw-links-list'>\n";
+			$counter = count( self::$links ) - 1;
+			foreach ( self::$links as $url => $label ) {
+				echo "\t\t\t<a href='" . esc_url( $url ) . "' target='_blank'>" . esc_html( $label ) . "</a>" . ( $counter-- > 0 ? ' | ' : '' ) . "\n";
 			}
-			echo '</span>';
+			echo "\t\t</span>\n";
 			/* translators: text used for the icon that shows the plugin links */
-			echo '<a class="bstw-links-icon icon16 icon-plugins" href="" title="' . esc_attr( __( 'About Black Studio TinyMCE Widget plugin', 'black-studio-tinymce-widget' ) ) . '"></a>';
-			echo '</div>';
+			echo "\t\t<a class='bstw-links-icon icon16 icon-plugins' href='#' title='" . esc_attr( __( 'About Black Studio TinyMCE Widget plugin', 'black-studio-tinymce-widget' ) ) . "'></a>\n";
+			echo "\t</div>\n";
 		}
 
 	} // END class Black_Studio_TinyMCE_Admin
