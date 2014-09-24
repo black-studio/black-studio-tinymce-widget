@@ -54,6 +54,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		protected static $admin = null;
 
 		/**
+		 * Instance of the text filters class
+		 *
+		 * @var object
+		 * @since 2.0.0
+		 */
+		protected static $text_filters = null;
+
+		/**
 		 * Instance of compatibility class for 3rd party plugins
 		 *
 		 * @var object
@@ -90,6 +98,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 */
 		public static function admin() {
 			return self::$admin;
+		}
+
+		/**
+		 * Return the instance of the text filters class
+		 *
+		 * @return object
+		 * @since 2.0.0
+		 */
+		public static function text_filters() {
+			return self::$text_filters;
 		}
 
 		/**
@@ -135,30 +153,21 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
-			// Include required file(s)
-			include_once( plugin_dir_path( __FILE__ ) . '/includes/class-wp-widget-black-studio-tinymce.php' );
+			// Include required files
+			include_once( plugin_dir_path( __FILE__ ) . '/includes/class-widget.php' );
 			// Include and instantiate admin class on admin pages
 			if ( is_admin() ) {
 				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-admin.php' );
 				self::$admin = Black_Studio_TinyMCE_Admin::instance();
 			}
+			// Include and instantiate text filter class on frontend pages
+			else {
+				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-text-filters.php' );
+				self::$text_filters = Black_Studio_TinyMCE_Text_Filters::instance();
+			}
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'compatibility' ), 20 );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
-			// Support for wp_kses_post in widget text
-			add_filter( 'widget_text', array( $this, 'widget_text_wp_kses_post' ), 10, 3 );
-			// Support for autoembed urls in widget text
-			if ( get_option( 'embed_autourls' ) ) {
-				add_filter( 'widget_text', array( $this, 'widget_text_autoembed' ), 20, 3 );
-			}
-			// Support for smilies in widget text
-			if ( get_option( 'use_smilies' ) ) {
-				add_filter( 'widget_text', array( $this, 'widget_text_convert_smilies' ), 30, 3 );
-			}
-			// Support for wpautop in widget text
-			add_filter( 'widget_text', array( $this, 'widget_text_wpautop' ), 40, 3 );
-			// Support for shortcodes in widget text
-			add_filter( 'widget_text', array( $this, 'widget_text_do_shortcode' ), 50, 3 );
 		}
 
 		/**
@@ -216,86 +225,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				return;
 			}
 			register_widget( 'WP_Widget_Black_Studio_TinyMCE' );
-		}
-
-		/**
-		 * Apply wp_kses to widget text
-		 *
-		 * @uses wp_kses_post()
-		 * 
-		 * @param string $text
-		 * @return string
-		 * @since 2.0.0
-		 */
-		public function widget_text_wp_kses_post( $text, $instance, $widget = null ) {
-			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				$text = wp_kses_post( $text );
-			}
-			return $text;
-		}
-
-		/**
-		 * Apply auto_embed to widget text
-		 *
-		 * @param string $text
-		 * @return string
-		 * @since 2.0.0
-		 */
-		public function widget_text_autoembed( $text, $instance, $widget = null ) {
-			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				global $wp_embed;
-				$text = $wp_embed->run_shortcode( $text );
-				$text = $wp_embed->autoembed( $text );
-			}
-			return $text;
-		}
-
-		/**
-		 * Apply smilies conversion to widget text
-		 *
-		 * @uses convert_smilies()
-		 * 
-		 * @param string $text
-		 * @return string
-		 * @since 2.0.0
-		 */
-		public function widget_text_convert_smilies( $text, $instance, $widget = null ) {
-			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				$text = convert_smilies( $text );
-			}
-			return $text;
-		}
-
-		/**
-		 * Apply automatic paragraphs in widget text
-		 *
-		 * @uses wpautop()
-		 * 
-		 * @param string $text
-		 * @return string
-		 * @since 2.0.0
-		 */
-		public function widget_text_wpautop( $text, $instance, $widget = null ) {
-			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				$text = wpautop( $text );
-			}
-			return $text;
-		}
-
-		/**
-		 * Process shortcodes in widget text
-		 *
-		 * @uses do_shortcode()
-		 * 
-		 * @param string $text
-		 * @return string
-		 * @since 2.0.0
-		 */
-		public function widget_text_do_shortcode( $text, $instance, $widget = null ) {
-			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				$text = do_shortcode( $text );
-			}
-			return $text;
 		}
 
 		/**

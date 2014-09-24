@@ -117,9 +117,9 @@ function black_studio_tinymce_preload_dialogs() {
  * @deprecated 2.0.0
  */
 function black_studio_tinymce_apply_smilies_to_widget_text( $text ) {
-	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->widget_text_convert_smilies( ... )' );
+	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->text_filters()->convert_smilies( ... )' );
 	if ( get_option( 'use_smilies' ) ) {
-		$text = bstw()->widget_text_convert_smilies( $text );
+		$text = bstw()->text_filters()->convert_smilies( $text );
 	}
 	return $text;
 }
