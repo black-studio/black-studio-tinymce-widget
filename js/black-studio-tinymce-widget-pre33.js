@@ -233,6 +233,12 @@
 			bstw( $( 'textarea[id^=widget-black-studio-tinymce]' ).attr( 'id' ) ).activate_after_open();
 		}
 
+		// Plugin links toggle behavior
+		$( '.bstw-links-icon' ).live( 'click', function( event ) {
+			event.preventDefault();
+			$( this ).closest( '.bstw-links' ).children( '.bstw-links-list' ).toggle();
+		});
+
 	});
 
 })( jQuery ); // end self-invoked wrapper function

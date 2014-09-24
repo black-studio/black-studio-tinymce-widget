@@ -59,7 +59,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			}
 			$output .= $before_text . $text . $after_text;
 			$output .= $after_widget;
-			echo $output;
+			echo $output; // xss ok
 		}
 
 		/**

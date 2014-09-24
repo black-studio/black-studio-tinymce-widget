@@ -1,9 +1,28 @@
 /* Black Studio TinyMCE Widget - CSS */
 
 .bstw-links {
-	font-size: 10px;
-	padding: 5px 0;
+	font-size: 11px;
+	margin-top: -3px;
 	text-align: right;
+	position: absolute;
+	right: 18px;
+}
+
+.bstw-links .icon-plugins {
+	float: right;
+	padding: 3px 6px;
+	margin: -8px -8px 0 -2px;
+	background: transparent url('../../../../wp-admin/images/menu.png') no-repeat scroll -180px -33px;
+	width: 16px;
+	height: 16px;
+}
+
+.bstw-links .bstw-links-list {
+	display: none;
+}
+
+.bstw-links a {
+	text-decoration: none;
 }
 
 #mce_fullscreen_container {
