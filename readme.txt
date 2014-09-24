@@ -70,6 +70,7 @@ When you post a message in the [support forum](http://wordpress.org/support/plug
 * Error messages if any, in particular in [browser's javascript console](http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers)
 * Browser and Operating System in use
 * WordPress version in use
+* Wordpress language if other than english
 * WordPress theme in use
 * WordPress plugins causing conflicts if any
 * A link to a screenshot if it can be useful to undesrtand the problem
@@ -117,7 +118,7 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 
 == Changelog ==
 
-= 2.0.0 (2014-09-22) =
+= 2.0.0 (2014-09-25) =
 * Total refactoring of plugin's source code
 * Added support for QuickTags toolbar in HTML mode
 * Added support for mobile devices (responsive width in widgets administration page)

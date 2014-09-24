@@ -49,3 +49,7 @@ div[id*="black-studio-tinymce"] .wp-editor-wrap {
 body.wait, body.wait * {
 	cursor: wait !important;   
 }
+
+#zedity_content_overlay {
+	z-index: 100000 !important;
+}

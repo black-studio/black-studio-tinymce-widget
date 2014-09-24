@@ -317,7 +317,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		}
 
 		/**
-		 * Display plugin links below the editor
+		 * Display plugin links
 		 *
 		 * @return void
 		 * @since 2.0.0
@@ -327,7 +327,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			echo "\t\t<span class='bstw-links-list'>\n";
 			$counter = count( self::$links ) - 1;
 			foreach ( self::$links as $url => $label ) {
-				echo "\t\t\t<a href='" . esc_url( $url ) . "' target='_blank'>" . esc_html( $label ) . "</a>" . ( $counter-- > 0 ? ' | ' : '' ) . "\n";
+				$separator = ( $counter-- > 0 ? ' | ' : '' );
+				echo "\t\t\t<a href='" . esc_url( $url ) . "' target='_blank'>" . esc_html( $label ) . "</a>$separator\n"; // xss ok
 			}
 			echo "\t\t</span>\n";
 			/* translators: text used for the icon that shows the plugin links */

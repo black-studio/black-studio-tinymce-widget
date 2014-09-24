@@ -47,18 +47,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
-			$wp_version = get_bloginfo( 'version' );
-			if ( version_compare( $wp_version, '3.2', '<' ) ) {
-				add_action( 'admin_init', array( $this, 'wp_pre_32' ), 32 );
-			}
-			if ( version_compare( $wp_version, '3.3', '<' ) ) {
-				add_action( 'admin_init', array( $this, 'wp_pre_33' ), 33 );
-			}
-			if ( version_compare( $wp_version, '3.5', '<' ) ) {
-				add_action( 'admin_init', array( $this, 'wp_pre_35' ), 35 );
-			}
-			if ( version_compare( $wp_version, '3.9', '<' ) ) {
-				add_action( 'admin_init', array( $this, 'wp_pre_39' ), 39 );
+			$current_version = get_bloginfo( 'version' );
+			$previous_versions = array( '3.2', '3.3', '3.5', '3.9' );
+			foreach ( $previous_versions as $previous_version ) {
+				if ( version_compare( $current_version, $previous_version, '<' ) ) {
+					add_action( 'admin_init', array( $this, 'wp_pre_' . str_replace( '.', '', $previous_version ) ), intval( 10 * $previous_version ) );
+				}
 			}
 		}
 

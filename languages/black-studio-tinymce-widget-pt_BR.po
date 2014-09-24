@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-09-18 11:43:36+00:00\n"
-"PO-Revision-Date: 2014-09-18 11:40+0000\n"
+"POT-Creation-Date: 2014-09-24 19:23:02+00:00\n"
+"PO-Revision-Date: 2014-09-22 15:01+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -26,49 +26,49 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 #. translators: error message shown when a duplicated widget ID is detected
-#: includes/class-admin.php:237
+#: includes/class-admin.php:247
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr ""
 
 #. translators: text used for plugin home link
-#: includes/class-admin.php:297
+#: includes/class-admin.php:307
 msgid "Home"
 msgstr "Home"
 
 #. translators: text used for support forum link
-#: includes/class-admin.php:299
+#: includes/class-admin.php:309
 msgid "Support"
 msgstr "Suporte"
 
 #. translators: text used for reviews link
-#: includes/class-admin.php:301
+#: includes/class-admin.php:311
 msgid "Rate"
 msgstr "Classificar"
 
 #. translators: text used for follow on twitter link
-#: includes/class-admin.php:303
+#: includes/class-admin.php:313
 msgid "Follow"
 msgstr "Seguir"
 
 #. translators: text used for donation link
-#: includes/class-admin.php:305
+#: includes/class-admin.php:315
 msgid "Donate"
 msgstr "Doar"
 
 #. translators: text used for the icon that shows the plugin links
-#: includes/class-admin.php:318
+#: includes/class-admin.php:335
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr ""
 
 #. translators: title of the widget
-#: includes/class-wp-widget-black-studio-tinymce.php:28
+#: includes/class-widget.php:28
 msgid "Visual Editor"
 msgstr "Editor visual"
 
 #. translators: description of the widget, shown in available widgets
-#: includes/class-wp-widget-black-studio-tinymce.php:30
+#: includes/class-widget.php:30
 msgid "Arbitrary text or HTML with visual editor"
 msgstr "Texto normal ou HTML com o editor visual"
 

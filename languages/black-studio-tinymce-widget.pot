@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget 2.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-09-18 11:47:36+00:00\n"
+"POT-Creation-Date: 2014-09-24 19:23:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,49 +25,49 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-#: includes/class-admin.php:237
+#: includes/class-admin.php:247
 #. translators: error message shown when a duplicated widget ID is detected
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr ""
 
-#: includes/class-admin.php:297
+#: includes/class-admin.php:307
 #. translators: text used for plugin home link
 msgid "Home"
 msgstr ""
 
-#: includes/class-admin.php:299
+#: includes/class-admin.php:309
 #. translators: text used for support forum link
 msgid "Support"
 msgstr ""
 
-#: includes/class-admin.php:301
+#: includes/class-admin.php:311
 #. translators: text used for reviews link
 msgid "Rate"
 msgstr ""
 
-#: includes/class-admin.php:303
+#: includes/class-admin.php:313
 #. translators: text used for follow on twitter link
 msgid "Follow"
 msgstr ""
 
-#: includes/class-admin.php:305
+#: includes/class-admin.php:315
 #. translators: text used for donation link
 msgid "Donate"
 msgstr ""
 
-#: includes/class-admin.php:318
+#: includes/class-admin.php:335
 #. translators: text used for the icon that shows the plugin links
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr ""
 
-#: includes/class-wp-widget-black-studio-tinymce.php:28
+#: includes/class-widget.php:28
 #. translators: title of the widget
 msgid "Visual Editor"
 msgstr ""
 
-#: includes/class-wp-widget-black-studio-tinymce.php:30
+#: includes/class-widget.php:30
 #. translators: description of the widget, shown in available widgets
 msgid "Arbitrary text or HTML with visual editor"
 msgstr ""
