@@ -203,6 +203,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Initialize compatibility for Page Builder (SiteOrigin Panels)
 		 *
 		 * @uses add_filter()
+		 * @uses remove_filter()
 		 * @uses add_action()
 		 * @uses is_plugin_active()
 		 *
@@ -216,6 +217,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 				add_filter( 'black_studio_tinymce_activate_events', array( $this, 'siteorigin_panels_activate_events' ) );
 				add_filter( 'black_studio_tinymce_deactivate_events', array( $this, 'siteorigin_panels_deactivate_events' ) );
 				add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'siteorigin_panels_enable_pages' ) );
+				add_filter( 'wp_editor_settings', array( $this, 'siteorigin_panels_editor_settings'), 20, 2 );
+				remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 40 );
 			}
 		}
 
@@ -286,6 +289,24 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 		
 		/**
+		 * Editor settings for use within Page Builder (SiteOrigin Panels)
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function siteorigin_panels_editor_settings( $settings, $editor_id ) {
+			// Allow initialization of main page/post editor instances
+			if ( strstr( $editor_id, 'black-studio-tinymce' ) === false ) {
+				$settings['tinymce'] = array( 'wp_skip_init' => false );
+			}
+			// Prevent wpautop on editor instances inside Page Builder
+			if ( $editor_id == 'widget-black-studio-tinymce-{$id}-text' ) {
+				$settings['default_editor'] = 'html';
+			}
+			return $settings;
+		}
+
+		/**
 		 * Disable old compatibility code provided by Page Builder (SiteOrigin Panels)
 		 *
 		 * @return void
@@ -295,7 +316,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			remove_action( 'admin_init', 'siteorigin_panels_black_studio_tinymce_admin_init' );
 			remove_action( 'admin_enqueue_scripts', 'siteorigin_panels_black_studio_tinymce_admin_enqueue', 15 );
 		}
-
 
 		/**
 		 * Compatibility with Jetpack After the deadline

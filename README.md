@@ -17,25 +17,27 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 ### Features ###
 
 * Add rich text widgets to your sidebars and edit them using visual editor
-* Switch between Visual mode and HTML mode
+* Switch between Visual mode and HTML mode (including Quicktags toolbar)
 * Insert images/videos from WordPress Media Library
-* Insert links to existing WordPress pages/posts
-* Fullscreen editing mode supported
-* Widgets accessibility mode supported
-* WordPress networks (Multi-site) supported
-* WPML (Multi-language) supported
-* Live preview of widgets in Theme customizer supported (since WordPress 3.9)
+* Insert links to existing WordPress pages/posts or external resources
+* Support for fullscreen editing mode
+* Support for widgets accessibility mode
+* Support for WordPress networks (multi-site)
+* Support for WPML (multi-language)
+* Live preview in theme customizer
 
 ### Links ###
 
 * [Plugin's web page](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
-* [Support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget)
+* [FAQ](https://wordpress.org/plugins/black-studio-tinymce-widget/faq/)
+* [Support forum](https://wordpress.org/support/plugin/black-studio-tinymce-widget)
 * [Follow us on Twitter](https://twitter.com/blackstudioita)
 
 ### Get involved ###
 
 * Developers can contribute to the source code on our [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget).
 * Translators can contribute through [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/).
+* Users can contribute by leaving a 5 stars [review](https://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget#postform) or making a [donation](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/).
 
 ## Installation ##
 
@@ -43,7 +45,7 @@ This section describes how to install and use the plugin.
 
 1. Install automatically through the `Plugins` menu and `Add New` button (or upload the entire `black-studio-tinymce-widget` folder to the `/wp-content/plugins/` directory)
 2. Activate the plugin
-3. Go to `Appearance` -> `Widgets`
+3. Go to `Appearance` => `Widgets`
 4. Drag and drop the `Visual Editor` widget to the desired sidebar (or, if using Accesibility mode, click the `Add` link)
 5. Fill in title and (rich) text
 
@@ -63,23 +65,30 @@ This section describes how to install and use the plugin.
 
 ### Troubleshooting ###
 
-If you are experiencing issues with the plugin, check our [support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget), but please read entirely these FAQ before posting a new topic in the forum. Most of the times issues are caused by incompatibility with other plugins or themes, which don't comply with WordPress coding standars and thus may prevent our plugin from working as expected. If you have any issues with the plugin, please do the following:
+If you are experiencing issues with the plugin please read entirely these FAQ before posting a new topic in our [support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget). Most of the times issues are caused by incompatibility with other plugins or themes, which may prevent our plugin from working as expected. In order to troubleshoot issues please complete the following steps:
 
-1. Ensure the you have understood the purpose of the plugin. It only adds the ability to use the visual editor (TinyMCE) in widgets as you do in posts and pages, but it doesn't alter the editor behavior or functions. So if you are experiencing issues with the editor even when editing posts or pages, they're definitely not related to our plugin (unless you're using some additional plugins that provides widgets support for pages, i.e. Page Builder).
+1. First, ensure you have understood the purpose of the plugin. What this plugin does is to give you the ability to use the WordPress visual editor (TinyMCE) in widgets as you do in posts and pages, but it doesn't alter the editor behavior itself or its functionalities. So if you are experiencing issues with the editor even when editing posts or pages, they're definitely not related to our plugin (unless you're using some additional plugins that provides widgets support for pages, i.e. Page Builder).
 2. Ensure that you are running the latest versions of both WordPress and the plugin.
 3. Search in our [support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget) for threads with similar issues.
-4. Disable all other plugins and switch to a WordPress default theme for a while. If the problem persists, open a topic in the forum (see below for instructions). Otherwise enable the other plugins ony by one and figure out which one is causing the issue, then post to the support forum mentioning it. Please see [Conflict Diagnosis Guide for WordPress plugins](https://rtcamp.com/rtmedia/docs/troubleshooting/conflict-diagnosis-guide-wordpress-plugins/) for further info.
+4. Disable all other plugins and check if the problem is fixed. In that case enable the other plugins one by one and figure out which one is causing the issue. Please see [Conflict Diagnosis Guide for WordPress plugins](https://rtcamp.com/rtmedia/docs/troubleshooting/conflict-diagnosis-guide-wordpress-plugins/) for further info.
+5. If the problem persists even with all other plugins disabled, try to switch to a WordPress default theme (i.e. Twenty Fourteen) and check if that fixes the issue.
 
-When you post a message in the [support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget) please provide the following information:
+If you found a conflict with a plugin or theme, or if your problem is still present after the steps above, open a topic in the [support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget) and provide the following information:
 
-* Description of the problem and steps to reproduce it
-* Error messages if any, in particular in [browser's javascript console](http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers)
+* Detailed description of the problem, including the steps to reproduce it
+* Error messages, if any, in particular in [browser's javascript console](http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers)
 * Browser and Operating System in use
+* Plugin version in use
 * WordPress version in use
-* Wordpress language if other than english
 * WordPress theme in use
-* WordPress plugins causing conflicts if any
-* A link to a screenshot if it can be useful to undesrtand the problem
+* WordPress default language in use, if other than english
+* WordPress plugins causing conflicts, if any
+* A link to a screenshot, if it can be useful to understand the problem
+* A link to your website, if it can be useful to show the problem
+
+### Can't find it in my available widgets ###
+
+**Since version 1.3.1 the name of the widget changed from "Black Studio TinyMCE Widget" to "Visual Editor" to enhance user friendliness. "Black Studio TinyMCE Widget" is still the name of the plugin, but it was a bit too long and not very intuitive for inexperienced users. You may find references to the old name in articles and videos on the web, so don't panic if you don't see the "Black Studio TinyMCE Widget" in your available widgets, just look for "Visual Editor". Note:** if you are using WordPress in a language other than english you may have a corresponding name translated in your language.  
 
 ### Widgets disappeared after migrating or changing the site URL ###
 
@@ -87,16 +96,16 @@ When you post a message in the [support forum](http://wordpress.org/support/plug
 
 ### How to translate widgets using WPML ###
 
-The current version of `Black Studio TinyMCE Widget` plugin works together with the `WPML String translation` plugin. To translate a widget created with `Black Studio TinyMCE Widget` plugin you have to create it on the widgets panel and then go to `WPML` -> `String translation` and translate the title and text from there (unfortunately the translation textarea has not the visual editor).
+The current version of `Black Studio TinyMCE Widget` plugin works together with the `WPML String translation` plugin. To translate a widget created with `Black Studio TinyMCE Widget` plugin you have to create it on the widgets panel and then go to `WPML` => `String translation` and translate the title and text from there (unfortunately the translation textarea has not the visual editor).
 **Note:** If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String translation list.  
 
 ### How to embed video and other contents ###
 
-WordPress has a nice [autoembed feature](http://codex.wordpress.org/Embeds) that allows you to embed videos and other stuff in an easy way, by just putting the URL in the content area. This is also possible for widgets created with this plugin, but for best results it is recommended to put the URL inside an `[embed]` shortcode. 
-Example: 
+WordPress has a nice [autoembed feature](http://codex.wordpress.org/Embeds) that allows you to embed videos and other stuff in an easy way, by just putting the URL in the content area. This is also possible for widgets created with this plugin.
+If you are using a version of WordPress prior to 4.0 or a version of Black Studio TinyMCE Widget prior to 2.0, for best results it is recommended to put the URL inside an `[embed]` shortcode. Example: 
 `[embed]http://www.youtube.com/watch?v=XXXXXXXXXXX[/embed]`
 Ensure that the URL has not an hyperlink on it.
-Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL is not surrounded by a `<p>` tag, which is added automatically by the WYSIWYG editor (switch to HTML mode to remove enclosing `<p>` tags).
+Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL is not surrounded by a `<p>` tag.
 
 ### How to customize widget HTML markup ###
 
@@ -120,10 +129,15 @@ function my_widget_after_text( $after_text, $instance ) {
 add_filter( 'black_studio_tinymce_before_text', '__return_empty_string' );
 add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 ```
+### Plugin's data location and cleanup ###
+
+Plugin's data is stored in serialized format inside a record of the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after uninstalling the plugin.
+
 ## Changelog ##
 
-### 2.0.0 (2014-09-25) ###
+### 2.0.0 (2014-10-01) ###
 * Total refactoring of plugin's source code
+* Enhanced integration with TinyMCE editor for better compatibility with other plugins
 * Added support for QuickTags toolbar in HTML mode
 * Added support for mobile devices (responsive width in widgets administration page)
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
@@ -283,3 +297,8 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 
 ### 0.5 (2011-11-10) ###
 * First Beta release
+
+## Upgrade Notice ##
+
+### 2.0.0 ###
+2.0 is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.

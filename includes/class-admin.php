@@ -106,7 +106,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Add actions and filters (only in widgets admin page)
 		 *
-		 * @uses apply_filters()
 		 * @uses add_action()
 		 * @uses add_filter()
 		 * @uses do_action()
@@ -115,15 +114,15 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function admin_init() {
+			add_action( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
 			if ( $this->enabled() ) {
-				// Add plugin hooks
 				add_action( 'admin_head', array( $this, 'enqueue_media' ) );
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
-				// Action hook on plugin load
+				add_filter( 'wp_editor_settings', array( $this, 'editor_settings'), 10, 2 );
 				do_action( 'black_studio_tinymce_load' );
 			}
 		}
@@ -262,21 +261,35 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		}
 
 		/**
-		 * Output the visual editor code
+		 * Output the visual editor
 		 *
 		 * @uses wp_editor()
 		 *
+		 * @param string $text
+		 * @param string $editor_id
+		 * @param string $name
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function editor( $text, $id, $name = '' ) {
-			$editor_settings = array(
-				'default_editor' => 'tmce',
-				'tinymce' => array( 'wp_skip_init' => true ),
-				'textarea_name' => $name,
-				'editor_height' => 350,
-			);
-			wp_editor( $text, $id, $editor_settings );
+		public function editor( $text, $editor_id, $name = '' ) {
+			wp_editor( $text, $editor_id, $this->editor_settings( array( 'textarea_name' => $name ), $editor_id ) );
+		}
+
+		/**
+		 * Set editor settings
+		 *
+		 * @param mixed[] $settings
+		 * @param string $editor_id
+		 * @return mixed[]
+		 * @since 2.0.0
+		 */
+		public function editor_settings( $settings, $editor_id ) {
+			if ( strstr( $editor_id, 'black-studio-tinymce' ) ) {
+				$settings['default_editor'] = 'tmce';
+				$settings['tinymce'] = array( 'wp_skip_init' => true );
+				$settings['editor_height'] = 350;
+			}
+			return $settings;
 		}
 
 		/**
@@ -305,6 +318,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			self::$links = array(
 				/* translators: text used for plugin home link */
 				'https://wordpress.org/plugins/black-studio-tinymce-widget/' => __( 'Home', 'black-studio-tinymce-widget' ),
+				/* translators: text used for support faq link */
+				'https://wordpress.org/plugins/black-studio-tinymce-widget/faq/' => __( 'FAQ', 'black-studio-tinymce-widget' ),
 				/* translators: text used for support forum link */
 				'https://wordpress.org/support/plugin/black-studio-tinymce-widget' => __( 'Support', 'black-studio-tinymce-widget' ),
 				/* translators: text used for reviews link */
@@ -322,7 +337,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		function display_links() {
+		public function display_links() {
 			echo "\t<div class='bstw-links'>\n";
 			echo "\t\t<span class='bstw-links-list'>\n";
 			$counter = count( self::$links ) - 1;
@@ -334,6 +349,22 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			/* translators: text used for the icon that shows the plugin links */
 			echo "\t\t<a class='bstw-links-icon icon16 icon-plugins' href='#' title='" . esc_attr( __( 'About Black Studio TinyMCE Widget plugin', 'black-studio-tinymce-widget' ) ) . "'></a>\n";
 			echo "\t</div>\n";
+		}
+
+		/**
+		 * Show row meta on the plugin screen
+		 *
+		 * @param mixed $links
+		 * @param mixed $file
+		 * @return string[]
+		 */
+		public function plugin_row_meta( $links, $file ) {
+			if ( $file == bstw()->get_basename() ) {
+				foreach ( self::$links as $url => $label ) {
+					$links[$label] = '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $label ) . '</a>';
+				}
+			}
+			return $links;
 		}
 
 	} // END class Black_Studio_TinyMCE_Admin

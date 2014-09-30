@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-09-24 19:23:02+00:00\n"
-"PO-Revision-Date: 2014-09-18 11:58+0000\n"
+"POT-Creation-Date: 2014-09-26 11:55:28+00:00\n"
+"PO-Revision-Date: 2014-09-26 11:44+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -27,39 +27,44 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 #. translators: error message shown when a duplicated widget ID is detected
-#: includes/class-admin.php:247
+#: includes/class-admin.php:246
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr "Virhe: Samalla ID:llä löytyi toinen vimpain. Tee samalla sisällöllä toinen vimpain ja poista tämä."
 
 #. translators: text used for plugin home link
-#: includes/class-admin.php:307
+#: includes/class-admin.php:306
 msgid "Home"
 msgstr "Etusivu"
 
+#. translators: text used for support faq link
+#: includes/class-admin.php:308
+msgid "FAQ"
+msgstr "UKK"
+
 #. translators: text used for support forum link
-#: includes/class-admin.php:309
+#: includes/class-admin.php:310
 msgid "Support"
 msgstr "Tuki"
 
 #. translators: text used for reviews link
-#: includes/class-admin.php:311
+#: includes/class-admin.php:312
 msgid "Rate"
 msgstr "Arvostele"
 
 #. translators: text used for follow on twitter link
-#: includes/class-admin.php:313
+#: includes/class-admin.php:314
 msgid "Follow"
 msgstr "Seuraa"
 
 #. translators: text used for donation link
-#: includes/class-admin.php:315
+#: includes/class-admin.php:316
 msgid "Donate"
 msgstr "Lahjoita"
 
 #. translators: text used for the icon that shows the plugin links
-#: includes/class-admin.php:335
+#: includes/class-admin.php:336
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-09-24 19:23:02+00:00\n"
-"PO-Revision-Date: 2014-09-18 11:58+0000\n"
+"POT-Creation-Date: 2014-09-30 23:41:03+00:00\n"
+"PO-Revision-Date: 2014-09-29 14:20+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -34,32 +34,37 @@ msgid ""
 msgstr "FOUT: Duplicate widget ID gedetecteerd. Om inhoud verlies te voorkomen, maak dan een nieuwe widget met dezelfde inhoud en verwijder deze."
 
 #. translators: text used for plugin home link
-#: includes/class-admin.php:307
+#: includes/class-admin.php:321
 msgid "Home"
 msgstr "Home"
 
+#. translators: text used for support faq link
+#: includes/class-admin.php:323
+msgid "FAQ"
+msgstr "FAQ"
+
 #. translators: text used for support forum link
-#: includes/class-admin.php:309
+#: includes/class-admin.php:325
 msgid "Support"
 msgstr "Ondersteuning"
 
 #. translators: text used for reviews link
-#: includes/class-admin.php:311
+#: includes/class-admin.php:327
 msgid "Rate"
 msgstr "Beoordelen"
 
 #. translators: text used for follow on twitter link
-#: includes/class-admin.php:313
+#: includes/class-admin.php:329
 msgid "Follow"
 msgstr "Volgen"
 
 #. translators: text used for donation link
-#: includes/class-admin.php:315
+#: includes/class-admin.php:331
 msgid "Donate"
 msgstr "Doneren"
 
 #. translators: text used for the icon that shows the plugin links
-#: includes/class-admin.php:335
+#: includes/class-admin.php:351
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr ""
 

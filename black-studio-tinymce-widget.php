@@ -123,6 +123,18 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		}
 
 		/**
+		 * Get plugin basename
+		 *
+		 * @uses plugin_basename()
+		 *
+		 * @return string
+		 * @since 2.0.0
+		 */
+		public static function get_basename() {
+			return plugin_basename( __FILE__ );
+		}
+
+		/**
 		 * Class constructor
 		 *
 		 * @uses add_action()
