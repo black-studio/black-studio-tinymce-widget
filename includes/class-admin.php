@@ -122,7 +122,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
-				add_filter( 'wp_editor_settings', array( $this, 'editor_settings'), 10, 2 );
+				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 10, 2 );
 				do_action( 'black_studio_tinymce_load' );
 			}
 		}
@@ -354,14 +354,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Show row meta on the plugin screen
 		 *
-		 * @param mixed $links
-		 * @param mixed $file
+		 * @param string[] $links
+		 * @param string $file
 		 * @return string[]
 		 */
 		public function plugin_row_meta( $links, $file ) {
 			if ( $file == bstw()->get_basename() ) {
 				foreach ( self::$links as $url => $label ) {
-					$links[$label] = '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $label ) . '</a>';
+					$links[ $label ] = '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $label ) . '</a>';
 				}
 			}
 			return $links;

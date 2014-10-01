@@ -203,6 +203,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Initialize compatibility for Page Builder (SiteOrigin Panels)
 		 *
 		 * @uses add_filter()
+		 * @uses add_action()
 		 * @uses remove_filter()
 		 * @uses add_action()
 		 * @uses is_plugin_active()
@@ -217,8 +218,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 				add_filter( 'black_studio_tinymce_activate_events', array( $this, 'siteorigin_panels_activate_events' ) );
 				add_filter( 'black_studio_tinymce_deactivate_events', array( $this, 'siteorigin_panels_deactivate_events' ) );
 				add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'siteorigin_panels_enable_pages' ) );
-				add_filter( 'wp_editor_settings', array( $this, 'siteorigin_panels_editor_settings'), 20, 2 );
+				add_filter( 'wp_editor_settings', array( $this, 'siteorigin_panels_editor_settings' ), 20, 2 );
 				remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 40 );
+				add_action( 'black_studio_tinymce_after_editor', array( $this, 'siteorigin_panels_after_editor' ) );
 			}
 		}
 
@@ -304,6 +306,18 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 				$settings['default_editor'] = 'html';
 			}
 			return $settings;
+		}
+
+		/**
+		 * Remove editor content filters for use within Page Builder (SiteOrigin Panels)
+		 * Workaround for WordPress Core bug #28403 https://core.trac.wordpress.org/ticket/28403
+		 *
+		 * @return void
+		 * @since 2.0.0
+		 */
+		public function siteorigin_panels_after_editor() {
+			remove_filter( 'the_editor_content', 'wp_htmledit_pre' );
+			remove_filter( 'the_editor_content', 'wp_richedit_pre' );
 		}
 
 		/**
