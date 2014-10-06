@@ -1,0 +1,55 @@
+/* Black Studio TinyMCE Widget - CSS */
+
+.bstw-links {
+	font-size: 11px;
+	margin-top: -3px;
+	text-align: right;
+	position: absolute;
+	right: 18px;
+}
+
+.bstw-links .icon16:before {
+	padding: 0;
+}
+
+.bstw-links .icon16 {
+	float: right;
+	padding: 3px 6px;
+	margin: -6px -8px 0 -2px;
+}
+
+.bstw-links .bstw-links-list {
+	display: none;
+}
+
+.bstw-links a {
+	text-decoration: none;
+}
+
+#wp-black-studio-tinymce-widget-wrap {
+	display: none;
+}
+
+div[id*="black-studio-tinymce"] .wp-editor-wrap {
+	margin-bottom: 1em;
+}
+
+#available-widgets [class*="black-studio-tinymce"] .widget-title:before {
+	content: "\f116"; 
+}
+
+.wp-customizer .mce-floatpanel.mce-popover {
+	z-index: 500000 !important;
+}
+
+#TB_overlay, #TB_window {
+	z-index: 999999 !important;
+}
+
+body.wait, body.wait * {
+	cursor: wait !important;   
+}
+
+#zedity_content_overlay {
+	z-index: 100000 !important;
+}
