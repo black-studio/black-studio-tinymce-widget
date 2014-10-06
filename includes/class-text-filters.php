@@ -51,7 +51,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 */
 		protected function __construct() {
 			// Support for wp_kses_post in widget text
-			add_filter( 'widget_text', array( $this, 'wp_kses_post' ), 10, 3 );
+			add_filter( 'widget_text', array( $this, 'wp_kses_post' ), 5, 3 );
 			// Support for autoembed urls in widget text
 			if ( get_option( 'embed_autourls' ) ) {
 				add_filter( 'widget_text', array( $this, 'autoembed' ), 20, 3 );
