@@ -297,7 +297,7 @@ module.exports = function( grunt ) {
 			deploy: {
 				options: {
 					plugin_slug: '<%= pkg.name %>',
-					build_dir: 'build',
+					build_dir: 'build/<%= pkg.name %>',
 					assets_dir: 'assets'
 				}
 			}
