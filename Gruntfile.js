@@ -170,12 +170,24 @@ module.exports = function( grunt ) {
 						pot.headers['x-poedit-bookmarks'] = '\n';
 						pot.headers['x-poedit-searchpath-0'] = '.\n';
 						pot.headers['x-textdomain-support'] = 'yes\n';
-						// Exclude string without textdomain
-						var translation, exclude = [ 'Title:', 'Visual', 'HTML', 'Cheatin&#8217; uh?' ];
+						// Exclude string without textdomain and plugin's meta data
+						var translation, delete_translation, 
+							excluded_strings = [ 'Title:', 'Visual', 'HTML', 'Cheatin&#8217; uh?' ],
+							excluded_meta = [ 'Plugin Name of the plugin/theme', 'Plugin URI of the plugin/theme', 'Author of the plugin/theme', 'Author URI of the plugin/theme' ];
 						for ( translation in pot.translations[''] ) {
-							if ( exclude.indexOf( translation ) >= 0 ) {
-								delete pot.translations[''][translation];
+							delete_translation = false;
+							if ( excluded_strings.indexOf( translation ) >= 0 ) {
+								delete_translation = true;
 								console.log( 'Excluded string: ' + translation );
+							}
+							if ( typeof pot.translations[''][translation].comments.extracted !== 'undefined' ) {
+								if ( excluded_meta.indexOf( pot.translations[''][translation].comments.extracted ) >= 0 ) {
+									delete_translation = true;
+									console.log( 'Excluded meta: ' + pot.translations[''][translation].comments.extracted );
+								}
+							}
+							if ( delete_translation ) {
+								delete pot.translations[''][translation];
 							}
 						}
 						return pot;

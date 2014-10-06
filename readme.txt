@@ -3,7 +3,7 @@ Contributors: marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -12,7 +12,7 @@ The visual editor widget for Wordpress.
 
 == Description ==
 
-This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress visual editor. This is intended to overcome the limitations of the default WordPress text widget, so that you can visually add rich text contents to your sidebars, with no knowledge of HTML required.
+This plugin adds a new `Visual Editor` widget type that allows you to insert rich text and media objects in your sidebars with no hassle. The default WordPress text widget lacks of functionalities and it requires HTML knowledge, this plugin was born to overcome these limitations. With Black Studio TinyMCE Widget you will be able to edit your widgets in a WYSIWYG manner using the native WordPress TinyMCE editor, just like you do in posts and pages. And if you are a developer you may still switch back and forth from Visual to HTML mode.
 
 = Features =
 
@@ -25,6 +25,7 @@ This plugin adds a WYSIWYG text widget based on the standard TinyMCE WordPress v
 * Support for WordPress networks (multi-site)
 * Support for WPML (multi-language)
 * Live preview in theme customizer
+* Available in 20+ languages
 
 = Links =
 
@@ -82,11 +83,11 @@ If you found a conflict with a plugin or theme, or if your problem is still pres
 
 = Can't find it in my available widgets =
 
-Since version 1.3.1 the name of the widget changed from "Black Studio TinyMCE Widget" to "Visual Editor" to enhance user friendliness. "Black Studio TinyMCE Widget" is still the name of the plugin, but it was a bit too long and not very intuitive for inexperienced users. You may find references to the old name in articles and videos on the web, so don't panic if you don't see the "Black Studio TinyMCE Widget" in your available widgets, just look for "Visual Editor". Note: if you are using WordPress in a language other than english you may have a corresponding name translated in your language.
+Since version 1.3.1 the name of the widget changed from `Black Studio TinyMCE Widget` to `Visual Editor` to enhance user friendliness. `Black Studio TinyMCE Widget` is still the name of the plugin, but it was a bit too long and not very intuitive for inexperienced users. You may find references to the old name in articles and videos on the web, so don't panic if you don't see the `Black Studio TinyMCE Widget` in your available widgets, just look for `Visual Editor`. Note: if you are using WordPress in a language other than english you may have a corresponding name translated in your language.
 
 = Widgets disappeared after migrating or changing the site URL =
 
-When dealing with a WordPress site URL change it is necessary to face the "serialized fields" issue: data may become corrupted if using a simple search/replace (see the [Codex](http://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiviation. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.
+When dealing with a WordPress site URL change it is necessary to face the serialized fields issue: data may become corrupted if using a simple search/replace (see the [Codex](http://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiviation. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.
 
 = How to translate widgets using WPML =
 
@@ -127,22 +128,22 @@ add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 
 = Plugin's data location and cleanup =
 
-Plugin's data is stored in serialized format inside a record of the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after uninstalling the plugin.
+Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 == Changelog ==
 
-= 2.0.0 (2014-10-01) =
+= 2.0.0 (2014-10-06) =
 * Total refactoring of plugin's source code
 * Enhanced integration with TinyMCE editor for better compatibility with other plugins
 * Added support for QuickTags toolbar in HTML mode
 * Added support for mobile devices (responsive width in widgets administration page)
 * Added project to [GitHub](https://github.com/black-studio/black-studio-tinymce-widget)
 * Added project to [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/) translation platform
-* Added french, dutch, greek, turkish, hindi and khmer translations thanks to [WP-Translation.org](http://wp-translations.org/) team
+* Added many new translations thanks to [WP-Translation.org](http://wp-translations.org/) team
+* Added several filter and action hooks
 * Improved code quality and security thanks to [Scrutinizer](https://scrutinizer-ci.com/g/black-studio/black-studio-tinymce-widget/) service
 * Improved development workflow thanks to [Grunt](http://gruntjs.com/)
 * Improved performance and user experience
-* Added several filter and action hooks
 * A huge Thanks to @cfoellmann for his precious support and contributions
 
 = 1.4.8 (2014-09-13) =
@@ -177,7 +178,7 @@ Plugin's data is stored in serialized format inside a record of the `wp_options`
 
 = 1.4 (2014-06-12) =
 * HTML and CSS optimization by using WordPress native editor markup and styles
-* Adoption of WordPress JS minification conventions (".min" suffix)
+* Adoption of WordPress JS minification conventions (`.min` suffix)
 * Integration with WordPress SCRIPT_DEBUG constant for javascript debugging purposes
 * Enhanced compatibility with 3rd party media buttons provider (i.e. Shortcodes Ultimate)
 * Enhanced plugin internal version handling
@@ -200,7 +201,7 @@ Plugin's data is stored in serialized format inside a record of the `wp_options`
 * Updated FAQ
 
 = 1.3.1 (2014-03-06) =
-* Renamed the widget to "Visual Editor" for better user friendliness
+* Renamed the widget to `Visual Editor` for better user friendliness
 * Fixed compatibility issue with FirmaSite Theme Enhancer plugin
 
 = 1.3.0 (2014-01-29) =
@@ -212,7 +213,7 @@ Plugin's data is stored in serialized format inside a record of the `wp_options`
 * Fixed editor behavior on widget title clicks
 * Fixed CSS issue affecting Firefox on WordPress 3.8
 * Added finnish translation (Contributor: Timo Leiniö)
-* Better handling of "More tag" button
+* Better handling of More tag button
 * Included JS dev version
 
 = 1.2.0 (2013-05-04) =
@@ -236,7 +237,7 @@ Plugin's data is stored in serialized format inside a record of the `wp_options`
 * Overall Javascript code optimization
 * Better Javascript compression
 * Fixed editor background color
-* Fixed compatibility issue with "WP Page Widget" plugin
+* Fixed compatibility issue with WP Page Widget plugin
 * Fixed issue about editor partially hidden on narrow screens
 
 = 0.9.5 (2012-10-01) =

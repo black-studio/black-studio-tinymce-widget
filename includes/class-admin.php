@@ -30,7 +30,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @var array
 		 * @since 2.0.0
 		 */
-		protected static $links;
+		protected $links;
 
 		/**
 		 * Return the single class instance
@@ -62,8 +62,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ), 20 );
 			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
-			// Initialize links
-			self::init_links();
 		}
 
 		/**
@@ -85,7 +83,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function load_textdomain() {
-			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
 		}
 
 		/**
@@ -114,6 +112,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function admin_init() {
+			$this->init_links();
 			add_action( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
 			if ( $this->enabled() ) {
 				add_action( 'admin_head', array( $this, 'enqueue_media' ) );
@@ -315,7 +314,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function init_links() {
-			self::$links = array(
+			$this->links = array(
 				/* translators: text used for plugin home link */
 				'https://wordpress.org/plugins/black-studio-tinymce-widget/' => __( 'Home', 'black-studio-tinymce-widget' ),
 				/* translators: text used for support faq link */
@@ -340,8 +339,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		public function display_links() {
 			echo "\t<div class='bstw-links'>\n";
 			echo "\t\t<span class='bstw-links-list'>\n";
-			$counter = count( self::$links ) - 1;
-			foreach ( self::$links as $url => $label ) {
+			$counter = count( $this->links ) - 1;
+			foreach ( $this->links as $url => $label ) {
 				$separator = ( $counter-- > 0 ? ' | ' : '' );
 				echo "\t\t\t<a href='" . esc_url( $url ) . "' target='_blank'>" . esc_html( $label ) . "</a>$separator\n"; // xss ok
 			}
@@ -360,7 +359,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function plugin_row_meta( $links, $file ) {
 			if ( $file == bstw()->get_basename() ) {
-				foreach ( self::$links as $url => $label ) {
+				foreach ( $this->links as $url => $label ) {
 					$links[ $label ] = '<a href="' . esc_url( $url ) . '" target="_blank">' . esc_html( $label ) . '</a>';
 				}
 			}
