@@ -40,18 +40,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		/**
 		 * Class constructor
 		 *
-		 * @uses add_action()
 		 * @uses add_filter()
 		 * @uses get_option()
-		 * @uses get_bloginfo()
 		 *
 		 * @global object $wp_embed
 		 * @return void
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
-			// Support for wp_kses_post in widget text
-			add_filter( 'widget_text', array( $this, 'wp_kses_post' ), 5, 3 );
 			// Support for autoembed urls in widget text
 			if ( get_option( 'embed_autourls' ) ) {
 				add_filter( 'widget_text', array( $this, 'autoembed' ), 20, 3 );
@@ -84,8 +80,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @param string $text
 		 * @return string
 		 * @since 2.0.0
+		 * @deprecated 2.0.3
 		 */
 		public function wp_kses_post( $text, $instance = null, $widget = null ) {
+			_deprecated_function( __METHOD__, '2.0.3' );
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				$text = wp_kses_post( $text );
 			}
