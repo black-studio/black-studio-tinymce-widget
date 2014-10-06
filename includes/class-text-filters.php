@@ -85,7 +85,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @return string
 		 * @since 2.0.0
 		 */
-		public function wp_kses_post( $text, $instance, $widget = null ) {
+		public function wp_kses_post( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				$text = wp_kses_post( $text );
 			}
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @return string
 		 * @since 2.0.0
 		 */
-		public function autoembed( $text, $instance, $widget = null ) {
+		public function autoembed( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				global $wp_embed;
 				$text = $wp_embed->run_shortcode( $text );
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @return string
 		 * @since 2.0.0
 		 */
-		public function convert_smilies( $text, $instance, $widget = null ) {
+		public function convert_smilies( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				$text = convert_smilies( $text );
 			}
@@ -133,7 +133,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @return string
 		 * @since 2.0.0
 		 */
-		public function wpautop( $text, $instance, $widget = null ) {
+		public function wpautop( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				$text = wpautop( $text );
 			}
@@ -149,7 +149,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @return string
 		 * @since 2.0.0
 		 */
-		public function do_shortcode( $text, $instance, $widget = null ) {
+		public function do_shortcode( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				$text = do_shortcode( $text );
 			}

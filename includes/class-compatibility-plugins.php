@@ -104,7 +104,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @return string
 		 * @since 2.0.0
 		 */
-		public function wpml_widget_text( $text, $instance, $widget = null ) {
+		public function wpml_widget_text( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				if ( function_exists( 'icl_t' ) ) {
 					$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
