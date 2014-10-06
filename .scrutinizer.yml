@@ -1,0 +1,94 @@
+# Scrutinizer Configuration
+# Profile: Black-Studio-plugin
+
+filter:
+    excluded_paths: [css/*.min.css, js/*.min.js]
+
+tools:
+    # Runs the JSHint static analysis tool (https://scrutinizer-ci.com/docs/tools/javascript/jshint/)
+    js_hint:
+        config:
+            boss: true
+            curly: true
+            eqeqeq: true
+            eqnull: true
+            es3: true
+            expr: true
+            immed: true
+            noarg: true
+            onevar: true
+            quotmark: single
+            trailing: true
+            undef: true
+            unused: true
+            browser: true
+            globals: { _: false, Backbone: false, jQuery: false, wp: false }
+
+    php_mess_detector:
+        config:
+            code_size_rules: { cyclomatic_complexity: true }
+            unused_code_rules: { unused_local_variable: true, unused_private_method: true, unused_formal_parameter: true }
+            controversial_rules: { superglobals: false }
+
+    # Runs the PHP CS Fixer (http://cs.sensiolabs.org/) (https://scrutinizer-ci.com/docs/tools/php/cs-fixer/)
+    php_cs_fixer:
+        config:
+            level: custom
+            fixers: { linefeed: true, trailing_spaces: true, visibility: true, return: true, short_tag: true, php_closing_tag: true, controls_spaces: true, elseif: true, eof_ending: true }
+
+    # PHP Analyzer (https://scrutinizer-ci.com/docs/tools/php/php-analyzer/)
+    php_analyzer:
+        config:
+            parameter_reference_check: { enabled: false }
+            checkstyle: { enabled: false, no_trailing_whitespace: true, naming: { enabled: true, local_variable: '^[a-z][a-zA-Z0-9]*$', abstract_class_name: ^Abstract|Factory$, utility_class_name: 'Utils?$', constant_name: '^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*$', property_name: '^[a-z][a-zA-Z0-9]*$', method_name: '^(?:[a-z]|__)[a-zA-Z0-9]*$', parameter_name: '^[a-z][a-zA-Z0-9]*$', interface_name: '^[A-Z][a-zA-Z0-9]*Interface$', type_name: '^[A-Z][a-zA-Z0-9]*$', exception_name: '^[A-Z][a-zA-Z0-9]*Exception$', isser_method_name: '^(?:is|has|should|may|supports)' } }
+            unreachable_code: { enabled: false }
+            check_access_control: { enabled: false }
+            typo_checks: { enabled: true }
+            check_variables: { enabled: false }
+            check_calls: { enabled: true, too_many_arguments: true, missing_argument: true, argument_type_checks: lenient }
+            suspicious_code: { enabled: false, overriding_parameter: false, overriding_closure_use: false, parameter_closure_use_conflict: false, parameter_multiple_times: false, non_existent_class_in_instanceof_check: false, non_existent_class_in_catch_clause: false, assignment_of_null_return: false, non_commented_switch_fallthrough: false, non_commented_empty_catch_block: false, overriding_private_members: false, use_statement_alias_conflict: false, precedence_in_condition_assignment: false }
+            dead_assignments: { enabled: false }
+            verify_php_doc_comments: { enabled: true, parameters: true, return: true, suggest_more_specific_types: true, ask_for_return_if_not_inferrable: false, ask_for_param_type_annotation: false }
+            loops_must_use_braces: { enabled: true }
+            check_usage_context: { enabled: true, foreach: { value_as_reference: true, traversable: true } }
+            simplify_boolean_return: { enabled: false }
+            phpunit_checks: { enabled: false }
+            reflection_checks: { enabled: false }
+            precedence_checks: { enabled: true, assignment_in_condition: true, comparison_of_bit_result: true }
+            basic_semantic_checks: { enabled: false }
+            unused_code: { enabled: true }
+            deprecation_checks: { enabled: false }
+            useless_function_calls: { enabled: true }
+            metrics_lack_of_cohesion_methods: { enabled: false }
+            metrics_coupling: { enabled: true, stable_code: { namespace_prefixes: {  }, classes: {  } } }
+            doctrine_parameter_binding: { enabled: false }
+            doctrine_entity_manager_injection: { enabled: false }
+            symfony_request_injection: { enabled: false }
+            doc_comment_fixes: { enabled: false }
+            reflection_fixes: { enabled: false }
+            use_statement_fixes: { enabled: true, remove_unused: true, preserve_multiple: false, preserve_blanklines: false, order_alphabetically: false }
+
+    # Runs PHP Code Sniffer
+    php_code_sniffer:
+        config:
+            standard: WordPress
+            sniffs: { generic: { classes: { duplicate_class_name_sniff: true }, php: { disallow_short_open_tag_sniff: true, no_silenced_errors_sniff: true, lower_case_constant_sniff: true, lower_case_keyword_sniff: true }, formatting: { multiple_statement_alignment_sniff: true }, functions: { function_call_argument_spacing_sniff: true, opening_function_brace_kernighan_ritchie_sniff: true }, files: { one_interface_per_file_sniff: true, line_length_sniff: true, one_class_per_file_sniff: true }, commenting: { fixme_sniff: true, todo_sniff: true }, control_structures: { inline_control_structure_sniff: true }, naming_conventions: { constructor_name_sniff: true } } }
+
+    # SensioLabs Security Checker (https://scrutinizer-ci.com/docs/tools/php/security-advisory-checker/)
+    sensiolabs_security_checker: true
+
+    # Testing?
+    # php_code_coverage: true
+
+    # PHP Copy/Paste Detector (https://scrutinizer-ci.com/docs/tools/php/copy-paste-detector/)
+    php_cpd: true
+
+    # PHPLOC - PHP Lines of code
+    php_loc: true
+
+    # PHP PDepend (https://scrutinizer-ci.com/docs/tools/php/pdepend/)
+    # Analyzes the size and structure of a PHP project
+    php_pdepend: true
+
+    # External Code Coverage (https://scrutinizer-ci.com/docs/tools/external-code-coverage/)
+    # external_code_coverage: true
