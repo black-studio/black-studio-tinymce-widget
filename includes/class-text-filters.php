@@ -50,16 +50,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		protected function __construct() {
 			// Support for autoembed urls in widget text
 			if ( get_option( 'embed_autourls' ) ) {
-				add_filter( 'widget_text', array( $this, 'autoembed' ), 20, 3 );
+				add_filter( 'widget_text', array( $this, 'autoembed' ), 4, 3 );
 			}
 			// Support for smilies in widget text
 			if ( get_option( 'use_smilies' ) ) {
-				add_filter( 'widget_text', array( $this, 'convert_smilies' ), 30, 3 );
+				add_filter( 'widget_text', array( $this, 'convert_smilies' ), 6, 3 );
 			}
 			// Support for wpautop in widget text
-			add_filter( 'widget_text', array( $this, 'wpautop' ), 40, 3 );
+			add_filter( 'widget_text', array( $this, 'wpautop' ), 8, 3 );
 			// Support for shortcodes in widget text
-			add_filter( 'widget_text', array( $this, 'do_shortcode' ), 50, 3 );
+			add_filter( 'widget_text', array( $this, 'do_shortcode' ), 10, 3 );
 		}
 
 		/**

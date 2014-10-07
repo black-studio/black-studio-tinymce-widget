@@ -219,7 +219,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 				add_filter( 'black_studio_tinymce_deactivate_events', array( $this, 'siteorigin_panels_deactivate_events' ) );
 				add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'siteorigin_panels_enable_pages' ) );
 				add_filter( 'wp_editor_settings', array( $this, 'siteorigin_panels_editor_settings' ), 20, 2 );
-				remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 40 );
+				remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 8 );
 				add_action( 'black_studio_tinymce_after_editor', array( $this, 'siteorigin_panels_after_editor' ) );
 			}
 		}
