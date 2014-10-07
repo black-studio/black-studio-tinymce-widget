@@ -84,6 +84,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 				$instance['text'] = stripslashes( wp_filter_post_kses( addslashes( $new_instance['text'] ) ) ); // wp_filter_post_kses() expects slashed
 			}
 			$instance['type'] = strip_tags( $new_instance['type'] );
+			$instance['filter'] = strip_tags( $new_instance['filter'] );
 			$instance = apply_filters( 'black_studio_tinymce_widget_update',  $instance, $this );
 			return $instance;
 		}
@@ -107,6 +108,10 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		 */
 		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'type' => 'visual' ) );
+			// Guess (wpautop) filter value for widgets created with previous version
+			if ( ! isset( $instance['filter'] ) ) {
+				$instance['filter'] = $instance['type'] == 'visual'? 1 : 0;
+			}
 			$title = strip_tags( $instance['title'] );
 			do_action( 'black_studio_tinymce_before_editor' );
 			?>
@@ -116,6 +121,10 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			<?php
 			do_action( 'black_studio_tinymce_editor', $instance['text'], $this->get_field_id( 'text' ), $this->get_field_name( 'text' ), $instance['type'] );
 			do_action( 'black_studio_tinymce_after_editor' );
+			?>
+			<input id="<?php echo $this->get_field_id( 'filter' ); ?>-hidden" name="<?php echo $this->get_field_name( 'filter' ); ?>" type="hidden" value="0" />
+			<p><input id="<?php echo $this->get_field_id( 'filter' ); ?>" name="<?php echo $this->get_field_name( 'filter' ); ?>" type="checkbox" value="1" <?php checked( $instance['filter'] ); ?> />&nbsp;<label for="<?php echo $this->get_field_id( 'filter' ); ?>"><?php _e( 'Automatically add paragraphs' ); ?></label></p>
+            <?php
 		}
 
 	} // END class WP_Widget_Black_Studio_TinyMCE

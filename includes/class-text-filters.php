@@ -133,7 +133,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 */
 		public function wpautop( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				$text = wpautop( $text );
+				// Widgets created with previous versions do not have the filter parameter
+				if ( isset( $instance['filter'] ) && $instance['filter'] == 1 || ! isset( $instance['filter'] ) && $instance['type'] == 'visual' ) {
+					$text = wpautop( $text );
+				}
 			}
 			return $text;
 		}
