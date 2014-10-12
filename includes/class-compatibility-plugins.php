@@ -73,7 +73,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 */
 		public function wpml() {
 			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'wpml_widget_update' ), 10, 2 );
-			add_filter( 'widget_text', array( $this, 'wpml_widget_text' ), 5, 3 );
+			add_filter( 'widget_text', array( $this, 'wpml_widget_text' ), 2, 3 );
 		}
 
 		/**

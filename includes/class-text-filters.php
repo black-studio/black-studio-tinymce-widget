@@ -123,18 +123,38 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		}
 
 		/**
+		 * Check if automatic addition of paragraphs in widget text is needed
+		 *
+		 * @uses apply_filters()
+		 * 
+		 * @param array $instance
+		 * @return boolean
+		 * @since 2.1.0
+		 */
+		public function need_wpautop( $instance ) {
+			// Widgets created with previous plugin versions do not have the filter parameter set so we base the choice on the type parameter
+			$need_wpautop = $instance['type'] == 'visual';
+			if ( isset( $instance['filter'] ) ) {
+				$need_wpautop = $instance['filter'] == 1;
+			}
+			$need_wpautop = apply_filters( 'black_studio_tinymce_need_wpautop', $need_wpautop, $instance );
+			return $need_wpautop;
+		}
+		
+		/**
 		 * Apply automatic paragraphs in widget text
 		 *
 		 * @uses wpautop()
 		 * 
 		 * @param string $text
+		 * @param array $instance
+		 * @param object $widget
 		 * @return string
 		 * @since 2.0.0
 		 */
 		public function wpautop( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				// Widgets created with previous versions do not have the filter parameter
-				if ( isset( $instance['filter'] ) && $instance['filter'] == 1 || ! isset( $instance['filter'] ) && $instance['type'] == 'visual' ) {
+				if ( need_wpautop( $instance ) ) {
 					$text = wpautop( $text );
 				}
 			}
