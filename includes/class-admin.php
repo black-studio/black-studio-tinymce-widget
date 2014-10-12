@@ -279,13 +279,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 *
 		 * @param mixed[] $settings
 		 * @param string $editor_id
-		 * @return mixed[]|array[]
+		 * @return mixed[]
 		 * @since 2.0.0
 		 */
 		public function editor_settings( $settings, $editor_id ) {
 			if ( strstr( $editor_id, 'black-studio-tinymce' ) ) {
 				$settings['default_editor'] = 'tmce';
-				$settings['tinymce'] = array( 'wp_skip_init' => true );
+				$settings['tinymce'] = array( 'wp_skip_init' => true, 'add_unload_trigger' => false );
 				$settings['editor_height'] = 350;
 			}
 			return $settings;

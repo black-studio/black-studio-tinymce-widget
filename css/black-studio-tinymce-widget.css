@@ -38,6 +38,7 @@
 	background-repeat: no-repeat;
 	z-index: 100000;
 	display: none;
+	opacity: 0.5;
 }
 
 #wp-black-studio-tinymce-widget-wrap {

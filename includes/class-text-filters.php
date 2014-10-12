@@ -154,7 +154,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 */
 		public function wpautop( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				if ( need_wpautop( $instance ) ) {
+				if ( $this->need_wpautop( $instance ) ) {
 					$text = wpautop( $text );
 				}
 			}

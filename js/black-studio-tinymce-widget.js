@@ -17,7 +17,7 @@ var bstw;
 		}
 		// jQuery object initialization
 		else if ( typeof arg === 'object' && arg instanceof jQuery ) {
-			id = $( 'textarea[id^=widget-black-studio-tinymce]', arg.closest( bstw_data.container_selectors ) ).attr( 'id' );
+			id = $( 'textarea[id^=widget-black-studio-tinymce][id$=text]', arg.closest( bstw_data.container_selectors ) ).attr( 'id' );
 		}
 
 		// Create and return instance
@@ -50,7 +50,7 @@ var bstw;
 						tinyMCEPreInit.mceInit[id].setup = function( ed ) {
 							// Real time preview (Theme customizer)
 							ed.on( 'keyup change', function() {
-								var content = window.switchEditors.pre_wpautop( ed.getContent() );
+								var content = window.switchEditors.pre_wpautop( ed.save() );
 								$( '#' + id ).val( content ).change();
 							});
 							$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
@@ -89,7 +89,7 @@ var bstw;
 			// Update textarea content when in visual mode
 			update_content: function() {
 				if ( this.get_mode() === 'visual' ) {
-					this.get_textarea().val( window.switchEditors.pre_wpautop( tinymce.get( id ).getContent() ) );
+					this.get_textarea().val( window.switchEditors.pre_wpautop( tinymce.get( id ).save() ) );
 				} else {
 					tinymce.get( id ).setContent( window.switchEditors.wpautop( this.get_textarea().val() ) );
 				}
@@ -136,6 +136,7 @@ var bstw;
 				return $( '#' + id );
 			},
 
+			// Check if the tinymce instance is active
 			is_tinymce_active: function() {
 				return 'object' === typeof tinymce && 'object' === typeof tinymce.get( id ) && null !== tinymce.get( id );
 			},
@@ -206,7 +207,7 @@ var bstw;
 					var height = $( this ).closest( '.widget' ).find( '.wp-editor-wrap' ).height();
 					$( this ).closest( '.widget' ).find( '.wp-editor-wrap' ).height( height ).append( '<div class="bstw-loading"></div>' );
 					$( this ).closest( '.widget' ).find( '.bstw-loading' ).height( height ).show();
-					bstw( $( this ) ).update_content().deactivate();
+					bstw( $( this ) ).update_content();
 				});
 			}
 		});
