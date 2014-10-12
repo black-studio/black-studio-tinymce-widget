@@ -203,7 +203,10 @@ var bstw;
 				// Note: the save event handler is intentionally attached to the save button instead of document
 				// to let the the textarea content be updated before the ajax request starts
 				$( 'input[name=savewidget]',  bstw( $( this ) ).get_widget() ).on( 'click', function() {
-					bstw( $( this ) ).update_content();
+					var height = $( this ).closest( '.widget' ).find( '.wp-editor-wrap' ).height();
+					$( this ).closest( '.widget' ).find( '.wp-editor-wrap' ).height( height ).append( '<div class="bstw-loading"></div>' );
+					$( this ).closest( '.widget' ).find( '.bstw-loading' ).height( height ).show();
+					bstw( $( this ) ).update_content().deactivate();
 				});
 			}
 		});
