@@ -127,7 +127,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 *
 		 * @uses apply_filters()
 		 * 
-		 * @param array $instance
+		 * @param mixed[] $instance
 		 * @return boolean
 		 * @since 2.1.0
 		 */
@@ -147,8 +147,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @uses wpautop()
 		 * 
 		 * @param string $text
-		 * @param array $instance
-		 * @param object $widget
+		 * @param mixed[]|null $instance
+		 * @param object|null $widget
 		 * @return string
 		 * @since 2.0.0
 		 */

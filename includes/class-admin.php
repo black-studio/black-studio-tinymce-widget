@@ -279,7 +279,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 *
 		 * @param mixed[] $settings
 		 * @param string $editor_id
-		 * @return mixed[]
+		 * @return mixed[]|array[]
 		 * @since 2.0.0
 		 */
 		public function editor_settings( $settings, $editor_id ) {

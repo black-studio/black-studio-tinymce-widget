@@ -99,7 +99,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses icl_t() Part of WPML
 		 *
 		 * @param string $text
-		 * @param mixed[] $instance
+		 * @param mixed[]|null $instance
 		 * @param object|null $widget
 		 * @return string
 		 * @since 2.0.0
