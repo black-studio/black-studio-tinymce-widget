@@ -179,4 +179,4 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 
 	} // END class Black_Studio_TinyMCE_Text_Filters
 
-} // class_exists check
+} // END class_exists check

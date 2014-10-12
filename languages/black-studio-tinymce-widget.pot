@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Black Studio TinyMCE Widget 2.0.0\n"
+"Project-Id-Version: Black Studio TinyMCE Widget 2.1.0\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-10-06 09:32:27+00:00\n"
+"POT-Creation-Date: 2014-10-12 22:25:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,6 +24,14 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
+
+#: black-studio-tinymce-widget.php:260
+#. translators: error message shown when multiple instance of the plugin are
+#. detected
+msgid ""
+"ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were "
+"detected. Please activate only one instance at a time."
+msgstr ""
 
 #: includes/class-admin.php:245
 #. translators: error message shown when a duplicated widget ID is detected

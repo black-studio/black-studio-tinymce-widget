@@ -172,7 +172,7 @@ module.exports = function( grunt ) {
 						pot.headers['x-textdomain-support'] = 'yes\n';
 						// Exclude string without textdomain and plugin's meta data
 						var translation, delete_translation,
-							excluded_strings = [ 'Title:', 'Visual', 'HTML', 'Cheatin&#8217; uh?' ],
+							excluded_strings = [ 'Title:', 'Visual', 'HTML', 'Cheatin&#8217; uh?', 'Automatically add paragraphs' ],
 							excluded_meta = [ 'Plugin Name of the plugin/theme', 'Plugin URI of the plugin/theme', 'Author of the plugin/theme', 'Author URI of the plugin/theme' ];
 						for ( translation in pot.translations[''] ) {
 							delete_translation = false;

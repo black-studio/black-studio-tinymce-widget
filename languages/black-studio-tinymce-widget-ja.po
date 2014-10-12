@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-10-06 09:32:27+00:00\n"
-"PO-Revision-Date: 2014-10-05 23:57+0000\n"
+"POT-Creation-Date: 2014-10-12 22:25:50+00:00\n"
+"PO-Revision-Date: 2014-10-12 22:24+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,14 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Textdomain-Support: yes\n"
+
+#. translators: error message shown when multiple instance of the plugin are
+#. detected
+#: black-studio-tinymce-widget.php:260
+msgid ""
+"ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were "
+"detected. Please activate only one instance at a time."
+msgstr ""
 
 #. translators: error message shown when a duplicated widget ID is detected
 #: includes/class-admin.php:245

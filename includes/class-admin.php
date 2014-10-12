@@ -368,4 +368,4 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 
 	} // END class Black_Studio_TinyMCE_Admin
 
-} // class_exists check
+} // END class_exists check

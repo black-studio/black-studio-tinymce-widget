@@ -129,4 +129,4 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 
 	} // END class WP_Widget_Black_Studio_TinyMCE
 
-} // class_exists check
+} // END class_exists check
