@@ -179,6 +179,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Added loading overlay when saving widget
 * Added check for multiple instances of the plugin
 * Fixed issue related to multiple line breaks not being saved
+* Fixed issues with RTL locales
 * Enhanced compatibility for widgets created with 1.x versions of the plugin
 * Updated documentation about widget customization
 

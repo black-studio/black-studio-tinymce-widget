@@ -132,12 +132,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 * @uses get_user_meta()
 		 * @uses get_current_user_id()
 		 *
-		 * @return void
+		 * @param mixed[] $pointers
+		 * @return mixed[]
 		 * @since 2.1.0
 		 */
 		public function filter_dismissed( $pointers ) {
 			$valid_pointers = array();
-			if ( $pointers && is_array( $pointers ) ) {
+			if ( is_array( $pointers ) ) {
 				$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
 				foreach ( $pointers as $pointer_id => $pointer ) {
 					if ( ! in_array( $pointer_id, $dismissed ) ) {
@@ -162,7 +163,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 				'options' => array(
 					'content' => sprintf( '<h3>%s</h3> <p>%s</p>',
 						/* translators: title for the dismissable admin pointer tooltip (same as plugin name) */
-						__( 'Black Studio TinyMCE Widget', 'black-studio-tinymce-widget'),
+						__( 'Black Studio TinyMCE Widget', 'black-studio-tinymce-widget' ),
 						/* translators: text for the dismissable admin pointer tooltip */
 						__( 'The Visual Editor widget allows you to insert rich text and media objects in your sidebars', 'black-studio-tinymce-widget' )
 					),

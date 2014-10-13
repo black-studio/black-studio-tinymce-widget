@@ -122,6 +122,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
 				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 10, 2 );
+				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fix_rtl' ) );
 				do_action( 'black_studio_tinymce_load' );
 			}
 		}
@@ -155,7 +156,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function admin_print_styles() {
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
-			wp_enqueue_style( 'editor-buttons' );
+			// wp_enqueue_style( 'editor-buttons' );
 			$this->enqueue_style();
 		}
 
@@ -364,6 +365,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				}
 			}
 			return $links;
+		}
+
+		/**
+		 * Fix for rtl languages
+		 *
+		 * @param mixed[] $settings
+		 * @return mixed[]
+		 * @since 2.1.0
+		 */
+		public function tinymce_fix_rtl( $settings ) {
+			if ( is_rtl() && isset( $settings['plugins'] ) && ',directionality' == $settings['plugins'] ) {
+				unset( $settings['plugins'] );
+			}
+			return $settings;
 		}
 
 	} // END class Black_Studio_TinyMCE_Admin

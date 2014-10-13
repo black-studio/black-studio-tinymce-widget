@@ -8,6 +8,12 @@
 	right: 18px;
 }
 
+.rtl .bstw-links {
+	text-align: left;
+	right: auto;
+	left: 18px;
+}
+
 .bstw-links .icon16:before {
 	padding: 0;
 }
@@ -16,6 +22,11 @@
 	float: right;
 	padding: 3px 6px;
 	margin: -6px -8px 0 -2px;
+}
+
+.rtl .bstw-links .icon16 {
+	float: left;
+	margin: -6px -2px 0 -8px;
 }
 
 .bstw-links .bstw-links-list {
