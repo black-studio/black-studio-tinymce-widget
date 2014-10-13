@@ -156,7 +156,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function admin_print_styles() {
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
-			// wp_enqueue_style( 'editor-buttons' );
+			wp_enqueue_style( 'editor-buttons' );
 			$this->enqueue_style();
 		}
 

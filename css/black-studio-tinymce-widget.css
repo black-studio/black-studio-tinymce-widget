@@ -79,3 +79,13 @@ body.wait, body.wait * {
 #zedity_content_overlay {
 	z-index: 100000 !important;
 }
+
+/* fixes for rtl editor color text button */
+.mce-rtl .mce-colorbutton button {
+	padding-right: 3px !important;
+	padding-left: 3px !important;
+}
+.mce-rtl .mce-colorbutton .mce-preview {
+	margin: 0 !important;
+	padding: 0 !important;
+}
