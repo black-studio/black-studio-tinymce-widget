@@ -122,6 +122,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
 				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 10, 2 );
+				add_action( 'admin_print_scripts', array( $this, 'pointer_load' ) );
+				add_filter( 'black_studio_tinymce_admin_pointers-widgets', array( $this, 'pointer_register' ) );
 				do_action( 'black_studio_tinymce_load' );
 			}
 		}
@@ -185,8 +187,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * Enqueue header scripts
 		 *
 		 * @uses wp_enqueue_script()
-		 * @uses Black_Studio_TinyMCE_Plugin::enqueue_script()
-		 * @uses Black_Studio_TinyMCE_Plugin::localize_script()
 		 * @uses do_action()
 		 *
 		 * @return void
@@ -249,8 +249,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 
 		/**
 		 * Enqueue footer scripts
-		 *
-		 * @uses wp_editor()
 		 *
 		 * @return void
 		 * @since 2.0.0
@@ -353,9 +351,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Show row meta on the plugin screen
 		 *
+		 * @uses esc_html()
+		 * @uses esc_url()
+		 *
 		 * @param string[] $links
 		 * @param string $file
 		 * @return string[]
+		 * @since 2.0.0
 		 */
 		public function plugin_row_meta( $links, $file ) {
 			if ( $file == bstw()->get_basename() ) {
@@ -365,6 +367,73 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			}
 			return $links;
 		}
+
+		/**
+		 * Load admin pointer
+		 *
+		 * @uses get_current_screen()
+		 * @uses apply_filters()
+		 * @uses get_user_meta()
+		 * @uses get_current_user_id()
+		 * @uses wp_enqueue_style()
+		 * @uses wp_enqueue_script()
+		 * @uses plugins_url()
+		 * @uses wp_localize_script()
+		 * @uses SCRIPT_DEBUG
+		 *
+		 * @return void
+		 * @since 2.1.0
+		 */
+		public function pointer_load() {
+			$screen = get_current_screen();
+			$screen_id = $screen->id;
+			$pointers = apply_filters( 'black_studio_tinymce_admin_pointers-' . $screen_id, array() );
+			if ( $pointers && is_array( $pointers ) ) {
+				$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+				$valid_pointers = array();
+				foreach ( $pointers as $pointer_id => $pointer ) {
+					if ( ! in_array( $pointer_id, $dismissed ) ) {
+						$pointer['pointer_id'] = $pointer_id;
+						$valid_pointers['pointers'][] =  $pointer;
+					}
+				}
+				if ( ! empty( $valid_pointers ) ) {
+					wp_enqueue_style( 'wp-pointer' );
+					$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+					wp_enqueue_script(
+						'black-studio-tinymce-widget-pointer',
+						plugins_url( 'js/black-studio-tinymce-widget-pointer' . $suffix . '.js', dirname( __FILE__ ) ),
+						array( 'wp-pointer' ),
+						bstw()->get_version()
+					);
+					wp_localize_script( 'black-studio-tinymce-widget-pointer', 'bstw_pointer', $valid_pointers );
+				}
+			}
+		}
+
+		/**
+		 * Register admin pointer
+		 *
+		 * @param mixed[] $pointers
+		 * @return mixed[]
+		 * @since 2.1.0
+		 */
+		public function pointer_register( $pointers ) {
+			$pointers['black_studio_tinymce_widget'] = array(
+				'target' => 'div[id$=black-studio-tinymce-__i__] .widget-top',
+				'options' => array(
+					'content' => sprintf( '<h3>%s</h3> <p>%s</p>',
+						/* translators: title for the dismissable admin pointer tooltip (same as plugin name) */
+						__( 'Black Studio TinyMCE Widget', 'black-studio-tinymce-widget'),
+						/* translators: text for the dismissable admin pointer tooltip */
+						__( 'The Visual Editor widget allows you to insert rich text and media objects in your sidebars', 'black-studio-tinymce-widget' )
+					),
+					'position' => array( 'edge' => 'left', 'align' => 'middle' )
+				)
+			);
+			return $pointers;
+		}
+
 
 	} // END class Black_Studio_TinyMCE_Admin
 

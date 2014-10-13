@@ -126,6 +126,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 					remove_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_32_admin_print_footer_scripts' ) );
 				}
 				add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_33_admin_print_footer_scripts' ) );
+				remove_action( 'admin_print_scripts', array( bstw()->admin(), 'pointer_load' ) );
+				remove_filter( 'black_studio_tinymce_admin_pointers-widgets', array( bstw()->admin(), 'pointer_register' ) );
 			}
 		}
 

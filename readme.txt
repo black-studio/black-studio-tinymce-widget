@@ -175,9 +175,11 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 = 2.1.0 (2014-10-13) =
 * Added option to automatically add paragraphs
-* Added check for multiple instances of the plugin
+* Added admin pointer to help new users identify the widget
 * Added loading overlay when saving widget
-* Fixed issue related to multiple line breaks
+* Added check for multiple instances of the plugin
+* Fixed issue related to multiple line breaks not being saved
+* Enhanced compatibility for widgets created with 1.x versions of the plugin
 * Updated documentation about widget customization
 
 = 2.0.4 (2014-10-07) =
