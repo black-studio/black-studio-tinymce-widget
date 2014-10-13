@@ -54,6 +54,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		protected static $admin = null;
 
 		/**
+		 * Instance of admin pointer class
+		 *
+		 * @var object
+		 * @since 2.1.0
+		 */
+		protected static $admin_pointer = null;
+
+		/**
 		 * Instance of compatibility class
 		 *
 		 * @var object
@@ -90,6 +98,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 */
 		public static function admin() {
 			return self::$admin;
+		}
+
+		/**
+		 * Return the instance of the admin pointer class
+		 *
+		 * @return object
+		 * @since 2.1.0
+		 */
+		public static function admin_pointer() {
+			return self::$admin_pointer;
 		}
 
 		/**
@@ -153,6 +171,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			if ( is_admin() ) {
 				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-admin.php' );
 				self::$admin = Black_Studio_TinyMCE_Admin::instance();
+				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-admin-pointer.php' );
+				self::$admin_pointer = Black_Studio_TinyMCE_Admin_Pointer::instance();
 			}
 			// Include and instantiate text filter class on frontend pages
 			else {
@@ -257,7 +277,7 @@ else {
 			if ( 'widgets.php' == $pagenow ) {
 				echo '<div class="error">';
 				/* translators: error message shown when multiple instance of the plugin are detected */
-				echo '<p>' . __( 'ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were detected. Please activate only one instance at a time.', 'black-studio-tinymce-widget' ) . '</p>';
+				echo '<p>' . esc_html( __( 'ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were detected. Please activate only one instance at a time.', 'black-studio-tinymce-widget' ) ) . '</p>';
 				echo '</div>';
 			}
 		}
