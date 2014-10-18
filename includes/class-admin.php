@@ -122,7 +122,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
 				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 5, 2 );
-				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fix_rtl' ), 10, 2 );
+				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fix_rtl' ), 10 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fullscreen' ), 10, 2 );
 				add_filter( 'quicktags_settings', array( $this, 'quicktags_fullscreen' ), 10, 2 );
 				do_action( 'black_studio_tinymce_load' );
@@ -378,7 +378,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @return mixed[]
 		 * @since 2.1.0
 		 */
-		public function tinymce_fix_rtl( $settings, $editor_id ) {
+		public function tinymce_fix_rtl( $settings ) {
 			// This fix has to be applied to all editor instances (not just BSTW ones)
 			if ( is_rtl() && isset( $settings['plugins'] ) && ',directionality' == $settings['plugins'] ) {
 				unset( $settings['plugins'] );
@@ -389,17 +389,17 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Apply TinyMCE default fullscreen
 		 *
-		 * @param string[] $settings
+		 * @param mixed[] $settings
 		 * @param string $editor_id
-		 * @return string[]
+		 * @return mixed[]
 		 * @since 2.1.2
 		 */
 		public function tinymce_fullscreen( $settings, $editor_id ) {
 			if ( strstr( $editor_id, 'black-studio-tinymce' ) ) {
-				for( $i = 1; $i <= 4; $i++ ) {
+				for ( $i = 1; $i <= 4; $i++ ) {
 					$toolbar = 'toolbar' . $i;
 					if ( isset( $settings[ $toolbar ] ) ) {
-					  $settings[ $toolbar ] = str_replace( 'wp_fullscreen', 'wp_fullscreen,fullscreen', $settings[ $toolbar ] );
+						$settings[ $toolbar ] = str_replace( 'wp_fullscreen', 'wp_fullscreen,fullscreen', $settings[ $toolbar ] );
 					}
 				}
 			}
@@ -409,9 +409,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Disable Quicktags default fullscreen
 		 *
-		 * @param string[] $settings
+		 * @param mixed[] $settings
 		 * @param string $editor_id
-		 * @return string[]
+		 * @return mixed[]
 		 * @since 2.1.2
 		 */
 		public function quicktags_fullscreen( $settings, $editor_id ) {

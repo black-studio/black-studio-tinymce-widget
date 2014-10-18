@@ -91,7 +91,7 @@ var bstw;
 			update_content: function() {
 				var content;
 				if ( this.get_mode() === 'visual' ) {
-					 content = tinymce.get( id ).save();
+					content = tinymce.get( id ).save();
 					if ( tinyMCEPreInit.mceInit[id].wpautop ) {
 						content = window.switchEditors.pre_wpautop( content );
 					}
