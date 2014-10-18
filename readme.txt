@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
 Tested up to: 4.1
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -173,6 +173,12 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Changelog ==
 
+= 2.1.3 (2014-10-18) =
+* Added ability to disable automatic addition of paragraphs when editing (i.e. using TinyMCE Advanced option)
+* Enhanced real time rendering in theme customizer
+* Fixed compatibility issue with Page Builder related to comment reply in admin
+* Fixed compatibility issue with Styles plugin
+
 = 2.1.2 (2014-10-13) =
 * Hotfix for fullscreen mode when using Page Builder
 
@@ -213,7 +219,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Improved code quality and security thanks to [Scrutinizer](https://scrutinizer-ci.com/g/black-studio/black-studio-tinymce-widget/) service
 * Improved development workflow thanks to [Grunt](http://gruntjs.com/)
 * Improved performance and user experience
-* A huge Thanks to @cfoellmann for his precious support and contributions
+* A huge Thanks to [@cfoellmann](https://github.com/cfoellmann) for his precious support and contributions
 
 = 1.4.8 (2014-09-13) =
 * Fixed bug on image captions on WordPress 4.0 (part 2)
@@ -366,5 +372,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Upgrade Notice ==
 
-= 2.1.2 =
+= 2.1.3 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.

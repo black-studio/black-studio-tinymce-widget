@@ -3,7 +3,7 @@
 Plugin Name: Black Studio TinyMCE Widget
 Plugin URI: https://wordpress.org/plugins/black-studio-tinymce-widget/
 Description: Adds a new "Visual Editor" widget type based on the native WordPress TinyMCE editor.
-Version: 2.1.2
+Version: 2.1.3
 Author: Black Studio
 Author URI: http://www.blackstudio.it
 Requires at least: 3.1
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @var string
 		 * @since 2.0.0
 		 */
-		public static $version = '2.1.2';
+		public static $version = '2.1.3';
 
 		/**
 		 * The single instance of the plugin class
@@ -180,7 +180,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 				self::$text_filters = Black_Studio_TinyMCE_Text_Filters::instance();
 			}
 			// Register action and filter hooks
-			add_action( 'plugins_loaded', array( $this, 'load_compatibility' ), 20 );
+			add_action( 'plugins_loaded', array( $this, 'load_compatibility' ), 50 );
 			add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 		}
 

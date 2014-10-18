@@ -299,7 +299,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		public function siteorigin_panels_editor_settings( $settings, $editor_id ) {
 			// Allow initialization of main page/post editor instances
 			if ( strstr( $editor_id, 'black-studio-tinymce' ) === false ) {
-				$settings['tinymce'] = array( 'wp_skip_init' => false );
+				if ( ! empty( $settings['tinymce'] ) ) {
+					$settings['tinymce']['wp_skip_init'] = false ;
+				}
 			}
 			// Prevent wpautop on editor instances inside Page Builder
 			if ( $editor_id == 'widget-black-studio-tinymce-{$id}-text' ) {

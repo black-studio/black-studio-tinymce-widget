@@ -46,12 +46,13 @@ var bstw;
 						tinyMCEPreInit.mceInit[id].selector = '#' + id;
 					}
 					if ( ! this.is_tinymce_active() ) {
-						tinyMCEPreInit.mceInit[id].wpautop = true;
 						tinyMCEPreInit.mceInit[id].setup = function( ed ) {
 							// Real time preview (Theme customizer)
 							ed.on( 'keyup change', function() {
-								var content = window.switchEditors.pre_wpautop( ed.save() );
-								$( '#' + id ).val( content ).change();
+								if ( bstw( id ).get_mode() === 'visual' ) {
+									bstw( id ).update_content();
+								}
+								$( '#' + id ).change();
 							});
 							$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
 						};
@@ -88,10 +89,19 @@ var bstw;
 
 			// Update textarea content when in visual mode
 			update_content: function() {
+				var content;
 				if ( this.get_mode() === 'visual' ) {
-					this.get_textarea().val( window.switchEditors.pre_wpautop( tinymce.get( id ).save() ) );
+					 content = tinymce.get( id ).save();
+					if ( tinyMCEPreInit.mceInit[id].wpautop ) {
+						content = window.switchEditors.pre_wpautop( content );
+					}
+					this.get_textarea().val( content);
 				} else {
-					tinymce.get( id ).setContent( window.switchEditors.wpautop( this.get_textarea().val() ) );
+					content = this.get_textarea().val();
+					if ( tinyMCEPreInit.mceInit[id].wpautop ) {
+						content = window.switchEditors.wpautop( );
+					}
+					tinymce.get( id ).setContent( content );
 				}
 				return this;
 			},
@@ -227,7 +237,17 @@ var bstw;
 				bstw( $widget ).deactivate().activate();
 			}
 		});
-		
+
+		// Event handler for widget synced
+		$( document ).on( 'widget-synced', function( event, $widget ) {
+			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
+				event.preventDefault();
+				if ( bstw( $widget ).get_mode() === 'visual' ) {
+					bstw( $widget ).update_content();
+				}
+			}
+		});
+
 		// Event handler for visual switch button
 		$( document ).on( 'click', 'a[id^=widget-black-studio-tinymce][id$=tmce]', function() {
 			bstw( $( this ) ).set_mode( 'visual' );

@@ -121,7 +121,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
-				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 10, 2 );
+				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 5, 2 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fix_rtl' ), 10, 2 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fullscreen' ), 10, 2 );
 				add_filter( 'quicktags_settings', array( $this, 'quicktags_fullscreen' ), 10, 2 );
@@ -270,7 +270,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function editor( $text, $editor_id, $name = '' ) {
-			wp_editor( $text, $editor_id, $this->editor_settings( array( 'textarea_name' => $name ), $editor_id ) );
+			wp_editor( $text, $editor_id, array( 'textarea_name' => $name ) );
 		}
 
 		/**
