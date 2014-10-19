@@ -100,10 +100,17 @@ div[id*="black-studio-tinymce"] .mce-wp-fullscreen {
 }
 
 
-/* Fix z-index for media dialog windows (on old WP versions) */
+/* Fix z-index for thickbox dialog windows (used for media on old WP versions but also used by some plugins) */
 
 #TB_overlay, #TB_window {
 	z-index: 999999 !important;
+}
+
+
+/* Fix z-index for media dialog windows (used on recent WP versions) */
+
+.media-modal {
+	z-index: 1000100 !important;
 }
 
 

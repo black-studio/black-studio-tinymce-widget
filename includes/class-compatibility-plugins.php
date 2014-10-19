@@ -300,6 +300,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			// Allow initialization of main page/post editor instances
 			if ( strstr( $editor_id, 'black-studio-tinymce' ) === false ) {
 				if ( ! empty( $settings['tinymce'] ) ) {
+					if ( ! is_array ( $settings['tinymce'] ) ) {
+						$settings['tinymce'] = array();
+					}
 					$settings['tinymce']['wp_skip_init'] = false ;
 				}
 			}

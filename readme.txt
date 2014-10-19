@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
 Tested up to: 4.1
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -173,11 +173,15 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Changelog ==
 
+= 2.1.4 (2014-10-19) =
+* Fixed compatibility issue on TinyMCE initialization filtering
+* Fixed z-index issue when both thickbox and media dialog windows were used (i.e. using Hover Effects Pack plugin)
+
 = 2.1.3 (2014-10-18) =
-* Added ability to disable automatic addition of paragraphs when editing (i.e. using TinyMCE Advanced option)
+* Added ability to disable automatic addition of paragraphs when editing (i.e. using TinyMCE Advanced plugin option)
 * Enhanced real time rendering in theme customizer
 * Fixed compatibility issue with Page Builder related to comment reply in admin
-* Fixed compatibility issue with Styles plugin
+* Fixed compatibility issue with Styles plugin related to plugins_loaded hook
 
 = 2.1.2 (2014-10-13) =
 * Hotfix for fullscreen mode when using Page Builder
@@ -372,5 +376,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Upgrade Notice ==
 
-= 2.1.3 =
+= 2.1.4 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
