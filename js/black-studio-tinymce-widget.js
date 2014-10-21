@@ -96,10 +96,10 @@ var bstw;
 						content = window.switchEditors.pre_wpautop( content );
 					}
 					this.get_textarea().val( content);
-				} else {
+				} else if ( this.is_tinymce_active() ) {
 					content = this.get_textarea().val();
 					if ( tinyMCEPreInit.mceInit[id].wpautop ) {
-						content = window.switchEditors.wpautop( );
+						content = window.switchEditors.wpautop( content );
 					}
 					tinymce.get( id ).setContent( content );
 				}
