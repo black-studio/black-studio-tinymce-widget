@@ -284,7 +284,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		public function editor_settings( $settings, $editor_id ) {
 			if ( strstr( $editor_id, 'black-studio-tinymce' ) ) {
 				$settings['default_editor'] = 'tmce';
-				$settings['tinymce'] = array( 'wp_skip_init' => true, 'add_unload_trigger' => false );
+				$settings['tinymce'] = array(
+					'wp_skip_init' => 'widget-black-studio-tinymce-__i__-text' == $editor_id,
+					'add_unload_trigger' => false,
+					'wp_autoresize_on' => false
+				);
 				$settings['editor_height'] = 350;
 				$settings['dfw'] = true;
 				$settings['editor_class'] = 'black-studio-tinymce';

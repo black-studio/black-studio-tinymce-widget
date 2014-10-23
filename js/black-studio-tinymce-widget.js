@@ -269,7 +269,7 @@ var bstw;
 		$( document ).on( 'sortstart',  function( event, ui ) {
 			var open_widgets_selectors = [
 				'body.wp-customizer .expanded > div[id*=black-studio-tinymce].widget', // Theme Customizer
-				'.widget-liquid-right div[id*=black-studio-tinymce].widget' // Widgets page
+				'.widget-liquid-right div[id*=black-studio-tinymce].widget.open' // Widgets page
 			];
 			$( open_widgets_selectors.join( ', ') ).filter( ':has(.widget-inside:visible)' ).each(function() {
 				$( '.widget-title', this ).trigger( 'click' );
@@ -294,7 +294,7 @@ var bstw;
 					bstw( $( this ) ).deactivate();
 				});
 				$( 'body' ).removeClass( 'wait' );
-			}, 500 );
+			}, 1000 );
 		});
 		
 		// External events
@@ -321,8 +321,8 @@ var bstw;
 			bstw( $( 'textarea[id^=widget-black-studio-tinymce]' ).attr( 'id' ) ).activate();
 		}
 		
-		// Deactivate editor on hidden base instance
-		bstw( 'widget-black-studio-tinymce-__i__-text' ).deactivate();
+		// Deactivate quicktags toolbar on hidden base instance
+		$( '#qt_widget-black-studio-tinymce-__i__-text_toolbar' ).remove();
 		
 		// Plugin links toggle behavior
 		$( document ).on( 'click', '.bstw-links-icon', function( event ) {
