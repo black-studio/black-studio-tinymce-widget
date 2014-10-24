@@ -119,7 +119,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
-				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 3 );
+				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 4 );
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
 				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 5, 2 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fix_rtl' ), 10 );
@@ -269,8 +269,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function editor( $text, $editor_id, $name = '' ) {
-			wp_editor( $text, $editor_id, array( 'textarea_name' => $name ) );
+		public function editor( $text, $editor_id, $name = '', $type = 'visual' ) {
+			wp_editor( $text, $editor_id, array( 'textarea_name' => $name, 'default_editor' => $type == 'visual' ? 'tmce' : 'html' ) );
 		}
 
 		/**
@@ -283,11 +283,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function editor_settings( $settings, $editor_id ) {
 			if ( strstr( $editor_id, 'black-studio-tinymce' ) ) {
-				$settings['default_editor'] = 'tmce';
+				// $settings['default_editor'] = 'tmce';
 				$settings['tinymce'] = array(
 					'wp_skip_init' => 'widget-black-studio-tinymce-__i__-text' == $editor_id,
 					'add_unload_trigger' => false,
-					'wp_autoresize_on' => false
+					'wp_autoresize_on' => false,
 				);
 				$settings['editor_height'] = 350;
 				$settings['dfw'] = true;

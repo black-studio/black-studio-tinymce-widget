@@ -45,7 +45,7 @@ var bstw;
 						tinyMCEPreInit.mceInit[id] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
 						tinyMCEPreInit.mceInit[id].selector = '#' + id;
 					}
-					if ( ! this.is_tinymce_active() ) {
+					if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' ) {
 						tinyMCEPreInit.mceInit[id].setup = function( ed ) {
 							// Real time preview (Theme customizer)
 							ed.on( 'keyup change', function() {
