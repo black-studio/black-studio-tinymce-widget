@@ -119,8 +119,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ) );
 				add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 				add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_footer_scripts' ) );
-				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 4 );
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
+				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 4 );
+				add_action( 'black_studio_tinymce_after_editor', array( $this, 'fix_the_editor_content_filter' ) );
 				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 5, 2 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fix_rtl' ), 10 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fullscreen' ), 10, 2 );
@@ -266,11 +267,26 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @param string $text
 		 * @param string $editor_id
 		 * @param string $name
+		 * @param string $type
 		 * @return void
 		 * @since 2.0.0
 		 */
 		public function editor( $text, $editor_id, $name = '', $type = 'visual' ) {
 			wp_editor( $text, $editor_id, array( 'textarea_name' => $name, 'default_editor' => $type == 'visual' ? 'tmce' : 'html' ) );
+		}
+
+		/**
+		 * Remove editor content filters for multiple editor instances
+		 * Workaround for WordPress Core bug #28403 https://core.trac.wordpress.org/ticket/28403
+		 *
+		 * @uses remove_filter
+		 *
+		 * @return void
+		 * @since 2.1.7
+		 */
+		function fix_the_editor_content_filter() {
+			remove_filter( 'the_editor_content', 'wp_htmledit_pre' );
+			remove_filter( 'the_editor_content', 'wp_richedit_pre' );
 		}
 
 		/**
@@ -283,7 +299,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function editor_settings( $settings, $editor_id ) {
 			if ( strstr( $editor_id, 'black-studio-tinymce' ) ) {
-				// $settings['default_editor'] = 'tmce';
 				$settings['tinymce'] = array(
 					'wp_skip_init' => 'widget-black-studio-tinymce-__i__-text' == $editor_id,
 					'add_unload_trigger' => false,
