@@ -132,8 +132,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @since 2.1.0
 		 */
 		public function need_wpautop( $instance ) {
-			// Widgets created with previous plugin versions do not have the filter parameter set so we base the choice on the type parameter
-			$need_wpautop = $instance['type'] == 'visual';
+			// Widgets created with previous plugin versions do not have the filter parameter set so we base the choice on the type and text fields
+			$need_wpautop = $instance['type'] == 'visual' && substr( $instance['text'], 0, 3 ) != '<p>';
 			if ( isset( $instance['filter'] ) ) {
 				$need_wpautop = $instance['filter'] == 1;
 			}
