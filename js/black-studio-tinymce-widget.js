@@ -69,7 +69,6 @@ var bstw;
 			deactivate: function() {
 				if ( ! $( '#' + id ).hasClass( 'activating' ) ) {
 					if ( this.is_tinymce_active() ) {
-						this.update_content();
 						tinymce.get( id ).remove();
 					}
 					if ( this.is_tinymce_configured() ) {
