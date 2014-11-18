@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
 Tested up to: 4.1
-Stable tag: 2.1.6
+Stable tag: 2.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -141,6 +141,11 @@ add_filter( 'black_studio_tinymce_before_text', '__return_empty_string' );
 add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
 `
 
+There's also an additional hook, that you may use to specify to not display widgets if their content is empty:
+`
+add_filter( 'black_studio_tinymce_hide_empty', '__return_true' );
+`
+
 = How to customize widget contents (using hooks) =
 
 You may alter widget title and text via code using the `widget_title` and `widget_text` filter hooks (see [Codex](http://codex.wordpress.org/Plugin_API/Filter_Reference#Widgets) for details).
@@ -172,6 +177,14 @@ function remove_bstw_widget_text_filters() {
 Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 == Changelog ==
+
+= 2.2.0 (2014-11-18) =
+* Added filter to hide empty widgets
+* Added workaround for WordPress Core bug #28403
+* Enhanced compatibility for widgets created with 1.x plugin versions
+* Enhanced compatibility for editor instances used by other plugins
+* Fixed bug on line breaks being stripped in text mode
+* Updated translations
 
 = 2.1.6 (2014-10-23) =
 * Fixed bug on line breaks being changed on editor load
@@ -383,5 +396,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Upgrade Notice ==
 
-= 2.1.6 =
+= 2.2.0 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
