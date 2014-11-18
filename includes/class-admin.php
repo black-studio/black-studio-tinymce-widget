@@ -61,7 +61,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ), 20 );
-			add_filter( 'wp_default_editor', array( $this, 'editor_accessibility_mode' ) );
 		}
 
 		/**
@@ -122,6 +121,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
 				add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 4 );
 				add_action( 'black_studio_tinymce_after_editor', array( $this, 'fix_the_editor_content_filter' ) );
+				add_action( 'wp_tiny_mce_init', array( $this, 'wp_tiny_mce_init' ) );
 				add_filter( 'wp_editor_settings', array( $this, 'editor_settings' ), 5, 2 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fix_rtl' ), 10 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fullscreen' ), 10, 2 );
@@ -290,6 +290,19 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		}
 
 		/**
+		 * Setup editor instance for event handling
+		 *
+		 * @param mixed[] $settings
+		 * @return void
+		 * @since 2.2.1
+		 */
+		function wp_tiny_mce_init( $settings ) {
+			$script = 'black-studio-tinymce-widget-setup';
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix . '.js', dirname( __FILE__ ) ) . '"></script>' . "\n";
+		}
+
+		/**
 		 * Set editor settings
 		 *
 		 * @param mixed[] $settings
@@ -309,22 +322,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				$settings['editor_class'] = 'black-studio-tinymce';
 			}
 			return $settings;
-		}
-
-		/**
-		 * Edit widgets in accessibility mode
-		 *
-		 * @global string $pagenow
-		 * @param string $editor
-		 * @return string
-		 * @since 2.0.0
-		 */
-		public function editor_accessibility_mode( $editor ) {
-			global $pagenow;
-			if ( $pagenow == 'widgets.php' && isset( $_GET['editwidget'] ) && strpos( $_GET['editwidget'], 'black-studio-tinymce' ) === 0 ) {
-				$editor = 'html';
-			}
-			return $editor;
 		}
 
 		/**

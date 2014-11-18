@@ -24,29 +24,30 @@ var bstw;
 		return {
 
 			// Activate editor
-			activate: function () {
+			activate: function ( force_init ) {
+				force_init = typeof force_init !== 'undefined' ? force_init : true;
 				if ( ! $( '#' + id ).hasClass( 'active' ) && ! $( '#' + id ).hasClass( 'activating' )) {
 					$( '#' + id ).addClass( 'activating' );
 					if ( ! this.is_quicktags_configured() ) {
-						tinyMCEPreInit.qtInit[id] = tinyMCEPreInit.qtInit['black-studio-tinymce-widget'];
-						tinyMCEPreInit.qtInit[id].id = id;
+						tinyMCEPreInit.qtInit[ id ] = tinyMCEPreInit.qtInit['black-studio-tinymce-widget'];
+						tinyMCEPreInit.qtInit[ id ].id = id;
 					}
 					if ( ! this.is_quicktags_active() ) {
 						var prevInstances, newInstance;
 						prevInstances = QTags.instances;
 						QTags.instances = [];
-						quicktags( tinyMCEPreInit.qtInit[id] );
+						quicktags( tinyMCEPreInit.qtInit[ id ] );
 						QTags._buttonsInit();
-						newInstance = QTags.instances[id];
+						newInstance = QTags.instances[ id ];
 						QTags.instances = prevInstances;
-						QTags.instances[id] = newInstance;
+						QTags.instances[ id ] = newInstance;
 					}
 					if ( ! this.is_tinymce_configured() ) {
-						tinyMCEPreInit.mceInit[id] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
-						tinyMCEPreInit.mceInit[id].selector = '#' + id;
+						tinyMCEPreInit.mceInit[ id ] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
+						tinyMCEPreInit.mceInit[ id ].selector = '#' + id;
 					}
 					if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' ) {
-						tinyMCEPreInit.mceInit[id].setup = function( ed ) {
+						tinyMCEPreInit.mceInit[ id ].setup = function( ed ) {
 							// Real time preview (Theme customizer)
 							ed.on( 'keyup change', function() {
 								if ( bstw( id ).get_mode() === 'visual' ) {
@@ -56,8 +57,12 @@ var bstw;
 							});
 							$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
 						};
-						this.go();
-						//tinymce.init( tinyMCEPreInit.mceInit[id] );
+						if ( ! force_init ) {
+							this.go();
+						}
+						else {
+							tinymce.init( tinyMCEPreInit.mceInit[ id ] );
+						}
 					} else {
 						$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
 					}
@@ -72,14 +77,14 @@ var bstw;
 						tinymce.get( id ).remove();
 					}
 					if ( this.is_tinymce_configured() ) {
-						delete tinyMCEPreInit.mceInit[id];
+						delete tinyMCEPreInit.mceInit[ id ];
 					}
 					if ( this.is_quicktags_active() ) {
 						$( '.quicktags-toolbar', this.get_widget_inside() ).remove();
-						delete QTags.instances[id];
+						delete QTags.instances[ id ];
 					}
 					if ( this.is_quicktags_configured() ) {
-						delete tinyMCEPreInit.qtInit[id];
+						delete tinyMCEPreInit.qtInit[ id ];
 					}
 					$( '#' + id ).removeClass( 'active' );
 				}
@@ -91,13 +96,13 @@ var bstw;
 				var content;
 				if ( this.get_mode() === 'visual' ) {
 					content = tinymce.get( id ).save();
-					if ( tinyMCEPreInit.mceInit[id].wpautop ) {
+					if ( tinyMCEPreInit.mceInit[ id ].wpautop ) {
 						content = window.switchEditors.pre_wpautop( content );
 					}
 					this.get_textarea().val( content);
 				} else if ( this.is_tinymce_active() ) {
 					content = this.get_textarea().val();
-					if ( tinyMCEPreInit.mceInit[id].wpautop ) {
+					if ( tinyMCEPreInit.mceInit[ id ].wpautop ) {
 						content = window.switchEditors.wpautop( content );
 					}
 					tinymce.get( id ).setContent( content );
@@ -152,25 +157,25 @@ var bstw;
 
 			// Check if the tinymce instance is configured
 			is_tinymce_configured: function() {
-				return 'undefined' !== typeof tinyMCEPreInit.mceInit[id];
+				return 'undefined' !== typeof tinyMCEPreInit.mceInit[ id ];
 			},
 
 			// Check if the quicktags instance is active
 			is_quicktags_active: function() {
-				return 'object' === typeof QTags.instances[id];
+				return 'object' === typeof QTags.instances[ id ];
 			},
 
 			// Check if the quicktags instance is configured
 			is_quicktags_configured: function() {
-				return 'object' === typeof tinyMCEPreInit.qtInit[id];
+				return 'object' === typeof tinyMCEPreInit.qtInit[ id ];
 			},
 
 			// Checks and settings to run before opening the widget
 			prepare: function() {
 				// Check for widgets with duplicate ids
-				if ( $( '[name="' + this.get_textarea().attr('name') + '"]' ).size() > 1) {
+				if ( $( '[name="' + this.get_textarea().attr( 'name' ) + '"]' ).size() > 1) {
 					if ( $( 'div.error', this.get_widget_inside() ).length === 0 ) {
-						this.get_widget_inside().prepend('<div class="error"><strong>' + bstw_data.error_duplicate_id + '</strong></div>');
+						this.get_widget_inside().prepend( '<div class="error"><strong>' + bstw_data.error_duplicate_id + '</strong></div>' );
 					}
 				}
 				// Fix CSS
@@ -209,7 +214,7 @@ var bstw;
 		// Event handler for widget open button
 		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] .widget-action', function() {
 			if ( ! $( this ).parents( '#available-widgets' ).length ) {
-				bstw( $( this ) ).prepare().responsive().activate();
+				bstw( $( this ) ).prepare().responsive().activate( false );
 				// Note: the save event handler is intentionally attached to the save button instead of document
 				// to let the the textarea content be updated before the ajax request starts
 				$( 'input[name=savewidget]',  bstw( $( this ) ).get_widget() ).on( 'click', function() {
@@ -270,17 +275,17 @@ var bstw;
 				'body.wp-customizer .expanded > div[id*=black-studio-tinymce].widget', // Theme Customizer
 				'.widget-liquid-right div[id*=black-studio-tinymce].widget.open' // Widgets page
 			];
-			$( open_widgets_selectors.join( ', ') ).filter( ':has(.widget-inside:visible)' ).each(function() {
+			$( open_widgets_selectors.join( ', ' ) ).filter( ':has(.widget-inside:visible)' ).each(function() {
 				$( '.widget-title', this ).trigger( 'click' );
 				bstw( $( this ) ).deactivate();
 			});
 			if ( ui.item.is( '[id*=black-studio-tinymce]' ) ){
-				bstw( ui.item.find('textarea[id^=widget-black-studio-tinymce]' ) ).deactivate();
+				bstw( ui.item.find( 'textarea[id^=widget-black-studio-tinymce]' ) ).deactivate();
 			}
 		});
 		$( document ).on( 'sortstop',  function( event, ui ) {
 			if ( ui.item.is( '[id*=black-studio-tinymce]' ) ){
-				bstw( ui.item.find('textarea[id^=widget-black-studio-tinymce]' ) ).activate();
+				bstw( ui.item.find( 'textarea[id^=widget-black-studio-tinymce]' ) ).activate( false );
 			}
 		});
 		$( document ).on( 'sortupdate',  function( event, ui ) {
@@ -315,11 +320,6 @@ var bstw;
 			});
 		});
 
-		// Activate editor when in accessibility mode
-		if ( $( 'body.widgets_access' ).size() > 0 ) {
-			bstw( $( 'textarea[id^=widget-black-studio-tinymce]' ).attr( 'id' ) ).activate();
-		}
-		
 		// Deactivate quicktags toolbar on hidden base instance
 		$( '#qt_widget-black-studio-tinymce-__i__-text_toolbar' ).remove();
 		
