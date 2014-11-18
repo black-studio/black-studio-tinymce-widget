@@ -76,7 +76,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * Apply wp_kses to widget text
 		 *
 		 * @uses wp_kses_post()
-		 * 
+		 *
 		 * @param string $text
 		 * @return string
 		 * @since 2.0.0
@@ -126,7 +126,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * Check if automatic addition of paragraphs in widget text is needed
 		 *
 		 * @uses apply_filters()
-		 * 
+		 *
 		 * @param mixed[] $instance
 		 * @return boolean
 		 * @since 2.1.0
@@ -140,12 +140,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 			$need_wpautop = apply_filters( 'black_studio_tinymce_need_wpautop', $need_wpautop, $instance );
 			return $need_wpautop;
 		}
-		
+
 		/**
 		 * Apply automatic paragraphs in widget text
 		 *
 		 * @uses wpautop()
-		 * 
+		 *
 		 * @param string $text
 		 * @param mixed[]|null $instance
 		 * @param object|null $widget
@@ -165,7 +165,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * Process shortcodes in widget text
 		 *
 		 * @uses do_shortcode()
-		 * 
+		 *
 		 * @param string $text
 		 * @return string
 		 * @since 2.0.0

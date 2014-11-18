@@ -265,7 +265,7 @@ else {
 
 	/* Check for multiple plugin instances */
 	if ( ! function_exists( 'bstw_multiple_notice' ) ) {
-	
+
 		/**
 		 * Show admin notice when multiple instances of the plugin are detected
 		 *
@@ -282,7 +282,7 @@ else {
 			}
 		}
 		add_action( 'admin_notices', 'bstw_multiple_notice' );
-		
+	
 	} // END function_exists bstw_multiple_notice check
 
 } // END else function_exists bstw check

@@ -292,14 +292,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Setup editor instance for event handling
 		 *
-		 * @param mixed[] $settings
 		 * @return void
 		 * @since 2.2.1
 		 */
-		function wp_tiny_mce_init( $settings ) {
+		function wp_tiny_mce_init() {
 			$script = 'black-studio-tinymce-widget-setup';
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix . '.js', dirname( __FILE__ ) ) . '"></script>' . "\n";
+			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix . '.js', dirname( __FILE__ ) ) . '"></script>' . "\n"; // xss ok
 		}
 
 		/**

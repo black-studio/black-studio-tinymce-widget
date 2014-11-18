@@ -287,7 +287,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			}
 			return $pages;
 		}
-		
+
 		/**
 		 * Disable old compatibility code provided by Page Builder (SiteOrigin Panels)
 		 *
