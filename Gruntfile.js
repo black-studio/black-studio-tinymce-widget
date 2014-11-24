@@ -110,6 +110,7 @@ module.exports = function( grunt ) {
 					'!build/**',
 					'!Gruntfile.js',
 					'!package.json',
+					'!composer.json',
 					'!LICENSE',
 					'!README.md',
 					'!assets/**',
