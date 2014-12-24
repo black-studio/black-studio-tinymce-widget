@@ -181,6 +181,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 = 2.2.2 (2014-12-24) =
 * Fixed bug on visual/text mode not being saved in WordPress 4.1
 * Updated German and French translations
+* Added support for (Composer)[https://getcomposer.org/] dependency manager (courtesy of [@cfoellmann](https://github.com/cfoellmann))
 
 = 2.2.1 (2014-11-18) =
 * Fixed paragraph formatting bug on saving
