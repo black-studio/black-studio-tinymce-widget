@@ -2,10 +2,10 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Black Studio TinyMCE Widget 2.2.0\n"
+"Project-Id-Version: Black Studio TinyMCE Widget 2.2.2\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-11-18 09:48:00+00:00\n"
+"POT-Creation-Date: 2014-12-24 09:59:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,37 +47,37 @@ msgid ""
 "new widget with the same content and then delete this one."
 msgstr ""
 
-#: includes/class-admin.php:339
+#: includes/class-admin.php:335
 #. translators: text used for plugin home link
 msgid "Home"
 msgstr ""
 
-#: includes/class-admin.php:341
+#: includes/class-admin.php:337
 #. translators: text used for support faq link
 msgid "FAQ"
 msgstr ""
 
-#: includes/class-admin.php:343
+#: includes/class-admin.php:339
 #. translators: text used for support forum link
 msgid "Support"
 msgstr ""
 
-#: includes/class-admin.php:345
+#: includes/class-admin.php:341
 #. translators: text used for reviews link
 msgid "Rate"
 msgstr ""
 
-#: includes/class-admin.php:347
+#: includes/class-admin.php:343
 #. translators: text used for follow on twitter link
 msgid "Follow"
 msgstr ""
 
-#: includes/class-admin.php:349
+#: includes/class-admin.php:345
 #. translators: text used for donation link
 msgid "Donate"
 msgstr ""
 
-#: includes/class-admin.php:369
+#: includes/class-admin.php:365
 #. translators: text used for the icon that shows the plugin links
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr ""
