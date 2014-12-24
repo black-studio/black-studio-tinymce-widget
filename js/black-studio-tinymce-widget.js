@@ -253,12 +253,12 @@ var bstw;
 		});
 
 		// Event handler for visual switch button
-		$( document ).on( 'click', 'a[id^=widget-black-studio-tinymce][id$=tmce]', function() {
+		$( document ).on( 'click', '[id^=widget-black-studio-tinymce][id$=tmce]', function() {
 			bstw( $( this ) ).set_mode( 'visual' );
 		});
 
 		// Event handler for html switch button
-		$( document ).on( 'click', 'a[id^=widget-black-studio-tinymce][id$=html]', function() {
+		$( document ).on( 'click', '[id^=widget-black-studio-tinymce][id$=html]', function() {
 			bstw( $( this ) ).set_mode( 'html' );
 		});
 
