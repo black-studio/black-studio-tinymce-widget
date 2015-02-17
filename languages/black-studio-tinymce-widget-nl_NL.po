@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Black Studio
+# Copyright (C) 2015 Black Studio
 # This file is distributed under the GPLv3.
 # Translators:
 # Janjaap van Dijk <janjaapvandijk@gmail.com>, 2014
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-12-24 09:59:17+00:00\n"
-"PO-Revision-Date: 2014-12-22 20:06+0000\n"
+"POT-Creation-Date: 2015-02-17 09:20:25+00:00\n"
+"PO-Revision-Date: 2015-01-29 13:27+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"

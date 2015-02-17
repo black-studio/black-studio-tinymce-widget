@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Black Studio
+# Copyright (C) 2015 Black Studio
 # This file is distributed under the GPLv3.
 # Translators:
 # marcochiesi <marco@blackstudio.it>, 2014
@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-10-12 22:25:50+00:00\n"
-"PO-Revision-Date: 2014-10-12 22:24+0000\n"
+"POT-Creation-Date: 2015-02-17 09:20:25+00:00\n"
+"PO-Revision-Date: 2015-02-06 14:17+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Polish (Poland) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/pl_PL/)\n"
 "MIME-Version: 1.0\n"
@@ -27,51 +27,58 @@ msgstr ""
 
 #. translators: error message shown when multiple instance of the plugin are
 #. detected
-#: black-studio-tinymce-widget.php:260
+#: black-studio-tinymce-widget.php:280
 msgid ""
 "ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were "
 "detected. Please activate only one instance at a time."
 msgstr ""
 
+#. translators: text for the dismissable admin pointer tooltip
+#: includes/class-admin-pointer.php:168
+msgid ""
+"The Visual Editor widget allows you to insert rich text and media objects in"
+" your sidebars"
+msgstr ""
+
 #. translators: error message shown when a duplicated widget ID is detected
-#: includes/class-admin.php:245
+#: includes/class-admin.php:247
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr ""
 
 #. translators: text used for plugin home link
-#: includes/class-admin.php:319
+#: includes/class-admin.php:335
 msgid "Home"
 msgstr "Strona główna"
 
 #. translators: text used for support faq link
-#: includes/class-admin.php:321
+#: includes/class-admin.php:337
 msgid "FAQ"
 msgstr "FAQ"
 
 #. translators: text used for support forum link
-#: includes/class-admin.php:323
+#: includes/class-admin.php:339
 msgid "Support"
-msgstr ""
+msgstr "Wsparcie"
 
 #. translators: text used for reviews link
-#: includes/class-admin.php:325
+#: includes/class-admin.php:341
 msgid "Rate"
 msgstr "Tempo"
 
 #. translators: text used for follow on twitter link
-#: includes/class-admin.php:327
+#: includes/class-admin.php:343
 msgid "Follow"
 msgstr "Śledź"
 
 #. translators: text used for donation link
-#: includes/class-admin.php:329
+#: includes/class-admin.php:345
 msgid "Donate"
-msgstr ""
+msgstr "Dotacja"
 
 #. translators: text used for the icon that shows the plugin links
-#: includes/class-admin.php:349
+#: includes/class-admin.php:365
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr ""
 
