@@ -178,7 +178,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Changelog ==
 
-= 2.2.3 (2015-02-17 =
+= 2.2.3 (2015-02-17) =
 * Fixed bug on reordering gallery images
 * Added czech and lithuanian translations (courtesy of WP-Translation.org team on Transifex)
 
