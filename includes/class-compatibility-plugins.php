@@ -42,7 +42,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Class constructor
 		 *
 		 * @param string[] $plugins
-		 * @return void
 		 * @since 2.0.0
 		 */
 		protected function __construct( $plugins ) {
@@ -153,7 +152,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		public function wp_page_widget_enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
+			if ( isset( $_GET['action'] ) && 'edit' == $_GET['action'] ) {
 				$pages[] = 'edit-tags.php';
 			}
 			if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) ) {
@@ -230,7 +229,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function siteorigin_panels_widget_object( $the_widget ) {
-			if ( isset( $the_widget->id_base ) && $the_widget->id_base == 'black-studio-tinymce' ) {
+			if ( isset( $the_widget->id_base ) && 'black-studio-tinymce' == $the_widget->id_base ) {
 				$the_widget->number = '';
 			}
 			return $the_widget;
@@ -282,7 +281,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		public function siteorigin_panels_enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['page'] ) && $_GET['page'] == 'so_panels_home_page' ) {
+			if ( isset( $_GET['page'] ) && 'so_panels_home_page' == $_GET['page'] ) {
 				$pages[] = 'themes.php';
 			}
 			return $pages;

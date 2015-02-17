@@ -43,7 +43,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @uses get_bloginfo()
 		 * @uses add_action()
 		 *
-		 * @param object $plugin
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
@@ -235,7 +234,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 */
 		public function wp_pre_35_upload_iframe_src( $upload_iframe_src ) {
 			global $pagenow;
-			if ( $pagenow == 'widgets.php' || ( $pagenow == 'admin-ajax.php' && isset( $_POST['id_base'] ) && $_POST['id_base'] == 'black-studio-tinymce' ) ) {
+			if ( $pagenow == 'widgets.php' || ( 'admin-ajax.php' == $pagenow && isset( $_POST['id_base'] ) && 'black-studio-tinymce' == $_POST['id_base'] ) ) {
 				$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
 			}
 			return $upload_iframe_src;

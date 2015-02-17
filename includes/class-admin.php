@@ -54,7 +54,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @uses get_bloginfo()
 		 *
 		 * @global object $wp_embed
-		 * @return void
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
@@ -284,7 +283,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @return void
 		 * @since 2.1.7
 		 */
-		function fix_the_editor_content_filter() {
+		public function fix_the_editor_content_filter() {
 			remove_filter( 'the_editor_content', 'wp_htmledit_pre' );
 			remove_filter( 'the_editor_content', 'wp_richedit_pre' );
 		}
@@ -295,7 +294,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @return void
 		 * @since 2.2.1
 		 */
-		function wp_tiny_mce_init() {
+		public function wp_tiny_mce_init() {
 			$script = 'black-studio-tinymce-widget-setup';
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix . '.js', dirname( __FILE__ ) ) . '"></script>' . "\n"; // xss ok

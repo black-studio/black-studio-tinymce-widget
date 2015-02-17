@@ -44,7 +44,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @uses get_option()
 		 *
 		 * @global object $wp_embed
-		 * @return void
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
@@ -110,7 +109,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * Apply smilies conversion to widget text
 		 *
 		 * @uses convert_smilies()
-		 * 
+		 *
 		 * @param string $text
 		 * @return string
 		 * @since 2.0.0

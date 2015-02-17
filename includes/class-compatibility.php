@@ -77,7 +77,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * Class constructor
 		 *
 		 * @global object $wp_embed
-		 * @return void
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
