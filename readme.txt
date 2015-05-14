@@ -3,8 +3,8 @@ Contributors: marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
-Tested up to: 4.1
-Stable tag: 2.2.3
+Tested up to: 4.2
+Stable tag: 2.2.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -66,17 +66,18 @@ If you are experiencing issues with the plugin please read entirely these FAQ be
 2. Ensure that you are running the latest versions of both WordPress and the plugin.
 3. Search in our [support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget) for threads with similar issues.
 4. Disable all other plugins and check if the problem is fixed. In that case enable the other plugins one by one and figure out which one is causing the issue. Please see [Conflict Diagnosis Guide for WordPress plugins](https://rtcamp.com/rtmedia/docs/troubleshooting/conflict-diagnosis-guide-wordpress-plugins/) for further info.
-5. If the problem persists even with all other plugins disabled, try to switch to a WordPress default theme (i.e. Twenty Fourteen) and check if that fixes the issue.
+5. If the problem persists even with all other plugins disabled, try to switch to a WordPress default theme (i.e. Twenty Fifteen) and check if that fixes the issue.
 
 If you found a conflict with a plugin or theme, or if your problem is still present after the steps above, open a topic in the [support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget) and provide the following information:
 
 * Detailed description of the problem, including the steps to reproduce it
+* Location(s) where the problem occurs (Appearance -> Widgets, Theme Customizer, Accessibility mode, Page Builder, etc)
 * Error messages, if any, in particular in [browser's javascript console](http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers)
 * Browser and Operating System in use
 * Plugin version in use
 * WordPress version in use
 * WordPress theme in use
-* WordPress default language in use, if other than english
+* WordPress language in use, if other than english
 * WordPress plugins causing conflicts, if any
 * A link to a screenshot, if it can be useful to understand the problem
 * A link to your website, if it can be useful to show the problem
@@ -178,13 +179,18 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Changelog ==
 
+= 2.2.4 (2015-05-14) =
+* Fixed issue with WordPress Theme Customizer
+* For developers: added ability to create subclasses of WP_Widget_Black_Studio_TinyMCE class (courtesy of [@andreamk](https://github.com/andreamk))
+* Added Khmer and updated Spanish translations (courtesy of WP-Translation.org team on Transifex)
+
 = 2.2.3 (2015-02-17) =
 * Fixed bug on reordering gallery images
-* Added czech and lithuanian translations (courtesy of WP-Translation.org team on Transifex)
+* Added Czech and Lithuanian translations (courtesy of WP-Translation.org team on Transifex)
 
 = 2.2.2 (2014-12-24) =
 * Fixed bug on visual/text mode not being saved in WordPress 4.1
-* Updated German and French translations
+* Updated German and French translations (courtesy of WP-Translation.org team on Transifex)
 * Added support for [Composer](https://getcomposer.org) dependency manager (courtesy of [@cfoellmann](https://github.com/cfoellmann))
 
 = 2.2.1 (2014-11-18) =
@@ -201,7 +207,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Enhanced compatibility for widgets created with 1.x plugin versions
 * Enhanced compatibility for editor instances used by other plugins
 * Fixed bug on line breaks being stripped in text mode
-* Updated translations
+* Updated translations (courtesy of WP-Translation.org team on Transifex)
 
 = 2.1.6 (2014-10-23) =
 * Fixed bug on line breaks being changed on editor load
@@ -413,5 +419,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Upgrade Notice ==
 
-= 2.2.3 =
+= 2.2.4 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
