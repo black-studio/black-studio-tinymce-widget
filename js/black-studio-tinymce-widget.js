@@ -26,8 +26,10 @@ var bstw;
 			// Activate editor
 			activate: function ( force_init ) {
 				force_init = typeof force_init !== 'undefined' ? force_init : true;
-				if ( ! $( '#' + id ).hasClass( 'active' ) && ! $( '#' + id ).hasClass( 'activating' )) {
-					$( '#' + id ).addClass( 'activating' );
+				if ( ! $( '#' + id ).hasClass( 'active' ) ) {
+					if ( ! $( '#' + id ).hasClass( 'activating' ) ) {
+						$( '#' + id ).addClass( 'activating' );
+					}
 					if ( ! this.is_quicktags_configured() ) {
 						tinyMCEPreInit.qtInit[ id ] = tinyMCEPreInit.qtInit['black-studio-tinymce-widget'];
 						tinyMCEPreInit.qtInit[ id ].id = id;
@@ -46,7 +48,7 @@ var bstw;
 						tinyMCEPreInit.mceInit[ id ] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
 						tinyMCEPreInit.mceInit[ id ].selector = '#' + id;
 					}
-					if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' ) {
+					if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' && $( '#' + id ).is( ':visible' ) ) {
 						tinyMCEPreInit.mceInit[ id ].setup = function( ed ) {
 							// Real time preview (Theme customizer)
 							ed.on( 'keyup change', function() {
@@ -63,6 +65,10 @@ var bstw;
 						else {
 							tinymce.init( tinyMCEPreInit.mceInit[ id ] );
 						}
+					} else if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' ) {
+						setTimeout( function() {
+							bstw( id ).activate( force_init );
+						}, 500 );
 					} else {
 						$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
 					}
@@ -271,7 +277,10 @@ var bstw;
 
 		// Deactivate editor on drag & drop operations
 		$( document ).on( 'sortstart',  function( event, ui ) {
-			if ( event !== null && ( ! $( ui.item ).is( '.widget' ) || $( ui.item ).is( '.ui-draggable' ) ) ) {
+			if ( ! $( ui.item ).is( '.widget' ) && ! $( ui.item ).is( '.customize-control' ) ) {
+				return;
+			}
+			if ( $( ui.item ).is( '.ui-draggable' ) ) {
 				return;
 			}
 			var open_widgets_selectors = [
@@ -286,11 +295,6 @@ var bstw;
 				bstw( ui.item.find( 'textarea[id^=widget-black-studio-tinymce]' ) ).deactivate();
 			}
 		});
-		$( document ).on( 'sortstop',  function( event, ui ) {
-			if ( ui.item.is( '[id*=black-studio-tinymce]' ) ){
-				bstw( ui.item.find( 'textarea[id^=widget-black-studio-tinymce]' ) ).activate( false );
-			}
-		});
 		$( document ).on( 'sortupdate',  function( event, ui ) {
 			if ( event !== null && ( ! $( ui.item ).is( '.widget' ) || $( ui.item ).is( '.ui-draggable' ) ) ) {
 				return;
@@ -300,6 +304,19 @@ var bstw;
 				$( 'textarea[id^=widget-black-studio-tinymce].active' ).each(function() {
 					bstw( $( this ) ).deactivate();
 				});
+				$( 'body' ).removeClass( 'wait' );
+			}, 1000 );
+		});
+		
+		// Support for moving widgets in Customizer without drag & drop
+		$( document ).on( 'click', 'body.wp-customizer div[id*=black-studio-tinymce].widget .move-widget-btn', function(){
+			$( 'body' ).addClass( 'wait' );
+			var $btn = $( this );
+			setTimeout(function() {
+				$( 'textarea[id^=widget-black-studio-tinymce].active' ).each(function() {
+					bstw( $( this ) ).deactivate();
+				});
+				bstw( $btn ).activate();
 				$( 'body' ).removeClass( 'wait' );
 			}, 1000 );
 		});
