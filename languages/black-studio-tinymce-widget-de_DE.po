@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Black Studio
+# Copyright (C) 2015 Black Studio
 # This file is distributed under the GPLv3.
 # Translators:
 # Christian Foellmann <foellmann@foe-services.de>, 2014
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2014-12-24 09:59:17+00:00\n"
-"PO-Revision-Date: 2014-12-22 20:06+0000\n"
+"POT-Creation-Date: 2015-05-14 10:31:20+00:00\n"
+"PO-Revision-Date: 2015-04-29 14:04+0000\n"
 "Last-Translator: Stefan Meier <hello@stefanmeier.net>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -30,68 +30,68 @@ msgstr ""
 
 #. translators: error message shown when multiple instance of the plugin are
 #. detected
-#: black-studio-tinymce-widget.php:280
+#: black-studio-tinymce-widget.php:279
 msgid ""
 "ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were "
 "detected. Please activate only one instance at a time."
 msgstr "FEHLER: Es wurden mehrere Instanzen des Black Studio TinyMCE Widget Plugins erkannt. Bitte aktiviere immer nur eine Instanz."
 
 #. translators: text for the dismissable admin pointer tooltip
-#: includes/class-admin-pointer.php:168
+#: includes/class-admin-pointer.php:167
 msgid ""
 "The Visual Editor widget allows you to insert rich text and media objects in"
 " your sidebars"
 msgstr "Das Widget für optische Bearbeitung ermöglicht es dir, Medienobjekte und Texte im .rtf-Format in deine Seitenleisten einzufügen."
 
 #. translators: error message shown when a duplicated widget ID is detected
-#: includes/class-admin.php:247
+#: includes/class-admin.php:246
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr "FEHLER: Doppelte Widget-ID gefunden. Um den Verlust von Daten zu verhindern, erstelle ein neues Widget mit dem gleichen Inhalt und lösche das Aktuelle."
 
 #. translators: text used for plugin home link
-#: includes/class-admin.php:335
+#: includes/class-admin.php:334
 msgid "Home"
 msgstr "Home"
 
 #. translators: text used for support faq link
-#: includes/class-admin.php:337
+#: includes/class-admin.php:336
 msgid "FAQ"
 msgstr "FAQ"
 
 #. translators: text used for support forum link
-#: includes/class-admin.php:339
+#: includes/class-admin.php:338
 msgid "Support"
 msgstr "Support"
 
 #. translators: text used for reviews link
-#: includes/class-admin.php:341
+#: includes/class-admin.php:340
 msgid "Rate"
 msgstr "Bewerten"
 
 #. translators: text used for follow on twitter link
-#: includes/class-admin.php:343
+#: includes/class-admin.php:342
 msgid "Follow"
 msgstr "Folgen"
 
 #. translators: text used for donation link
-#: includes/class-admin.php:345
+#: includes/class-admin.php:344
 msgid "Donate"
 msgstr "Spenden"
 
 #. translators: text used for the icon that shows the plugin links
-#: includes/class-admin.php:365
+#: includes/class-admin.php:364
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr "Über das Black Studio TinyMCE Widget Plugin"
 
 #. translators: title of the widget
-#: includes/class-widget.php:28
+#: includes/class-widget.php:27
 msgid "Visual Editor"
 msgstr "Visueller Editor"
 
 #. translators: description of the widget, shown in available widgets
-#: includes/class-widget.php:30
+#: includes/class-widget.php:29
 msgid "Arbitrary text or HTML with visual editor"
 msgstr "Normaler Text oder HTML mit Editor"
 
