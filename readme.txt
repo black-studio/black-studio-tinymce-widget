@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
 Tested up to: 4.2
-Stable tag: 2.2.4
+Stable tag: 2.2.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -178,6 +178,12 @@ function remove_bstw_widget_text_filters() {
 Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 == Changelog ==
+
+= 2.2.5 (2015-07-11) =
+* Fixed z-index issue on Styles dropdown in Customizer
+* Added workaround to avoid glitches in Customizer
+* Fixed extra slashes in inclusions using plugin_dir_path
+* Added Persian translation (courtesy of WP-Translation.org team on Transifex)
 
 = 2.2.4 (2015-05-14) =
 * Fixed issue with WordPress Theme Customizer
@@ -419,5 +425,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Upgrade Notice ==
 
-= 2.2.4 =
+= 2.2.5 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
