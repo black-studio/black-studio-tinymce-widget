@@ -165,17 +165,17 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 */
 		protected function __construct() {
 			// Include required files
-			include_once( plugin_dir_path( __FILE__ ) . '/includes/class-widget.php' );
+			include_once( plugin_dir_path( __FILE__ ) . 'includes/class-widget.php' );
 			// Include and instantiate admin class on admin pages
 			if ( is_admin() ) {
-				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-admin.php' );
+				include_once( plugin_dir_path( __FILE__ ) . 'includes/class-admin.php' );
 				self::$admin = Black_Studio_TinyMCE_Admin::instance();
-				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-admin-pointer.php' );
+				include_once( plugin_dir_path( __FILE__ ) . 'includes/class-admin-pointer.php' );
 				self::$admin_pointer = Black_Studio_TinyMCE_Admin_Pointer::instance();
 			}
 			// Include and instantiate text filter class on frontend pages
 			else {
-				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-text-filters.php' );
+				include_once( plugin_dir_path( __FILE__ ) . 'includes/class-text-filters.php' );
 				self::$text_filters = Black_Studio_TinyMCE_Text_Filters::instance();
 			}
 			// Register action and filter hooks
@@ -207,7 +207,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			// Compatibility load flag (for both deprecated functions and code for compatibility with other plugins)
 			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );
 			if ( $load_compatibility ) {
-				include_once( plugin_dir_path( __FILE__ ) . '/includes/class-compatibility.php' );
+				include_once( plugin_dir_path( __FILE__ ) . 'includes/class-compatibility.php' );
 				self::$compatibility = Black_Studio_TinyMCE_Compatibility::instance();
 			}
 		}
