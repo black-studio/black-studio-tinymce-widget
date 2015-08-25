@@ -106,7 +106,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		public function wpml_widget_text( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				if ( function_exists( 'icl_t' ) ) {
-					$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
+					if ( ! isset( $instance['panels_info'] ) ) { // Avoid translation of Page Builder (SiteOrigin panels) widgets
+						$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
+					}
 				}
 			}
 			return $text;
