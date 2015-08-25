@@ -179,7 +179,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Changelog ==
 
-= 2.2.6 (2015-07-24) =
+= 2.2.6 (2015-08-25) =
 * Fixed content duplication issue with Page Builder + WPML String Translation
 
 = 2.2.5 (2015-07-11) =
