@@ -114,16 +114,16 @@ Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL
 The appearance of widgets in the frontend depends on both CSS and HTML. This plugin does not insert any additional CSS to your website frontend, so if you need to customize the styling you'll have to do at theme level, or you have to insert explicitely insert `<style>` in your widget using the the Text / HTML mode (this option is not recommended though).
 As for the HTML, most of the markup is controlled by WordPress and by the theme.
 The HTML output of a widget includes the following parts:
-```
-[before_widget]
-	[before_title]
-		[title]
-	[after_title]
-	[before_text]
-		[text]
-	[after_text]
-[after_widget]
-```
+
+	[before_widget]
+		[before_title]
+			[title]
+		[after_title]
+		[before_text]
+			[text]
+		[after_text]
+	[after_widget]
+
 which can be customized as following:
 
 * The `[title]` and `[text]` are the values that you insert in Widgets administration panel.
@@ -131,25 +131,28 @@ which can be customized as following:
 * The `[before_text]` and `[after_text]` are the only piece of HTML markup added by the plugin. The default markup is the same as native WordPress text widgets to ensure visual compatibility with styles created for text widgets: `<div class="textwidget"> [text] </div>`. You may customize the markup using the `black_studio_tinymce_before_text` and `black_studio_tinymce_after_text` filter hooks. They both take two parameters, the first is the default text and the second is the widget instance. See examples below.
 
 Example 1: Custom markup for `[before_text]` and `[after_text]`
-```
-add_filter( 'black_studio_tinymce_before_text', 'my_widget_before_text', 10, 2 );
-function my_widget_before_text( $before_text, $instance ) {
-	return '<div class="mytextwidget">';
-}
-add_filter( 'black_studio_tinymce_after_text', 'my_widget_after_text', 10, 2 );
-function my_widget_after_text( $after_text, $instance ) {
-	return '</div>';
-}
-```
+
+	add_filter( 'black_studio_tinymce_before_text', 'my_widget_before_text', 10, 2 );
+	function my_widget_before_text( $before_text, $instance ) {
+		return '<div class="mytextwidget">';
+	}
+	add_filter( 'black_studio_tinymce_after_text', 'my_widget_after_text', 10, 2 );
+	function my_widget_after_text( $after_text, $instance ) {
+		return '</div>';
+	}
+
+
 Example 2: Totally remove markup for `[before_text]` and `[after_text]`
-```
-add_filter( 'black_studio_tinymce_before_text', '__return_empty_string' );
-add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
-```
+
+	add_filter( 'black_studio_tinymce_before_text', '__return_empty_string' );
+	add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
+
+
 There's also an additional hook, that you may use to specify to not display widgets if their content is empty:
-```
-add_filter( 'black_studio_tinymce_hide_empty', '__return_true' );
-```
+
+	add_filter( 'black_studio_tinymce_hide_empty', '__return_true' );
+
+
 ### How to customize widget contents (using hooks) ###
 
 You may alter widget title and text via code using the `widget_title` and `widget_text` filter hooks (see [Codex](http://codex.wordpress.org/Plugin_API/Filter_Reference#Widgets) for details).
@@ -163,18 +166,19 @@ The plugin also internally uses `widget_text` filter to apply specific features:
 
 If for any reason you need to remove the filters above, you may use the following code snippet (or a custom version of it):
 
-```
-add_action( 'init', 'remove_bstw_widget_text_filters' );
-function remove_bstw_widget_text_filters() {
-    if ( function_exists( 'bstw' ) ) {
-        remove_filter( 'widget_text', array( bstw()->compatibility()->plugins(), 'wpml_widget_text' ), 2 );
-        remove_filter( 'widget_text', array( bstw()->text_filters(), 'autoembed' ), 4 );
-        remove_filter( 'widget_text', array( bstw()->text_filters(), 'convert_smilies' ), 6 );
-        remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 8 );
-        remove_filter( 'widget_text', array( bstw()->text_filters(), 'do_shortcode' ), 10 );
-    }
-}
-```
+
+	add_action( 'init', 'remove_bstw_widget_text_filters' );
+	function remove_bstw_widget_text_filters() {
+	    if ( function_exists( 'bstw' ) ) {
+	        remove_filter( 'widget_text', array( bstw()->compatibility()->plugins(), 'wpml_widget_text' ), 2 );
+	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'autoembed' ), 4 );
+	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'convert_smilies' ), 6 );
+	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 8 );
+	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'do_shortcode' ), 10 );
+	    }
+	}
+
+
 ### Plugin's data location and cleanup ###
 
 Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.

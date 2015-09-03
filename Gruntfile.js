@@ -116,7 +116,8 @@ module.exports = function( grunt ) {
 					'!assets/**',
 					'!nbproject/**',
 					'!**/*.LCK',
-					'!**/_notes/**'
+					'!**/_notes/**',
+					'!tmp/**'
 				],
 				dest: 'build/<%= pkg.name %>/'
 			}
@@ -299,7 +300,8 @@ module.exports = function( grunt ) {
 				options: {
 					plugin_slug: '<%= pkg.name %>',
 					build_dir: 'build/<%= pkg.name %>',
-					assets_dir: 'assets'
+					assets_dir: 'assets',
+					tmp_dir: './tmp'
 				}
 			}
 		}
