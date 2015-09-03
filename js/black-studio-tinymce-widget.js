@@ -218,7 +218,7 @@ var bstw;
 	$( document ).ready(function() {
 
 		// Event handler for widget open button
-		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] .widget-action', function() {
+		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] .widget-title-action', function() {
 			if ( ! $( this ).parents( '#available-widgets' ).length ) {
 				bstw( $( this ) ).prepare().responsive().activate( false );
 				// Note: the save event handler is intentionally attached to the save button instead of document
