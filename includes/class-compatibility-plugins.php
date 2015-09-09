@@ -324,6 +324,70 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			add_filter( 'atd_load_scripts', '__return_true' );
 		}
 
+		/**
+		 * Compatibility with NextGEN Gallery plugin
+		 *
+		 * @uses add_action()
+		 *
+		 * @return void
+		 * @since 2.3.0
+		 */
+		public function nextgen_gallery() {
+			add_action( 'admin_init', array( $this, 'nextgen_gallery_admin_init' ) );
+			add_filter( 'widget_text', array( $this, 'nextgen_gallery_widget_text' ) );
+		}
+
+		/**
+		 * Initialize compatibility code for NextGEN Gallery plugin 
+		 *
+		 * @uses add_action()
+		 * @uses is_plugin_active()
+		 *
+		 * @return void
+		 * @since 2.3.0
+		 */
+		public function nextgen_gallery_admin_init() {
+			if ( is_admin() && is_plugin_active( 'nextgen-gallery/nggallery.php' ) ) {
+				if ( ! preg_match( "/\/wp-admin\/(post|post-new)\.php$/", $_SERVER['SCRIPT_NAME'] ) ) {
+					$ngg_module_attach_to_post = new M_Attach_To_Post();
+					add_action( 'admin_enqueue_scripts', array( $ngg_module_attach_to_post, '_enqueue_tinymce_resources' ) );
+					add_action( 'admin_enqueue_scripts', array( $this, 'nextgen_gallery_enqueue_style' ) );
+				}
+			}
+		}
+
+		/**
+		 * Enqueue style for NextGEN Gallery plugin 
+		 *
+		 * @uses wp_enqueue_style()
+		 *
+		 * @return void
+		 * @since 2.3.0
+		 */
+		public function nextgen_gallery_enqueue_style() {
+			if ( class_exists( 'C_Router' ) ) {
+				$router = C_Router::get_instance();
+				wp_enqueue_style(
+					'ngg_attach_to_post_dialog', $router->get_static_url('photocrati-attach_to_post#attach_to_post_dialog.css')
+				);
+			}
+		}
+
+		/**
+		 * Widget text filter code for NextGEN Gallery plugin
+		 *
+		 * @param string $content
+		 *
+		 * @return string
+		 * @since 2.3.0
+		 */
+		function nextgen_gallery_widget_text( $content ) {
+			if ( class_exists( 'M_Attach_To_Post' ) ) {
+				$ngg_module_attach_to_post = new M_Attach_To_Post();
+				return $ngg_module_attach_to_post->substitute_placeholder_imgs( $content );
+			}
+		}
+
 	} // END class Black_Studio_TinyMCE_Compatibility_Plugins
 
 } // END class_exists check
