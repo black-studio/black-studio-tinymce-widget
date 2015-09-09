@@ -348,10 +348,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 */
 		public function nextgen_gallery_admin_init() {
 			if ( is_admin() && is_plugin_active( 'nextgen-gallery/nggallery.php' ) ) {
-				if ( ! preg_match( '/\/wp-admin\/(post|post-new)\.php$/', $_SERVER['SCRIPT_NAME'] ) ) {
-					$ngg_module_attach_to_post = new M_Attach_To_Post();
-					add_action( 'admin_enqueue_scripts', array( $ngg_module_attach_to_post, '_enqueue_tinymce_resources' ) );
-					add_action( 'admin_enqueue_scripts', array( $this, 'nextgen_gallery_enqueue_style' ) );
+				if ( ! preg_match( '/\/wp-admin\/(post|post-new)\.php$/', $_SERVER['SCRIPT_NAME'] ) && bstw()->admin()->enabled() ) {
+					if ( class_exists( 'M_Attach_To_Post' ) ) {
+						$ngg_module_attach_to_post = new M_Attach_To_Post();
+						add_action( 'admin_enqueue_scripts', array( $ngg_module_attach_to_post, '_enqueue_tinymce_resources' ) );
+						add_action( 'admin_enqueue_scripts', array( $this, 'nextgen_gallery_enqueue_style' ) );
+					}
 				}
 			}
 		}
