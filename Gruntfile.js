@@ -30,7 +30,7 @@ module.exports = function( grunt ) {
 		uglify: {
 			options: {
 				preserveComments: 'some',
-				banner: '/* <%= pkg.title %> - v<%= pkg.version %> */\n'
+				banner: '/* <%= pkg.title %> */\n'
 			},
 			admin: {
 				files: [{
@@ -51,7 +51,7 @@ module.exports = function( grunt ) {
 		cssmin: {
 			minify: {
 				options: {
-					banner: '/* <%= pkg.title %> - v<%= pkg.version %> */'
+					banner: '/* <%= pkg.title %> */'
 				},
 				files: [{
 					expand: true,
