@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
 Tested up to: 4.3
-Stable tag: 2.2.7
+Stable tag: 2.2.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -109,22 +109,22 @@ The appearance of widgets in the frontend depends on both CSS and HTML. This plu
 As for the HTML, most of the markup is controlled by WordPress and by the theme.
 The HTML output of a widget includes the following parts:
 `
-[before_widget]
-	[before_title]
-		[title]
-	[after_title]
-	[before_text]
-		[text]
-	[after_text]
-[after_widget]
+{before_widget}
+	{before_title}
+		{title}
+	{after_title}
+	{before_text}
+		{text}
+	{after_text}
+{after_widget}
 `
 which can be customized as following:
 
-* The `[title]` and `[text]` are the values that you insert in Widgets administration panel.
-* The markup  of `[before_widget]`, `[after_widget]`, `[before_title]`, `[after_title]` is usually defined by your theme when registering a sidebar with the [`register_sidebar`](http://codex.wordpress.org/Function_Reference/register_sidebar) function. 
-* The `[before_text]` and `[after_text]` are the only piece of HTML markup added by the plugin. The default markup is the same as native WordPress text widgets to ensure visual compatibility with styles created for text widgets: `<div class="textwidget"> [text] </div>`. You may customize the markup using the `black_studio_tinymce_before_text` and `black_studio_tinymce_after_text` filter hooks. They both take two parameters, the first is the default text and the second is the widget instance. See examples below.
+* The `{title}` and `{text}` are the values that you insert in Widgets administration panel.
+* The markup  of `{before_widget}`, `{after_widget}`, `{before_title}`, `{after_title}` is usually defined by your theme when registering a sidebar with the [`register_sidebar`](http://codex.wordpress.org/Function_Reference/register_sidebar) function. 
+* The `{before_text}` and `{after_text}` are the only piece of HTML markup added by the plugin. The default markup is the same as native WordPress text widgets to ensure visual compatibility with styles created for text widgets: `<div class="textwidget"> {text} </div>`. You may customize the markup using the `black_studio_tinymce_before_text` and `black_studio_tinymce_after_text` filter hooks. They both take two parameters, the first is the default text and the second is the widget instance. See examples below.
 
-Example 1: Custom markup for `[before_text]` and `[after_text]`
+Example 1: Custom markup for `{before_text}` and `{after_text}`
 `
 add_filter( 'black_studio_tinymce_before_text', 'my_widget_before_text', 10, 2 );
 function my_widget_before_text( $before_text, $instance ) {
@@ -178,6 +178,9 @@ function remove_bstw_widget_text_filters() {
 Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 == Changelog ==
+
+= 2.2.8 (2015-09-16) =
+* Fixed link dialog z-index issue in Customizer
 
 = 2.2.7 (2015-09-03) =
 * Fixed issue with Customizer when clicking on the widget title arrow (courtesy of Syhlver)
@@ -431,5 +434,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Upgrade Notice ==
 
-= 2.2.7 =
+= 2.2.8 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
