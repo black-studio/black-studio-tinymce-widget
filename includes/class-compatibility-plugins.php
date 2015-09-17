@@ -78,6 +78,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add widget text to WPML String translation
 		 *
+		 * @uses is_plugin_active()
 		 * @uses icl_register_string() Part of WPML
 		 *
 		 * @param mixed[] $instance
@@ -86,9 +87,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wpml_widget_update( $instance, $widget ) {
-			if ( function_exists( 'icl_register_string' ) && ! empty( $widget->number ) ) {
-				if ( ! isset( $instance['panels_info'] ) ) { // Avoid translation of Page Builder (SiteOrigin panels) widgets
-					icl_register_string( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $instance['text'] );
+			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
+				if ( function_exists( 'icl_register_string' ) && ! empty( $widget->number ) ) {
+					if ( ! isset( $instance['panels_info'] ) ) { // Avoid translation of Page Builder (SiteOrigin panels) widgets
+						icl_register_string( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $instance['text'] );
+					}
 				}
 			}
 			return $instance;
@@ -97,6 +100,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Translate widget text
 		 *
+		 * @uses is_plugin_active()
 		 * @uses icl_t() Part of WPML
 		 *
 		 * @param string $text
@@ -106,10 +110,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wpml_widget_text( $text, $instance = null, $widget = null ) {
-			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				if ( function_exists( 'icl_t' ) ) {
-					if ( ! isset( $instance['panels_info'] ) ) { // Avoid translation of Page Builder (SiteOrigin panels) widgets
-						$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
+			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+				if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
+					if ( function_exists( 'icl_t' ) ) {
+						if ( ! isset( $instance['panels_info'] ) ) { // Avoid translation of Page Builder (SiteOrigin panels) widgets
+							$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
+						}
 					}
 				}
 			}
