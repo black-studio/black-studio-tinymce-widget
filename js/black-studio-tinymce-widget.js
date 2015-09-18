@@ -349,6 +349,11 @@ var bstw;
 			$( this ).closest( '.bstw-links' ).children( '.bstw-links-list' ).toggle();
 		});
 		
+		// Populate dummy post ID for embed preview
+		if ( typeof( wp.media.view.settings.post.id ) !== 'undefined' && wp.media.view.settings.post.id === 0 ) {
+			wp.media.view.settings.post.id = bstw_data.dummy_post_id;
+		}
+		
 	});
 
 })( jQuery ); // end self-invoked wrapper function

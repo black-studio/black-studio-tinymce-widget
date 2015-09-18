@@ -60,6 +60,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			// Register action and filter hooks
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ), 20 );
+			add_action( 'init', array( $this, 'register_dummy_post_type' ) );
 		}
 
 		/**
@@ -239,6 +240,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			$activate_events = apply_filters( 'black_studio_tinymce_activate_events', array() );
 			$deactivate_events = apply_filters( 'black_studio_tinymce_deactivate_events', array() );
 			$data = array(
+				'dummy_post_id' => $this->get_dummy_post_id(),
 				'container_selectors' => implode( ', ', $container_selectors ),
 				'activate_events' => $activate_events,
 				'deactivate_events' => $deactivate_events,
@@ -433,6 +435,52 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				$settings['buttons'] = str_replace( ',fullscreen', '', $settings['buttons'] );
 			}
 			return $settings;
+		}
+
+		/**
+		 * Register a private custom post type to be used for link embed previews
+		 *
+		 * @uses register_post_type()
+		 *
+		 * @return void
+		 * @since 2.3.0
+		 */
+		public function register_dummy_post_type() {
+			$args = array(
+				'public' => false,
+				'publicly_queryable' => false,
+				'show_ui' => false,
+				'query_var' => false,
+				'rewrite' => false,
+				'capability_type' => 'post',
+				'hierarchical' => false,
+				'menu_position' => null,
+				'show_in_nav_menus' => false,
+				'has_archive' => false
+			);
+			register_post_type( 'bstw_dummy', $args );
+		}
+
+		/**
+		 * Get dummy post ID for link embed previews
+		 *
+		 * @uses WP_Query()
+		 * @uses wp_insert_post()
+		 * @uses update_option()
+		 * @uses get_option()
+		 *
+		 * @return int
+		 * @since 2.3.0
+		 */
+		public function get_dummy_post_id() {
+			$query_post = new WP_Query( 'post_type=bstw_dummy' );
+			if ( $query_post->post_count > 0 ) {
+				$dummy_post_id = $query_post->post->ID;
+			}
+			else {
+				$dummy_post_id = wp_insert_post( array(	'post_type' => 'bstw_dummy' ) );
+			}
+			return $dummy_post_id;
 		}
 
 	} // END class Black_Studio_TinyMCE_Admin
