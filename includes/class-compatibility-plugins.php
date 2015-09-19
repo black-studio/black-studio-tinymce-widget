@@ -87,7 +87,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wpml_widget_update( $instance, $widget ) {
-			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
+			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
 				if ( function_exists( 'icl_register_string' ) && ! empty( $widget->number ) ) {
 					icl_register_string( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $instance['text'] );
 				}
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 */
 		public function wpml_widget_text( $text, $instance = null, $widget = null ) {
 			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 					if ( function_exists( 'icl_t' ) ) {
 						if ( ! isset( $instance['panels_info'] ) ) { // Avoid translation of Page Builder (SiteOrigin panels) widgets
@@ -391,8 +391,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		public function nextgen_gallery_widget_text( $content ) {
 			if ( class_exists( 'M_Attach_To_Post' ) ) {
 				$ngg_module_attach_to_post = new M_Attach_To_Post();
-				return $ngg_module_attach_to_post->substitute_placeholder_imgs( $content );
+				$content = $ngg_module_attach_to_post->substitute_placeholder_imgs( $content );
 			}
+			return $content;
 		}
 
 	} // END class Black_Studio_TinyMCE_Compatibility_Plugins
