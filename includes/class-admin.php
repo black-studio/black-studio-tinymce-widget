@@ -152,7 +152,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * Enqueue styles
 		 *
 		 * @uses wp_enqueue_style()
-		 * @uses Black_Studio_TinyMCE_Plugin::enqueue_style()
 		 *
 		 * @return void
 		 * @since 2.0.0
@@ -176,10 +175,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function enqueue_style() {
 			$style = apply_filters( 'black-studio-tinymce-widget-style', 'black-studio-tinymce-widget' );
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$path = apply_filters( 'black-studio-tinymce-widget-style-path', 'css/' );
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.css' : '.min.css';
 			wp_enqueue_style(
 				$style,
-				plugins_url( 'css/' . $style . $suffix. '.css', dirname( __FILE__ ) ),
+				plugins_url( $path . $style . $suffix, dirname( __FILE__ ) ),
 				array(),
 				bstw()->get_version()
 			);
@@ -216,10 +216,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function enqueue_script() {
 			$script = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$path = apply_filters( 'black-studio-tinymce-widget-script-path', 'js/' );
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
 			wp_enqueue_script(
 				$script,
-				plugins_url( 'js/' . $script . $suffix . '.js', dirname( __FILE__ ) ),
+				plugins_url( $path . $script . $suffix, dirname( __FILE__ ) ),
 				array( 'jquery', 'editor', 'quicktags' ),
 				bstw()->get_version(),
 				true
@@ -293,13 +294,15 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Setup editor instance for event handling
 		 *
+		 * @uses SCRIPT_DEBUG
+		 *
 		 * @return void
 		 * @since 2.2.1
 		 */
 		public function wp_tiny_mce_init() {
 			$script = 'black-studio-tinymce-widget-setup';
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix . '.js', dirname( __FILE__ ) ) . '"></script>' . "\n"; // xss ok
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
+			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix, dirname( __FILE__ ) ) . '"></script>' . "\n"; // xss ok
 		}
 
 		/**
@@ -410,7 +413,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @return mixed[]
 		 * @since 2.1.2
 		 */
-		public function tinymce_fullscreen( $settings, $editor_id ) {
+		public function tinymce_fullscreen( $settings, $editor_id = null ) {
 			if ( strstr( $editor_id, 'black-studio-tinymce' ) ) {
 				for ( $i = 1; $i <= 4; $i++ ) {
 					$toolbar = 'toolbar' . $i;
@@ -456,7 +459,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				'hierarchical' => false,
 				'menu_position' => null,
 				'show_in_nav_menus' => false,
-				'has_archive' => false
+				'has_archive' => false,
 			);
 			register_post_type( 'bstw_dummy', $args );
 		}

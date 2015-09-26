@@ -11,6 +11,9 @@ module.exports = function( grunt ) {
 		dirs: {
 			css: 'css',
 			js: 'js',
+			compat_wordpress_css: 'compat/wordpress/css',
+			compat_wordpress_js: 'compat/wordpress/js',
+			compat_plugin_js: 'compat/plugin/js',
 			languages: 'languages'
 		},
 
@@ -22,7 +25,9 @@ module.exports = function( grunt ) {
 			all: [
 				'Gruntfile.js',
 				'<%= dirs.js %>/*.js',
-				'!<%= dirs.js %>/*.min.js'
+				'<%= dirs.compat_plugin_js %>/*.js',
+				'<%= dirs.compat_wordpress_js %>/*.js',
+				'!**/*.min.js'
 			]
 		},
 
@@ -35,13 +40,13 @@ module.exports = function( grunt ) {
 			admin: {
 				files: [{
 					expand: true,
-					cwd: '<%= dirs.js %>/',
+					cwd: './',
 					src: [
-						'*.js',
-						'!*.min.js',
-						'!Gruntfile.js'
+						'<%= dirs.js %>/*.js',
+						'<%= dirs.compat_plugin_js %>/*.js',
+						'<%= dirs.compat_wordpress_js %>/*.js',
+						'!**/*.min.js'
 					],
-					dest: '<%= dirs.js %>/',
 					ext: '.min.js'
 				}]
 			}
@@ -55,12 +60,12 @@ module.exports = function( grunt ) {
 				},
 				files: [{
 					expand: true,
-					cwd: '<%= dirs.css %>/',
+					cwd: './',
 					src: [
-						'*.css',
-						'!*.min.css'
+						'<%= dirs.css %>/*.css',
+						'<%= dirs.compat_wordpress_css %>/*.css',
+						'!**/*.min.css'
 					],
-					dest: '<%= dirs.css %>/',
 					ext: '.min.css'
 				}]
 			}

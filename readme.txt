@@ -164,7 +164,7 @@ If for any reason you need to remove the filters above, you may use the followin
 add_action( 'init', 'remove_bstw_widget_text_filters' );
 function remove_bstw_widget_text_filters() {
     if ( function_exists( 'bstw' ) ) {
-        remove_filter( 'widget_text', array( bstw()->compatibility()->plugins(), 'wpml_widget_text' ), 2 );
+        remove_filter( 'widget_text', array( bstw()->compatibility()->module( 'wpml' ), 'widget_text' ), 2 );
         remove_filter( 'widget_text', array( bstw()->text_filters(), 'autoembed' ), 4 );
         remove_filter( 'widget_text', array( bstw()->text_filters(), 'convert_smilies' ), 6 );
         remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 8 );

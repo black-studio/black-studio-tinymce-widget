@@ -96,11 +96,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 */
 		public function enqueue( $pointers ) {
 			$script = 'black-studio-tinymce-widget-pointer';
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
 			wp_enqueue_style( 'wp-pointer' );
 			wp_enqueue_script(
 				$script,
-				plugins_url( 'js/' . $script . $suffix . '.js', dirname( __FILE__ ) ),
+				plugins_url( 'js/' . $script . $suffix, dirname( __FILE__ ) ),
 				array( 'wp-pointer' ),
 				bstw()->get_version(),
 				true

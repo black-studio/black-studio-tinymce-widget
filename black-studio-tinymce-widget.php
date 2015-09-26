@@ -155,6 +155,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		/**
 		 * Class constructor
 		 *
+		 * @uses is_admin()
 		 * @uses add_action()
 		 * @uses add_filter()
 		 * @uses get_option()
@@ -207,7 +208,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			// Compatibility load flag (for both deprecated functions and code for compatibility with other plugins)
 			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );
 			if ( $load_compatibility ) {
-				include_once( plugin_dir_path( __FILE__ ) . 'includes/class-compatibility.php' );
+				include_once( plugin_dir_path( __FILE__ ) . 'compat/class-compatibility.php' );
 				self::$compatibility = Black_Studio_TinyMCE_Compatibility::instance();
 			}
 		}
