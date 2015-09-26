@@ -35,10 +35,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 * @deprecated 2.3.0
 		 */
-		public static function instance( $plugins = array() ) {
+		public static function instance() {
 			_deprecated_function( __FUNCTION__, '2.3.0' );
 			if ( is_null( self::$_instance ) ) {
-				self::$_instance = new self( $plugins );
+				self::$_instance = new self();
 			}
 			return self::$_instance;
 		}

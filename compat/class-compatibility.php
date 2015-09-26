@@ -107,7 +107,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		public static function plugins() {
 			_deprecated_function( __FUNCTION__, '2.3.0' );
 			include_once( self::get_path() . 'class-compatibility-plugins.php' );
-			self::$plugins = Black_Studio_TinyMCE_Compatibility_Plugins::instance( array() );
+			self::$plugins = Black_Studio_TinyMCE_Compatibility_Plugins::instance();
 			return self::$plugins;
 		}
 
