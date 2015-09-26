@@ -2,7 +2,13 @@
 # Profile: Black-Studio-plugin
 
 filter:
-    excluded_paths: [css/*.min.css, js/*.min.js]
+    excluded_paths: [
+        css/*.min.css, 
+        js/*.min.js
+        compat/plugin/js/*.min.js, 
+        compat/wordpress/js/*.min.js, 
+        compat/wordpress/css/*.min.css, 
+    ]
 
 tools:
     # Runs the JSHint static analysis tool (https://scrutinizer-ci.com/docs/tools/javascript/jshint/)

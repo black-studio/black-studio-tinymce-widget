@@ -234,7 +234,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 * @deprecated 2.3.0
 		 */
-		public function wp_pre_39_editor( $text, $id, $name = '', $type = 'visual' ) {
+		public function wp_pre_39_editor() {
 			_deprecated_function( __FUNCTION__, '2.3.0' );
 		}
 

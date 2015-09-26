@@ -43,7 +43,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 * @uses is_admin()
 		 * @uses add_action()
 		 *
-		 * @param string[] $plugins
 		 * @since 2.3.0
 		 */
 		protected function __construct() {

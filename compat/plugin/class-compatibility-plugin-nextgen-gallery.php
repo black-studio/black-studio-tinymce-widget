@@ -27,7 +27,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		/**
 		 * Return the single class instance
 		 *
-		 * @param string[] $plugins
 		 * @return object
 		 * @since 2.3.0
 		 */

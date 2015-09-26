@@ -158,7 +158,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 				'wpml',
 				'jetpack_after_the_deadline',
 				'wp_page_widget',
-				'nextgen_gallery'
+				'nextgen_gallery',
 			);
 			$compatibility_plugins = apply_filters( 'black_studio_tinymce_load_compatibility_plugins', $compatibility_plugins );
 			if ( ! empty( $compatibility_plugins ) ) {
@@ -197,7 +197,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		public static function get_path( $folder = '' ) {
 			$path = plugin_dir_path( dirname( __FILE__ ) ) . 'compat/';
 			if ( ! empty( $folder ) ) {
-				$path .=  $folder . '/';
+				$path .= $folder . '/';
 			}
 			return $path;
 		}
@@ -214,10 +214,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 				$class_name = 'Black_Studio_TinyMCE_Compatibility_' . ucwords( $folder )  . '_';
 				$class_name .= str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $slug ) ) );
 				self::$modules[ $slug ] = call_user_func( array( $class_name, 'instance' ) );
-			}
-			else {
-				_doing_it_wrong( __FUNCTION__, __( 'File not found' ) . $file, '2.0' );
-				die( $file );
 			}
 		}
 

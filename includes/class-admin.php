@@ -409,7 +409,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * Apply TinyMCE default fullscreen
 		 *
 		 * @param mixed[] $settings
-		 * @param string $editor_id
+		 * @param string|null $editor_id
 		 * @return mixed[]
 		 * @since 2.1.2
 		 */

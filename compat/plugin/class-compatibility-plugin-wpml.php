@@ -27,7 +27,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		/**
 		 * Return the single class instance
 		 *
-		 * @param string[] $plugins
 		 * @return object
 		 * @since 2.3.0
 		 */
@@ -77,7 +76,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		public function admin_init() {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				// If WPML widgets plugin is not active add widget body to WPML String Translation
-				if( ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
+				if ( ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
 					add_filter( 'black_studio_tinymce_widget_update', array( $this, 'widget_update' ), 10, 2 );
 				}
 				// If WPML widgets plugin is active remove widget title from WPML String Translation

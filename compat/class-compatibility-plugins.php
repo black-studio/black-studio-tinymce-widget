@@ -46,11 +46,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Class constructor
 		 *
-		 * @param string[] $plugins
 		 * @since 2.0.0
 		 * @deprecated 2.3.0
 		 */
-		protected function __construct( $plugins ) {
+		protected function __construct() {
 			_deprecated_function( __FUNCTION__, '2.3.0' );
 		}
 
@@ -81,12 +80,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Add widget text to WPML String translation
 		 *
 		 * @param mixed[] $instance
-		 * @param object $widget
 		 * @return mixed[]
 		 * @since 2.0.0
 		 * @deprecated 2.3.0
 		 */
-		public function wpml_widget_update( $instance, $widget ) {
+		public function wpml_widget_update( $instance ) {
 			_deprecated_function( __FUNCTION__, '2.3.0' );
 			return $instance;
 		}
