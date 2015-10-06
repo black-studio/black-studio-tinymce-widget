@@ -248,6 +248,15 @@ var bstw;
 			}
 		});
 
+		// Event handler for focus widget control (triggered by shift+click on Customizer)
+		$( document ).on( 'expand', function( event ) {
+			var $widget = bstw( $( 'textarea[id^=widget-black-studio-tinymce][id$=text]', event.target ) ).get_widget();
+			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
+				event.preventDefault();
+				bstw( $widget ).deactivate().activate();
+			}
+		});
+
 		// Event handler for widget synced
 		$( document ).on( 'widget-synced', function( event, $widget ) {
 			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
