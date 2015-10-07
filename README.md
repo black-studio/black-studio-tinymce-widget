@@ -18,16 +18,17 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 
 * Add rich text widgets to your sidebars and edit them using the TinyMCE visual editor
 * Switch between Visual mode and HTML mode (including Quicktags toolbar)
-* Insert images / videos / media from WordPress Media Library
+* Insert images, videos and other media from WordPress Media Library
 * Insert links to existing WordPress pages/posts or external resources
 * Option to "Automatically add paragraphs" to widget text
 * Support for shortcodes, smilies and embeds in widget text
-* Support for theme customizer with live preview
+* Support for theme customizer with live preview and quick edit
 * Support for fullscreen editing mode
 * Support for widgets accessibility mode
-* Support for multi-site (WordPress networks)
-* Support for multi-language (with 3rd party plugins like WPML, Polylang and WPGlobus)
-* Support for 3rd party plugins providing additional TinyMCE features (WP Edit, TinyMCE Advanced, ...)
+* Compatible with multi-site (WordPress networks)
+* Compatible with common multi-language plugins (WPML, Polylang and WPGlobus)
+* Compatible with plugins providing additional TinyMCE features (WP Edit, TinyMCE Advanced, etc)
+* Compatible with Page Builder plugin by SiteOrigin
 * Translations available in 20+ languages
 
 ### Links ###
@@ -50,8 +51,8 @@ This section describes how to install and use the plugin.
 
 1. You may install the plugin directly from your WordPress dasboard. Go to `Plugins` => `Add New` and search for `Black Studio TinyMCE Widget`, or pick it from the Popular plugins. Alternatively you may download the ZIP package and upload it using the `Upload Plugin` button in the same screen. You may also upload the files using FTP, just ensure that the entire `black-studio-tinymce-widget` folder is copied into the `/wp-content/plugins/` directory).
 2. Activate the plugin.
-3. In order to use the plugin, go to `Appearance` => `Widgets` in your WordPress dashboard, or use the `Customize` feature.
-4. You may drag and drop the `Visual Editor` widget to the desired sidebar (or, if using Accessibility mode, click the `Add` link).
+3. In order to use the plugin, go to `Appearance` => `Widgets` in your WordPress dashboard, or alternatively use the `Customize` feature.
+4. Add as many `Visual Editor` widgets as you want to the desired sidebar(s).
 5. Fill in title and (rich) text for your widgets.
 
 ## Screenshots ##
@@ -70,7 +71,7 @@ This section describes how to install and use the plugin.
 
 ### Purpose of the plugin ###
 
-This plugin gives you the ability to use the WordPress visual editor (TinyMCE) in widgets as you do in posts and pages, but it doesn't affect the editor behavior itself or its functionalities. If you are looking for additional editor features, take a look at specific plugins like [WP Edit](https://wordpress.org/plugins/wp-edit/), [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/) or any other feature-specific plugin you may need. Any additional TinyMCE plugin written following WordPress guidelines should work fine with Black Studio TinyMCE Widget.
+This plugin gives you the ability to use the WordPress visual editor (TinyMCE) in widgets as you do in posts and pages, but it doesn't affect the editor behavior itself or its functionalities. If you are looking for additional editor features, take a look at plugins like [WP Edit](https://wordpress.org/plugins/wp-edit/), [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/) or any other feature specific plugin you may need. Any additional TinyMCE plugin written following WordPress guidelines should work fine with Black Studio TinyMCE Widget.
 
 ### Troubleshooting ###
 
@@ -96,7 +97,7 @@ If you found a conflict with a plugin or theme, or if your problem is still pres
 * A link to a screenshot, if it can be useful to understand the problem
 * A link to your website, if it can be useful to show the problem
 
-### Can't find it in my available widgets ###
+### Can't find it in available widgets ###
 
 Since version 1.3.1 the name of the widget changed from `Black Studio TinyMCE Widget` to `Visual Editor` to enhance user friendliness. `Black Studio TinyMCE Widget` is still the name of the plugin, but it was a bit too long and not very intuitive for inexperienced users. You may find references to the old name in articles and videos on the web, so don't panic if you don't see the `Black Studio TinyMCE Widget` in your available widgets, just look for `Visual Editor`. Note: if you are using WordPress in a language other than english you may have a corresponding name translated in your language.
 
@@ -112,16 +113,18 @@ The current version of `Black Studio TinyMCE Widget` supports the following mult
 * Polylang
 * WPGlobus
 
-*WPML*
+**WPML**
 
 [WPML](https://wpml.org) is the leading commercial plugin for WordPress multi-lanaguage sites.
 If you're using WPML, we recommend to install also the 3rd party [WPML Widgets](https://wordpress.org/plugins/wpml-widgets/) plugin, which will allow you to create widgets and assign them to specific languages, keeping th ability to work with visual editor.
 Alternatively you may use the WPML String Translation plugin, provided by the WPML team. In this case, you'll have to create the widgets in the widgets admin panel, using the Visual Editor provided by the Black Studio TinyMCE Widget plugin, and then go to WPML => String Translation and translate title and body of widgets. If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String Translation list. Unfortunately the WPML String Translation interface has no Visual Editor, that's why we no longer recommend this method. If you were using WPML String Translation, we recommend to switch to WPML widgets and remove the entries in WPML String Translation list after you moved them to be real widgets.
 
-*Polylang*
-[Polylang](https://wordpress.org/plugins/polylang/) is a free alternative to WPML that allows you to create bilingual or multilingual WordPress sites. It provides natively to assign languages to each widget (including the ones created with Black Studio TinyMCE Widget) so you won't need any additional plugin to have a multi-language widgets.
+**Polylang**
 
-*WPGlobus*
+[Polylang](https://wordpress.org/plugins/polylang/) is a free alternative to WPML that allows you to create bilingual or multilingual WordPress sites. It provides natively the ability to assign languages to each widget (including the ones created with Black Studio TinyMCE Widget), so you won't need any additional plugin to have a multi-language widgets.
+
+**WPGlobus**
+
 [WPGlobus](https://wordpress.org/plugins/wpglobus/) is a new WordPress plugin for multi-language sites, with a different approach in comparison to WPML and Polylang. The WPGlobus team has also created the [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/) addon plugin, that will allow you yo use it in conjunction with Black Studio TinyMCE Widget.
 
 ### How to embed video and other contents ###
