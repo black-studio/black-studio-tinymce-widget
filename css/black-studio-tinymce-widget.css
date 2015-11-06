@@ -72,7 +72,7 @@ div[id*="black-studio-tinymce"] .wp-editor-wrap {
 }
 
 
-/* Icon for Theme customizer */
+/* Icon for Customizer */
 
 #available-widgets [class*="black-studio-tinymce"] .widget-title:before {
 	content: "\f116"; 

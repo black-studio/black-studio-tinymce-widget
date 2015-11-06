@@ -22,7 +22,7 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 * Insert links to existing WordPress pages/posts or external resources
 * Option to "Automatically add paragraphs" to widget text
 * Support for shortcodes, smilies and embeds in widget text
-* Support for theme customizer with live preview and quick edit
+* Support for Customizer with live preview and quick edit
 * Support for fullscreen editing mode
 * Support for widgets accessibility mode
 * Compatible with multi-site (WordPress networks)
@@ -88,7 +88,7 @@ If you are experiencing issues with the plugin please read entirely these FAQ be
 If you found a conflict with a plugin or theme, or if your problem is still present after the steps above, open a topic in the [support forum](http://wordpress.org/support/plugin/black-studio-tinymce-widget) and provide the following information:
 
 * Detailed description of the problem, including the steps to reproduce it
-* Location(s) where the problem occurs (Appearance -> Widgets, Theme Customizer, Accessibility mode, Page Builder, etc)
+* Location(s) where the problem occurs (Appearance -> Widgets, Customizer, Accessibility mode, Page Builder, etc)
 * Error messages, if any, in particular in [browser's javascript console](http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers)
 * Browser and Operating System in use
 * Plugin version in use
@@ -233,7 +233,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Added Persian translation (courtesy of WP-Translation.org team on Transifex)
 
 ### 2.2.4 (2015-05-14) ###
-* Fixed issue with WordPress Theme Customizer
+* Fixed issue with WordPress Customizer
 * For developers: added ability to create subclasses of WP_Widget_Black_Studio_TinyMCE class (courtesy of [@andreamk](https://github.com/andreamk))
 * Added Khmer and updated Spanish translations (courtesy of WP-Translation.org team on Transifex)
 
@@ -248,7 +248,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 ### 2.2.1 (2014-11-18) ###
 * Fixed paragraph formatting bug on saving
-* Fixed real-time update bug in Theme Customizer
+* Fixed real-time update bug in Customizer
 * Enhanced editor initialization
 * Simplified internal integration with Page Builder
 * Simplified internal initialization for accessibility mode
@@ -275,7 +275,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 ### 2.1.3 (2014-10-18) ###
 * Added ability to disable automatic addition of paragraphs when editing (i.e. using TinyMCE Advanced plugin option)
-* Enhanced real time rendering in theme customizer
+* Enhanced real time rendering in Customizer
 * Fixed compatibility issue with Page Builder related to comment reply in admin
 * Fixed compatibility issue with Styles plugin related to plugins_loaded hook
 
@@ -339,7 +339,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 ### 1.4.3 (2014-07-13) ###
 * Added filter hooks to modify the markup before and after the widget text
 * Fixed z-index issue in fullscreen mode
-* Added widget icon for theme customizer
+* Added widget icon for Customizer
 * Updated danish translation
 * Updated FAQ and readme.txt
 
@@ -366,11 +366,11 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 ### 1.3.3 (2014-04-04) ###
 * Fixed visualization bug upon widget saving
-* Enhanced support WordPress 3.9 Theme Customizer (live edit)
+* Enhanced support for WordPress 3.9 Customizer (live edit)
 
 ### 1.3.2 (2014-04-03) ###
 * Fixed compatibility issue with WordPress 3.9 Beta 3
-* Added support for WordPress 3.9 Theme Customizer
+* Added support for WordPress 3.9 Customizer
 * Added swedish translation (Contributor: macsolve)
 * Updated installation documentation
 * Updated FAQ

@@ -35,7 +35,7 @@
 					} catch( e ) {
 						window.alert( e );
 					}
-					// Real time preview (Theme customizer)
+					// Real time preview (Customizer)
 					if ( this.is_tinymce_active() ) {
 						if ( typeof tinymce.get( id ).on === 'function' ) {
 							tinymce.get( id ).on( 'keyup change', function() {
@@ -249,7 +249,7 @@
 			bstw( $( this ) ).set_mode( 'html' );
 		});
 
-		// Event handler for widget added (i.e. with Theme Customizer */
+		// Event handler for widget added (i.e. with Customizer */
 		$( document ).on( 'widget-added', function( event, $widget ) {
 			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
 				event.preventDefault();
