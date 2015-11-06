@@ -30,7 +30,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Return the single class instance
 		 *
-		 * @param string[] $plugins
 		 * @return object
 		 * @since 2.0.0
 		 * @deprecated 2.3.0
