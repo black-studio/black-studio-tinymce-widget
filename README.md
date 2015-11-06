@@ -55,6 +55,8 @@ This section describes how to install and use the plugin.
 4. Add as many `Visual Editor` widgets as you want to the desired sidebar(s).
 5. Fill in title and (rich) text for your widgets.
 
+Note: the plugin doesn't have nor requires any settings.
+
 ## Screenshots ##
 
 ### 1. Black Studio TinyMCE Widget in Visual mode ###
@@ -107,7 +109,7 @@ When dealing with a WordPress site URL change it is necessary to face the serial
 
 ### How to translate widgets in multi-language sites ###
 
-The current version of `Black Studio TinyMCE Widget` supports the following multi-language plugins:
+The current version of Black Studio TinyMCE Widget supports the following multi-language plugins:
 
 * WPML
 * Polylang
@@ -115,9 +117,9 @@ The current version of `Black Studio TinyMCE Widget` supports the following mult
 
 **WPML**
 
-[WPML](https://wpml.org) is the leading commercial plugin for WordPress multi-lanaguage sites.
-If you're using WPML, we recommend to install also the 3rd party [WPML Widgets](https://wordpress.org/plugins/wpml-widgets/) plugin, which will allow you to create widgets and assign them to specific languages, keeping th ability to work with visual editor.
-Alternatively you may use the WPML String Translation plugin, provided by the WPML team. In this case, you'll have to create the widgets in the widgets admin panel, using the Visual Editor provided by the Black Studio TinyMCE Widget plugin, and then go to WPML => String Translation and translate title and body of widgets. If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String Translation list. Unfortunately the WPML String Translation interface has no Visual Editor, that's why we no longer recommend this method. If you were using WPML String Translation, we recommend to switch to WPML widgets and remove the entries in WPML String Translation list after you moved them to be real widgets.
+[WPML](https://wpml.org) is the leading commercial plugin for WordPress multi-language sites.
+If you're using WPML, we recommend to install also the 3rd party [WPML Widgets](https://wordpress.org/plugins/wpml-widgets/) plugin, which will allow you to create widgets and assign them to specific languages, keeping th ability to work with the visual editor.
+Alternatively you may use the WPML String Translation plugin, provided by the WPML team. In this case, you'll have to create the widgets in the widgets admin panel, using the Visual Editor provided by the Black Studio TinyMCE Widget plugin, and then go to WPML => String Translation and translate title and body of widgets. If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String Translation list. Unfortunately the WPML String Translation interface has no Visual Editor, that's why we no longer recommend this method. If you were using WPML String Translation, we recommend to switch to WPML Widgets and remove the entries in WPML String Translation list after you moved them to be real widgets.
 
 **Polylang**
 
@@ -131,32 +133,36 @@ Alternatively you may use the WPML String Translation plugin, provided by the WP
 
 WordPress has a nice [autoembed feature](http://codex.wordpress.org/Embeds) that allows you to embed videos and other stuff in an easy way, by just putting the URL in the content area. This is also possible for widgets created with this plugin.
 If you are using a version of WordPress prior to 4.0 or a version of Black Studio TinyMCE Widget prior to 2.0, for best results it is recommended to put the URL inside an `[embed]` shortcode. Example: 
-`[embed]http://www.youtube.com/watch?v=XXXXXXXXXXX[/embed]`
+
+	[embed]http://www.youtube.com/watch?v=XXXXXXXXXXX[/embed]
+
 Ensure that the URL has not an hyperlink on it.
 Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL is not surrounded by a `<p>` tag.
 
 ### How to customize widget appearance ###
 
-The appearance of widgets in the frontend depends on both CSS and HTML. This plugin does not insert any additional CSS to your website frontend, so if you need to customize the styling, you'll have to do at theme level, or you have to insert explicitely `<style>` tags in your widget using the the Text / HTML mode (this option is not recommended though).
-As for the HTML, most of the markup is controlled by WordPress and by the theme.
+The appearance of widgets in the frontend depends on both CSS and HTML. The plugin does not insert any additional CSS to your website frontend, so if you need to customize the styling of your widget elements, you'll have to do at theme level, or you have to explicitely insert `<style>` tags in your widget text using the the HTML mode (this method is not recommended).
+If you need to add CSS classes to widgets we recommend the [Widget CSS Classes](https://wordpress.org/plugins/widget-css-classes/) plugin.
+The HTML markup is controlled mainly by WordPress and by the theme, and in a smaller part by the plugin.
+
 The HTML output of a widget includes the following parts:
 
 	{before_widget}
 		{before_title}
-			{title}
+			{widget_title}
 		{after_title}
 		{before_text}
-			{text}
+			{widget_text}
 		{after_text}
 	{after_widget}
 
-which can be customized as following:
+These elements can be customized as follows:
 
-* The `{title}` and `{text}` are the values that you insert in Widgets administration panel.
+* The `{widget_title}` and `{widget_text}` are the values inserted into the widget fields.
 * The markup  of `{before_widget}`, `{after_widget}`, `{before_title}`, `{after_title}` is usually defined by your theme when registering a sidebar with the [`register_sidebar`](http://codex.wordpress.org/Function_Reference/register_sidebar) function. 
-* The `{before_text}` and `{after_text}` are the only piece of HTML markup added by the plugin. The default markup is the same as native WordPress text widgets to ensure visual compatibility with styles created for text widgets: `<div class="textwidget"> {text} </div>`. You may customize the markup using the `black_studio_tinymce_before_text` and `black_studio_tinymce_after_text` filter hooks. They both take two parameters, the first is the default text and the second is the widget instance. See examples below.
+* The `{before_text}` and `{after_text}` are the only pieces of HTML markup added by the plugin. The default markup is the same as native WordPress text widgets to ensure styling compatibility with CSS created for text widgets: `<div class="textwidget"> {text} </div>`. You may customize this markup using the `black_studio_tinymce_before_text` and `black_studio_tinymce_after_text` filter hooks. They both take two parameters: the first is the default text and the second is the widget instance. See examples below.
 
-Example 1: Custom markup for `{before_text}` and `{after_text}`
+Example 1: Custom markup for `{before_text}` and `{after_text}` elements
 
 	add_filter( 'black_studio_tinymce_before_text', 'my_widget_before_text', 10, 2 );
 	function my_widget_before_text( $before_text, $instance ) {
@@ -168,7 +174,7 @@ Example 1: Custom markup for `{before_text}` and `{after_text}`
 	}
 
 
-Example 2: Totally remove markup for `[before_text]` and `[after_text]`
+Example 2: Totally remove markup for `[before_text]` and `[after_text]` elements
 
 	add_filter( 'black_studio_tinymce_before_text', '__return_empty_string' );
 	add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
@@ -184,11 +190,11 @@ There's also an additional hook, that you may use to specify to not display widg
 You may alter widget title and text via code using the `widget_title` and `widget_text` filter hooks (see [Codex](http://codex.wordpress.org/Plugin_API/Filter_Reference#Widgets) for details).
 The plugin also internally uses `widget_text` filter to apply specific features:
 
-* [icl_t](http://wpml.org/documentation/support/translation-for-texts-by-other-plugins-and-themes/) (priority 2): applies WPML translation (called only if WPML is activated on the site).
-* [autoembed](http://codex.wordpress.org/Embeds) (priority 4): converts embed urls to relevant embed codes.
-* [convert_smilies](http://codex.wordpress.org/Function_Reference/convert_smilies) (priority 6): converts text equivalent of smilies to images.
-* [wpautop](http://codex.wordpress.org/Function_Reference/wpautop) (priority 8): applies paragraphs automatically (if the relevant option is selected).
-* [do_shortcode](http://codex.wordpress.org/Function_Reference/do_shortcode) (priority 10): processes the shortcodes.
+* [`icl_t`](http://wpml.org/documentation/support/translation-for-texts-by-other-plugins-and-themes/) (priority 2): applies WPML translation (called only if WPML + WPML String Translation are activated on the site and WPML Widgets is not present - See FAQ about multi-language sites for further information).
+* [`autoembed`](http://codex.wordpress.org/Embeds) (priority 4): converts embed urls to relevant embed codes.
+* [`convert_smilies`](http://codex.wordpress.org/Function_Reference/convert_smilies) (priority 6): converts text equivalent of smilies to images.
+* [`wpautop`](http://codex.wordpress.org/Function_Reference/wpautop) (priority 8): applies paragraphs automatically (if the relevant option is selected).
+* [`do_shortcode`](http://codex.wordpress.org/Function_Reference/do_shortcode) (priority 10): processes the shortcodes.
 
 If for any reason you need to remove the filters above, you may use the following code snippet (or a custom version of it):
 
@@ -205,9 +211,9 @@ If for any reason you need to remove the filters above, you may use the followin
 	}
 
 
-### Plugin's data location and cleanup ###
+### Plugin's data storage and cleanup ###
 
-Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
+Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 ## Changelog ##
 
