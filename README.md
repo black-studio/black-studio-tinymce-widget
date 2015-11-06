@@ -37,12 +37,12 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 * [Plugin's page](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
 * [FAQ](https://wordpress.org/plugins/black-studio-tinymce-widget/faq/)
 * [Support forum](https://wordpress.org/support/plugin/black-studio-tinymce-widget)
-* [Follow us on Twitter](https://twitter.com/blackstudioita)
+* Follow us on [Twitter](https://twitter.com/blackstudioita), [Facebook](https://www.facebook.com/blackstudiocomunicazione) and [LinkedIn](https://www.linkedin.com/company/black-studio)
 
 ### Get involved ###
 
 * Developers can contribute to the source code on our [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget).
-* Translators can contribute through [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/).
+* Translators can contribute through the [Official WordPress Translation platform](https://translate.wordpress.org/projects/wp-plugins/black-studio-tinymce-widget).
 * Users can contribute by leaving a 5 stars [review](https://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget#postform) or making a [donation](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/).
 
 ## Installation ##
