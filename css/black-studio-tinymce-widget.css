@@ -22,13 +22,13 @@
 
 .bstw-links .icon16 {
 	float: right;
-	padding: 3px 6px;
-	margin: -6px -8px 0 -2px;
+	padding: 3px;
+	margin: -6px -3px 0 6px;
 }
 
 .rtl .bstw-links .icon16 {
 	float: left;
-	margin: -6px -2px 0 -8px;
+	margin: -6px 6px 0 0;
 }
 
 .bstw-links .bstw-links-list {
