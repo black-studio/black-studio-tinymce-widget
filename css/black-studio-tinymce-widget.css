@@ -79,6 +79,13 @@ div[id*="black-studio-tinymce"] .wp-editor-wrap {
 }
 
 
+/* Min width in Customizer */
+
+.customize-control-widget_form.wide-widget-control .widget-inside > .form .wp-editor-wrap {
+	min-width: 500px;
+}
+
+
 /* Put TinyMCE panels foreground in Customizer */
 
 .wp-customizer .mce-floatpanel.mce-popover,
