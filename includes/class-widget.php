@@ -111,8 +111,8 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 		public function form( $instance ) {
 			global $wp_customize;
 			$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'type' => 'visual' ) );
-			// Force Visual mode in Customizer (to avoid glitches)
-			if ( $wp_customize ) {
+			// Force Visual mode at startup in Customizer (to avoid glitches)
+			if ( $wp_customize && ! defined( 'DOING_AJAX' ) ) {
 				$instance['type'] = 'visual';
 			}
 			// Guess (wpautop) filter value for widgets created with previous version
