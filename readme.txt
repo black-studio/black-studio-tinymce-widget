@@ -1,7 +1,7 @@
 === Black Studio TinyMCE Widget ===
 Contributors: marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
-Tags: wysiwyg, visual, widget, tinymce, editor, image, video, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, video widget, media widget
+Tags: wysiwyg, visual, widget, tinymce, editor, rich text, visual editor, wysiwyg widget, text widget, tinymce widget, image widget, media widget
 Requires at least: 3.1
 Tested up to: 4.4
 Stable tag: 2.2.8
