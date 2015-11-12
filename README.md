@@ -188,25 +188,38 @@ There's also an additional hook, that you may use to specify to not display widg
 ### How to customize widget contents (using hooks) ###
 
 You may alter widget title and text via code using the `widget_title` and `widget_text` filter hooks (see [Codex](http://codex.wordpress.org/Plugin_API/Filter_Reference#Widgets) for details).
-The plugin also internally uses `widget_text` filter to apply specific features:
+The plugin also internally uses `widget_text` filter to apply specific WordPress native features:
 
-* [`icl_t`](http://wpml.org/documentation/support/translation-for-texts-by-other-plugins-and-themes/) (priority 2): applies WPML translation (called only if WPML + WPML String Translation are activated on the site and WPML Widgets is not present - See FAQ about multi-language sites for further information).
 * [`autoembed`](http://codex.wordpress.org/Embeds) (priority 4): converts embed urls to relevant embed codes.
 * [`convert_smilies`](http://codex.wordpress.org/Function_Reference/convert_smilies) (priority 6): converts text equivalent of smilies to images.
 * [`wpautop`](http://codex.wordpress.org/Function_Reference/wpautop) (priority 8): applies paragraphs automatically (if the relevant option is selected).
 * [`do_shortcode`](http://codex.wordpress.org/Function_Reference/do_shortcode) (priority 10): processes the shortcodes.
 
-If for any reason you need to remove the filters above, you may use the following code snippet (or a custom version of it):
+Moreover there are additional filters specific for 3rd party plugins:
+
+* [`icl_t`](http://wpml.org/documentation/support/translation-for-texts-by-other-plugins-and-themes/) (priority 2): applies WPML translation (used only if WPML + WPML String Translation are activated on the site and WPML Widgets is not activated - See FAQ about multi-language sites for further information).
+* [`M_Attach_To_Post::substitute_placeholder_imgs`] (priority 10): replaces NextGEN Gallery placeholder images with galleries/slideshows (used only if the NextGEN Gallery plugin is activated).
+
+If for any reason you need to remove the filters above, you may use the following code snippets (or a customized version, depending on your needs):
 
 
 	add_action( 'init', 'remove_bstw_widget_text_filters' );
 	function remove_bstw_widget_text_filters() {
 	    if ( function_exists( 'bstw' ) ) {
-	        remove_filter( 'widget_text', array( bstw()->compatibility()->module( 'wpml' ), 'widget_text' ), 2 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'autoembed' ), 4 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'convert_smilies' ), 6 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 8 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'do_shortcode' ), 10 );
+	    }
+	}
+
+
+
+	add_action( 'init', 'remove_bstw_widget_text_plugin_filters' );
+	function remove_bstw_widget_text_plugin_filters() {
+	    if ( function_exists( 'bstw' ) ) {
+	        remove_filter( 'widget_text', array( bstw()->compatibility()->module( 'wpml' ), 'widget_text' ), 2 );
+	        remove_filter( 'widget_text', array( bstw()->compatibility()->module( 'nextgen_gallery' ), 'widget_text' ) );
 	    }
 	}
 

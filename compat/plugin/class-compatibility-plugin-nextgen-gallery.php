@@ -51,7 +51,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 				add_action( 'admin_init', array( $this, 'nextgen_gallery_admin_init' ) );
 			}
 			add_action( 'init', array( $this, 'nextgen_gallery_customizer_init' ), 20 );
-			add_filter( 'widget_text', array( $this, 'nextgen_gallery_widget_text' ) );
+			add_filter( 'widget_text', array( $this, 'widget_text' ) );
 		}
 
 		/**
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * @return string
 		 * @since 2.3.0
 		 */
-		public function nextgen_gallery_widget_text( $content ) {
+		public function widget_text( $content ) {
 			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			if ( is_plugin_active( 'nextgen-gallery/nggallery.php' ) ) {
 				if ( class_exists( 'M_Attach_To_Post' ) ) {
