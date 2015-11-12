@@ -89,7 +89,8 @@ div[id*="black-studio-tinymce"] .wp-editor-wrap {
 /* Put TinyMCE panels foreground in Customizer */
 
 .wp-customizer .mce-floatpanel.mce-popover,
-.wp-customizer .mce-panel.mce-menu {
+.wp-customizer .mce-panel.mce-menu,
+.wp-customizer .mce-inline-toolbar-grp {
 	z-index: 500000 !important;
 }
 
