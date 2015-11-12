@@ -22,6 +22,7 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 * Insert links to existing WordPress pages/posts or external resources
 * Option to "Automatically add paragraphs" to widget text
 * Support for shortcodes, smilies and embeds in widget text
+* Support for responsive images (requires WordPress 4.4 or later)
 * Support for Customizer with live preview and quick edit
 * Support for fullscreen editing mode
 * Support for widgets accessibility mode
@@ -194,6 +195,7 @@ The plugin also internally uses `widget_text` filter to apply specific WordPress
 * [`convert_smilies`](http://codex.wordpress.org/Function_Reference/convert_smilies) (priority 6): converts text equivalent of smilies to images.
 * [`wpautop`](http://codex.wordpress.org/Function_Reference/wpautop) (priority 8): applies paragraphs automatically (if the relevant option is selected).
 * [`do_shortcode`](http://codex.wordpress.org/Function_Reference/do_shortcode) (priority 10): processes the shortcodes.
+* [`wp_make_content_images_responsive`](http://wpseek.com/function/wp_make_content_images_responsive/) (priority 12): makes images responsive.
 
 Moreover there are additional filters specific for 3rd party plugins:
 
@@ -210,6 +212,7 @@ If for any reason you need to remove the filters above, you may use the followin
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'convert_smilies' ), 6 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 8 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'do_shortcode' ), 10 );
+	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'wp_make_content_images_responsive' ), 12 );
 	    }
 	}
 
