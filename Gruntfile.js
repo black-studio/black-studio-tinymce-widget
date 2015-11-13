@@ -289,16 +289,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		// Transifex integration
-		exec: {
-			txpull: { // Pull Transifex translation - grunt exec:txpull
-				cmd: 'tx pull -a --minimum-perc=50'
-			},
-			txpush: { // Push pot to Transifex - grunt exec:txpush
-				cmd: 'tx push -s'
-			}
-		},
-
 		// Deploy to WP repository
 		wp_deploy: {
 			deploy: {
@@ -326,8 +316,6 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'languages', [
 		'checktextdomain',
 		'makepot',
-		'exec:txpush',
-		'exec:txpull',
 		'potomo'
 	]);
 
