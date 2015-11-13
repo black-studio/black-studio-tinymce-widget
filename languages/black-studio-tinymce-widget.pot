@@ -2,17 +2,17 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Black Studio TinyMCE Widget 2.2.4\n"
+"Project-Id-Version: Black Studio TinyMCE Widget 2.2.8\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2015-07-11 15:06:36+00:00\n"
+"POT-Creation-Date: 2015-11-13 11:44:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Black Studio <info@blackstudio.it>\n"
 "Language-Team: Black Studio <info@blackstudio.it>\n"
-"X-Generator: grunt-wp-i18n 0.4.8\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: English\n"
@@ -25,7 +25,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-#: black-studio-tinymce-widget.php:279
+#: black-studio-tinymce-widget.php:280
 #. translators: error message shown when multiple instance of the plugin are
 #. detected
 msgid ""
@@ -40,44 +40,44 @@ msgid ""
 "in your sidebars"
 msgstr ""
 
-#: includes/class-admin.php:246
+#: includes/class-admin.php:249
 #. translators: error message shown when a duplicated widget ID is detected
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr ""
 
-#: includes/class-admin.php:334
+#: includes/class-admin.php:339
 #. translators: text used for plugin home link
 msgid "Home"
 msgstr ""
 
-#: includes/class-admin.php:336
+#: includes/class-admin.php:341
 #. translators: text used for support faq link
 msgid "FAQ"
 msgstr ""
 
-#: includes/class-admin.php:338
+#: includes/class-admin.php:343
 #. translators: text used for support forum link
 msgid "Support"
 msgstr ""
 
-#: includes/class-admin.php:340
+#: includes/class-admin.php:345
 #. translators: text used for reviews link
 msgid "Rate"
 msgstr ""
 
-#: includes/class-admin.php:342
+#: includes/class-admin.php:347
 #. translators: text used for follow on twitter link
 msgid "Follow"
 msgstr ""
 
-#: includes/class-admin.php:344
+#: includes/class-admin.php:349
 #. translators: text used for donation link
 msgid "Donate"
 msgstr ""
 
-#: includes/class-admin.php:364
+#: includes/class-admin.php:369
 #. translators: text used for the icon that shows the plugin links
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr ""

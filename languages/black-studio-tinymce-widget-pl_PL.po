@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2015-05-14 10:31:20+00:00\n"
-"PO-Revision-Date: 2015-04-29 14:04+0000\n"
+"POT-Creation-Date: 2015-11-13 11:37:59+00:00\n"
+"PO-Revision-Date: 2015-09-20 10:34+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
-"Language-Team: Polish (Poland) (http://www.transifex.com/projects/p/black-studio-tinymce-widget/language/pl_PL/)\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/wp-translations/black-studio-tinymce-widget/language/pl_PL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl_PL\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: grunt-wp-i18n 0.4.8\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-Country: United States\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #. translators: error message shown when multiple instance of the plugin are
 #. detected
-#: black-studio-tinymce-widget.php:279
+#: black-studio-tinymce-widget.php:280
 msgid ""
 "ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were "
 "detected. Please activate only one instance at a time."
@@ -41,44 +41,44 @@ msgid ""
 msgstr ""
 
 #. translators: error message shown when a duplicated widget ID is detected
-#: includes/class-admin.php:246
+#: includes/class-admin.php:249
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr ""
 
 #. translators: text used for plugin home link
-#: includes/class-admin.php:334
+#: includes/class-admin.php:339
 msgid "Home"
 msgstr "Strona główna"
 
 #. translators: text used for support faq link
-#: includes/class-admin.php:336
+#: includes/class-admin.php:341
 msgid "FAQ"
 msgstr "FAQ"
 
 #. translators: text used for support forum link
-#: includes/class-admin.php:338
+#: includes/class-admin.php:343
 msgid "Support"
 msgstr "Wsparcie"
 
 #. translators: text used for reviews link
-#: includes/class-admin.php:340
+#: includes/class-admin.php:345
 msgid "Rate"
 msgstr "Tempo"
 
 #. translators: text used for follow on twitter link
-#: includes/class-admin.php:342
+#: includes/class-admin.php:347
 msgid "Follow"
 msgstr "Śledź"
 
 #. translators: text used for donation link
-#: includes/class-admin.php:344
+#: includes/class-admin.php:349
 msgid "Donate"
 msgstr "Dotacja"
 
 #. translators: text used for the icon that shows the plugin links
-#: includes/class-admin.php:364
+#: includes/class-admin.php:369
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr ""
 

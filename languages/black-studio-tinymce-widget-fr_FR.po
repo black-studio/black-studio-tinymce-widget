@@ -1,7 +1,7 @@
 # Copyright (C) 2015 Black Studio
 # This file is distributed under the GPLv3.
 # Translators:
-# FxB <fxb@wp-translations.org>, 2014
+# FX Bénard <fxb@wp-translations.org>, 2014
 # marcochiesi <marco@blackstudio.it>, 2014
 # marcochiesi <marco@blackstudio.it>, 2014
 # Patricia BT, 2014
@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2015-07-11 15:06:36+00:00\n"
-"PO-Revision-Date: 2015-05-21 21:00+0000\n"
+"POT-Creation-Date: 2015-11-13 11:37:59+00:00\n"
+"PO-Revision-Date: 2015-10-20 18:57+0000\n"
 "Last-Translator: Patricia BT\n"
-"Language-Team: French (France) (http://www.transifex.com/p/black-studio-tinymce-widget/language/fr_FR/)\n"
+"Language-Team: French (France) (http://www.transifex.com/wp-translations/black-studio-tinymce-widget/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: grunt-wp-i18n 0.4.8\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-Country: United States\n"
@@ -31,7 +31,7 @@ msgstr ""
 
 #. translators: error message shown when multiple instance of the plugin are
 #. detected
-#: black-studio-tinymce-widget.php:279
+#: black-studio-tinymce-widget.php:280
 msgid ""
 "ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were "
 "detected. Please activate only one instance at a time."
@@ -45,44 +45,44 @@ msgid ""
 msgstr "Le widget Éditeur Visuel permet d'insérer du texte riche et des objets média dans vos barres latérales"
 
 #. translators: error message shown when a duplicated widget ID is detected
-#: includes/class-admin.php:246
+#: includes/class-admin.php:249
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr "ERREUR : ID de widget en double détecté. Pour éviter la perte de votre contenu, veuillez créer un nouveau widget avec le même contenu et supprimez celui-ci."
 
 #. translators: text used for plugin home link
-#: includes/class-admin.php:334
+#: includes/class-admin.php:339
 msgid "Home"
 msgstr "Accueil"
 
 #. translators: text used for support faq link
-#: includes/class-admin.php:336
+#: includes/class-admin.php:341
 msgid "FAQ"
 msgstr "FAQ"
 
 #. translators: text used for support forum link
-#: includes/class-admin.php:338
+#: includes/class-admin.php:343
 msgid "Support"
 msgstr "Aide"
 
 #. translators: text used for reviews link
-#: includes/class-admin.php:340
+#: includes/class-admin.php:345
 msgid "Rate"
 msgstr "Avis"
 
 #. translators: text used for follow on twitter link
-#: includes/class-admin.php:342
+#: includes/class-admin.php:347
 msgid "Follow"
 msgstr "Suivre"
 
 #. translators: text used for donation link
-#: includes/class-admin.php:344
+#: includes/class-admin.php:349
 msgid "Donate"
 msgstr "Don"
 
 #. translators: text used for the icon that shows the plugin links
-#: includes/class-admin.php:364
+#: includes/class-admin.php:369
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr "À propos de l'extension Black Studio TinyMCE Widget"
 
