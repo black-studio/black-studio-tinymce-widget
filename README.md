@@ -4,7 +4,7 @@
 **Tags:** wysiwyg, visual, widget, tinymce, editor, rich text, visual editor, wysiwyg widget, text widget, tinymce widget, image widget, media widget  
 **Requires at least:** 3.1  
 **Tested up to:** 4.4  
-**Stable tag:** 2.2.8  
+**Stable tag:** 2.3.0  
 **License:** GPLv3  
 **License URI:** http://www.gnu.org/licenses/gpl.html  
 
@@ -12,13 +12,13 @@ The visual editor widget for Wordpress.
 
 ## Description ##
 
-This plugin adds a new `Visual Editor` widget type that allows you to insert rich text and media objects in your sidebars with no hassle. The default WordPress text widget lacks of functionalities and it requires HTML knowledge, this plugin was born to overcome these limitations. With Black Studio TinyMCE Widget you will be able to edit your widgets in a WYSIWYG manner using the native WordPress TinyMCE editor, just like you do in posts and pages. And if you are a developer you may still switch back and forth from Visual to HTML mode.
+This plugin adds a new `Visual Editor` widget type that allows you to insert rich text and media elements in your sidebars with no hassle. The default WordPress text widget lacks of functionalities and it requires HTML knowledge, this plugin was born to overcome these limitations. With Black Studio TinyMCE Widget you will be able to edit your widgets in a WYSIWYG manner using the native WordPress TinyMCE editor, just like you do in posts and pages. And if you are a developer you may still switch back and forth from Visual to HTML mode.
 
 ### Features ###
 
 * Add rich text widgets to your sidebars and edit them using the TinyMCE visual editor
 * Switch between Visual mode and HTML mode (including Quicktags toolbar)
-* Insert images, videos and other media from WordPress Media Library
+* Insert images, videos and other media from WordPress Media Library (including embed preview)
 * Insert links to existing WordPress pages/posts or external resources
 * Option to "Automatically add paragraphs" to widget text
 * Support for shortcodes, smilies and embeds in widget text
@@ -38,7 +38,7 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 * [Plugin's page](http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
 * [FAQ](https://wordpress.org/plugins/black-studio-tinymce-widget/faq/)
 * [Support forum](https://wordpress.org/support/plugin/black-studio-tinymce-widget)
-* Follow us on [Twitter](https://twitter.com/blackstudioita), [Facebook](https://www.facebook.com/blackstudiocomunicazione) and [LinkedIn](https://www.linkedin.com/company/black-studio)
+* Follow us on [Twitter](https://twitter.com/blackstudioita), [Facebook](https://www.facebook.com/blackstudiocomunicazione), [LinkedIn](https://www.linkedin.com/company/black-studio) and [GitHub](https://github.com/black-studio)
 
 ### Get involved ###
 
@@ -124,7 +124,7 @@ Alternatively you may use the WPML String Translation plugin, provided by the WP
 
 **Polylang**
 
-[Polylang](https://wordpress.org/plugins/polylang/) is a free alternative to WPML that allows you to create bilingual or multilingual WordPress sites. It provides natively the ability to assign languages to each widget (including the ones created with Black Studio TinyMCE Widget), so you won't need any additional plugin to have a multi-language widgets.
+[Polylang](https://wordpress.org/plugins/polylang/) is a free alternative to WPML that allows you to create bilingual or multilingual WordPress sites. It provides natively the ability to assign languages to each widget (including the ones created with Black Studio TinyMCE Widget), so you won't need any additional plugin to have multi-language widgets.
 
 **WPGlobus**
 
@@ -232,6 +232,19 @@ If for any reason you need to remove the filters above, you may use the followin
 Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 ## Changelog ##
+
+### 2.3.0 (2015-11-16) ###
+* Added support for responsive images (WP 4.4+)
+* Added support for NextGEN Gallery plugin
+* Added support for embed preview inside the editor
+* Added support for quick widget selection (shift+click) in Customizer
+* Enhanced integration with multi-language plugins (WPML and Polylang)
+* Enhanced widget appearance in Customizer
+* Moved translations from Transifex to WordPress.org language packs system
+* Fixed several z-index related issues in Customizer
+* Fixed issues when creating/updating widgets in Customizer 
+* Refactored code for compatibility with 3rd party plugins
+* Updated documentation
 
 ### 2.2.8 (2015-09-16) ###
 * Fixed link dialog z-index issue in Customizer
@@ -488,5 +501,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 ## Upgrade Notice ##
 
-### 2.2.8 ###
+### 2.3.0 ###
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
