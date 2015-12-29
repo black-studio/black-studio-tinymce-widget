@@ -1,5 +1,5 @@
 === Black Studio TinyMCE Widget ===
-Contributors: marcochiesi, thedarkmist
+Contributors: black-studio, marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, visual, widget, tinymce, editor, rich text, visual editor, wysiwyg widget, text widget, tinymce widget, image widget, media widget
 Requires at least: 3.1
@@ -18,11 +18,11 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 
 * Add rich text widgets to your sidebars and edit them using the TinyMCE visual editor
 * Switch between Visual mode and HTML mode (including Quicktags toolbar)
-* Insert images, videos and other media from WordPress Media Library (including embed preview)
+* Insert images, videos and other media from WordPress Media Library
 * Insert links to existing WordPress pages/posts or external resources
 * Option to "Automatically add paragraphs" to widget text
-* Support for shortcodes, smilies and embeds in widget text
-* Support for responsive images (requires WordPress 4.4 or later)
+* Support for shortcodes, smilies and embed in widget text (including preview)
+* Support for responsive images (on WordPress 4.4 or later)
 * Support for Customizer with live preview and quick edit
 * Support for fullscreen editing mode
 * Support for widgets accessibility mode
@@ -227,8 +227,8 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Changelog ==
 
-= 2.3.0 (2015-11-16) =
-* Added support for responsive images (WP 4.4+)
+= 2.3.0 (2015-11-24) =
+* Added support for responsive images (WordPress 4.4+)
 * Added support for NextGEN Gallery plugin
 * Added support for embed preview inside the editor
 * Added support for quick widget selection (shift+click) in Customizer
