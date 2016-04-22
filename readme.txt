@@ -1,10 +1,10 @@
 === Black Studio TinyMCE Widget ===
-Contributors: marcochiesi, thedarkmist
+Contributors: black-studio, marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, visual, widget, tinymce, editor, rich text, visual editor, wysiwyg widget, text widget, tinymce widget, image widget, media widget
 Requires at least: 3.1
-Tested up to: 4.4
-Stable tag: 2.2.8
+Tested up to: 4.5
+Stable tag: 2.2.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -226,6 +226,10 @@ function remove_bstw_widget_text_plugin_filters() {
 Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 == Changelog ==
+
+= 2.2.9 (2016-04-22) =
+* Fixed compatibility issue with Page Builder + WPML String Translation
+* Fixed minor z-index issue with new inline link dialog (WordPress 4.5)
 
 = 2.2.8 (2015-09-16) =
 * Fixed link dialog z-index issue in Customizer
@@ -482,5 +486,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Upgrade Notice ==
 
-= 2.2.8 =
+= 2.2.9 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
