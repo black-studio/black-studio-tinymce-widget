@@ -3,7 +3,7 @@
 **Donate link:** http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/  
 **Tags:** wysiwyg, visual, widget, tinymce, editor, rich text, visual editor, wysiwyg widget, text widget, tinymce widget, image widget, media widget  
 **Requires at least:** 3.1  
-**Tested up to:** 4.4  
+**Tested up to:** 4.5  
 **Stable tag:** 2.3.0  
 **License:** GPLv3  
 **License URI:** http://www.gnu.org/licenses/gpl.html  
@@ -233,7 +233,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 ## Changelog ##
 
-### 2.3.0 (2015-11-24) ###
+### 2.3.0 (2016-XX-XX) ###
 * Added support for responsive images (WordPress 4.4+)
 * Added support for NextGEN Gallery plugin
 * Added support for embed preview inside the editor
@@ -245,6 +245,10 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Fixed issues when creating/updating widgets in Customizer 
 * Refactored code for compatibility with 3rd party plugins
 * Updated documentation
+
+### 2.2.9 (2016-04-22) ###
+* Fixed compatibility issue with Page Builder + WPML String Translation
+* Fixed minor z-index issue with new inline link dialog (WordPress 4.5)
 
 ### 2.2.8 (2015-09-16) ###
 * Fixed link dialog z-index issue in Customizer
