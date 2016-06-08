@@ -246,6 +246,9 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Refactored code for compatibility with 3rd party plugins
 * Updated documentation
 
+### 2.2.10 (2016-06-08) ###
+* Fixed menubar transparency issue with Page Builder + TinyMCE Advanced
+
 ### 2.2.9 (2016-04-22) ###
 * Fixed compatibility issue with Page Builder + WPML String Translation
 * Fixed minor z-index issue with new inline link dialog (WordPress 4.5)
