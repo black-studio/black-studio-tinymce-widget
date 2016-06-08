@@ -145,6 +145,14 @@ body.wait, body.wait * {
 }
 
 
+/* Fix for menubar styling (TinyMCE Advanced) */
+.mce-menubar {
+	border-color: #e5e5e5 !important;
+	background: #fff !important;
+	border-width: 0px 0px 1px !important;
+}
+
+
 /* Fix for RTL editor color text button */
 
 .mce-rtl .mce-colorbutton button {
