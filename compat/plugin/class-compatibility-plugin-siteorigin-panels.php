@@ -50,6 +50,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 				add_action( 'admin_init', array( $this, 'disable_compat' ), 7 );
 				add_action( 'admin_init', array( $this, 'admin_init' ) );
 			}
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			}
 		}
 
 		/**

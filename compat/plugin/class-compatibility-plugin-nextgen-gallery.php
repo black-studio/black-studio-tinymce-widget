@@ -52,6 +52,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 			}
 			add_action( 'init', array( $this, 'nextgen_gallery_customizer_init' ), 20 );
 			add_filter( 'widget_text', array( $this, 'widget_text' ) );
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			}
 		}
 
 		/**
@@ -113,7 +116,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * @since 2.3.0
 		 */
 		public function nextgen_gallery_customizer_init() {
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			if ( is_plugin_active( 'nextgen-gallery/nggallery.php' ) ) {
 				if ( class_exists( 'M_Frame_Communication' ) ) {
 					$ngg_module_frame_communication = new M_Frame_Communication();
@@ -133,7 +135,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * @since 2.3.0
 		 */
 		public function widget_text( $content ) {
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			if ( is_plugin_active( 'nextgen-gallery/nggallery.php' ) ) {
 				if ( class_exists( 'M_Attach_To_Post' ) ) {
 					$ngg_module_attach_to_post = new M_Attach_To_Post();

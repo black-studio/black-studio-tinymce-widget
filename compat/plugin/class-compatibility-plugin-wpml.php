@@ -51,6 +51,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 				add_action( 'admin_init', array( $this, 'admin_init' ) );
 			}
 			add_filter( 'widget_text', array( $this, 'widget_text' ), 2, 3 );
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			}
 		}
 
 		/**
@@ -119,7 +122,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @since 2.3.0
 		 */
 		public function widget_text( $text, $instance = null, $widget = null ) {
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 					if ( function_exists( 'icl_t' ) ) {
