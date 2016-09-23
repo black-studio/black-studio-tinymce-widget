@@ -50,6 +50,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 					$this->$plugin();
 				}
 			}
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			}
 		}
 
 		/**
@@ -110,7 +113,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wpml_widget_text( $text, $instance = null, $widget = null ) {
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 					if ( function_exists( 'icl_t' ) ) {
