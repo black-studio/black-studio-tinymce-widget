@@ -74,8 +74,61 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wpml() {
+			add_action( 'black_studio_tinymce_before_widget', array( $this, 'wpml_widget_before' ), 10, 2 );
+			add_action( 'black_studio_tinymce_after_widget', array( $this, 'wpml_widget_after' ), 10, 2 );
 			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'wpml_widget_update' ), 10, 2 );
 			add_filter( 'widget_text', array( $this, 'wpml_widget_text' ), 2, 3 );
+		}
+
+		/**
+		 * Disable WPML String translation native behavior
+		 *
+		 * @uses remove_filter()
+		 *
+		 * @param mixed[] $args
+		 * @param mixed[] $instance
+		 * @return void
+		 * @since 2.3.0
+		 */
+		public function wpml_widget_before( $args, $instance ) {
+			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+				// Avoid native WPML string translation of widget titles 
+				// For widgets inserted in pages built with Page Builder (SiteOrigin panels) and also when WPML Widgets is active
+				if ( false !== has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) ) {
+					if ( isset( $instance['panels_info'] ) || is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
+						remove_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
+					}
+				}
+				// Avoid native WPML string translation of widget texts (for all widgets) 
+				// Black Studio TinyMCE Widget already supports WPML string translation, so this is needed to prevent duplicate translations
+				if ( false !== has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) ) {
+					remove_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
+				}
+			}
+			
+		}
+
+		/**
+		 * Re-Enable WPML String translation native behavior
+		 *
+		 * @uses add_filter()
+		 *
+		 * @param mixed[] $args
+		 * @param mixed[] $instance
+		 * @return void
+		 * @since 2.3.0
+		 */
+		public function wpml_widget_after( $args, $instance ) {
+			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+				if ( false === has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) && function_exists( 'icl_sw_filters_widget_title' ) ) {
+					if ( isset( $instance['panels_info'] ) || is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
+						add_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
+					}
+				}
+				if ( false === has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) && function_exists( 'icl_sw_filters_widget_text' ) ) {
+					add_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
+				}
+			}
 		}
 
 		/**
@@ -113,10 +166,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wpml_widget_text( $text, $instance = null, $widget = null ) {
-			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
 				if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 					if ( function_exists( 'icl_t' ) ) {
-						if ( ! isset( $instance['panels_info'] ) ) { // Avoid translation of Page Builder (SiteOrigin panels) widgets
+						// Avoid translation of Page Builder (SiteOrigin panels) widgets
+						if ( ! isset( $instance['panels_info'] ) ) { 
 							$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
 						}
 					}
