@@ -4,7 +4,7 @@ Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
 Tested up to: 4.6
-Stable tag: 2.2.12
+Stable tag: 2.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -93,8 +93,9 @@ When dealing with a WordPress site URL change it is necessary to face the serial
 
 = How to translate widgets using WPML =
 
-The current version of `Black Studio TinyMCE Widget` plugin works together with the `WPML String translation` plugin. To translate a widget created with `Black Studio TinyMCE Widget` plugin you have to create it on the widgets panel and then go to `WPML` => `String translation` and translate the title and text from there (unfortunately the translation textarea has not the visual editor).
-Note: If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String translation list.
+[WPML](https://wpml.org) is the leading commercial plugin for WordPress multi-language sites.
+If you're using WPML, we recommend to install also the 3rd party [WPML Widgets](https://wordpress.org/plugins/wpml-widgets/) plugin, which will allow you to create widgets and assign them to specific languages, keeping the ability to work with the visual editor.
+Alternatively you may use the WPML String Translation plugin, provided by the WPML team. In this case, you'll have to create the widgets in the widgets admin panel, using the Visual Editor provided by the Black Studio TinyMCE Widget plugin, and then go to WPML => String Translation and translate title and body of widgets. If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String Translation list. Unfortunately the WPML String Translation interface has no Visual Editor, that's why we no longer recommend this method. If you were using WPML String Translation, we recommend to switch to WPML Widgets and remove the entries in WPML String Translation list after you moved them to be real widgets.
 
 = How to embed video and other contents =
 
@@ -179,6 +180,10 @@ function remove_bstw_widget_text_filters() {
 Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 == Changelog ==
+
+= 2.3.0 (2016-11-17) =
+* Enhanced integration with WPML and Page Builder
+* Added new action hooks (black_studio_tinymce_before_widget and black_studio_tinymce_after_widget)
 
 = 2.2.12 (2016-09-23) =
 * Fixed issue with Page Builder's Live Editor
@@ -448,5 +453,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Upgrade Notice ==
 
-= 2.2.12 =
+= 2.3.0 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
