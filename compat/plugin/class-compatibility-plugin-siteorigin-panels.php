@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class that provides compatibility code for Page Builder (SiteOrigin Panels)
  *
  * @package Black_Studio_TinyMCE_Widget
- * @since 2.3.0
+ * @since 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panels' ) ) {
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * Return the single class instance
 		 *
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * @uses is_admin()
 		 * @uses add_action()
 		 *
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __construct() {
 			if ( is_admin() ) {
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __clone() {
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
@@ -73,7 +73,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * @uses is_plugin_active()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function admin_init() {
 			if ( is_plugin_active( 'siteorigin-panels/siteorigin-panels.php' ) ) {
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 *
 		 * @param object $the_widget
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function widget_object( $the_widget ) {
 			if ( isset( $the_widget->id_base ) && 'black-studio-tinymce' == $the_widget->id_base ) {
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 *
 		 * @param string[] $selectors
 		 * @return string[]
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function container_selectors( $selectors ) {
 			$selectors[] = 'div.panel-dialog';
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 *
 		 * @param string[] $events
 		 * @return string[]
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function activate_events( $events ) {
 			$events[] = 'panelsopen';
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 *
 		 * @param string[] $events
 		 * @return string[]
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function deactivate_events( $events ) {
 			$events[] = 'panelsdone';
@@ -141,7 +141,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 *
 		 * @param string[] $pages
 		 * @return string[]
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * @uses remove_action()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function disable_compat( ) {
 			remove_action( 'admin_init', 'siteorigin_panels_black_studio_tinymce_admin_init' );

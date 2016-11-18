@@ -28,7 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * Array of compatibility modules class instances
 		 *
 		 * @var array
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected static $modules = null;
 
@@ -37,7 +37,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 *
 		 * @var object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		protected static $plugins = null;
 
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 *
 		 * @var object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		protected static $wordpress = null;
 
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * @param string $slug
 		 *
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function module( $slug ) {
 			return isset( self::$modules[ $slug ] ) ? self::$modules[ $slug ] : null;
@@ -102,10 +102,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 *
 		 * @return object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public static function plugins() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			include_once( self::get_path() . 'class-compatibility-plugins.php' );
 			self::$plugins = Black_Studio_TinyMCE_Compatibility_Plugins::instance();
 			return self::$plugins;
@@ -116,10 +116,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 *
 		 * @return object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public static function wordpress() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			if ( version_compare( get_bloginfo( 'version' ), '3.9', '<' ) ) {
 				include_once( self::get_path() . 'class-compatibility-wordpress.php' );
 				self::$wordpress = Black_Studio_TinyMCE_Compatibility_Wordpress::instance();
@@ -192,7 +192,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * @uses plugin_dir_path()
 		 *
 		 * @return string
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function get_path( $folder = '' ) {
 			$path = plugin_dir_path( dirname( __FILE__ ) ) . 'compat/';
@@ -205,7 +205,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		/**
 		 * Get instance of a compatibility module
 		 *
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function create_module_instance( $folder, $slug ) {
 			$file = self::get_path( $folder ) . 'class-compatibility-' . $folder . '-' . str_replace( '_', '-',  $slug ) . '.php';

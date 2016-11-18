@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class that provides compatibility code for NextGEN Gallery plugin
  *
  * @package Black_Studio_TinyMCE_Widget
- * @since 2.3.0
+ * @since 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery' ) ) {
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * Return the single class instance
 		 *
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -44,7 +44,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * @uses add_filter()
 		 * @uses add_action()
 		 *
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __construct() {
 			if ( is_admin() ) {
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __clone() {
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
@@ -75,7 +75,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * @uses M_Attach_To_Post class (part of NextGEN Gallery)
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function nextgen_gallery_admin_init() {
 			if ( is_plugin_active( 'nextgen-gallery/nggallery.php' ) ) {
@@ -96,7 +96,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * @uses C_Router class (part of NextGEN Gallery)
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function nextgen_gallery_admin_enqueue_style() {
 			if ( class_exists( 'C_Router' ) ) {
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 * @uses M_Frame_Communication class (part of NextGEN Gallery)
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function nextgen_gallery_customizer_init() {
 			if ( is_plugin_active( 'nextgen-gallery/nggallery.php' ) ) {
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 		 *
 		 * @param string $content
 		 * @return string
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function widget_text( $content ) {
 			if ( is_plugin_active( 'nextgen-gallery/nggallery.php' ) ) {

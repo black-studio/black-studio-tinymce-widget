@@ -7,11 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class that provides compatibility code with other plugins
- * Starting from version 2.3.0 this class is no longer used, and it will be removed in future version
+ * Starting from version 2.4.0 this class is no longer used, and it will be removed in future version
  *
  * @package Black_Studio_TinyMCE_Widget
  * @since 2.0.0
- * @deprecated 2.3.0
+ * @deprecated 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
@@ -23,7 +23,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @var object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -32,10 +32,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public static function instance() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			if ( is_null( self::$_instance ) ) {
 				self::$_instance = new self();
 			}
@@ -46,10 +46,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * Class constructor
 		 *
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		protected function __construct() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -57,10 +57,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		protected function __clone() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
@@ -69,10 +69,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wpml() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -81,10 +81,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param mixed[] $instance
 		 * @return mixed[]
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wpml_widget_update( $instance ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $instance;
 		}
 
@@ -96,10 +96,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param object|null $widget
 		 * @return string
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wpml_widget_text( $text, $instance = null, $widget = null ) {
-			_deprecated_function( __FUNCTION__, '2.3.0', 'bstw()->compatibility()->module( \'wpml\' )->widget_text( $text, $instance, $widget )' );
+			_deprecated_function( __FUNCTION__, '2.4.0', 'bstw()->compatibility()->module( \'wpml\' )->widget_text( $text, $instance, $widget )' );
 			return bstw()->compatibility()->module( 'wpml' )->widget_text( $text, $instance, $widget );
 		}
 
@@ -108,10 +108,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_page_widget() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -119,10 +119,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_page_widget_admin_init() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -131,10 +131,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param string[] $pages
 		 * @return string[]
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_page_widget_enable_pages( $pages ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $pages;
 		}
 
@@ -143,10 +143,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_page_widget_enqueue_script() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -154,10 +154,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function siteorigin_panels() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -165,10 +165,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function siteorigin_panels_admin_init() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -177,10 +177,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param object $the_widget
 		 * @return object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function siteorigin_panels_widget_object( $the_widget ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $the_widget;
 		}
 
@@ -190,10 +190,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param string[] $selectors
 		 * @return string[]
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function siteorigin_panels_container_selectors( $selectors ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $selectors;
 		}
 
@@ -203,10 +203,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param string[] $events
 		 * @return string[]
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function siteorigin_panels_activate_events( $events ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $events;
 		}
 
@@ -216,10 +216,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param string[] $events
 		 * @return string[]
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function siteorigin_panels_deactivate_events( $events ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $events;
 		}
 
@@ -229,10 +229,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param string[] $pages
 		 * @return string[]
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function siteorigin_panels_enable_pages( $pages ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $pages;
 		}
 
@@ -241,10 +241,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function siteorigin_panels_disable_compat( ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -252,10 +252,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function jetpack_after_the_deadline() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -263,10 +263,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function jetpack_after_the_deadline_load() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 	} // END class Black_Studio_TinyMCE_Compatibility_Plugins

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class that provides compatibility Compatibility with WPML plugins
  *
  * @package Black_Studio_TinyMCE_Widget
- * @since 2.3.0
+ * @since 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * Return the single class instance
 		 *
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @uses add_action()
 		 * @uses add_filter()
 		 *
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __construct() {
 			add_action( 'init', array( $this, 'init' ) );
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __clone() {
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
@@ -74,7 +74,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @uses remove_action()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function init() {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
@@ -94,7 +94,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @param mixed[] $args
 		 * @param mixed[] $instance
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function widget_before( $args, $instance ) {
 			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
@@ -123,7 +123,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @param mixed[] $args
 		 * @param mixed[] $instance
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function widget_after( $args, $instance ) {
 			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
@@ -147,7 +147,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @param mixed[] $instance
 		 * @param object $widget
 		 * @return mixed[]
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function widget_update( $instance, $widget ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
@@ -170,7 +170,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @param mixed[]|null $instance
 		 * @param object|null $widget
 		 * @return string
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function widget_text( $text, $instance = null, $widget = null ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {

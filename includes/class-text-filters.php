@@ -189,7 +189,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @param mixed[]|null $instance
 		 * @param object|null $widget
 		 * @return string
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function wp_make_content_images_responsive( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {

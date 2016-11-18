@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class that provides compatibility code for WP Page Widget plugin
  *
  * @package Black_Studio_TinyMCE_Widget
- * @since 2.3.0
+ * @since 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' ) ) {
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 * Return the single class instance
 		 *
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 * @uses is_admin()
 		 * @uses add_action()
 		 *
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __construct() {
 			if ( is_admin() ) {
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __clone() {
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
@@ -73,7 +73,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 * @uses get_bloginfo()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function admin_init() {
 			if ( is_plugin_active( 'wp-page-widget/wp-page-widgets.php' ) && version_compare( get_bloginfo( 'version' ), '3.3', '>=' ) ) {
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 *
 		 * @param string[] $pages
 		 * @return string[]
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
@@ -110,7 +110,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 * @uses SCRIPT_DEBUG
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function enqueue_script() {
 			$main_script = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );

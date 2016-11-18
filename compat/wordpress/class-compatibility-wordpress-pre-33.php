@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class that provides compatibility code for WordPress versions prior to 3.3 
  *
  * @package Black_Studio_TinyMCE_Widget
- * @since 2.3.0
+ * @since 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * Return the single class instance
 		 *
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * @uses is_admin()
 		 * @uses add_action()
 		 *
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __construct() {
 			if ( is_admin() ) {
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __clone() {
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * @uses get_bloginfo()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function admin_init() {
 			$wp_version = get_bloginfo( 'version' );
@@ -96,7 +96,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 *
 		 * @param mixed[] $settings
 		 * @return mixed[]
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function tiny_mce_before_init( $settings ) {
 			$plugins = explode( ',', $settings['plugins'] );
@@ -116,7 +116,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * @uses wp_enqueue_style()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function admin_print_styles() {
 			wp_enqueue_style( 'thickbox' );
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * @uses wp_enqueue_script()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function admin_print_scripts() {
 			wp_enqueue_script( 'media-upload' );
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * Filter to enqueue style / script
 		 *
 		 * @return string
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function handle() {
 			return 'black-studio-tinymce-widget-pre33';
@@ -154,7 +154,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * @param string $path
 		 *
 		 * @return string
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function path( $path ) {
 			return 'compat/wordpress/' . $path;
@@ -167,7 +167,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_33' ) ) {
 		 * @uses wp_preload_dialog()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function admin_print_footer_scripts() {
 			if ( function_exists( 'wp_tiny_mce' ) ) {

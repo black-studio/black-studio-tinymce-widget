@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class that provides compatibility code for WordPress versions prior to 3.5
  *
  * @package Black_Studio_TinyMCE_Widget
- * @since 2.3.0
+ * @since 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * Return the single class instance
 		 *
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 *
 		 * @uses add_action()
 		 *
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __construct() {
 			add_action( 'admin_init', array( $this, 'admin_init' ), 35 );
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __clone() {
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
@@ -64,7 +64,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * @uses add_filter()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function admin_init() {
 			if ( bstw()->admin()->enabled() ) {
@@ -79,7 +79,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * @global string $pagenow
 		 * @param string $upload_iframe_src
 		 * @return string
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function upload_iframe_src( $upload_iframe_src ) {
 			global $pagenow;

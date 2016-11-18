@@ -446,7 +446,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @uses register_post_type()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function register_dummy_post_type() {
 			$args = array(
@@ -473,7 +473,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @uses get_option()
 		 *
 		 * @return int
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function get_dummy_post_id() {
 			$query_post = new WP_Query( 'post_type=bstw_dummy' );

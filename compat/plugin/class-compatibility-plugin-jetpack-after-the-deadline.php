@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class that provides compatibility code for Jetpack After the deadline
  *
  * @package Black_Studio_TinyMCE_Widget
- * @since 2.3.0
+ * @since 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_The_Deadline' ) ) {
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_Th
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_Th
 		 * Return the single class instance
 		 *
 		 * @return object
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_Th
 		 * @uses is_admin()
 		 * @uses add_action()
 		 *
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __construct() {
 			if ( is_admin() ) {
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_Th
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		protected function __clone() {
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_Th
 		 * @uses add_filter()
 		 *
 		 * @return void
-		 * @since 2.3.0
+		 * @since 2.4.0
 		 */
 		public function after_the_deadline_load() {
 			add_filter( 'atd_load_scripts', '__return_true' );

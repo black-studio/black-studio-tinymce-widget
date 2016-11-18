@@ -7,11 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class that provides compatibility code with older WordPress versions
- * Starting from version 2.3.0 this class is no longer used, and it will be removed in future version
+ * Starting from version 2.4.0 this class is no longer used, and it will be removed in future version
  *
  * @package Black_Studio_TinyMCE_Widget
  * @since 2.0.0
- * @deprecated 2.3.0
+ * @deprecated 2.4.0
  */
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
@@ -23,7 +23,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @var object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		protected static $_instance = null;
 
@@ -32,10 +32,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return object
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public static function instance() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			if ( is_null( self::$_instance ) ) {
 				self::$_instance = new self();
 			}
@@ -46,10 +46,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Class constructor
 		 *
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		protected function __construct() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -57,10 +57,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		protected function __clone() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
@@ -69,10 +69,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_32() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -80,10 +80,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function  wp_pre_32_admin_print_footer_scripts() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -91,10 +91,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_33() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -103,10 +103,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @param mixed[] $settings
 		 * @return mixed[]
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_33_tiny_mce_before_init( $settings ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $settings;
 		}
 
@@ -115,10 +115,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_33_admin_print_styles() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -126,10 +126,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_33_admin_print_scripts() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -137,10 +137,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return string
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_33_handle() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return 'black-studio-tinymce-widget-pre33';
 		}
 
@@ -149,10 +149,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_33_admin_print_footer_scripts() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -160,10 +160,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_35() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -173,10 +173,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @param string $upload_iframe_src
 		 * @return string
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_35_upload_iframe_src( $upload_iframe_src ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $upload_iframe_src;
 		}
 
@@ -185,10 +185,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_39() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -196,10 +196,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return string
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_39_handle() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return 'black-studio-tinymce-widget-pre39';
 		}
 
@@ -209,10 +209,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @param mixed[] $settings
 		 * @return mixed[]
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_39_tiny_mce_before_init( $settings ) {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 			return $settings;
 		}
 
@@ -221,10 +221,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_39_admin_print_footer_scripts() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 		/**
@@ -232,10 +232,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
-		 * @deprecated 2.3.0
+		 * @deprecated 2.4.0
 		 */
 		public function wp_pre_39_editor() {
-			_deprecated_function( __FUNCTION__, '2.3.0' );
+			_deprecated_function( __FUNCTION__, '2.4.0' );
 		}
 
 	} // END class Black_Studio_TinyMCE_Compatibility_Wordpress
