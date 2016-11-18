@@ -74,10 +74,29 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wpml() {
+			add_action( 'init', array( $this, 'wpml_init' ) );
 			add_action( 'black_studio_tinymce_before_widget', array( $this, 'wpml_widget_before' ), 10, 2 );
 			add_action( 'black_studio_tinymce_after_widget', array( $this, 'wpml_widget_after' ), 10, 2 );
 			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'wpml_widget_update' ), 10, 2 );
 			add_filter( 'widget_text', array( $this, 'wpml_widget_text' ), 2, 3 );
+		}
+
+		/**
+		 * Initialize compatibility with WPML and WPML Widgets plugins
+		 *
+		 * @uses is_plugin_active()
+		 * @uses has_action()
+		 * @uses remove_action()
+		 *
+		 * @return void
+		 * @since 2.4.0
+		 */
+		public function wpml_init() {
+			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
+				if ( false !== has_action( 'update_option_widget_black-studio-tinymce', 'icl_st_update_widget_title_actions' ) ) {
+					remove_action( 'update_option_widget_black-studio-tinymce', 'icl_st_update_widget_title_actions', 5 );
+				}
+			}
 		}
 
 		/**
