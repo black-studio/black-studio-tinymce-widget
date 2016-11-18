@@ -3,7 +3,7 @@ Contributors: black-studio, marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, visual, widget, tinymce, editor, rich text, visual editor, wysiwyg widget, text widget, tinymce widget, image widget, media widget
 Requires at least: 3.1
-Tested up to: 4.5
+Tested up to: 4.6
 Stable tag: 2.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -113,7 +113,7 @@ The current version of Black Studio TinyMCE Widget supports the following multi-
 **WPML**
 
 [WPML](https://wpml.org) is the leading commercial plugin for WordPress multi-language sites.
-If you're using WPML, we recommend to install also the 3rd party [WPML Widgets](https://wordpress.org/plugins/wpml-widgets/) plugin, which will allow you to create widgets and assign them to specific languages, keeping th ability to work with the visual editor.
+If you're using WPML, we recommend to install also the 3rd party [WPML Widgets](https://wordpress.org/plugins/wpml-widgets/) plugin, which will allow you to create widgets and assign them to specific languages, keeping the ability to work with the visual editor.
 Alternatively you may use the WPML String Translation plugin, provided by the WPML team. In this case, you'll have to create the widgets in the widgets admin panel, using the Visual Editor provided by the Black Studio TinyMCE Widget plugin, and then go to WPML => String Translation and translate title and body of widgets. If you installed WPML after the creation of the widgets, just re-save them and they will appear on the String Translation list. Unfortunately the WPML String Translation interface has no Visual Editor, that's why we no longer recommend this method. If you were using WPML String Translation, we recommend to switch to WPML Widgets and remove the entries in WPML String Translation list after you moved them to be real widgets.
 
 **Polylang**
@@ -227,7 +227,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 == Changelog ==
 
-= 2.3.0 (2016-XX-XX) =
+= 2.4.0 (TBA) =
 * Added support for responsive images (WordPress 4.4+)
 * Added support for NextGEN Gallery plugin
 * Added support for embed preview inside the editor
@@ -239,6 +239,16 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Fixed issues when creating/updating widgets in Customizer 
 * Refactored code for compatibility with 3rd party plugins
 * Updated documentation
+
+= 2.3.0 (2016-11-17) =
+* Enhanced integration with WPML and Page Builder
+* Added new action hooks (black_studio_tinymce_before_widget and black_studio_tinymce_after_widget)
+
+= 2.2.12 (2016-09-23) =
+* Fixed issue with Page Builder's Live Editor
+
+= 2.2.11 (2016-08-19) =
+* Fixed compatibility issue with Polylang in Customizer
 
 = 2.2.10 (2016-06-08) =
 * Fixed menubar transparency issue with Page Builder + TinyMCE Advanced
