@@ -48,6 +48,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			$after_widget = $args['after_widget'];
 			$before_title = $args['before_title'];
 			$after_title = $args['after_title'];
+			do_action( 'black_studio_tinymce_before_widget', $args, $instance );
 			$before_text = apply_filters( 'black_studio_tinymce_before_text', '<div class="textwidget">', $instance );
 			$after_text = apply_filters( 'black_studio_tinymce_after_text', '</div>', $instance );
 			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
@@ -62,6 +63,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 				$output .= $after_widget;
 				echo $output; // xss ok
 			}
+			do_action( 'black_studio_tinymce_after_widget', $args, $instance );
 		}
 
 		/**
