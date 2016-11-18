@@ -67,7 +67,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		}
 
 		/**
-		 * Initialize compatibility with WPML
+		 * Initialize compatibility with WPML and WPML Widgets plugins
 		 *
 		 * @uses is_plugin_active()
 		 * @uses has_action()
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @since 2.4.0
 		 */
 		public function widget_before( $args, $instance ) {
-			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				// Avoid native WPML string translation of widget titles 
 				// For widgets inserted in pages built with Page Builder (SiteOrigin panels) and also when WPML Widgets is active
 				if ( false !== has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) ) {
@@ -126,7 +126,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @since 2.4.0
 		 */
 		public function widget_after( $args, $instance ) {
-			if( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				if ( false === has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) && function_exists( 'icl_sw_filters_widget_title' ) ) {
 					if ( isset( $instance['panels_info'] ) || is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
 						add_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
