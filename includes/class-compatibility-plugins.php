@@ -89,7 +89,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses remove_action()
 		 *
 		 * @return void
-		 * @since 2.4.0
+		 * @since 2.3.1
 		 */
 		public function wpml_init() {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
