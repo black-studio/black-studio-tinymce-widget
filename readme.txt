@@ -3,7 +3,7 @@ Contributors: black-studio, marcochiesi, thedarkmist
 Donate link: http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget
 Requires at least: 3.1
-Tested up to: 4.6
+Tested up to: 4.7
 Stable tag: 2.3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
