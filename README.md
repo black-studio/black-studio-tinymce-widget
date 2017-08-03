@@ -3,8 +3,8 @@
 **Donate link:** http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/  
 **Tags:** wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget  
 **Requires at least:** 3.1  
-**Tested up to:** 4.7  
-**Stable tag:** 2.3.2  
+**Tested up to:** 4.8  
+**Stable tag:** 2.4.0  
 **License:** GPLv3  
 **License URI:** http://www.gnu.org/licenses/gpl.html  
 
@@ -12,12 +12,14 @@ The visual editor widget for Wordpress.
 
 ## Description ##
 
-This plugin adds a new `Visual Editor` widget type that allows you to insert rich text and media objects in your sidebars with no hassle. The default WordPress text widget lacks of functionalities and it requires HTML knowledge, this plugin was born to overcome these limitations. With Black Studio TinyMCE Widget you will be able to edit your widgets in a WYSIWYG manner using the native WordPress TinyMCE editor, just like you do in posts and pages. And if you are a developer you may still switch back and forth from Visual to HTML mode.
+This plugin adds a new `Visual Editor` widget type that allows you to insert rich text and media objects in your sidebars with no hassle. With Black Studio TinyMCE Widget you will be able to edit your widgets in a WYSIWYG manner using the native WordPress TinyMCE editor, just like you do in posts and pages. And if you are a developer you may still switch back and forth from Visual to HTML mode. For years the default WordPress text widget lacked of functionalities and it required HTML knowledge, this plugin was born to overcome these limitations. The recent releases of WordPress (starting from version 4.8 released in June 2017), finally included a native visual text widget, but it's pretty minimal and it doesn't provide all the features available with Black Studio TinyMCE Widget, which still remains a must-have for advanced users.
 
 ### Features ###
 
 * Add rich text widgets to your sidebars and edit them using visual editor
 * Switch between Visual mode and HTML mode (including Quicktags toolbar)
+* Full featured TinyMCE Visual Editor (the same you have for pages and posts)
+* Compatible with 3rd party TinyMCE customization plugins (TinyMCE Advanced, WP Edit, ...)
 * Insert images/videos from WordPress Media Library
 * Insert links to existing WordPress pages/posts or external resources
 * Support for fullscreen editing mode
@@ -48,7 +50,7 @@ This section describes how to install and use the plugin.
 1. Install automatically through the `Plugins` menu and `Add New` button (or upload the entire `black-studio-tinymce-widget` folder to the `/wp-content/plugins/` directory)
 2. Activate the plugin
 3. Go to `Appearance` => `Widgets`
-4. Drag and drop the `Visual Editor` widget to the desired sidebar (or, if using Accesibility mode, click the `Add` link)
+4. Drag and drop the `Visual Editor` widget to the desired sidebar (or, if using Accessibility mode, click the `Add` link)
 5. Fill in title and (rich) text
 
 ## Screenshots ##
@@ -95,7 +97,7 @@ Since version 1.3.1 the name of the widget changed from `Black Studio TinyMCE Wi
 
 ### Widgets disappeared after migrating or changing the site URL ###
 
-When dealing with a WordPress site URL change it is necessary to face the serialized fields issue: data may become corrupted if using a simple search/replace (see the [Codex](http://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiviation. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.
+When dealing with a WordPress site URL change it is necessary to face the serialized fields issue: data may become corrupted if using a simple search/replace (see the [Codex](http://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiving. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.
 
 ### How to translate widgets using WPML ###
 
@@ -113,7 +115,7 @@ Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL
 
 ### How to customize widget appearance ###
 
-The appearance of widgets in the frontend depends on both CSS and HTML. This plugin does not insert any additional CSS to your website frontend, so if you need to customize the styling you'll have to do at theme level, or you have to insert explicitely insert `<style>` in your widget using the the Text / HTML mode (this option is not recommended though).
+The appearance of widgets in the frontend depends on both CSS and HTML. This plugin does not insert any additional CSS to your website frontend, so if you need to customize the styling you'll have to do at theme level, or you have to insert explicitly insert `<style>` in your widget using the the Text / HTML mode (this option is not recommended though).
 As for the HTML, most of the markup is controlled by WordPress and by the theme.
 The HTML output of a widget includes the following parts:
 
@@ -183,9 +185,21 @@ If for any reason you need to remove the filters above, you may use the followin
 
 ### Plugin's data location and cleanup ###
 
-Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin itslef. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
+The widgets data are stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Widget data storage is handled by WordPress and not directly by the plugin. The widgets data are intentionally kept in the database upon plugin deactivation / deletion to avoid content loss. Additionally the plugin may save some user preferences in the `wp_usermeta` table, in particular the records having key with the prefix `_bstw`.
+If you want to totally remove the plugin including its data, just uninstall it and then remove the above records from the database.
+You may use the following SQL queries for removal (Note: adjust table prefix according to your database settings):
+
+	DELETE FROM wp_options WHERE option_name = 'widget_black-studio-tinymce';
+	DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
+
 
 ## Changelog ##
+
+### 2.4.0 (2017-08-04) ###
+* Prevent JS errors and display warning when visual editor is disabled in profile settings
+* Fixed z-index issue on TinyMCE panels
+* Added Mexican Spanish translation
+* Updated other language translations
 
 ### 2.3.2 (2017-04-13) ###
 * Added Indonesian, Occitan and Portuguese translations
@@ -199,7 +213,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Added new action hooks (black_studio_tinymce_before_widget and black_studio_tinymce_after_widget)
 
 ### 2.2.12 (2016-09-23) ###
-* Fixed issue with Page Builder's Live Editor
+* Fixed issue with Page Builder Live Editor
 
 ### 2.2.11 (2016-08-19) ###
 * Fixed compatibility issue with Polylang in Customizer
@@ -274,7 +288,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Fixed compatibility issue with Styles plugin related to plugins_loaded hook
 
 ### 2.1.2 (2014-10-13) ###
-* Hotfix for fullscreen mode when using Page Builder
+* Hotfix for full screen mode when using Page Builder
 
 ### 2.1.1 (2014-10-13) ###
 * Hotfix for CSS compatibility with Page Builder 
@@ -375,7 +389,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 ### 1.3.0 (2014-01-29) ###
 * Added support for smilies conversion (based on the general WordPress option)
-* Updated styling to match the new default WordPress editor appearence
+* Updated styling to match the new default WordPress editor appearance
 * Refactoring of PHP and JS code to be compliant to WordPress coding standard
 * Fixed compatibility issue with WordPress 3.9 alpha and TinyMCE 4.0
 * Fixed compatibility issue with Jetpack / After the Deadline plugin
@@ -426,7 +440,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Increased width of editor window
 
 ### 0.9 (2012-01-20) ###
-* Added support for WPML plugin (for multilanguage sites)
+* Added support for WPML plugin (for multilingual sites)
 
 ### 0.8.2 (2011-12-21) ###
 * Added support for shortcodes in widget text
@@ -443,7 +457,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Optimization/compression of javascript code
 
 ### 0.6.5 (2011-11-17) ###
-* Forced TinyMCE editor to not automatically add/remove paragraph tags when switching to HTML mode (you may need to re-edit your widgets to adjust linebreaks, if you were using multiple paragraphs)
+* Forced TinyMCE editor to not automatically add/remove paragraph tags when switching to HTML mode (you may need to re-edit your widgets to adjust line breaks, if you were using multiple paragraphs)
 
 ### 0.6.4 (2011-11-14) ###
 * Fixed compatibility issue with Jetpack / After the Deadline plugin
