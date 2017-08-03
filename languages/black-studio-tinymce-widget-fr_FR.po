@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2017-04-13 10:57:08+00:00\n"
-"PO-Revision-Date: 2017-03-05 10:32+0000\n"
-"Last-Translator: FX Bénard <fxb@wp-translations.org>\n"
+"POT-Creation-Date: 2017-08-03 22:00:29+00:00\n"
+"PO-Revision-Date: 2017-08-03 22:00+0000\n"
+"Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: French (France) (http://www.transifex.com/wp-translations/black-studio-tinymce-widget/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,46 +46,54 @@ msgid ""
 msgstr "Le widget Éditeur Visuel permet d'insérer du texte riche et des objets média dans vos colonnes latérales"
 
 #. translators: error message shown when a duplicated widget ID is detected
-#: includes/class-admin.php:246
+#: includes/class-admin.php:250
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
 msgstr "ERREUR : ID de widget en double détecté. Pour éviter la perte de votre contenu, veuillez créer un nouveau widget avec le même contenu et supprimez celui-ci."
 
 #. translators: text used for plugin home link
-#: includes/class-admin.php:334
+#: includes/class-admin.php:338
 msgid "Home"
 msgstr "Accueil"
 
 #. translators: text used for support faq link
-#: includes/class-admin.php:336
+#: includes/class-admin.php:340
 msgid "FAQ"
 msgstr "FAQ"
 
 #. translators: text used for support forum link
-#: includes/class-admin.php:338
+#: includes/class-admin.php:342
 msgid "Support"
 msgstr "Support"
 
 #. translators: text used for reviews link
-#: includes/class-admin.php:340
+#: includes/class-admin.php:344
 msgid "Rate"
 msgstr "Avis"
 
 #. translators: text used for follow on twitter link
-#: includes/class-admin.php:342
+#: includes/class-admin.php:346
 msgid "Follow"
 msgstr "Suivre"
 
 #. translators: text used for donation link
-#: includes/class-admin.php:344
+#: includes/class-admin.php:348
 msgid "Donate"
 msgstr "Don"
 
 #. translators: text used for the icon that shows the plugin links
-#: includes/class-admin.php:364
+#: includes/class-admin.php:368
 msgid "About Black Studio TinyMCE Widget plugin"
 msgstr "À propos de l’extension Black Studio TinyMCE Widget"
+
+#. translators: warning message shown when when visual editor is disabled in
+#. current user's profile settings
+#: includes/class-admin.php:454
+msgid ""
+"Visual Editor is disabled in your Profile settings. You need to enable it in"
+" order to use the Visual Editor widget at its full potential."
+msgstr ""
 
 #. translators: title of the widget
 #: includes/class-widget.php:27

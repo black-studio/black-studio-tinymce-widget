@@ -1,8 +1,7 @@
 # Copyright (C) 2017 Black Studio
 # This file is distributed under the GPLv3.
 # Translators:
-# Elektra M. <safiragon@yahoo.gr>, 2017
-# evigiannakou <evigian@in.gr>, 2014
+# Eugenio Avila <avilamqz@hotmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
@@ -10,11 +9,11 @@ msgstr ""
 "POT-Creation-Date: 2017-08-03 22:00:29+00:00\n"
 "PO-Revision-Date: 2017-08-03 22:00+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
-"Language-Team: Greek (http://www.transifex.com/wp-translations/black-studio-tinymce-widget/language/el/)\n"
+"Language-Team: Spanish (Mexico) (http://www.transifex.com/wp-translations/black-studio-tinymce-widget/language/es_MX/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: el\n"
+"Language: es_MX\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: grunt-wp-i18n 0.4.9\n"
 "X-Poedit-Basepath: .\n"
@@ -32,56 +31,56 @@ msgstr ""
 msgid ""
 "ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were "
 "detected. Please activate only one instance at a time."
-msgstr "ΣΦΑΛΜΑ: Εντοπίστηκαν πολλαπλές εμφανίσεις της προσθήκης Black Studio TinyMCE Widget. Παρακαλούμε ενεργοποιήστε μόνο μία εμφάνιση κάθε φορά."
+msgstr ""
 
 #. translators: text for the dismissable admin pointer tooltip
 #: includes/class-admin-pointer.php:167
 msgid ""
 "The Visual Editor widget allows you to insert rich text and media objects in"
 " your sidebars"
-msgstr "Το γραφικό στοιχείο Visual Editor σάς επιτρέπει να εισάγετε εμπλουτισμένο κείμενο και αντικείμενα μέσων στις πλευρικές γραμμές σας"
+msgstr ""
 
 #. translators: error message shown when a duplicated widget ID is detected
 #: includes/class-admin.php:250
 msgid ""
 "ERROR: Duplicate widget ID detected. To avoid content loss, please create a "
 "new widget with the same content and then delete this one."
-msgstr "ΣΦΑΛΜΑ: Ανιχνεύθηκε ID διπλής μονάδας. Για να αποφύγετε την απώλεια περιεχομένου, παρακαλώ δημιουργήστε μια νέα μονάδα με το ίδιο περιεχόμενο και έπειτα διαγράψτε αυτή."
+msgstr ""
 
 #. translators: text used for plugin home link
 #: includes/class-admin.php:338
 msgid "Home"
-msgstr "Αρχική"
+msgstr "Inicio"
 
 #. translators: text used for support faq link
 #: includes/class-admin.php:340
 msgid "FAQ"
-msgstr "Κοινές απορίες"
+msgstr "FAQ"
 
 #. translators: text used for support forum link
 #: includes/class-admin.php:342
 msgid "Support"
-msgstr "Υποστήριξη"
+msgstr "Soporte "
 
 #. translators: text used for reviews link
 #: includes/class-admin.php:344
 msgid "Rate"
-msgstr "Αξιολόγηση"
+msgstr "Calificar "
 
 #. translators: text used for follow on twitter link
 #: includes/class-admin.php:346
 msgid "Follow"
-msgstr "Ακολουθήστε"
+msgstr "Seguir "
 
 #. translators: text used for donation link
 #: includes/class-admin.php:348
 msgid "Donate"
-msgstr "Δωρεά"
+msgstr "Donar "
 
 #. translators: text used for the icon that shows the plugin links
 #: includes/class-admin.php:368
 msgid "About Black Studio TinyMCE Widget plugin"
-msgstr "Σχετικά με την προσθήκη Black Studio TinyMCE Widget"
+msgstr "Acerca de Black Studio TinyMCE Widget"
 
 #. translators: warning message shown when when visual editor is disabled in
 #. current user's profile settings
@@ -94,15 +93,15 @@ msgstr ""
 #. translators: title of the widget
 #: includes/class-widget.php:27
 msgid "Visual Editor"
-msgstr "Επεξεργαστής"
+msgstr "Editor visual"
 
 #. translators: description of the widget, shown in available widgets
 #: includes/class-widget.php:29
 msgid "Arbitrary text or HTML with visual editor"
-msgstr "Τυχαίο κείμενο ή HTML με επεξεργαστή"
+msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
 "Adds a new \"Visual Editor\" widget type based on the native WordPress "
 "TinyMCE editor."
-msgstr "Προσθέτει ένα νέο τύπο γραφικού στοιχείου \"Visual Editor\" που βασίζεται στον επεξεργαστή WordPress TinyMCE."
+msgstr ""
