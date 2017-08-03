@@ -474,5 +474,5 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 == Upgrade Notice ==
 
-= 2.3.1 =
+= 2.4.0 =
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
