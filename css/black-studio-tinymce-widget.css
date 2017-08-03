@@ -81,11 +81,16 @@ div[id*="black-studio-tinymce"] .wp-editor-wrap {
 
 /* Put TinyMCE panels foreground */
 
-.wp-customizer .mce-floatpanel.mce-popover,
-.wp-customizer .mce-panel.mce-menu,
-.widgets-php .mce-floatpanel.mce-popover,
-.widgets-php .mce-panel.mce-menu {
+.wp-customizer #mce-modal-block,
+.wp-admin #mce-modal-block {
 	z-index: 500000 !important;
+}
+
+.wp-customizer .mce-floatpanel,
+.wp-customizer .mce-panel,
+.wp-admin .mce-floatpanel,
+.wp-admin .mce-panel {
+	z-index: 500010 !important;
 }
 
 
