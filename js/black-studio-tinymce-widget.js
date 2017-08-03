@@ -1,6 +1,6 @@
 /* Black Studio TinyMCE Widget - JS */
 
-/* global bstw_data, tinymce, tinyMCEPreInit, QTags, quicktags, isRtl */
+/* global bstw_data, tinymce, tinyMCEPreInit, QTags, quicktags, isRtl, ajaxurl */
 
 var bstw;
 
@@ -45,32 +45,36 @@ var bstw;
 						QTags.instances[ id ] = newInstance;
 					}
 					if ( ! this.is_tinymce_configured() ) {
-						tinyMCEPreInit.mceInit[ id ] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
-						tinyMCEPreInit.mceInit[ id ].selector = '#' + id;
+						if ( 'undefined' !== typeof tinyMCEPreInit.mceInit['black-studio-tinymce-widget'] ) {
+							tinyMCEPreInit.mceInit[ id ] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
+							tinyMCEPreInit.mceInit[ id ].selector = '#' + id;
+						}
 					}
-					if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' && $( '#' + id ).is( ':visible' ) ) {
-						tinyMCEPreInit.mceInit[ id ].setup = function( ed ) {
-							// Real time preview (Theme customizer)
-							ed.on( 'keyup change', function() {
-								if ( bstw( id ).get_mode() === 'visual' ) {
-									bstw( id ).update_content();
-								}
-								$( '#' + id ).change();
-							});
+					if ( this.is_tinymce_configured() ) {
+						if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' && $( '#' + id ).is( ':visible' ) ) {
+							tinyMCEPreInit.mceInit[ id ].setup = function( ed ) {
+								// Real time preview (Theme customizer)
+								ed.on( 'keyup change', function() {
+									if ( bstw( id ).get_mode() === 'visual' ) {
+										bstw( id ).update_content();
+									}
+									$( '#' + id ).change();
+								});
+								$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
+							};
+							if ( ! force_init ) {
+								this.go();
+							}
+							else {
+								tinymce.init( tinyMCEPreInit.mceInit[ id ] );
+							}
+						} else if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' ) {
+							setTimeout( function() {
+								bstw( id ).activate( force_init );
+							}, 500 );
+						} else {
 							$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
-						};
-						if ( ! force_init ) {
-							this.go();
 						}
-						else {
-							tinymce.init( tinyMCEPreInit.mceInit[ id ] );
-						}
-					} else if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' ) {
-						setTimeout( function() {
-							bstw( id ).activate( force_init );
-						}, 500 );
-					} else {
-						$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
 					}
 				}
 				return this;
@@ -100,18 +104,20 @@ var bstw;
 			// Update textarea content when in visual mode
 			update_content: function() {
 				var content;
-				if ( this.get_mode() === 'visual' ) {
-					content = tinymce.get( id ).save();
-					if ( tinyMCEPreInit.mceInit[ id ].wpautop ) {
-						content = window.switchEditors.pre_wpautop( content );
+				if ( this.is_tinymce_configured() ) {
+					if ( this.get_mode() === 'visual' ) {
+						content = tinymce.get( id ).save();
+						if ( tinyMCEPreInit.mceInit[ id ].wpautop ) {
+							content = window.switchEditors.pre_wpautop( content );
+						}
+						this.get_textarea().val( content);
+					} else if ( this.is_tinymce_active() ) {
+						content = this.get_textarea().val();
+						if ( tinyMCEPreInit.mceInit[ id ].wpautop ) {
+							content = window.switchEditors.wpautop( content );
+						}
+						tinymce.get( id ).setContent( content );
 					}
-					this.get_textarea().val( content);
-				} else if ( this.is_tinymce_active() ) {
-					content = this.get_textarea().val();
-					if ( tinyMCEPreInit.mceInit[ id ].wpautop ) {
-						content = window.switchEditors.wpautop( content );
-					}
-					tinymce.get( id ).setContent( content );
 				}
 				return this;
 			},
@@ -338,6 +344,16 @@ var bstw;
 			$( 'textarea[id^=widget-black-studio-tinymce]' ).each(function() {
 				bstw( $( this ) ).responsive();
 			});
+		});
+		
+		// Event handler for dismission of "Visual Editor disabled" notice
+		$( document ).on( 'click', '.bstw-visual-editor-disabled-notice .notice-dismiss', function() {
+			$.ajax({
+        		url: ajaxurl,
+        		data: {
+            		action: 'bstw_visual_editor_disabled_dismiss_notice'
+        		}
+    		});
 		});
 
 		// Deactivate quicktags toolbar on hidden base instance

@@ -125,6 +125,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fix_rtl' ), 10 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'tinymce_fullscreen' ), 10, 2 );
 				add_filter( 'quicktags_settings', array( $this, 'quicktags_fullscreen' ), 10, 2 );
+				if ( ! user_can_richedit() ) {
+					add_action( 'admin_notices', array( $this, 'visual_editor_disabled_notice' ) );
+				}
+				add_action( 'wp_ajax_bstw_visual_editor_disabled_dismiss_notice', array( $this, 'visual_editor_disabled_dismiss_notice' ) );
 				do_action( 'black_studio_tinymce_load' );
 			}
 		}
@@ -433,6 +437,33 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				$settings['buttons'] = str_replace( ',fullscreen', '', $settings['buttons'] );
 			}
 			return $settings;
+		}
+
+		/**
+		 * Show admin notice when visual editor is disabled in current user's profile settings
+		 *
+		 * @return void
+		 * @since 2.4.0
+		 */
+		public function visual_editor_disabled_notice() {
+			global $pagenow;
+			$dismissed = get_user_meta( get_current_user_id(), '_bstw_visual_editor_disabled_notice_dismissed', true );
+			if ( 'widgets.php' == $pagenow && empty( $dismissed ) ) {
+				echo '<div class="bstw-visual-editor-disabled-notice notice notice-warning is-dismissible">';
+				/* translators: warning message shown when when visual editor is disabled in current user's profile settings */
+				echo '<p>' . esc_html( __( 'Visual Editor is disabled in your Profile settings. You need to enable it in order to use the Visual Editor widget at its full potential.', 'black-studio-tinymce-widget' ) ) . '</p>';
+				echo '</div>';
+			}
+		}
+		
+		/**
+		 * Store dismission of the "Visual Editor disabled" notice for the current user
+		 *
+		 * @return void
+		 * @since 2.4.0
+		 */
+		public function visual_editor_disabled_dismiss_notice() {
+			add_user_meta( get_current_user_id(), '_bstw_visual_editor_disabled_notice_dismissed', true );
 		}
 
 	} // END class Black_Studio_TinyMCE_Admin
