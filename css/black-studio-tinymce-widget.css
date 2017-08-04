@@ -86,10 +86,12 @@ div[id*="black-studio-tinymce"] .wp-editor-wrap {
 	z-index: 500000 !important;
 }
 
-.wp-customizer .mce-floatpanel,
-.wp-customizer .mce-panel,
-.wp-admin .mce-floatpanel,
-.wp-admin .mce-panel {
+.wp-customizer .mce-menu,
+.wp-customizer .mce-popover,
+.wp-customizer .mce-window,
+.wp-admin .mce-menu,
+.wp-admin .mce-popover,
+.wp-admin .mce-window {
 	z-index: 500010 !important;
 }
 
