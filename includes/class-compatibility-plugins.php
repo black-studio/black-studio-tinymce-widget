@@ -327,15 +327,15 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Remove widget number to prevent translation when using Page Builder (SiteOrigin Panels) + WPML String Translation
 		 *
-		 * @param object $the_widget
+		 * @param object $widget
 		 * @return object
 		 * @since 2.0.0
 		 */
-		public function siteorigin_panels_widget_object( $the_widget ) {
-			if ( isset( $the_widget->id_base ) && 'black-studio-tinymce' == $the_widget->id_base ) {
-				$the_widget->number = '';
+		public function siteorigin_panels_widget_object( $widget ) {
+			if ( isset( $widget->id_base ) && 'black-studio-tinymce' == $widget->id_base ) {
+				$widget->number = '';
 			}
-			return $the_widget;
+			return $widget;
 		}
 
 		/**
