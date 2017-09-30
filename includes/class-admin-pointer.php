@@ -137,7 +137,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 */
 		public function filter_dismissed( $pointers ) {
 			$valid_pointers = array();
-			if ( is_array( $pointers ) ) {
+			if ( is_array( $pointers ) && function_exists( 'get_user_meta' ) ) {
 				$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
 				foreach ( $pointers as $pointer_id => $pointer ) {
 					if ( ! in_array( $pointer_id, $dismissed ) ) {

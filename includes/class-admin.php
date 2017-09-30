@@ -442,12 +442,18 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Show admin notice when visual editor is disabled in current user's profile settings
 		 *
+		 * @uses get_user_meta()
+		 * @uses get_current_user_id()
+		 *
 		 * @return void
 		 * @since 2.4.0
 		 */
 		public function visual_editor_disabled_notice() {
 			global $pagenow;
-			$dismissed = get_user_meta( get_current_user_id(), '_bstw_visual_editor_disabled_notice_dismissed', true );
+			$dismissed = false;
+			if ( function_exists( 'get_user_meta' ) ) {
+				$dismissed = get_user_meta( get_current_user_id(), '_bstw_visual_editor_disabled_notice_dismissed', true );
+			}
 			if ( 'widgets.php' == $pagenow && empty( $dismissed ) ) {
 				echo '<div class="bstw-visual-editor-disabled-notice notice notice-warning is-dismissible">';
 				/* translators: warning message shown when when visual editor is disabled in current user's profile settings */
@@ -459,11 +465,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		/**
 		 * Store dismission of the "Visual Editor disabled" notice for the current user
 		 *
+		 * @uses add_user_meta()
+		 * @uses get_current_user_id()
+		 *
 		 * @return void
 		 * @since 2.4.0
 		 */
 		public function visual_editor_disabled_dismiss_notice() {
-			add_user_meta( get_current_user_id(), '_bstw_visual_editor_disabled_notice_dismissed', true );
+			if ( function_exists( 'add_user_meta' ) ) {
+				add_user_meta( get_current_user_id(), '_bstw_visual_editor_disabled_notice_dismissed', true );
+			}
 		}
 
 	} // END class Black_Studio_TinyMCE_Admin
