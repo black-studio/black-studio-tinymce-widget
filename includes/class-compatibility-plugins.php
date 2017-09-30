@@ -408,6 +408,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			add_filter( 'atd_load_scripts', '__return_true' );
 		}
 
+		/**
+		 * Compatibility for Elementor plugin
+		 *
+		 * @uses add_filter()
+		 *
+		 * @return void
+		 * @since 2.5.0
+		 */
+		public function elementor() {
+			if ( is_admin() && isset( $_GET['action'] ) && 'elementor' == $_GET['action'] ) {
+				add_filter( 'black_studio_tinymce_enable', '__return_false', 100 );
+			}
+		}
+
 	} // END class Black_Studio_TinyMCE_Compatibility_Plugins
 
 } // END class_exists check

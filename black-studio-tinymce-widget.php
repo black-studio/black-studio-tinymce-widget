@@ -225,7 +225,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			if ( ! is_blog_installed() ) {
 				return;
 			}
-			register_widget( 'WP_Widget_Black_Studio_TinyMCE' );
+			if ( ! is_admin() || self::$admin->enabled() ) {
+				register_widget( 'WP_Widget_Black_Studio_TinyMCE' );
+			}
 		}
 
 		/**
