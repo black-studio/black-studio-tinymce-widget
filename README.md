@@ -4,7 +4,7 @@
 **Tags:** wysiwyg, widget, tinymce, editor, image, media, rich text, rich text editor, visual editor, wysiwyg editor, tinymce editor, widget editor, html editor, wysiwyg widget, html widget, editor widget, text widget, rich text widget, enhanced text widget, tinymce widget, visual widget, image widget, media widget  
 **Requires at least:** 3.1  
 **Tested up to:** 4.8  
-**Stable tag:** 2.4.2  
+**Stable tag:** 2.5.0  
 **License:** GPLv3  
 **License URI:** http://www.gnu.org/licenses/gpl.html  
 
@@ -194,6 +194,11 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 
 ## Changelog ##
+
+### 2.5.0 (2017-10-01) ###
+* Fixed compatibility issue with Elementor Page Builder plugin (auto-disabled when editing a page with Elementor)
+* Fixed compatibility issue with WP Page Widget and WPML (widgets added in a page will not be translated)
+* Added checks on user meta usage (not allowed on VIP)
 
 ### 2.4.2 (2017-08-04) ###
 * Fixed other additional z-index issues on TinyMCE panels
@@ -486,5 +491,5 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ## Upgrade Notice ##
 
-### 2.4.2 ###
+### 2.5.0 ###
 Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
