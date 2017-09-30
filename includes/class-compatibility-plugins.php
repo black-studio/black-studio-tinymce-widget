@@ -258,8 +258,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.5.0
 		 */
 		public function wp_page_widget_add_data( $instance, $widget ) {
-			if ( isset( $_POST['action'] ) && 'pw-save-widget' == $_POST['action'] ) {
-				$instance['wp_page_widget'] = true;
+			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
+				if ( isset( $_POST['action'] ) && 'pw-save-widget' == $_POST['action'] ) {
+					$instance['wp_page_widget'] = true;
+				}
 			}
 			return $instance;
 		}
