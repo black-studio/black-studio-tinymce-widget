@@ -438,7 +438,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		public function elementor() {
 			if ( is_admin() && isset( $_GET['action'] ) && 'elementor' == $_GET['action'] ) {
 				add_filter( 'black_studio_tinymce_enable', '__return_false', 100 );
+				add_action( 'widgets_init', array( $this, 'elementor_unregister_widget' ), 20 );
 			}
+		}
+		
+		/**
+		 * Unregister Widget for Elementor plugin
+		 *
+		 * @uses unregister_widget()
+		 *
+		 * @return void
+		 * @since 2.5.1
+		 */
+		public function elementor_unregister_widget() {
+			unregister_widget( 'WP_Widget_Black_Studio_TinyMCE' );
 		}
 
 	} // END class Black_Studio_TinyMCE_Compatibility_Plugins
