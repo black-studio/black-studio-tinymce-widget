@@ -89,7 +89,13 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			}
 			$instance['type'] = strip_tags( $new_instance['type'] );
 			$instance['filter'] = strip_tags( $new_instance['filter'] );
-			$instance = apply_filters( 'black_studio_tinymce_widget_update',  $instance, $this );
+			$additional_fields = apply_filters( 'black_studio_tinymce_widget_additional_fields', array() );
+			if ( ! empty( $additional_fields ) ) {
+				foreach ( $additional_fields as $additional_field ) {
+					$instance[ $additional_field ] = $new_instance[ $additional_field ];
+				}
+			}
+			$instance = apply_filters( 'black_studio_tinymce_widget_update', $instance, $this );
 			return $instance;
 		}
 

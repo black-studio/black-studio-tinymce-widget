@@ -393,6 +393,19 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/**
+		 * Add widget field for Page Builder (SiteOrigin Panels)
+		 *
+		 * @param mixed[] $instance
+		 * @param object $widget
+		 * @return mixed[]
+		 * @since 2.5.2
+		 */
+		public function siteorigin_panels_additional_fields( $fields ) {
+			$fields[] = 'panels_info';
+			return $fields;
+		}
+
+		/**
 		 * Disable old compatibility code provided by Page Builder (SiteOrigin Panels)
 		 *
 		 * @return void
