@@ -84,17 +84,17 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 
 		/**
 		 * Helper function to get WPML version
-		 * 
+		 *
 		 * @uses get_plugin_data()
-		 * 
+		 *
 		 * @return string
-		 * @since 2.5.2
+		 * @since 2.6.0
 		 */
 		public function wpml_get_version() {
 			$wpml_data = get_plugin_data( WP_PLUGIN_DIR . '/sitepress-multilingual-cms/sitepress.php', false, false );
 			return $wpml_data['Version'];
 		}
-		
+
 		/**
 		 * Initialize compatibility with WPML and WPML Widgets plugins
 		 *
@@ -125,20 +125,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 */
 		public function wpml_widget_before( $args, $instance ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
-				// Avoid native WPML string translation of widget titles 
+				// Avoid native WPML string translation of widget titles
 				// For widgets inserted in pages built with Page Builder (SiteOrigin panels) and also when WPML Widgets is active
 				if ( false !== has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) ) {
 					if ( isset( $instance['panels_info'] ) || isset( $instance['wp_page_widget'] ) || is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) || version_compare( $this->wpml_get_version(), '3.8.0' ) >= 0 ) {
 						remove_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
 					}
 				}
-				// Avoid native WPML string translation of widget texts (for all widgets) 
+				// Avoid native WPML string translation of widget texts (for all widgets)
 				// Black Studio TinyMCE Widget already supports WPML string translation, so this is needed to prevent duplicate translations
 				if ( false !== has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) ) {
 					remove_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
 				}
 			}
-			
+
 		}
 
 		/**
@@ -207,8 +207,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
 				if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 					if ( function_exists( 'icl_t' ) && function_exists( 'icl_st_is_registered_string' ) ) {
-						// Avoid translation of Page Builder (SiteOrigin panels) and WP Page Widget widgets 
-						if ( ! isset( $instance['panels_info'] ) && ! isset( $instance['wp_page_widget'] ) ) { 
+						// Avoid translation of Page Builder (SiteOrigin panels) and WP Page Widget widgets
+						if ( ! isset( $instance['panels_info'] ) && ! isset( $instance['wp_page_widget'] ) ) {
 							if ( icl_st_is_registered_string( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number ) ) {
 								$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
 							}
@@ -218,7 +218,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			}
 			return $text;
 		}
-		
+
 		/**
 		 * Check for existing deprecated translations (made with WPML String Translations plugin) and display warning
 		 *
@@ -229,7 +229,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @param mixed[]|null $instance
 		 * @param object|null $widget
 		 * @return void
-		 * @since 2.5.2
+		 * @since 2.6.0
 		 */
 		public function wpml_check_deprecated_translations( $instance, $widget ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && version_compare( $this->wpml_get_version(), '3.8.0' ) >= 0 ) {
@@ -444,7 +444,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @param string[] fields
 		 * @return string[]
-		 * @since 2.5.2
+		 * @since 2.6.0
 		 */
 		public function siteorigin_panels_additional_fields( $fields ) {
 			$fields[] = 'panels_info';
@@ -500,7 +500,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 				add_action( 'widgets_init', array( $this, 'elementor_unregister_widget' ), 20 );
 			}
 		}
-		
+
 		/**
 		 * Unregister Widget for Elementor plugin
 		 *
