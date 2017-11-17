@@ -5,7 +5,7 @@ Plugin URI: https://wordpress.org/plugins/black-studio-tinymce-widget/
 Description: Adds a new "Visual Editor" widget type based on the native WordPress TinyMCE editor.
 Version: 2.6.0
 Author: Black Studio
-Author URI: http://www.blackstudio.it
+Author URI: https://www.blackstudio.it
 Requires at least: 3.1
 Tested up to: 4.8
 License: GPLv3

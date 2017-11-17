@@ -345,7 +345,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				/* translators: text used for follow on twitter link */
 				'https://twitter.com/blackstudioita' => __( 'Follow', 'black-studio-tinymce-widget' ),
 				/* translators: text used for donation link */
-				'http://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/' => __( 'Donate', 'black-studio-tinymce-widget' ),
+				'https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/' => __( 'Donate', 'black-studio-tinymce-widget' ),
 			);
 		}
 
@@ -461,7 +461,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				echo '</div>';
 			}
 		}
-		
+
 		/**
 		 * Store dismission of the "Visual Editor disabled" notice for the current user
 		 *
