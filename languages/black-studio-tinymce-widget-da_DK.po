@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2017-08-03 22:00:29+00:00\n"
-"PO-Revision-Date: 2017-08-03 22:00+0000\n"
+"POT-Creation-Date: 2017-11-17 00:53:22+00:00\n"
+"PO-Revision-Date: 2017-11-17 00:51+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Danish (Denmark) (http://www.transifex.com/wp-translations/black-studio-tinymce-widget/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
@@ -84,10 +84,23 @@ msgstr ""
 
 #. translators: warning message shown when when visual editor is disabled in
 #. current user's profile settings
-#: includes/class-admin.php:454
+#: includes/class-admin.php:460
 msgid ""
 "Visual Editor is disabled in your Profile settings. You need to enable it in"
 " order to use the Visual Editor widget at its full potential."
+msgstr ""
+
+#. translators: Warning displayed when deprecated translations of the current
+#. widget are detected
+#: includes/class-compatibility-plugins.php:241
+msgid ""
+"WARNING: This widget has one or more translations made using WPML String "
+"Translation plugin, which is now a deprecated method of translating widgets,"
+" in favor of the \"Display on language\" dropdown introduced with WPML 3.8. "
+"Please migrate your existing translations by creating new widgets and "
+"selecting the language of this widget and the new ones accordingly. Finally "
+"delete the existing translations from <a href=\"%s\">WPML String Translation"
+" interface</a>."
 msgstr ""
 
 #. translators: title of the widget

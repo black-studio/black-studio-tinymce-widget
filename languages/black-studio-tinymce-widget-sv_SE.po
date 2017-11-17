@@ -2,12 +2,13 @@
 # This file is distributed under the GPLv3.
 # Translators:
 # marcochiesi <marco@blackstudio.it>, 2014
+# Tor-Bjorn Fjellner, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Black Studio TinyMCE Widget\n"
 "Report-Msgid-Bugs-To: https://github.com/black-studio/black-studio-tinymce-widget/issues\n"
-"POT-Creation-Date: 2017-08-03 22:00:29+00:00\n"
-"PO-Revision-Date: 2017-08-03 22:00+0000\n"
+"POT-Creation-Date: 2017-11-17 00:51:01+00:00\n"
+"PO-Revision-Date: 2017-11-17 00:51+0000\n"
 "Last-Translator: marcochiesi <marco@blackstudio.it>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/wp-translations/black-studio-tinymce-widget/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +32,7 @@ msgstr ""
 msgid ""
 "ERROR: Multiple instances of the Black Studio TinyMCE Widget plugin were "
 "detected. Please activate only one instance at a time."
-msgstr ""
+msgstr "FEL: Flera instanser av tillägget Black Studio TinyMCE upptäcktes. Aktivera bara en instans åt gången."
 
 #. translators: text for the dismissable admin pointer tooltip
 #: includes/class-admin-pointer.php:167
@@ -55,7 +56,7 @@ msgstr "Hem"
 #. translators: text used for support faq link
 #: includes/class-admin.php:340
 msgid "FAQ"
-msgstr "FAQ"
+msgstr "Vanliga frågor"
 
 #. translators: text used for support forum link
 #: includes/class-admin.php:342
@@ -84,10 +85,23 @@ msgstr ""
 
 #. translators: warning message shown when when visual editor is disabled in
 #. current user's profile settings
-#: includes/class-admin.php:454
+#: includes/class-admin.php:460
 msgid ""
 "Visual Editor is disabled in your Profile settings. You need to enable it in"
 " order to use the Visual Editor widget at its full potential."
+msgstr ""
+
+#. translators: Warning displayed when deprecated translations of the current
+#. widget are detected
+#: includes/class-compatibility-plugins.php:241
+msgid ""
+"WARNING: This widget has one or more translations made using WPML String "
+"Translation plugin, which is now a deprecated method of translating widgets,"
+" in favor of the \"Display on language\" dropdown introduced with WPML 3.8. "
+"Please migrate your existing translations by creating new widgets and "
+"selecting the language of this widget and the new ones accordingly. Finally "
+"delete the existing translations from <a href=\"%s\">WPML String Translation"
+" interface</a>."
 msgstr ""
 
 #. translators: title of the widget
@@ -98,7 +112,7 @@ msgstr "Visuell redigerare"
 #. translators: description of the widget, shown in available widgets
 #: includes/class-widget.php:29
 msgid "Arbitrary text or HTML with visual editor"
-msgstr "Godtycklig text eller HTML med visuell redigerare. Black Studio TinyMCE."
+msgstr "Godtycklig text eller HTML med visuell redigerare"
 
 #. Description of the plugin/theme
 msgid ""
