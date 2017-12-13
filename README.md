@@ -4,7 +4,7 @@
 **Tags:** widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml  
 **Requires at least:** 3.1  
 **Tested up to:** 4.9  
-**Stable tag:** 2.6.0  
+**Stable tag:** 2.6.1  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl.html  
 
@@ -194,6 +194,9 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 
 ## Changelog ##
+
+### 2.6.1 (2017-12-13) ###
+* Fixed bug related to WPML String Translation filters
 
 ### 2.6.0 (2017-11-17) ###
 * Compatibility update for WPML 3.8
@@ -500,5 +503,6 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ## Upgrade Notice ##
 
-### 2.6.0 ###
-Version 2.x is a major update. If you are upgrading from version 1.x please ensure to backup your database before upgrading.
+### 2.6.1 ###
+If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
+Important: Always ensure to backup your database before upgrading.
