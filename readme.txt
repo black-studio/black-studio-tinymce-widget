@@ -4,7 +4,7 @@ Donate link: https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymc
 Tags: widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml
 Requires at least: 3.1
 Tested up to: 4.9
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -188,6 +188,9 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 `
 
 == Changelog ==
+
+= 2.6.2 (2018-02-27) =
+* Fixed conflict that was causing widget-specific warning messages to be moved to the top of the page
 
 = 2.6.1 (2017-12-13) =
 * Fixed bug related to WPML String Translation filters
@@ -497,6 +500,6 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 == Upgrade Notice ==
 
-= 2.6.1 =
+= 2.6.2 =
 If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
 Important: Always ensure to backup your database before upgrading.
