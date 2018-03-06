@@ -65,6 +65,20 @@ module.exports = function( grunt ) {
 				}]
 			}
 		},
+		
+		// PHP Code Sniffer
+		phpcs: {
+			application: {
+				src: [
+					'**/*.php',
+					'!node_modules/**',
+					'!build/**'
+				],
+			},
+			options: {
+				verbose: true
+			}
+		},
 
 		// Watch changes for assets
 		watch: {
@@ -310,7 +324,7 @@ module.exports = function( grunt ) {
 
 	// Load NPM tasks to be used here
 	require( 'load-grunt-tasks' )( grunt );
-
+	
 	// Register tasks
 	grunt.registerTask( 'default', [
 		'jshint',
