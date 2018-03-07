@@ -2,7 +2,7 @@
 **Contributors:** black-studio, marcochiesi, thedarkmist  
 **Donate link:** https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/  
 **Tags:** widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml  
-**Requires at least:** 3.1  
+**Requires at least:** 3.3  
 **Tested up to:** 4.9  
 **Stable tag:** 2.6.2  
 **License:** GPLv3  

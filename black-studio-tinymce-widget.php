@@ -12,7 +12,7 @@ Description: Adds a new "Visual Editor" widget type based on the native WordPres
 Version: 2.6.2
 Author: Black Studio
 Author URI: https://www.blackstudio.it
-Requires at least: 3.1
+Requires at least: 3.3
 Tested up to: 4.8
 License: GPLv3
 Text Domain: black-studio-tinymce-widget
