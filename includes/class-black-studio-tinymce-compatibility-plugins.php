@@ -322,6 +322,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
 			if ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) {
+			$pages[] = 'term.php';
 				$pages[] = 'edit-tags.php';
 			}
 			if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ), true ) ) {
