@@ -273,7 +273,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 						$wpml_st_url = admin_url( 'admin.php?page=wpml-string-translation%2Fmenu%2Fstring-translation.php&context=Widgets' );
 						echo '<div class="notice notice-warning inline"><p>';
 						/* translators: Warning displayed when deprecated translations of the current widget are detected */
-						echo sprintf( __( 'WARNING: This widget has one or more translations made using WPML String Translation plugin, which is now a deprecated method of translating widgets, in favor of the "Display on language" dropdown introduced with WPML 3.8. Please migrate your existing translations by creating new widgets and selecting the language of this widget and the new ones accordingly. Finally delete the existing translations from <a href="%s">WPML String Translation interface</a>.', 'black-studio-tinymce-widget' ), esc_url( $wpml_st_url ) );
+						echo sprintf( esc_html__( 'WARNING: This widget has one or more translations made using WPML String Translation, which is now a deprecated translation method. Starting from WPML 3.8 you should replicate this widget for each language and set the "Display on language" dropdown accordingly. Finally, you should delete the previously existing translations from %s.', 'black-studio-tinymce-widget' ), '<a href="' . esc_url( $wpml_st_url ) . '">WPML String Translation</a>' );
 						echo '</p></div>';
 					}
 				}
