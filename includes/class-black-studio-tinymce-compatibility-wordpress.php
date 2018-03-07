@@ -116,7 +116,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_WordPress' ) ) {
 		public function wp_pre_39() {
 			$wp_version = get_bloginfo( 'version' );
 			if ( bstw()->admin()->enabled() ) {
-				add_filter( 'black-studio-tinymce-widget-script', array( $this, 'wp_pre_39_handle' ), 61 );
+				add_filter( 'black_studio_tinymce_widget_script', array( $this, 'wp_pre_39_handle' ), 61 );
 				add_filter( 'tiny_mce_before_init', array( $this, 'wp_pre_39_tiny_mce_before_init' ), 61 );
 				add_action( 'admin_print_footer_scripts', array( $this, 'wp_pre_39_admin_print_footer_scripts' ) );
 				remove_action( 'admin_print_footer_scripts', array( bstw()->admin(), 'admin_print_footer_scripts' ) );

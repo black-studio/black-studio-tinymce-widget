@@ -359,7 +359,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_page_widget_enqueue_script() {
-			$main_script   = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );
+			$main_script   = apply_filters( 'black_studio_tinymce_widget_script', 'black-studio-tinymce-widget' );
 			$compat_script = 'wp-page-widget';
 			$suffix        = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			wp_enqueue_script(

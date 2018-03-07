@@ -87,8 +87,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 			global $pagenow;
 			if ( 'widgets.php' === $pagenow ) {
 				add_action( 'admin_print_scripts', array( $this, 'load' ) );
-				add_filter( 'black_studio_tinymce_admin_pointers-widgets', array( $this, 'register' ), 10 );
-				add_filter( 'black_studio_tinymce_admin_pointers-widgets', array( $this, 'filter_dismissed' ), 20 );
+				add_filter( 'black_studio_tinymce_admin_pointers_widgets', array( $this, 'register' ), 10 );
+				add_filter( 'black_studio_tinymce_admin_pointers_widgets', array( $this, 'filter_dismissed' ), 20 );
 			}
 		}
 
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 */
 		public function load() {
 			$screen   = get_current_screen();
-			$pointers = apply_filters( 'black_studio_tinymce_admin_pointers-' . $screen->id, array() );
+			$pointers = apply_filters( 'black_studio_tinymce_admin_pointers_' . $screen->id, array() );
 			if ( ! empty( $pointers ) ) {
 				$this->enqueue( $pointers );
 			}

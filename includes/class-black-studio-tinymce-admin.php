@@ -182,7 +182,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function enqueue_style() {
-			$style  = apply_filters( 'black-studio-tinymce-widget-style', 'black-studio-tinymce-widget' );
+			$style  = apply_filters( 'black_studio_tinymce_widget_style', 'black-studio-tinymce-widget' );
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			wp_enqueue_style(
 				$style,
@@ -222,7 +222,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function enqueue_script() {
-			$script = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );
+			$script = apply_filters( 'black_studio_tinymce_widget_script', 'black-studio-tinymce-widget' );
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			wp_enqueue_script(
 				$script,
@@ -253,7 +253,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				/* translators: error message shown when a duplicated widget ID is detected */
 				'error_duplicate_id'  => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new widget with the same content and then delete this one.', 'black-studio-tinymce-widget' ),
 			);
-			wp_localize_script( apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' ), 'bstw_data', $data );
+			wp_localize_script( apply_filters( 'black_studio_tinymce_widget_script', 'black-studio-tinymce-widget' ), 'bstw_data', $data );
 		}
 
 		/**
