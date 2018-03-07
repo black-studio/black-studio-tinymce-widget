@@ -84,7 +84,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
-			$this->load_deprecated();
 			$this->load_plugins();
 			$this->load_wordpress();
 		}
@@ -107,12 +106,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 *
 		 * @return void
 		 * @since 2.0.0
+		 * @deprecated 3.0.0
 		 */
 		public function load_deprecated() {
-			$load_deprecated = apply_filters( 'black_studio_tinymce_load_deprecated', true );
-			if ( $load_deprecated ) {
-				include_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/deprecated.php';
-			}
+			_deprecated_function( __METHOD__, '3.0.0' );
 		}
 
 		/**

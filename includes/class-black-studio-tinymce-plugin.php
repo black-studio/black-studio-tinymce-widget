@@ -194,7 +194,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function load_compatibility() {
-			// Compatibility load flag (for both deprecated functions and code for compatibility with other plugins).
+			// Flag to control load of compatibility code
 			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );
 			if ( $load_compatibility ) {
 				include_once plugin_dir_path( __DIR__ ) . 'includes/class-black-studio-tinymce-compatibility.php';

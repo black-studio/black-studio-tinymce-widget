@@ -76,26 +76,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		}
 
 		/**
-		 * Apply wp_kses to widget text
-		 *
-		 * @uses wp_kses_post()
-		 *
-		 * @param string       $text     Widget text.
-		 * @param mixed[]|null $instance Widget instance.
-		 * @param object|null  $widget   Widget object.
-		 * @return string
-		 * @since 2.0.0
-		 * @deprecated 2.0.3
-		 */
-		public function wp_kses_post( $text, $instance = null, $widget = null ) {
-			_deprecated_function( __METHOD__, '2.0.3' );
-			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				$text = wp_kses_post( $text );
-			}
-			return $text;
-		}
-
-		/**
 		 * Apply auto_embed to widget text
 		 *
 		 * @param string       $text     Widget text.
