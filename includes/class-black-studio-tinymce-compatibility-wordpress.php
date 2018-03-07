@@ -1,20 +1,24 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Compatibility with older WordPress versions
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class that provides compatibility code with older WordPress versions
- *
- * @package Black_Studio_TinyMCE_Widget
- * @since 2.0.0
- */
+if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_WordPress' ) ) {
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
-
-	final class Black_Studio_TinyMCE_Compatibility_Wordpress {
+	/**
+	 * Class that provides compatibility code with older WordPress versions
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 2.0.0
+	 */
+	final class Black_Studio_TinyMCE_Compatibility_WordPress {
 
 		/**
 		 * The single instance of the class
@@ -46,7 +50,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
-			$current_version = get_bloginfo( 'version' );
+			$current_version   = get_bloginfo( 'version' );
 			$previous_versions = array( '3.2', '3.3', '3.5', '3.9' );
 			foreach ( $previous_versions as $previous_version ) {
 				if ( version_compare( $current_version, $previous_version, '<' ) ) {
@@ -62,7 +66,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
 		/**
@@ -90,7 +94,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function  wp_pre_32_admin_print_footer_scripts() {
+		public function wp_pre_32_admin_print_footer_scripts() {
 			if ( function_exists( 'wp_tiny_mce' ) ) {
 				wp_tiny_mce( false, array() );
 			}
@@ -133,7 +137,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		/**
 		 * Remove WP fullscreen mode and set the native tinyMCE fullscreen mode for WordPress prior to 3.3
 		 *
-		 * @param mixed[] $settings
+		 * @param mixed[] $settings Array of settings.
 		 * @return mixed[]
 		 * @since 2.0.0
 		 */
@@ -228,13 +232,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * (this is done excluding post_id parameter in Thickbox iframe url)
 		 *
 		 * @global string $pagenow
-		 * @param string $upload_iframe_src
+		 * @param string $upload_iframe_src Source of the iframe for the upload dialog.
 		 * @return string
 		 * @since 2.0.0
 		 */
 		public function wp_pre_35_upload_iframe_src( $upload_iframe_src ) {
 			global $pagenow;
-			if ( 'widgets.php' == $pagenow || ( 'admin-ajax.php' == $pagenow && isset( $_POST['id_base'] ) && 'black-studio-tinymce' == $_POST['id_base'] ) ) {
+			if ( 'widgets.php' === $pagenow || ( 'admin-ajax.php' === $pagenow && isset( $_POST['id_base'] ) && 'black-studio-tinymce' === $_POST['id_base'] ) ) {
 				$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
 			}
 			return $upload_iframe_src;
@@ -283,21 +287,21 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		/**
 		 * TinyMCE initialization for WordPress prior to 3.9
 		 *
-		 * @param mixed[] $settings
+		 * @param mixed[] $settings Array of settings.
 		 * @return mixed[]
 		 * @since 2.0.0
 		 */
 		public function wp_pre_39_tiny_mce_before_init( $settings ) {
 			$custom_settings = array(
-				'remove_linebreaks' => false,
+				'remove_linebreaks'       => false,
 				'convert_newlines_to_brs' => false,
-				'force_p_newlines' => true,
-				'force_br_newlines' => false,
-				'remove_redundant_brs' => false,
-				'forced_root_block' => 'p',
+				'force_p_newlines'        => true,
+				'force_br_newlines'       => false,
+				'remove_redundant_brs'    => false,
+				'forced_root_block'       => 'p',
 				'apply_source_formatting' => true,
 			);
-			// Return modified settings
+			// Return modified settings.
 			return array_merge( $settings, $custom_settings );
 		}
 
@@ -322,27 +326,31 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @uses esc_textarea()
 		 * @uses do_action()
 		 *
+		 * @param string $text Widget text.
+		 * @param string $id   Widget ID.
+		 * @param string $name Widget name.
+		 * @param string $type Widget type.
 		 * @return void
 		 * @since 2.0.0
 		 */
 		public function wp_pre_39_editor( $text, $id, $name = '', $type = 'visual' ) {
-			$switch_class = $type == 'visual' ? 'html-active' : 'tmce-active';
+			$switch_class = 'visual' === $type ? 'html-active' : 'tmce-active';
 			?>
-            <div id="<?php echo esc_attr( $id ); ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
-                <div id="<?php echo esc_attr( $id ); ?>-wp-content-editor-tools" class="wp-editor-tools hide-if-no-js">
-                    <div class="wp-editor-tabs">
-                        <a id="<?php echo esc_attr( $id ); ?>-content-html" class="wp-switch-editor switch-html"><?php _e( 'HTML' ); ?></a>
-                        <a id="<?php echo esc_attr( $id ); ?>-content-tmce" class="wp-switch-editor switch-tmce"><?php _e( 'Visual' ); ?></a>
-                    </div>
-                    <div id="<?php esc_attr( $id ); ?>-wp-content-media-buttons" class="wp-media-buttons">
+			<div id="<?php echo esc_attr( $id ); ?>-wp-content-wrap" class="wp-core-ui wp-editor-wrap <?php echo esc_attr( $switch_class ); ?> has-dfw">
+				<div id="<?php echo esc_attr( $id ); ?>-wp-content-editor-tools" class="wp-editor-tools hide-if-no-js">
+					<div class="wp-editor-tabs">
+						<a id="<?php echo esc_attr( $id ); ?>-content-html" class="wp-switch-editor switch-html"><?php esc_html_e( 'HTML' ); ?></a>
+						<a id="<?php echo esc_attr( $id ); ?>-content-tmce" class="wp-switch-editor switch-tmce"><?php esc_html_e( 'Visual' ); ?></a>
+					</div>
+					<div id="<?php esc_attr( $id ); ?>-wp-content-media-buttons" class="wp-media-buttons">
 						<?php do_action( 'media_buttons', $id ); ?>
-                    </div>
-                </div>
-                <div class="wp-editor-container">
-	                <textarea class="widefat" rows="20" cols="40" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
-                </div>
-            </div>
-            <?php
+					</div>
+				</div>
+				<div class="wp-editor-container">
+					<textarea class="widefat" rows="20" cols="40" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
+				</div>
+			</div>
+			<?php
 		}
 
 	} // END class Black_Studio_TinyMCE_Compatibility_Wordpress

@@ -1,6 +1,11 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Admin pointer handling
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -14,6 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 
+	/**
+	 * Class that provides admin pointer
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 2.1.0
+	 */
 	final class Black_Studio_TinyMCE_Admin_Pointer {
 
 		/**
@@ -49,7 +60,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
-			// Register action and filter hooks
+			// Register action and filter hooks.
 			add_action( 'admin_init', array( $this, 'admin_init' ), 20 );
 		}
 
@@ -60,7 +71,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 * @since 2.1.0
 		 */
 		protected function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
 		/**
@@ -74,7 +85,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 */
 		public function admin_init() {
 			global $pagenow;
-			if ( 'widgets.php' == $pagenow ) {
+			if ( 'widgets.php' === $pagenow ) {
 				add_action( 'admin_print_scripts', array( $this, 'load' ) );
 				add_filter( 'black_studio_tinymce_admin_pointers-widgets', array( $this, 'register' ), 10 );
 				add_filter( 'black_studio_tinymce_admin_pointers-widgets', array( $this, 'filter_dismissed' ), 20 );
@@ -90,7 +101,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 * @uses wp_localize_script()
 		 * @uses SCRIPT_DEBUG
 		 *
-		 * @param mixed[] $pointers
+		 * @param mixed[] $pointers Array of pointers.
 		 * @return void
 		 * @since 2.1.0
 		 */
@@ -118,7 +129,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 * @since 2.1.0
 		 */
 		public function load() {
-			$screen = get_current_screen();
+			$screen   = get_current_screen();
 			$pointers = apply_filters( 'black_studio_tinymce_admin_pointers-' . $screen->id, array() );
 			if ( ! empty( $pointers ) ) {
 				$this->enqueue( $pointers );
@@ -131,7 +142,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		 * @uses get_user_meta()
 		 * @uses get_current_user_id()
 		 *
-		 * @param mixed[] $pointers
+		 * @param mixed[] $pointers Array of pointers.
 		 * @return mixed[]
 		 * @since 2.1.0
 		 */
@@ -140,8 +151,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 			if ( is_array( $pointers ) && function_exists( 'get_user_meta' ) ) {
 				$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
 				foreach ( $pointers as $pointer_id => $pointer ) {
-					if ( ! in_array( $pointer_id, $dismissed ) ) {
-						$pointer['pointer_id'] = $pointer_id;
+					if ( ! in_array( $pointer_id, $dismissed, true ) ) {
+						$pointer['pointer_id']        = $pointer_id;
 						$valid_pointers['pointers'][] = $pointer;
 					}
 				}
@@ -152,22 +163,25 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 		/**
 		 * Register admin pointer(s)
 		 *
-		 * @param mixed[] $pointers
+		 * @param mixed[] $pointers Array of pointers.
 		 * @return mixed[]
 		 * @since 2.1.0
 		 */
 		public function register( $pointers ) {
 			$pointers['black_studio_tinymce_widget'] = array(
-				'target' => 'div[id$=black-studio-tinymce-__i__] .widget-top',
+				'target'  => 'div[id$=black-studio-tinymce-__i__] .widget-top',
 				'options' => array(
-					'content' => sprintf( '<h3>%s</h3> <p>%s</p>',
+					'content'  => sprintf( '<h3>%s</h3> <p>%s</p>',
 						/* translators: title for the dismissable admin pointer tooltip (same as plugin name) */
 						__( 'Black Studio TinyMCE Widget', 'black-studio-tinymce-widget' ),
 						/* translators: text for the dismissable admin pointer tooltip */
 						__( 'The Visual Editor widget allows you to insert rich text and media objects in your sidebars', 'black-studio-tinymce-widget' )
 					),
-					'position' => array( 'edge' => 'left', 'align' => 'middle' )
-				)
+					'position' => array(
+						'edge'  => 'left',
+						'align' => 'middle',
+					),
+				),
 			);
 			return $pointers;
 		}

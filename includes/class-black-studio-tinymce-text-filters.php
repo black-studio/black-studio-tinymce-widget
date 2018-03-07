@@ -1,19 +1,23 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Widget text filters
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class that applies widget text filters
- *
- * @package Black_Studio_TinyMCE_Widget
- * @since 2.0.0
- */
-
 if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 
+	/**
+	 * Class that applies widget text filters
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 2.0.0
+	 */
 	final class Black_Studio_TinyMCE_Text_Filters {
 
 		/**
@@ -47,17 +51,17 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
-			// Support for autoembed urls in widget text
+			// Support for autoembed urls in widget text.
 			if ( get_option( 'embed_autourls' ) ) {
 				add_filter( 'widget_text', array( $this, 'autoembed' ), 4, 3 );
 			}
-			// Support for smilies in widget text
+			// Support for smilies in widget text.
 			if ( get_option( 'use_smilies' ) ) {
 				add_filter( 'widget_text', array( $this, 'convert_smilies' ), 6, 3 );
 			}
-			// Support for wpautop in widget text
+			// Support for wpautop in widget text.
 			add_filter( 'widget_text', array( $this, 'wpautop' ), 8, 3 );
-			// Support for shortcodes in widget text
+			// Support for shortcodes in widget text.
 			add_filter( 'widget_text', array( $this, 'do_shortcode' ), 10, 3 );
 		}
 
@@ -68,7 +72,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
 		/**
@@ -76,7 +80,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 *
 		 * @uses wp_kses_post()
 		 *
-		 * @param string $text
+		 * @param string       $text     Widget text.
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
 		 * @return string
 		 * @since 2.0.0
 		 * @deprecated 2.0.3
@@ -92,7 +98,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		/**
 		 * Apply auto_embed to widget text
 		 *
-		 * @param string $text
+		 * @param string       $text     Widget text.
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
 		 * @return string
 		 * @since 2.0.0
 		 */
@@ -110,7 +118,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 *
 		 * @uses convert_smilies()
 		 *
-		 * @param string $text
+		 * @param string       $text     Widget text.
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
 		 * @return string
 		 * @since 2.0.0
 		 */
@@ -126,15 +136,15 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 *
 		 * @uses apply_filters()
 		 *
-		 * @param mixed[] $instance
+		 * @param mixed[] $instance Widget instance.
 		 * @return boolean
 		 * @since 2.1.0
 		 */
 		public function need_wpautop( $instance ) {
-			// Widgets created with previous plugin versions do not have the filter parameter set so we base the choice on the type and text fields
-			$need_wpautop = $instance['type'] == 'visual' && substr( $instance['text'], 0, 3 ) != '<p>';
+			// Widgets created with previous plugin versions do not have the filter parameter set so we base the choice on the type and text fields.
+			$need_wpautop = 'visual' === $instance['type'] && substr( $instance['text'], 0, 3 ) !== '<p>';
 			if ( isset( $instance['filter'] ) ) {
-				$need_wpautop = $instance['filter'] == 1;
+				$need_wpautop = 1 === $instance['filter'];
 			}
 			$need_wpautop = apply_filters( 'black_studio_tinymce_need_wpautop', $need_wpautop, $instance );
 			return $need_wpautop;
@@ -145,9 +155,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 *
 		 * @uses wpautop()
 		 *
-		 * @param string $text
-		 * @param mixed[]|null $instance
-		 * @param object|null $widget
+		 * @param string       $text     Widget text.
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
 		 * @return string
 		 * @since 2.0.0
 		 */
@@ -165,7 +175,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		 *
 		 * @uses do_shortcode()
 		 *
-		 * @param string $text
+		 * @param string       $text     Widget text.
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
 		 * @return string
 		 * @since 2.0.0
 		 */

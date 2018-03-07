@@ -1,19 +1,23 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Compatibility with other plugins
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class that provides compatibility code with other plugins
- *
- * @package Black_Studio_TinyMCE_Widget
- * @since 2.0.0
- */
-
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 
+	/**
+	 * Class that provides compatibility code with other plugins
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 2.0.0
+	 */
 	final class Black_Studio_TinyMCE_Compatibility_Plugins {
 
 		/**
@@ -43,7 +47,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Return the single class instance
 		 *
-		 * @param string[] $plugins
+		 * @param string[] $plugins Array of plugins.
 		 * @return object
 		 * @since 2.0.0
 		 */
@@ -57,7 +61,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Class constructor
 		 *
-		 * @param string[] $plugins
+		 * @param string[] $plugins Array of plugins.
 		 * @since 2.0.0
 		 */
 		protected function __construct( $plugins ) {
@@ -67,7 +71,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 				}
 			}
 			if ( ! function_exists( 'is_plugin_active' ) ) {
-				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				include_once ABSPATH . 'wp-admin/includes/plugin.php';
 			}
 		}
 
@@ -78,7 +82,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '2.0' );
 		}
 
 		/**
@@ -134,25 +138,30 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @uses remove_filter()
 		 *
-		 * @param mixed[] $args
-		 * @param mixed[] $instance
+		 * @param mixed[] $args     Array of arguments.
+		 * @param mixed[] $instance Widget instance.
 		 * @return void
 		 * @since 2.3.0
 		 */
 		public function wpml_widget_before( $args, $instance ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
-				// Avoid native WPML string translation of widget titles
-				// for widgets inserted in pages built with Page Builder (SiteOrigin panels)
-				// and also when WPML Widgets is active and for WPML versions from 3.8.0 on
+				/*
+				Avoid native WPML string translation of widget titles
+				for widgets inserted in pages built with Page Builder (SiteOrigin panels)
+				and also when WPML Widgets is active and for WPML versions from 3.8.0 on
+				*/
 				if ( false !== has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) ) {
 					if ( isset( $instance['panels_info'] ) || isset( $instance['wp_page_widget'] ) || is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) || version_compare( $this->wpml_get_version(), '3.8.0' ) >= 0 ) {
 						remove_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
 						$this->wpml_removed_widget_title_filter = true;
 					}
 				}
-				// Avoid native WPML string translation of widget texts (for all widgets)
-				// Note: Black Studio TinyMCE Widget already supports WPML string translation,
-				// so this is needed to prevent duplicate translations
+
+				/*
+				Avoid native WPML string translation of widget texts (for all widgets)
+				Note: Black Studio TinyMCE Widget already supports WPML string translation,
+				so this is needed to prevent duplicate translations
+				*/
 				if ( false !== has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) ) {
 					remove_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
 					$this->wpml_removed_widget_text_filter = true;
@@ -166,21 +175,21 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 *
 		 * @uses add_filter()
 		 *
-		 * @param mixed[] $args
-		 * @param mixed[] $instance
+		 * @param mixed[] $args     Array of arguments.
+		 * @param mixed[] $instance Widget instance.
 		 * @return void
 		 * @since 2.3.0
 		 */
 		public function wpml_widget_after( $args, $instance ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
-				// Restore widget title's native WPML string translation filter if it was removed
+				// Restore widget title's native WPML string translation filter if it was removed.
 				if ( $this->wpml_removed_widget_title_filter ) {
 					if ( false === has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) && function_exists( 'icl_sw_filters_widget_title' ) ) {
 						add_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
 						$this->wpml_removed_widget_title_filter = false;
 					}
 				}
-				// Restore widget text's native WPML string translation filter if it was removed
+				// Restore widget text's native WPML string translation filter if it was removed.
 				if ( $this->wpml_removed_widget_text_filter ) {
 					if ( false === has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) && function_exists( 'icl_sw_filters_widget_text' ) ) {
 						add_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
@@ -196,18 +205,18 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses is_plugin_active()
 		 * @uses icl_register_string() Part of WPML
 		 *
-		 * @param mixed[] $instance
-		 * @param object $widget
+		 * @param mixed[] $instance Array of arguments.
+		 * @param object  $widget   Widget instance.
 		 * @return mixed[]
 		 * @since 2.0.0
 		 */
 		public function wpml_widget_update( $instance, $widget ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) &&
-				 version_compare( $this->wpml_get_version(), '3.8.0' ) < 0 &&
-				 ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' )
+				version_compare( $this->wpml_get_version(), '3.8.0' ) < 0 &&
+				! is_plugin_active( 'wpml-widgets/wpml-widgets.php' )
 			) {
 				if ( function_exists( 'icl_register_string' ) && ! empty( $widget->number ) ) {
-					// Avoid translation of Page Builder (SiteOrigin panels) and WP Page Widget widgets
+					// Avoid translation of Page Builder (SiteOrigin panels) and WP Page Widget widgets.
 					if ( ! isset( $instance['panels_info'] ) && ! isset( $instance['wp_page_widget'] ) ) {
 						icl_register_string( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $instance['text'] );
 					}
@@ -223,9 +232,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses icl_t() Part of WPML
 		 * @uses icl_st_is_registered_string() Part of WPML
 		 *
-		 * @param string $text
-		 * @param mixed[]|null $instance
-		 * @param object|null $widget
+		 * @param string       $text     Widget text.
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
 		 * @return string
 		 * @since 2.0.0
 		 */
@@ -233,7 +242,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) && ! is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) ) {
 				if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 					if ( function_exists( 'icl_t' ) && function_exists( 'icl_st_is_registered_string' ) ) {
-						// Avoid translation of Page Builder (SiteOrigin panels) and WP Page Widget widgets
+						// Avoid translation of Page Builder (SiteOrigin panels) and WP Page Widget widgets.
 						if ( ! isset( $instance['panels_info'] ) && ! isset( $instance['wp_page_widget'] ) ) {
 							if ( icl_st_is_registered_string( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number ) ) {
 								$text = icl_t( 'Widgets', 'widget body - ' . $widget->id_base . '-' . $widget->number, $text );
@@ -252,8 +261,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @uses icl_st_is_registered_string() Part of WPML
 		 * @uses admin_url()
 		 *
-		 * @param mixed[]|null $instance
-		 * @param object|null $widget
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
 		 * @return void
 		 * @since 2.6.0
 		 */
@@ -305,17 +314,17 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Enable filter for WP Page Widget plugin
 		 *
-		 * @param string[] $pages
+		 * @param string[] $pages Array of pages.
 		 * @return string[]
 		 * @since 2.0.0
 		 */
 		public function wp_page_widget_enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['action'] ) && 'edit' == $_GET['action'] ) {
+			if ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) {
 				$pages[] = 'edit-tags.php';
 			}
-			if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ) ) ) {
+			if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ), true ) ) {
 				$pages[] = 'admin.php';
 			}
 			return $pages;
@@ -324,14 +333,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add WP Page Widget marker
 		 *
-		 * @param mixed[] $instance
-		 * @param object $widget
+		 * @param mixed[] $instance Widget instance.
+		 * @param object  $widget   Widget object.
 		 * @return mixed[]
 		 * @since 2.5.0
 		 */
 		public function wp_page_widget_add_data( $instance, $widget ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				if ( isset( $_POST['action'] ) && 'pw-save-widget' == $_POST['action'] ) {
+				if ( isset( $_POST['action'] ) && 'pw-save-widget' === $_POST['action'] ) {
 					$instance['wp_page_widget'] = true;
 				}
 			}
@@ -350,9 +359,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_page_widget_enqueue_script() {
-			$main_script = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );
+			$main_script   = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );
 			$compat_script = 'wp-page-widget';
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$suffix        = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 			wp_enqueue_script(
 				$compat_script,
 				plugins_url( 'js/' . $compat_script . $suffix . '.js', dirname( __FILE__ ) ),
@@ -402,12 +411,12 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Remove widget number to prevent translation when using Page Builder (SiteOrigin Panels) + WPML String Translation
 		 *
-		 * @param object $widget
+		 * @param object $widget Widget object.
 		 * @return object
 		 * @since 2.0.0
 		 */
 		public function siteorigin_panels_widget_object( $widget ) {
-			if ( isset( $widget->id_base ) && 'black-studio-tinymce' == $widget->id_base ) {
+			if ( isset( $widget->id_base ) && 'black-studio-tinymce' === $widget->id_base ) {
 				$widget->number = '';
 			}
 			return $widget;
@@ -416,7 +425,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add selector for widget detection for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $selectors
+		 * @param string[] $selectors Array of selectors.
 		 * @return string[]
 		 * @since 2.0.0
 		 */
@@ -428,7 +437,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add activate events for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $events
+		 * @param string[] $events Array of events.
 		 * @return string[]
 		 * @since 2.0.0
 		 */
@@ -440,7 +449,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add deactivate events for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $events
+		 * @param string[] $events Array of events.
 		 * @return string[]
 		 * @since 2.0.0
 		 */
@@ -452,14 +461,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add pages filter to enable editor for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $pages
+		 * @param string[] $pages Array of pages.
 		 * @return string[]
 		 * @since 2.0.0
 		 */
 		public function siteorigin_panels_enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['page'] ) && 'so_panels_home_page' == $_GET['page'] ) {
+			if ( isset( $_GET['page'] ) && 'so_panels_home_page' === $_GET['page'] ) {
 				$pages[] = 'themes.php';
 			}
 			return $pages;
@@ -468,7 +477,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add widget field for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] fields
+		 * @param string[] $fields Array of fields.
 		 * @return string[]
 		 * @since 2.6.0
 		 */
@@ -483,7 +492,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function siteorigin_panels_disable_compat( ) {
+		public function siteorigin_panels_disable_compat() {
 			remove_action( 'admin_init', 'siteorigin_panels_black_studio_tinymce_admin_init' );
 			remove_action( 'admin_enqueue_scripts', 'siteorigin_panels_black_studio_tinymce_admin_enqueue', 15 );
 		}
@@ -521,7 +530,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.5.0
 		 */
 		public function elementor() {
-			if ( is_admin() && isset( $_GET['action'] ) && 'elementor' == $_GET['action'] ) {
+			if ( is_admin() && isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) {
 				add_filter( 'black_studio_tinymce_enable', '__return_false', 100 );
 				add_action( 'widgets_init', array( $this, 'elementor_unregister_widget' ), 20 );
 			}

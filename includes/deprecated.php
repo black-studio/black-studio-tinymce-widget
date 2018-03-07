@@ -1,15 +1,14 @@
 <?php
-
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 /**
- * Deprecated functions
+ * Black Studio TinyMCE Widget - Deprecated functions for backward compatibility
  *
  * @package Black_Studio_TinyMCE_Widget
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Global var with plugin version for backward compatibility
@@ -17,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.6.3
  * @deprecated 2.0.0
  */
-global $black_studio_tinymce_widget_version; // global is necessary because this file is included in a non-global context
+global $black_studio_tinymce_widget_version; // global is necessary because this file is included in a non-global context.
 $black_studio_tinymce_widget_version = Black_Studio_TinyMCE_Plugin::$version;
 
 /**
@@ -26,10 +25,12 @@ $black_studio_tinymce_widget_version = Black_Studio_TinyMCE_Plugin::$version;
  * @since 0.9.4
  * @deprecated 1.4
  */
-global $black_studio_tinymce_widget_dev_mode ; // global is necessary because this file is included in a non-global context
+global $black_studio_tinymce_widget_dev_mode; // global is necessary because this file is included in a non-global context.
 $black_studio_tinymce_widget_dev_mode = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 
 /**
+ * Get plugin version
+ *
  * @since 1.4.0
  * @deprecated 2.0.0
  */
@@ -39,6 +40,8 @@ function black_studio_tinymce_get_version() {
 }
 
 /**
+ * Widget initialization
+ *
  * @since 0.7.0
  * @deprecated 2.0.0
  */
@@ -48,6 +51,8 @@ function black_studio_tinymce_widgets_init() {
 }
 
 /**
+ * Admin initialization
+ *
  * @since 0.8.0
  * @deprecated 2.0.0
  */
@@ -57,6 +62,8 @@ function black_studio_tinymce_admin_init() {
 }
 
 /**
+ * Enqueue TinyMCE stuff
+ *
  * @since 0.5.0
  * @deprecated 2.0.0
  */
@@ -66,6 +73,9 @@ function black_studio_tinymce_load_tiny_mce() {
 }
 
 /**
+ * TinyMCE editor initialization
+ *
+ * @param mixed[] $arg Array of arguments.
  * @since 0.5.0
  * @deprecated 2.0.0
  */
@@ -75,6 +85,8 @@ function black_studio_tinymce_init_editor( $arg ) {
 }
 
 /**
+ * Enqueue plugin's admin styles
+ *
  * @since 0.5.0
  * @deprecated 2.0.0
  */
@@ -84,6 +96,8 @@ function black_studio_tinymce_styles() {
 }
 
 /**
+ * Enqueue plugin's admin scripts
+ *
  * @since 0.5.0
  * @deprecated 2.0.0
  */
@@ -93,6 +107,8 @@ function black_studio_tinymce_scripts() {
 }
 
 /**
+ * Enqueue plugin's admin footer scripts
+ *
  * @since 0.7.0
  * @deprecated 2.0.0
  */
@@ -102,6 +118,8 @@ function black_studio_tinymce_footer_scripts() {
 }
 
 /**
+ * Enqueue media dialog stuff
+ *
  * @since 0.6.0
  * @deprecated 0.7.0
  */
@@ -111,8 +129,11 @@ function black_studio_tinymce_preload_dialogs() {
 }
 
 /**
+ * Apply smilies to widget text
+ *
  * @uses get_option()
  *
+ * @param string $text Widget text.
  * @since 1.3.0
  * @deprecated 2.0.0
  */
@@ -125,15 +146,21 @@ function black_studio_tinymce_apply_smilies_to_widget_text( $text ) {
 }
 
 /**
+ * Enable full media options in upload dialog for WordPress prior to 3.5
+ *
+ * @param mixed[] $arg Array of arguments.
  * @since 1.0.0
  * @deprecated 2.0.0
  */
-function black_studio_tinymce_upload_iframe_src( $arg ){
+function black_studio_tinymce_upload_iframe_src( $arg ) {
 	_deprecated_function( __FUNCTION__, '2.0.0', 'bstw()->compatibility()->wordpress()->wp_pre_35_upload_iframe_src( ... )' );
 	bstw()->compatibility()->wordpress()->wp_pre_35_upload_iframe_src( $arg );
 }
 
 /**
+ * Enable accessibility mode
+ *
+ * @param mixed[] $editor Editor instance.
  * @since 1.2.0
  * @deprecated 2.0.0
  */
@@ -143,6 +170,9 @@ function black_studio_tinymce_editor_accessibility_mode( $editor ) {
 }
 
 /**
+ * Compatibility with Page Builder by SiteOrigin
+ *
+ * @param object $the_widget Widget object.
  * @since 1.4.5
  * @deprecated 2.0.0
  */
