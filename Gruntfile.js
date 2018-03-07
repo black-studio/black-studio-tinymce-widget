@@ -73,9 +73,11 @@ module.exports = function( grunt ) {
 					'**/*.php',
 					'!node_modules/**',
 					'!build/**'
-				],
+				]
 			},
 			options: {
+				bin: 'phpcs --exclude=Generic.Files.LineEndings',
+				standard: 'WordPress',
 				verbose: true
 			}
 		},
