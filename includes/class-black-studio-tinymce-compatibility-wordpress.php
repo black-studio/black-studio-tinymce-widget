@@ -95,7 +95,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_WordPress' ) ) {
 		 */
 		public function wp_pre_35_upload_iframe_src( $upload_iframe_src ) {
 			global $pagenow;
-			if ( 'widgets.php' === $pagenow || ( 'admin-ajax.php' === $pagenow && isset( $_POST['id_base'] ) && 'black-studio-tinymce' === $_POST['id_base'] ) ) {
+			if ( 'widgets.php' === $pagenow || ( 'admin-ajax.php' === $pagenow && isset( $_POST['id_base'] ) && 'black-studio-tinymce' === $_POST['id_base'] ) ) { // Input var okay.
 				$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
 			}
 			return $upload_iframe_src;

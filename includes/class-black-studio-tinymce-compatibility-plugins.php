@@ -321,11 +321,11 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		public function wp_page_widget_enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) {
 			$pages[] = 'term.php';
+			if ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) { // Input var okay.
 				$pages[] = 'edit-tags.php';
 			}
-			if ( isset( $_GET['page'] ) && in_array( $_GET['page'], array( 'pw-front-page', 'pw-search-page' ), true ) ) {
+			if ( isset( $_GET['page'] ) && in_array( wp_unslash( $_GET['page'] ), array( 'pw-front-page', 'pw-search-page' ), true ) ) { // Input var okay.
 				$pages[] = 'admin.php';
 			}
 			return $pages;
@@ -341,7 +341,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 */
 		public function wp_page_widget_add_data( $instance, $widget ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				if ( isset( $_POST['action'] ) && 'pw-save-widget' === $_POST['action'] ) {
+				if ( isset( $_POST['action'] ) && 'pw-save-widget' === $_POST['action'] ) { // Input var okay.
 					$instance['wp_page_widget'] = true;
 				}
 			}
@@ -469,7 +469,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		public function siteorigin_panels_enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['page'] ) && 'so_panels_home_page' === $_GET['page'] ) {
+			if ( isset( $_GET['page'] ) && 'so_panels_home_page' === $_GET['page'] ) { // Input var okay.
 				$pages[] = 'themes.php';
 			}
 			return $pages;
@@ -531,7 +531,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.5.0
 		 */
 		public function elementor() {
-			if ( is_admin() && isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) {
+			if ( is_admin() && isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) { // Input var okay.
 				add_filter( 'black_studio_tinymce_enable', '__return_false', 100 );
 				add_action( 'widgets_init', array( $this, 'elementor_unregister_widget' ), 20 );
 			}
