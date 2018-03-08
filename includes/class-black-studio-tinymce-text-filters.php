@@ -63,6 +63,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 			add_filter( 'widget_text', array( $this, 'wpautop' ), 8, 3 );
 			// Support for shortcodes in widget text.
 			add_filter( 'widget_text', array( $this, 'do_shortcode' ), 10, 3 );
+			// Support for responsive images (WP 4.4+)
+			add_filter( 'widget_text', array( $this, 'wp_make_content_images_responsive' ), 12, 3 );
 		}
 
 		/**
@@ -164,6 +166,26 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 		public function do_shortcode( $text, $instance = null, $widget = null ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
 				$text = do_shortcode( $text );
+			}
+			return $text;
+		}
+
+		/**
+		 * Make images responsive (WP 4.4+)
+		 *
+		 * @uses wp_make_content_images_responsive()
+		 *
+		 * @param string       $text     Widget text.
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
+		 * @return string
+		 * @since 2.4.0
+		 */
+		public function wp_make_content_images_responsive( $text, $instance = null, $widget = null ) {
+			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
+				if ( function_exists( 'wp_make_content_images_responsive' ) ) {
+					$text = wp_make_content_images_responsive( $text );
+				}
 			}
 			return $text;
 		}

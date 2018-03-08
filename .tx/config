@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[black-studio-tinymce-widget.black-studio-tinymce-widget]
-file_filter = languages/black-studio-tinymce-widget-<lang>.po
-source_file = languages/black-studio-tinymce-widget.pot
-source_lang = en_US
-type = PO

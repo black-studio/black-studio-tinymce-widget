@@ -133,7 +133,7 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 				'type'  => 'visual',
 			) );
 			// Force Visual mode in Customizer (to avoid glitches).
-			if ( $wp_customize ) {
+			if ( $wp_customize && ! defined( 'DOING_AJAX' ) ) {
 				$instance['type'] = 'visual';
 			}
 			// Guess (wpautop) filter value for widgets created with previous version.

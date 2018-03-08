@@ -35,7 +35,7 @@
 					} catch( e ) {
 						window.alert( e );
 					}
-					// Real time preview (Theme customizer)
+					// Real time preview (Customizer)
 					if ( this.is_tinymce_active() ) {
 						if ( typeof tinymce.get( id ).on === 'function' ) {
 							tinymce.get( id ).on( 'keyup change', function() {
@@ -195,7 +195,7 @@
 	$( document ).ready(function() {
 
 		// Event handler for widget open button
-		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] a.widget-action', function() {
+		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] a.widget-action, div.widget[id*=black-studio-tinymce] div.widget-title-action', function() {
 			bstw( $( this ) ).check_duplicates().fix_css().set_media_target().activate_after_open();
 			// Event handler for widget save button (for new instances)
 			// Note: this event handler is intentionally attached to the save button instead of document
@@ -249,7 +249,7 @@
 			bstw( $( this ) ).set_mode( 'html' );
 		});
 
-		// Event handler for widget added (i.e. with Theme Customizer */
+		// Event handler for widget added (i.e. with Customizer */
 		$( document ).on( 'widget-added', function( event, $widget ) {
 			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
 				event.preventDefault();

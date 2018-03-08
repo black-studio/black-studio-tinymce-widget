@@ -16,18 +16,24 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 
 ### Features ###
 
-* Add rich text widgets to your sidebars and edit them using visual editor
+* Add rich text widgets to your sidebars and edit them using the TinyMCE visual editor
 * Switch between Visual mode and HTML mode (including Quicktags toolbar)
+* Insert images, videos and other media from WordPress Media Library
 * Full featured TinyMCE Visual Editor (the same you have for pages and posts)
 * Compatible with 3rd party TinyMCE customization plugins (TinyMCE Advanced, WP Edit, ...)
 * Insert images/videos from WordPress Media Library
 * Insert links to existing WordPress pages/posts or external resources
+* Option to "Automatically add paragraphs" to widget text
+* Support for shortcodes, smilies and embed in widget text (including preview)
+* Support for responsive images (on WordPress 4.4 or later)
+* Support for Customizer with live preview and quick edit
 * Support for fullscreen editing mode
 * Support for widgets accessibility mode
-* Support for WordPress networks (multi-site)
-* Support for WPML (multi-language)
-* Live preview in theme customizer
-* Available in 20+ languages
+* Compatible with multi-site (WordPress networks)
+* Compatible with common multi-language plugins (WPML, Polylang and WPGlobus)
+* Compatible with plugins providing additional TinyMCE features (WP Edit, TinyMCE Advanced, etc)
+* Compatible with Page Builder plugin by SiteOrigin
+* Translations available in 20+ languages
 
 ### Links ###
 
@@ -35,23 +41,25 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 * [Plugin's page](https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
 * [FAQ](https://wordpress.org/plugins/black-studio-tinymce-widget/faq/)
 * [Support forum](https://wordpress.org/support/plugin/black-studio-tinymce-widget)
-* Follow us on [Twitter](https://twitter.com/blackstudioita), [Facebook](https://www.facebook.com/blackstudiocomunicazione) and [LinkedIn](https://www.linkedin.com/company/black-studio)
+* Follow us on [Twitter](https://twitter.com/blackstudioita), [Facebook](https://www.facebook.com/blackstudiocomunicazione), [LinkedIn](https://www.linkedin.com/company/black-studio) and [GitHub](https://github.com/black-studio)
 
 ### Get involved ###
 
 * Developers can contribute to the source code on our [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget).
-* Translators can contribute through [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/).
+* Translators can contribute through the [Official WordPress Translation platform](https://translate.wordpress.org/projects/wp-plugins/black-studio-tinymce-widget).
 * Users can contribute by leaving a 5 stars [review](https://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget#postform) or making a [donation](https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/).
 
 ## Installation ##
 
 This section describes how to install and use the plugin.
 
-1. Install automatically through the `Plugins` menu and `Add New` button (or upload the entire `black-studio-tinymce-widget` folder to the `/wp-content/plugins/` directory)
-2. Activate the plugin
-3. Go to `Appearance` => `Widgets`
-4. Drag and drop the `Visual Editor` widget to the desired sidebar (or, if using Accessibility mode, click the `Add` link)
-5. Fill in title and (rich) text
+1. You may install the plugin directly from your WordPress dasboard. Go to `Plugins` => `Add New` and search for `Black Studio TinyMCE Widget`, or pick it from the Popular plugins. Alternatively you may download the ZIP package and upload it using the `Upload Plugin` button in the same screen. You may also upload the files using FTP, just ensure that the entire `black-studio-tinymce-widget` folder is copied into the `/wp-content/plugins/` directory).
+2. Activate the plugin.
+3. In order to use the plugin, go to `Appearance` => `Widgets` in your WordPress dashboard, or alternatively use the `Customize` feature.
+4. Add as many `Visual Editor` widgets as you want to the desired sidebar(s).
+5. Fill in title and (rich) text for your widgets.
+
+Note: the plugin doesn't have nor requires any settings.
 
 ## Screenshots ##
 
@@ -67,6 +75,10 @@ This section describes how to install and use the plugin.
 
 ## Frequently Asked Questions ##
 
+### Purpose of the plugin ###
+
+This plugin gives you the ability to use the WordPress visual editor (TinyMCE) in widgets as you do in posts and pages, but it doesn't affect the editor behavior itself or its functionalities. If you are looking for additional editor features, take a look at plugins like [WP Edit](https://wordpress.org/plugins/wp-edit/), [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/) or any other feature specific plugin you may need. Any additional TinyMCE plugin written following WordPress guidelines should work fine with Black Studio TinyMCE Widget.
+
 ### Troubleshooting ###
 
 If you are experiencing issues with the plugin please read entirely these FAQ before posting a new topic in our [support forum](https://wordpress.org/support/plugin/black-studio-tinymce-widget). Most of the times issues are caused by incompatibility with other plugins or themes, which may prevent our plugin from working as expected. In order to troubleshoot issues please complete the following steps:
@@ -80,7 +92,7 @@ If you are experiencing issues with the plugin please read entirely these FAQ be
 If you found a conflict with a plugin or theme, or if your problem is still present after the steps above, open a topic in the [support forum](https://wordpress.org/support/plugin/black-studio-tinymce-widget) and provide the following information:
 
 * Detailed description of the problem, including the steps to reproduce it
-* Location(s) where the problem occurs (Appearance -> Widgets, Theme Customizer, Accessibility mode, Page Builder, etc)
+* Location(s) where the problem occurs (Appearance -> Widgets, Customizer, Accessibility mode, Page Builder, etc)
 * Error messages, if any, in particular in [browser's javascript console](https://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers)
 * Browser and Operating System in use
 * Plugin version in use
@@ -91,7 +103,7 @@ If you found a conflict with a plugin or theme, or if your problem is still pres
 * A link to a screenshot, if it can be useful to understand the problem
 * A link to your website, if it can be useful to show the problem
 
-### Can't find it in my available widgets ###
+### Can't find it in available widgets ###
 
 Since version 1.3.1 the name of the widget changed from `Black Studio TinyMCE Widget` to `Visual Editor` to enhance user-friendliness. `Black Studio TinyMCE Widget` is still the name of the plugin, but it was a bit too long and not very intuitive for inexperienced users. You may find references to the old name in articles and videos on the web, so don't panic if you don't see the `Black Studio TinyMCE Widget` in your available widgets, just look for `Visual Editor`. Note: if you are using WordPress in a language other than English you may have a corresponding name translated into your language.
 
@@ -99,42 +111,62 @@ Since version 1.3.1 the name of the widget changed from `Black Studio TinyMCE Wi
 
 When dealing with a WordPress site URL change it is necessary to face the serialized fields issue: data may become corrupted if using a simple search/replace (see the [Codex](https://codex.wordpress.org/Moving_WordPress#When_Your_Domain_Name_or_URLs_Change) for further info). This is not an issue specifically related to our plugin, but it affects all the parts (plugins, themes and WordPress core files too) that use serialized data archiving. When changing the site URL, the recommended way is to use the [Search and Replace for WordPress Databases Script](https://interconnectit.com/products/search-and-replace-for-wordpress-databases/), as suggested by the Codex.
 
-### How to translate widgets using WPML ###
+### How to translate widgets in multi-language sites ###
+
+The current version of Black Studio TinyMCE Widget supports the following multi-language plugins:
+
+* WPML
+* Polylang
+* WPGlobus
+
+**WPML**
 
 [WPML](https://wpml.org) is the leading commercial plugin for WordPress multi-language sites.
 If you're using WPML v3.8 or newer and you need to translate a widget, we recommend to create a separate widget for each language of your site and assign the language to each widget accordingly using the selector "Display on language" provided by WPML. This way you will be able to work with the visual editor also for translations.
 For older versions of WPML (up to 3.7.x), we recommend to install the 3rd party [WPML Widgets](https://wordpress.org/plugins/wpml-widgets/) plugin, which provides the same feature described above, that was not available natively on WPML. In the past, we also suggested to translate the widgets using the official WPML String Translation plugin, but this method is now deprecated as it was not very friendly due to the inability of using the visual editor for translations. If you were using WPML String Translation, we recommend to switch to the aforementioned translation method and remove the entries in WPML String Translation list after you moved them to be real widgets. Starting from version 2.6.0 of Black Studio TinyMCE Widget, a warning will be displayed if any deprecated translation is detected.
 
+**Polylang**
+
+[Polylang](https://wordpress.org/plugins/polylang/) is a free alternative to WPML that allows you to create bilingual or multilingual WordPress sites. It provides natively the ability to assign languages to each widget (including the ones created with Black Studio TinyMCE Widget), so you won't need any additional plugin to have multi-language widgets.
+
+**WPGlobus**
+
+[WPGlobus](https://wordpress.org/plugins/wpglobus/) is a new WordPress plugin for multi-language sites, with a different approach in comparison to WPML and Polylang. The WPGlobus team has also created the [WPGlobus for Black Studio TinyMCE Widget](https://wordpress.org/plugins/wpglobus-for-black-studio-tinymce-widget/) addon plugin, that will allow you yo use it in conjunction with Black Studio TinyMCE Widget.
+
 ### How to embed video and other contents ###
 
-WordPress has a nice [autoembed feature](https://codex.wordpress.org/Embeds) that allows you to embed videos and other stuff in an easy way, by just putting the URL in the content area. This is also possible for widgets created with this plugin.
-If you are using a version of WordPress prior to 4.0 or a version of Black Studio TinyMCE Widget prior to 2.0, for best results it is recommended to put the URL inside an `[embed]` shortcode. Example:
-`[embed]https://www.youtube.com/watch?v=XXXXXXXXXXX[/embed]`
-Ensure that the URL has not a hyperlink.
+WordPress has a nice [autoembed feature](http://codex.wordpress.org/Embeds) that allows you to embed videos and other stuff in an easy way, by just putting the URL in the content area. This is also possible for widgets created with this plugin.
+If you are using a version of WordPress prior to 4.0 or a version of Black Studio TinyMCE Widget prior to 2.0, for best results it is recommended to put the URL inside an `[embed]` shortcode. Example: 
+
+	[embed]http://www.youtube.com/watch?v=XXXXXXXXXXX[/embed]
+
+Ensure that the URL has not an hyperlink on it.
 Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL is not surrounded by a `<p>` tag.
 
 ### How to customize widget appearance ###
 
 The appearance of widgets in the frontend depends on both CSS and HTML. This plugin does not insert any additional CSS to your website frontend, so if you need to customize the styling you'll have to do at theme level, or you have to insert explicitly insert `<style>` in your widget using the Text / HTML mode (this option is not recommended though).
-As for the HTML, most of the markup is controlled by WordPress and by the theme.
+If you need to add CSS classes to widgets we recommend the [Widget CSS Classes](https://wordpress.org/plugins/widget-css-classes/) plugin.
+The HTML markup is controlled mainly by WordPress and by the theme, and in a smaller part by the plugin.
+
 The HTML output of a widget includes the following parts:
 
 	{before_widget}
 		{before_title}
-			{title}
+			{widget_title}
 		{after_title}
 		{before_text}
-			{text}
+			{widget_text}
 		{after_text}
 	{after_widget}
 
-which can be customized as following:
+These elements can be customized as follows:
 
-* The `{title}` and `{text}` are the values that you insert in Widgets administration panel.
+* The `{widget_title}` and `{widget_text}` are the values inserted into the widget fields.
 * The markup  of `{before_widget}`, `{after_widget}`, `{before_title}`, `{after_title}` is usually defined by your theme when registering a sidebar with the [`register_sidebar`](https://codex.wordpress.org/Function_Reference/register_sidebar) function.
-* The `{before_text}` and `{after_text}` are the only piece of HTML markup added by the plugin. The default markup is the same as native WordPress text widgets to ensure visual compatibility with styles created for text widgets: `<div class="textwidget"> {text} </div>`. You may customize the markup using the `black_studio_tinymce_before_text` and `black_studio_tinymce_after_text` filter hooks. They both take two parameters, the first is the default text and the second is the widget instance. See examples below.
+* The `{before_text}` and `{after_text}` are the only pieces of HTML markup added by the plugin. The default markup is the same as native WordPress text widgets to ensure styling compatibility with CSS created for text widgets: `<div class="textwidget"> {text} </div>`. You may customize this markup using the `black_studio_tinymce_before_text` and `black_studio_tinymce_after_text` filter hooks. They both take two parameters: the first is the default text and the second is the widget instance. See examples below.
 
-Example 1: Custom markup for `{before_text}` and `{after_text}`
+Example 1: Custom markup for `{before_text}` and `{after_text}` elements
 
 	add_filter( 'black_studio_tinymce_before_text', 'my_widget_before_text', 10, 2 );
 	function my_widget_before_text( $before_text, $instance ) {
@@ -146,7 +178,7 @@ Example 1: Custom markup for `{before_text}` and `{after_text}`
 	}
 
 
-Example 2: Totally remove markup for `[before_text]` and `[after_text]`
+Example 2: Totally remove markup for `[before_text]` and `[after_text]` elements
 
 	add_filter( 'black_studio_tinymce_before_text', '__return_empty_string' );
 	add_filter( 'black_studio_tinymce_after_text', '__return_empty_string' );
@@ -160,30 +192,43 @@ There's also an additional hook, that you may use to specify to not display widg
 ### How to customize widget contents (using hooks) ###
 
 You may alter widget title and text via code using the `widget_title` and `widget_text` filter hooks (see [Codex](https://codex.wordpress.org/Plugin_API/Filter_Reference#Widgets) for details).
-The plugin also internally uses `widget_text` filter to apply specific features:
+The plugin also internally uses `widget_text` filter to apply specific WordPress native features:
 
-* [icl_t](https://wpml.org/documentation/support/translation-for-texts-by-other-plugins-and-themes/) (priority 2): applies WPML translation (called only if WPML is activated on the site).
-* [autoembed](https://codex.wordpress.org/Embeds) (priority 4): converts embed urls to relevant embed codes.
-* [convert_smilies](https://codex.wordpress.org/Function_Reference/convert_smilies) (priority 6): converts text equivalent of smilies to images.
-* [wpautop](https://codex.wordpress.org/Function_Reference/wpautop) (priority 8): applies paragraphs automatically (if the relevant option is selected).
-* [do_shortcode](https://codex.wordpress.org/Function_Reference/do_shortcode) (priority 10): processes the shortcodes.
+* [`autoembed`](http://codex.wordpress.org/Embeds) (priority 4): converts embed urls to relevant embed codes.
+* [`convert_smilies`](http://codex.wordpress.org/Function_Reference/convert_smilies) (priority 6): converts text equivalent of smilies to images.
+* [`wpautop`](http://codex.wordpress.org/Function_Reference/wpautop) (priority 8): applies paragraphs automatically (if the relevant option is selected).
+* [`do_shortcode`](http://codex.wordpress.org/Function_Reference/do_shortcode) (priority 10): processes the shortcodes.
+* [`wp_make_content_images_responsive`](http://wpseek.com/function/wp_make_content_images_responsive/) (priority 12): makes images responsive.
 
-If for any reason you need to remove the filters above, you may use the following code snippet (or a custom version of it):
+Moreover there are additional filters specific for 3rd party plugins:
+
+* [`icl_t`](http://wpml.org/documentation/support/translation-for-texts-by-other-plugins-and-themes/) (priority 2): applies WPML translation (used only if WPML + WPML String Translation are activated on the site and WPML Widgets is not activated - See FAQ about multi-language sites for further information).
+* [`M_Attach_To_Post::substitute_placeholder_imgs`] (priority 10): replaces NextGEN Gallery placeholder images with galleries/slideshows (used only if the NextGEN Gallery plugin is activated).
+
+If for any reason you need to remove the filters above, you may use the following code snippets (or a customized version, depending on your needs):
 
 
 	add_action( 'init', 'remove_bstw_widget_text_filters' );
 	function remove_bstw_widget_text_filters() {
 	    if ( function_exists( 'bstw' ) ) {
-	        remove_filter( 'widget_text', array( bstw()->compatibility()->plugins(), 'wpml_widget_text' ), 2 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'autoembed' ), 4 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'convert_smilies' ), 6 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 8 );
 	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'do_shortcode' ), 10 );
+	        remove_filter( 'widget_text', array( bstw()->text_filters(), 'wp_make_content_images_responsive' ), 12 );
 	    }
 	}
 
 
-### Plugin's data location and cleanup ###
+
+	add_action( 'init', 'remove_bstw_widget_text_plugin_filters' );
+	function remove_bstw_widget_text_plugin_filters() {
+	    if ( function_exists( 'bstw' ) ) {
+	        remove_filter( 'widget_text', array( bstw()->compatibility()->module( 'wpml' ), 'widget_text' ), 2 );
+	        remove_filter( 'widget_text', array( bstw()->compatibility()->module( 'nextgen_gallery' ), 'widget_text' ) );
+	    }
+	}
+
 
 The widgets data are stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Widget data storage is handled by WordPress and not directly by the plugin. The widgets data are intentionally kept in the database upon plugin deactivation/deletion to avoid content loss. Additionally, the plugin may save some user preferences in the `wp_usermeta` table, in particular, the records having s key with the prefix `_bstw`.
 If you want to totally remove the plugin including its data, just uninstall it and then remove the above records from the database.
@@ -193,7 +238,22 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 	DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 
+Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
+
 ## Changelog ##
+
+### 3.0.0 (TBA) ###
+* Added support for responsive images (WordPress 4.4+)
+* Added support for NextGEN Gallery plugin
+* Added support for embed preview inside the editor
+* Added support for quick widget selection (shift+click) in Customizer
+* Enhanced integration with multi-language plugins (WPML and Polylang)
+* Enhanced widget appearance in Customizer
+* Moved translations from Transifex to WordPress.org language packs system
+* Fixed several z-index related issues in Customizer
+* Fixed issues when creating/updating widgets in Customizer 
+* Refactored code for compatibility with 3rd party plugins
+* Updated documentation
 
 ### 2.6.2 (2018-02-27) ###
 * Fixed conflict that was causing widget-specific warning messages to be moved to the top of the page
@@ -267,7 +327,7 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 * Added Persian translation (courtesy of WP-Translation.org team on Transifex)
 
 ### 2.2.4 (2015-05-14) ###
-* Fixed issue with WordPress Theme Customizer
+* Fixed issue with WordPress Customizer
 * For developers: added ability to create subclasses of WP_Widget_Black_Studio_TinyMCE class (courtesy of [@andreamk](https://github.com/andreamk))
 * Added Khmer and updated Spanish translations (courtesy of WP-Translation.org team on Transifex)
 
@@ -282,7 +342,7 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ### 2.2.1 (2014-11-18) ###
 * Fixed paragraph formatting bug on saving
-* Fixed real-time update bug in Theme Customizer
+* Fixed real-time update bug in Customizer
 * Enhanced editor initialization
 * Simplified internal integration with Page Builder
 * Simplified internal initialization for accessibility mode
@@ -309,7 +369,7 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ### 2.1.3 (2014-10-18) ###
 * Added ability to disable automatic addition of paragraphs when editing (i.e. using TinyMCE Advanced plugin option)
-* Enhanced real-time rendering in theme customizer
+* Enhanced real-time rendering in Customizer
 * Fixed compatibility issue with Page Builder related to comment reply in admin
 * Fixed compatibility issue with Styles plugin related to plugins_loaded hook
 
@@ -373,7 +433,7 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 ### 1.4.3 (2014-07-13) ###
 * Added filter hooks to modify the markup before and after the widget text
 * Fixed z-index issue in fullscreen mode
-* Added widget icon for theme customizer
+* Added widget icon for Customizer
 * Updated Danish translation
 * Updated FAQ and readme.txt
 
@@ -400,11 +460,11 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ### 1.3.3 (2014-04-04) ###
 * Fixed visualization bug upon widget saving
-* Enhanced support WordPress 3.9 Theme Customizer (live edit)
+* Enhanced support for WordPress 3.9 Customizer (live edit)
 
 ### 1.3.2 (2014-04-03) ###
 * Fixed compatibility issue with WordPress 3.9 Beta 3
-* Added support for WordPress 3.9 Theme Customizer
+* Added support for WordPress 3.9 Customizer
 * Added swedish translation (Contributor: macsolve)
 * Updated installation documentation
 * Updated FAQ
