@@ -145,7 +145,7 @@ Alternatively, if you don't want to use `[embed]` shortcode, ensure that the URL
 
 ### How to customize widget appearance ###
 
-The appearance of widgets in the frontend depends on both CSS and HTML. This plugin does not insert any additional CSS to your website frontend, so if you need to customize the styling you'll have to do at theme level, or you have to insert explicitly insert `<style>` in your widget using the Text / HTML mode (this option is not recommended though).
+The appearance of widgets in the frontend depends on both CSS and HTML. This plugin does not insert any additional CSS to your website frontend, so if you need to customize the styling you'll have to do at theme level, or you have to explicitly insert `<style>` in your widget using the Text / HTML mode (this method is not recommended though).
 If you need to add CSS classes to widgets we recommend the [Widget CSS Classes](https://wordpress.org/plugins/widget-css-classes/) plugin.
 The HTML markup is controlled mainly by WordPress and by the theme, and in a smaller part by the plugin.
 
@@ -230,6 +230,8 @@ If for any reason you need to remove the filters above, you may use the followin
 	}
 
 
+### Plugin's data storage and cleanup ###
+
 The widgets data are stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Widget data storage is handled by WordPress and not directly by the plugin. The widgets data are intentionally kept in the database upon plugin deactivation/deletion to avoid content loss. Additionally, the plugin may save some user preferences in the `wp_usermeta` table, in particular, the records having s key with the prefix `_bstw`.
 If you want to totally remove the plugin including its data, just uninstall it and then remove the above records from the database.
 You may use the following SQL queries for removal (Note: adjust table prefix according to your database settings):
@@ -238,7 +240,6 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 	DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 
-Plugin's data is stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Data storage is handled by WordPress and not directly by the plugin. The widgets data is intentionally kept in the datatbase upon plugin deactivation / deletion to avoid content loss. If you want to totally remove the plugin including its data, just remove that record after plugin removal.
 
 ## Changelog ##
 
@@ -454,7 +455,7 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 * Duplicated widget IDs detection
 * Added Rate link
 * Added compatibility with WordPress Language packs
-* Added ukrainian translation (Contributor: Michael Yunat)
+* Added Ukrainian translation (Contributor: Michael Yunat)
 * Fixed notice on theme_advanced_buttons1 parameter
 * Fixed z-index issue with WordPress 3.9 admin menu on small screens
 
@@ -566,6 +567,5 @@ Plugin's data is stored in serialized format inside a record in the `wp_options`
 
 ## Upgrade Notice ##
 
-### 2.6.2 ###
-If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
-Important: Always ensure to backup your database before upgrading.
+### 3.0.0 ###
+Version 3.x is a major update. If you are upgrading from version 1.x or 2.x please ensure to backup your database before upgrading.
