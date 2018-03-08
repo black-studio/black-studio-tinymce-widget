@@ -283,7 +283,7 @@ module.exports = function( grunt ) {
 				readme: 'readme.txt',
 				plugin: 'black-studio-tinymce-widget.php'
 			},
-			plugin_vs_readme: { //Check plugin header version againts stable tag in readme
+			plugin_vs_readme: { //Check plugin header version against stable tag in readme
 				version1: 'plugin',
 				version2: 'readme',
 				compare: '=='
@@ -309,18 +309,6 @@ module.exports = function( grunt ) {
 				cmd: 'tx push -s'
 			}
 		},
-
-		// Deploy to WP repository
-		wp_deploy: {
-			deploy: {
-				options: {
-					plugin_slug: '<%= pkg.name %>',
-					build_dir: 'build/<%= pkg.name %>',
-					assets_dir: 'assets',
-					tmp_dir: './tmp'
-				}
-			}
-		}
 
 	});
 
@@ -355,11 +343,6 @@ module.exports = function( grunt ) {
 		'copy',
 		'lineending',
 		'compress'
-	]);
-
-	grunt.registerTask( 'deploy', [
-		'build',
-		'wp_deploy'
 	]);
 
 };
