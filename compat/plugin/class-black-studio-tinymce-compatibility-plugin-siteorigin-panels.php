@@ -1,26 +1,30 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Compatibility with Page Builder (SiteOrigin Panels)
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class that provides compatibility code for Page Builder (SiteOrigin Panels)
- *
- * @package Black_Studio_TinyMCE_Widget
- * @since 2.4.0
- */
-
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panels' ) ) {
 
+	/**
+	 * Class that provides compatibility code for Page Builder (SiteOrigin Panels)
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 2.4.0
+	 */
 	final class Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panels {
 
 		/**
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		protected static $_instance = null;
 
@@ -43,7 +47,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * @uses is_admin()
 		 * @uses add_action()
 		 *
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		protected function __construct() {
 			if ( is_admin() ) {
@@ -51,7 +55,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 				add_action( 'admin_init', array( $this, 'admin_init' ) );
 			}
 			if ( ! function_exists( 'is_plugin_active' ) ) {
-				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				include_once ABSPATH . 'wp-admin/includes/plugin.php';
 			}
 		}
 
@@ -59,10 +63,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		protected function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '3.0' );
 		}
 
 		/**
@@ -73,7 +77,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * @uses is_plugin_active()
 		 *
 		 * @return void
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public function admin_init() {
 			if ( is_plugin_active( 'siteorigin-panels/siteorigin-panels.php' ) ) {
@@ -82,6 +86,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 				add_filter( 'black_studio_tinymce_activate_events', array( $this, 'activate_events' ) );
 				add_filter( 'black_studio_tinymce_deactivate_events', array( $this, 'deactivate_events' ) );
 				add_filter( 'black_studio_tinymce_enable_pages', array( $this, 'enable_pages' ) );
+				add_filter( 'black_studio_tinymce_widget_additional_fields', array( $this, 'additional_fields' ) );
 				remove_filter( 'widget_text', array( bstw()->text_filters(), 'wpautop' ), 8 );
 			}
 		}
@@ -89,23 +94,23 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		/**
 		 * Remove widget number to prevent translation when using Page Builder (SiteOrigin Panels) + WPML String Translation
 		 *
-		 * @param object $the_widget
+		 * @param object $widget Widget object.
 		 * @return object
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
-		public function widget_object( $the_widget ) {
-			if ( isset( $the_widget->id_base ) && 'black-studio-tinymce' == $the_widget->id_base ) {
-				$the_widget->number = '';
+		public function widget_object( $widget ) {
+			if ( isset( $widget->id_base ) && 'black-studio-tinymce' === $widget->id_base ) {
+				$widget->number = '';
 			}
-			return $the_widget;
+			return $widget;
 		}
 
 		/**
 		 * Add selector for widget detection for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $selectors
+		 * @param string[] $selectors Array of selectors.
 		 * @return string[]
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public function container_selectors( $selectors ) {
 			$selectors[] = 'div.panel-dialog';
@@ -115,9 +120,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		/**
 		 * Add activate events for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $events
+		 * @param string[] $events Array of events.
 		 * @return string[]
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public function activate_events( $events ) {
 			$events[] = 'panelsopen';
@@ -127,9 +132,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		/**
 		 * Add deactivate events for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $events
+		 * @param string[] $events Array of events.
 		 * @return string[]
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public function deactivate_events( $events ) {
 			$events[] = 'panelsdone';
@@ -139,17 +144,29 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		/**
 		 * Add pages filter to enable editor for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $pages
+		 * @param string[] $pages Array of pages.
 		 * @return string[]
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public function enable_pages( $pages ) {
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['page'] ) && 'so_panels_home_page' == $_GET['page'] ) {
+			if ( isset( $_GET['page'] ) && 'so_panels_home_page' === $_GET['page'] ) { // Input var ok.
 				$pages[] = 'themes.php';
 			}
 			return $pages;
+		}
+
+		/**
+		 * Add widget field for Page Builder (SiteOrigin Panels)
+		 *
+		 * @param string[] $fields Array of fields.
+		 * @return string[]
+		 * @since 3.0.0
+		 */
+		public function additional_fields( $fields ) {
+			$fields[] = 'panels_info';
+			return $fields;
 		}
 
 		/**
@@ -158,9 +175,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * @uses remove_action()
 		 *
 		 * @return void
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
-		public function disable_compat( ) {
+		public function disable_compat() {
 			remove_action( 'admin_init', 'siteorigin_panels_black_studio_tinymce_admin_init' );
 			remove_action( 'admin_enqueue_scripts', 'siteorigin_panels_black_studio_tinymce_admin_enqueue', 15 );
 		}

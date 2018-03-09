@@ -1,26 +1,30 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Compatibility with WordPress versions prior to 3.5
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class that provides compatibility code for WordPress versions prior to 3.5
- *
- * @package Black_Studio_TinyMCE_Widget
- * @since 2.4.0
- */
+if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_WordPress_Pre_35' ) ) {
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
-
-	final class Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35 {
+	/**
+	 * Class that provides compatibility code for WordPress versions prior to 3.5
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 3.0.0
+	 */
+	final class Black_Studio_TinyMCE_Compatibility_WordPress_Pre_35 {
 
 		/**
 		 * The single instance of the class
 		 *
 		 * @var object
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		protected static $_instance = null;
 
@@ -28,7 +32,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * Return the single class instance
 		 *
 		 * @return object
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -42,7 +46,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 *
 		 * @uses add_action()
 		 *
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		protected function __construct() {
 			add_action( 'admin_init', array( $this, 'admin_init' ), 35 );
@@ -52,10 +56,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * Prevent the class from being cloned
 		 *
 		 * @return void
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		protected function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '3.0' );
 		}
 
 		/**
@@ -64,7 +68,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * @uses add_filter()
 		 *
 		 * @return void
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public function admin_init() {
 			if ( bstw()->admin()->enabled() ) {
@@ -77,18 +81,18 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35' ) ) {
 		 * (this is done excluding post_id parameter in Thickbox iframe url)
 		 *
 		 * @global string $pagenow
-		 * @param string $upload_iframe_src
+		 * @param string $upload_iframe_src Source of the iframe for the upload dialog.
 		 * @return string
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public function upload_iframe_src( $upload_iframe_src ) {
 			global $pagenow;
-			if ( 'widgets.php' == $pagenow || ( 'admin-ajax.php' == $pagenow && isset( $_POST['id_base'] ) && 'black-studio-tinymce' == $_POST['id_base'] ) ) {
+			if ( 'widgets.php' === $pagenow || ( 'admin-ajax.php' === $pagenow && isset( $_POST['id_base'] ) && 'black-studio-tinymce' === $_POST['id_base'] ) ) { // Input var okay.
 				$upload_iframe_src = str_replace( 'post_id=0', '', $upload_iframe_src );
 			}
 			return $upload_iframe_src;
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility_Wordpress_Pre_35
+	} // END class Black_Studio_TinyMCE_Compatibility_WordPress_Pre_35
 
 } // END class_exists check

@@ -63,7 +63,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 			add_filter( 'widget_text', array( $this, 'wpautop' ), 8, 3 );
 			// Support for shortcodes in widget text.
 			add_filter( 'widget_text', array( $this, 'do_shortcode' ), 10, 3 );
-			// Support for responsive images (WP 4.4+)
+			// Support for responsive images (WP 4.4+).
 			add_filter( 'widget_text', array( $this, 'wp_make_content_images_responsive' ), 12, 3 );
 		}
 

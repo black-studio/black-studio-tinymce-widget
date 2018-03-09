@@ -1,21 +1,25 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Compatibility code with other plugins
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class that provides compatibility code with other plugins
- * Starting from version 3.0.0 this class is no longer used, and it will be removed in future version
- *
- * @package Black_Studio_TinyMCE_Widget
- * @since 2.0.0
- * @deprecated 3.0.0
- */
-
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 
+	/**
+	 * Class that provides compatibility code with other plugins
+	 * Starting from version 3.0.0 this class is no longer used, and it will be removed in future version
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 2.0.0
+	 * @deprecated 3.0.0
+	 */
 	final class Black_Studio_TinyMCE_Compatibility_Plugins {
 
 		/**
@@ -61,7 +65,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 */
 		protected function __clone() {
 			_deprecated_function( __FUNCTION__, '3.0.0' );
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '3.0' );
 		}
 
 		/**
@@ -78,7 +82,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add widget text to WPML String translation
 		 *
-		 * @param mixed[] $instance
+		 * @param mixed[] $instance Widget instance.
 		 * @return mixed[]
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -91,9 +95,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Translate widget text
 		 *
-		 * @param string $text
-		 * @param mixed[]|null $instance
-		 * @param object|null $widget
+		 * @param string       $text     Widget text.
+		 * @param mixed[]|null $instance Widget instance.
+		 * @param object|null  $widget   Widget object.
 		 * @return string
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -128,7 +132,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Enable filter for WP Page Widget plugin
 		 *
-		 * @param string[] $pages
+		 * @param string[] $pages Array of pages.
 		 * @return string[]
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -174,20 +178,20 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Remove widget number to prevent translation when using Page Builder (SiteOrigin Panels) + WPML String Translation
 		 *
-		 * @param object $the_widget
+		 * @param object $widget Widget object.
 		 * @return object
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
 		 */
-		public function siteorigin_panels_widget_object( $the_widget ) {
+		public function siteorigin_panels_widget_object( $widget ) {
 			_deprecated_function( __FUNCTION__, '3.0.0' );
-			return $the_widget;
+			return $widget;
 		}
 
 		/**
 		 * Add selector for widget detection for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $selectors
+		 * @param string[] $selectors Array of selectors.
 		 * @return string[]
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -200,7 +204,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add activate events for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $events
+		 * @param string[] $events Array of events.
 		 * @return string[]
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -213,7 +217,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add deactivate events for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $events
+		 * @param string[] $events Array of events.
 		 * @return string[]
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -226,7 +230,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		/**
 		 * Add pages filter to enable editor for Page Builder (SiteOrigin Panels)
 		 *
-		 * @param string[] $pages
+		 * @param string[] $pages Array of pages.
 		 * @return string[]
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -237,13 +241,26 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		}
 
 		/**
+		 * Add widget field for Page Builder (SiteOrigin Panels)
+		 *
+		 * @param string[] $fields Array of fields.
+		 * @return string[]
+		 * @since 2.6.0
+		 * @deprecated 3.0.0
+		 */
+		public function siteorigin_panels_additional_fields( $fields ) {
+			_deprecated_function( __FUNCTION__, '3.0.0' );
+			return $fields;
+		}
+
+		/**
 		 * Disable old compatibility code provided by Page Builder (SiteOrigin Panels)
 		 *
 		 * @return void
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
 		 */
-		public function siteorigin_panels_disable_compat( ) {
+		public function siteorigin_panels_disable_compat() {
 			_deprecated_function( __FUNCTION__, '3.0.0' );
 		}
 

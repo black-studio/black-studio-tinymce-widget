@@ -1,19 +1,23 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Compatibility code
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class that manages compatibility code
- *
- * @package Black_Studio_TinyMCE_Widget
- * @since 2.0.0
- */
-
 if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 
+	/**
+	 * Class that manages compatibility code
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 2.0.0
+	 */
 	final class Black_Studio_TinyMCE_Compatibility {
 
 		/**
@@ -68,7 +72,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '3.0' );
 		}
 
 		/**
@@ -87,8 +91,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		/**
 		 * Return the instance of a compatibility class module, given its slug
 		 *
-		 * @param string $slug
-		 *
+		 * @param string $slug Slug of instance.
 		 * @return object
 		 * @since 3.0.0
 		 */
@@ -104,8 +107,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * @deprecated 3.0.0
 		 */
 		public static function plugins() {
-			_deprecated_function( __FUNCTION__, '2.4.0' );
-			include_once( self::get_path() . 'class-compatibility-plugins.php' );
+			_deprecated_function( __FUNCTION__, '3.00' );
+			include_once self::get_path() . 'class-compatibility-plugins.php';
 			self::$plugins = Black_Studio_TinyMCE_Compatibility_Plugins::instance();
 			return self::$plugins;
 		}
@@ -118,10 +121,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * @deprecated 3.0.0
 		 */
 		public static function wordpress() {
-			_deprecated_function( __FUNCTION__, '2.4.0' );
+			_deprecated_function( __FUNCTION__, '3.0.0' );
 			if ( version_compare( get_bloginfo( 'version' ), '3.9', '<' ) ) {
-				include_once( self::get_path() . 'class-compatibility-wordpress.php' );
-				self::$wordpress = Black_Studio_TinyMCE_Compatibility_Wordpress::instance();
+				include_once self::get_path() . 'class-compatibility-wordpress.php';
+				self::$wordpress = Black_Studio_TinyMCE_Compatibility_WordPress::instance();
 			}
 			return self::$wordpress;
 		}
@@ -177,7 +180,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 			$compatibility_versions = array( '3.5', '3.9' );
 			foreach ( $compatibility_versions as $version ) {
 				if ( version_compare( get_bloginfo( 'version' ), $version, '<' ) ) {
-					$this->create_module_instance( 'wordpress', 'pre_' . str_replace( '.', '', $version ) );
+					$this->create_module_instance( strtolower( 'WordPress' ), 'pre_' . str_replace( '.', '', $version ) );
 				}
 			}
 		}
@@ -187,6 +190,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 *
 		 * @uses plugin_dir_path()
 		 *
+		 * @param string $folder Folder containing the file to be loaded.
 		 * @return string
 		 * @since 3.0.0
 		 */
@@ -201,14 +205,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		/**
 		 * Get instance of a compatibility module
 		 *
+		 * @param string $folder Folder containing the file to be loaded.
+		 * @param string $slug   Slug of the file to be loaded.
 		 * @since 3.0.0
 		 */
 		public static function create_module_instance( $folder, $slug ) {
-			$file = self::get_path( $folder ) . 'class-compatibility-' . $folder . '-' . str_replace( '_', '-',  $slug ) . '.php';
+			$file = self::get_path( $folder ) . 'class-black-studio-tinymce-compatibility-' . $folder . '-' . str_replace( '_', '-', $slug ) . '.php';
 			if ( file_exists( $file ) ) {
-				include_once( $file );
-				$class_name = 'Black_Studio_TinyMCE_Compatibility_' . ucwords( $folder )  . '_';
-				$class_name .= str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $slug ) ) );
+				include_once $file;
+				$class_name             = 'Black_Studio_TinyMCE_Compatibility_' . ucwords( $folder ) . '_';
+				$class_name            .= str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $slug ) ) );
 				self::$modules[ $slug ] = call_user_func( array( $class_name, 'instance' ) );
 			}
 		}

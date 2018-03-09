@@ -1,22 +1,26 @@
 <?php
+/**
+ * Black Studio TinyMCE Widget - Compatibility code with older WordPress versions
+ *
+ * @package Black_Studio_TinyMCE_Widget
+ */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Class that provides compatibility code with older WordPress versions
- * Starting from version 3.0.0 this class is no longer used, and it will be removed in future version
- *
- * @package Black_Studio_TinyMCE_Widget
- * @since 2.0.0
- * @deprecated 3.0.0
- */
+if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_WordPress' ) ) {
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
-
-	final class Black_Studio_TinyMCE_Compatibility_Wordpress {
+	/**
+	 * Class that provides compatibility code with older WordPress versions
+	 * Starting from version 3.0.0 this class is no longer used, and it will be removed in future version
+	 *
+	 * @package Black_Studio_TinyMCE_Widget
+	 * @since 2.0.0
+	 * @deprecated 3.0.0
+	 */
+	final class Black_Studio_TinyMCE_Compatibility_WordPress {
 
 		/**
 		 * The single instance of the class
@@ -61,7 +65,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 */
 		protected function __clone() {
 			_deprecated_function( __FUNCTION__, '3.0.0' );
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; uh?' ), '2.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '3.0' );
 		}
 
 		/**
@@ -82,7 +86,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
 		 */
-		public function  wp_pre_32_admin_print_footer_scripts() {
+		public function wp_pre_32_admin_print_footer_scripts() {
 			_deprecated_function( __FUNCTION__, '3.0.0' );
 		}
 
@@ -100,7 +104,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		/**
 		 * Remove WP fullscreen mode and set the native tinyMCE fullscreen mode for WordPress prior to 3.3
 		 *
-		 * @param mixed[] $settings
+		 * @param mixed[] $settings Array of settings.
 		 * @return mixed[]
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -170,7 +174,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		 * Enable full media options in upload dialog for WordPress prior to 3.5
 		 * (this is done excluding post_id parameter in Thickbox iframe url)
 		 *
-		 * @param string $upload_iframe_src
+		 * @param string $upload_iframe_src Source of the iframe for the upload dialog.
 		 * @return string
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -206,7 +210,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 		/**
 		 * TinyMCE initialization for WordPress prior to 3.9
 		 *
-		 * @param mixed[] $settings
+		 * @param mixed[] $settings Array of settings.
 		 * @return mixed[]
 		 * @since 2.0.0
 		 * @deprecated 3.0.0
@@ -238,6 +242,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Wordpress' ) ) {
 			_deprecated_function( __FUNCTION__, '3.0.0' );
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility_Wordpress
+	} // END class Black_Studio_TinyMCE_Compatibility_WordPress
 
 } // END class_exists check

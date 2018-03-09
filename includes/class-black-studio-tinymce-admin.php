@@ -183,7 +183,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function enqueue_style() {
 			$style  = apply_filters( 'black_studio_tinymce_widget_style', 'black-studio-tinymce-widget' );
-			$path = apply_filters( 'black-studio-tinymce-widget-style-path', 'css/' );
+			$path   = apply_filters( 'black_studio_tinymce_widget_style_path', 'css/' );
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.css' : '.min.css';
 			wp_enqueue_style(
 				$style,
@@ -224,7 +224,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function enqueue_script() {
 			$script = apply_filters( 'black_studio_tinymce_widget_script', 'black-studio-tinymce-widget' );
-			$path = apply_filters( 'black-studio-tinymce-widget-script-path', 'js/' );
+			$path   = apply_filters( 'black_studio_tinymce_widget_script_path', 'js/' );
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
 			wp_enqueue_script(
 				$script,
@@ -249,7 +249,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			$activate_events     = apply_filters( 'black_studio_tinymce_activate_events', array() );
 			$deactivate_events   = apply_filters( 'black_studio_tinymce_deactivate_events', array() );
 			$data                = array(
-				'dummy_post_id' => $this->get_dummy_post_id(),
+				'dummy_post_id'       => $this->get_dummy_post_id(),
 				'container_selectors' => implode( ', ', $container_selectors ),
 				'activate_events'     => $activate_events,
 				'deactivate_events'   => $deactivate_events,
@@ -499,16 +499,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function register_dummy_post_type() {
 			$args = array(
-				'public' => false,
+				'public'             => false,
 				'publicly_queryable' => false,
-				'show_ui' => false,
-				'query_var' => false,
-				'rewrite' => false,
-				'capability_type' => 'post',
-				'hierarchical' => false,
-				'menu_position' => null,
-				'show_in_nav_menus' => false,
-				'has_archive' => false,
+				'show_ui'            => false,
+				'query_var'          => false,
+				'rewrite'            => false,
+				'capability_type'    => 'post',
+				'hierarchical'       => false,
+				'menu_position'      => null,
+				'show_in_nav_menus'  => false,
+				'has_archive'        => false,
 			);
 			register_post_type( 'bstw_dummy', $args );
 		}
@@ -522,15 +522,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @uses get_option()
 		 *
 		 * @return int
-		 * @since 2.4.0
+		 * @since 3.0.0
 		 */
 		public function get_dummy_post_id() {
 			$query_post = new WP_Query( 'post_type=bstw_dummy' );
 			if ( $query_post->post_count > 0 ) {
 				$dummy_post_id = $query_post->post->ID;
-			}
-			else {
-				$dummy_post_id = wp_insert_post( array(	'post_type' => 'bstw_dummy' ) );
+			} else {
+				$dummy_post_id = wp_insert_post( array( 'post_type' => 'bstw_dummy' ) );
 			}
 			return $dummy_post_id;
 		}
