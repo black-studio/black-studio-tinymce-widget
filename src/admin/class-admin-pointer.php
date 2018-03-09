@@ -5,6 +5,8 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget\Admin;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -17,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.1.0
  */
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Admin\\Admin_Pointer' ) ) {
 
 	/**
 	 * Class that provides admin pointer
@@ -25,7 +27,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin_Pointer' ) ) {
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 2.1.0
 	 */
-	final class Black_Studio_TinyMCE_Admin_Pointer {
+	final class Admin_Pointer {
 
 		/**
 		 * The single instance of the class

@@ -5,12 +5,16 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget\Admin;
+
+use WP_Query;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Admin\\Admin', false ) ) {
 
 	/**
 	 * Class that provides admin functionalities
@@ -18,7 +22,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 2.0.0
 	 */
-	final class Black_Studio_TinyMCE_Admin {
+	final class Admin {
 
 		/**
 		 * The single instance of the class
@@ -86,7 +90,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function load_textdomain() {
-			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
+			load_plugin_textdomain( 'black-studio-tinymce-widget', false, dirname( dirname( dirname( plugin_basename( __FILE__ ) ) ) ) . '/languages/' );
 		}
 
 		/**
@@ -187,7 +191,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.css' : '.min.css';
 			wp_enqueue_style(
 				$style,
-				plugins_url( $path . $style . $suffix, dirname( __FILE__ ) ),
+				plugins_url( $path . $style . $suffix, dirname( dirname( __FILE__ ) ) ),
 				array(),
 				bstw()->get_version()
 			);
@@ -228,7 +232,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
 			wp_enqueue_script(
 				$script,
-				plugins_url( $path . $script . $suffix, dirname( __FILE__ ) ),
+				plugins_url( $path . $script . $suffix, dirname( dirname( __FILE__ ) ) ),
 				array( 'jquery', 'editor', 'quicktags' ),
 				bstw()->get_version(),
 				true
@@ -313,7 +317,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		public function wp_tiny_mce_init() {
 			$script = 'black-studio-tinymce-widget-setup';
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
-			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix, dirname( __FILE__ ) ) . '"></script>' . "\n"; // xss ok.
+			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix, dirname( dirname( __FILE__ ) ) ) . '"></script>' . "\n"; // xss ok.
 		}
 
 		/**

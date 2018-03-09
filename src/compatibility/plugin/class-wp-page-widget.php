@@ -5,12 +5,14 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget\Compatibility\Plugin;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wp_Page_Widget', false ) ) {
 
 	/**
 	 * Class that provides compatibility code for WP Page Widget plugin
@@ -18,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 3.0.0
 	 */
-	final class Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget {
+	final class Wp_Page_Widget {
 
 		/**
 		 * The single instance of the class
@@ -139,17 +141,17 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 */
 		public function enqueue_script() {
 			$main_script   = apply_filters( 'black_studio_tinymce_widget_script', 'black-studio-tinymce-widget' );
-			$compat_script = 'wp-page-widget';
+			$compat_script = 'js/compatibility/plugin/wp-page-widget';
 			$suffix        = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
 			wp_enqueue_script(
 				$compat_script,
-				plugins_url( 'plugin/js/' . $compat_script . $suffix, dirname( __FILE__ ) ),
+				plugins_url( $compat_script . $suffix, dirname( dirname( dirname( __FILE__ ) ) ) ),
 				array( 'jquery', 'editor', 'quicktags', $main_script ),
 				bstw()->get_version(),
 				true
 			);
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget
+	} // END class
 
-} // END class_exists check
+} // END class_exists

@@ -5,12 +5,14 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget\Compatibility\WordPress;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_WordPress_Pre_39' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\WordPress\\WordPress_Pre_39', false ) ) {
 
 	/**
 	 * Class that provides compatibility code for WordPress versions prior to 3.9
@@ -184,6 +186,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_WordPress_Pre_39' ) ) {
 			<?php
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility_WordPress_Pre_39
+	} // END class
 
-} // END class_exists check
+} // END class_exists

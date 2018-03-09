@@ -24,7 +24,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-black-studio-tinymce-plugin.php';
+// Include autoloader.
+require_once plugin_dir_path( __FILE__ ) . 'lib/autoload.php';
 
 if ( ! function_exists( 'bstw' ) ) {
 
@@ -35,7 +36,7 @@ if ( ! function_exists( 'bstw' ) ) {
 	 * @since 2.0.0
 	 */
 	function bstw() {
-		return Black_Studio_TinyMCE_Plugin::instance();
+		return Black_Studio_TinyMCE_Widget\Plugin::instance();
 	}
 
 	/* Create the main instance */

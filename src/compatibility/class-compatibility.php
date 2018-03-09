@@ -5,12 +5,14 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget\Compatibility;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Compatibility', false ) ) {
 
 	/**
 	 * Class that manages compatibility code
@@ -18,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 2.0.0
 	 */
-	final class Black_Studio_TinyMCE_Compatibility {
+	final class Compatibility {
 
 		/**
 		 * The single instance of the plugin class
@@ -35,24 +37,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * @since 2.4.0
 		 */
 		protected static $modules = null;
-
-		/**
-		 * Instance of compatibility class for 3rd party plugins
-		 *
-		 * @var object
-		 * @since 2.0.0
-		 * @deprecated 3.0.0
-		 */
-		protected static $plugins = null;
-
-		/**
-		 * Instance of compatibility class for WordPress old versions
-		 *
-		 * @var object
-		 * @since 2.0.0
-		 * @deprecated 3.0.0
-		 */
-		protected static $wordpress = null;
 
 		/**
 		 * Class constructor
@@ -97,49 +81,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 */
 		public static function module( $slug ) {
 			return isset( self::$modules[ $slug ] ) ? self::$modules[ $slug ] : null;
-		}
-
-		/**
-		 * Return the instance of the compatibility class for 3rd party plugins
-		 *
-		 * @return object
-		 * @since 2.0.0
-		 * @deprecated 3.0.0
-		 */
-		public static function plugins() {
-			_deprecated_function( __FUNCTION__, '3.00' );
-			include_once self::get_path() . 'class-compatibility-plugins.php';
-			self::$plugins = Black_Studio_TinyMCE_Compatibility_Plugins::instance();
-			return self::$plugins;
-		}
-
-		/**
-		 * Return the instance of the compatibility class for WordPress old versions
-		 *
-		 * @return object
-		 * @since 2.0.0
-		 * @deprecated 3.0.0
-		 */
-		public static function wordpress() {
-			_deprecated_function( __FUNCTION__, '3.0.0' );
-			if ( version_compare( get_bloginfo( 'version' ), '3.9', '<' ) ) {
-				include_once self::get_path() . 'class-compatibility-wordpress.php';
-				self::$wordpress = Black_Studio_TinyMCE_Compatibility_WordPress::instance();
-			}
-			return self::$wordpress;
-		}
-
-		/**
-		 * Load compatibility code for previous BSTW versions
-		 *
-		 * @uses apply_filters()
-		 * @uses plugin_dir_path()
-		 *
-		 * @return void
-		 * @since 2.0.0
-		 * @deprecated 3.0.0
-		 */
-		public function load_deprecated() {
 		}
 
 		/**
@@ -211,15 +152,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 		 * @since 3.0.0
 		 */
 		public static function create_module_instance( $folder, $slug ) {
-			$file = self::get_path( $folder ) . 'class-black-studio-tinymce-compatibility-' . $folder . '-' . str_replace( '_', '-', $slug ) . '.php';
-			if ( file_exists( $file ) ) {
-				include_once $file;
-				$class_name             = 'Black_Studio_TinyMCE_Compatibility_' . ucwords( $folder ) . '_';
-				$class_name            .= str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $slug ) ) );
-				self::$modules[ $slug ] = call_user_func( array( $class_name, 'instance' ) );
-			}
+			$class_name             = ucwords( $folder ) . '\\' . str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $slug ) ) );
+			self::$modules[ $slug ] = call_user_func( array( $class_name, 'instance' ) );
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility
+	} // END class
 
-} // END class_exists check
+} // END class_exists

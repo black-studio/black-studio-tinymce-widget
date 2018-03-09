@@ -5,12 +5,14 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget\Compatibility\Plugin;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Nextgen_Gallery', false ) ) {
 
 	/**
 	 * Class that provides compatibility code for NextGEN Gallery plugin
@@ -18,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 3.0.0
 	*/
-	final class Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery {
+	final class Nextgen_Gallery {
 
 		/**
 		 * The single instance of the class
@@ -148,6 +150,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery'
 			return $content;
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility_Plugin_Nextgen_Gallery
+	} // END class
 
-} // END class_exists check
+} // END class_exists

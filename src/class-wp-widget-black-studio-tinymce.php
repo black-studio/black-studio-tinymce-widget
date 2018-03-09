@@ -5,6 +5,10 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget;
+
+use WP_Widget;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -155,6 +159,5 @@ if ( ! class_exists( 'WP_Widget_Black_Studio_TinyMCE' ) ) {
 			<?php
 		}
 
-	} // END class WP_Widget_Black_Studio_TinyMCE
-
-} // END class_exists check
+	} // END class
+} // END class_exists

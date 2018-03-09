@@ -5,19 +5,21 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget\Compatibility\Plugin;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wpml', false ) ) {
 	/**
 	 * Class that provides compatibility with WPML plugin(s)
 	 *
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 3.0.0
 	 */
-	final class Black_Studio_TinyMCE_Compatibility_Plugin_Wpml {
+	final class Wpml {
 
 		/**
 		 * The single instance of the class
@@ -265,6 +267,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 			}
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility_Plugin_Wpml
+	} // END class
 
-} // END class_exists check
+} // END class_exists

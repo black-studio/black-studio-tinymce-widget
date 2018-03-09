@@ -5,12 +5,14 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget\Compatibility\Plugin;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panels' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Siteorigin_Panels', false ) ) {
 
 	/**
 	 * Class that provides compatibility code for Page Builder (SiteOrigin Panels)
@@ -18,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 2.4.0
 	 */
-	final class Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panels {
+	final class Siteorigin_Panels {
 
 		/**
 		 * The single instance of the class
@@ -183,6 +185,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 			remove_action( 'admin_enqueue_scripts', 'siteorigin_panels_black_studio_tinymce_admin_enqueue', 15 );
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panels
+	} // END class
 
-} // END class_exists check
+} // END class_exists

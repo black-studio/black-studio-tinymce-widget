@@ -4,13 +4,14 @@
  *
  * @package Black_Studio_TinyMCE_Widget
  */
+namespace Black_Studio_TinyMCE_Widget\Utilities;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Utilities\\Text_Filters' ) ) {
 
 	/**
 	 * Class that applies widget text filters
@@ -18,7 +19,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 2.0.0
 	 */
-	final class Black_Studio_TinyMCE_Text_Filters {
+	final class Text_Filters {
 
 		/**
 		 * The single instance of the class
@@ -190,6 +191,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Text_Filters' ) ) {
 			return $text;
 		}
 
-	} // END class Black_Studio_TinyMCE_Text_Filters
+	} // END class
 
-} // END class_exists check
+} // END class_exists

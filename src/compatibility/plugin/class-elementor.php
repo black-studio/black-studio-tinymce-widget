@@ -1,24 +1,26 @@
 <?php
 /**
- * Black Studio TinyMCE Widget - Compatibility with Jetpack After the deadline plugin
+ * Black Studio TinyMCE Widget - Compatibility with Elementor plugin
  *
  * @package Black_Studio_TinyMCE_Widget
  */
+
+namespace Black_Studio_TinyMCE_Widget\Compatibility\Plugin;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_The_Deadline' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Elementor', false ) ) {
 
 	/**
-	 * Class that provides compatibility code for Jetpack After the deadline
+	 * Class that provides compatibility code for Elementor
 	 *
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 3.0.0
 	 */
-	final class Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_The_Deadline {
+	final class Elementor {
 
 		/**
 		 * The single instance of the class
@@ -45,13 +47,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_Th
 		 * Class constructor
 		 *
 		 * @uses is_admin()
+		 * @uses add_filter()
 		 * @uses add_action()
 		 *
 		 * @since 3.0.0
 		 */
 		protected function __construct() {
-			if ( is_admin() ) {
-				add_action( 'black_studio_tinymce_load', array( $this, 'load' ) );
+			$action = filter_input( INPUT_GET, 'action' );
+			if ( is_admin() && 'elementor' === $action ) {
+				add_filter( 'black_studio_tinymce_enable', '__return_false', 100 );
+				add_action( 'widgets_init', array( $this, 'unregister_widget' ), 20 );
 			}
 		}
 
@@ -65,17 +70,17 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_Th
 			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; uh?' ), '3.0' );
 		}
 		/**
-		 * Load Jetpack After the deadline scripts
+		 * Unregister Widget for Elementor plugin
 		 *
-		 * @uses add_filter()
+		 * @uses unregister_widget()
 		 *
 		 * @return void
 		 * @since 3.0.0
 		 */
-		public function load() {
-			add_filter( 'atd_load_scripts', '__return_true' );
+		public function unregister_widget() {
+			unregister_widget( 'WP_Widget_Black_Studio_TinyMCE' );
 		}
 
-	} // END class Black_Studio_TinyMCE_Compatibility_Plugin_Jetpack_After_The_Deadline
+	} // END class
 
-} // END class_exists check
+} // END class_exists

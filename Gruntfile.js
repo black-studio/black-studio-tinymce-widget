@@ -11,9 +11,6 @@ module.exports = function( grunt ) {
 		dirs: {
 			css: 'css',
 			js: 'js',
-			compat_wordpress_css: 'compat/wordpress/css',
-			compat_wordpress_js: 'compat/wordpress/js',
-			compat_plugin_js: 'compat/plugin/js',
 			languages: 'languages'
 		},
 
@@ -25,8 +22,6 @@ module.exports = function( grunt ) {
 			all: [
 				'Gruntfile.js',
 				'<%= dirs.js %>/*.js',
-				'<%= dirs.compat_plugin_js %>/*.js',
-				'<%= dirs.compat_wordpress_js %>/*.js',
 				'!**/*.min.js'
 			]
 		},
@@ -40,13 +35,12 @@ module.exports = function( grunt ) {
 			admin: {
 				files: [{
 					expand: true,
-					cwd: './',
+					cwd: '<%= dirs.js %>/',
 					src: [
-						'<%= dirs.js %>/*.js',
-						'<%= dirs.compat_plugin_js %>/*.js',
-						'<%= dirs.compat_wordpress_js %>/*.js',
-						'!**/*.min.js'
+						'*.js',
+						'!*.min.js'
 					],
+					dest: '<%= dirs.js %>/',
 					ext: '.min.js'
 				}]
 			}
@@ -60,12 +54,12 @@ module.exports = function( grunt ) {
 				},
 				files: [{
 					expand: true,
-					cwd: './',
+					cwd: '<%= dirs.css %>/',
 					src: [
-						'<%= dirs.css %>/*.css',
-						'<%= dirs.compat_wordpress_css %>/*.css',
-						'!**/*.min.css'
+						'*.css',
+						'!*.min.css'
 					],
+					dest: '<%= dirs.css %>/',
 					ext: '.min.css'
 				}]
 			}
@@ -300,7 +294,7 @@ module.exports = function( grunt ) {
 			},
 			plugin_vs_internal: { //Check plugin header version against internal defined version
 				version1: 'plugin',
-				version2: grunt.file.read('includes/class-black-studio-tinymce-plugin.php').match( /version = '(.*)'/ )[1],
+				version2: grunt.file.read('src/class-plugin.php').match( /version = '(.*)'/ )[1],
 				compare: '=='
 			}
 		}

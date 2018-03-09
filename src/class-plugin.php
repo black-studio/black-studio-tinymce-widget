@@ -5,12 +5,14 @@
  * @package Black_Studio_TinyMCE_Widget
  */
 
+namespace Black_Studio_TinyMCE_Widget;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
+if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Plugin', true ) ) {
 
 	/**
 	 * Main plugin class
@@ -18,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 2.0.0
 	 */
-	final class Black_Studio_TinyMCE_Plugin {
+	final class Plugin {
 
 		/**
 		 * Plugin version
@@ -155,18 +157,13 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		 * @since 2.0.0
 		 */
 		protected function __construct() {
-			// Include required files.
-			include_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-widget-black-studio-tinymce.php';
 			if ( is_admin() ) {
-				// Include and instantiate admin class on admin pages.
-				include_once plugin_dir_path( __DIR__ ) . 'includes/class-black-studio-tinymce-admin.php';
-				self::$admin = Black_Studio_TinyMCE_Admin::instance();
-				include_once plugin_dir_path( __DIR__ ) . 'includes/class-black-studio-tinymce-admin-pointer.php';
-				self::$admin_pointer = Black_Studio_TinyMCE_Admin_Pointer::instance();
+				// Instantiate admin classes on admin pages.
+				self::$admin         = Admin\Admin::instance();
+				self::$admin_pointer = Admin\Admin_Pointer::instance();
 			} else {
-				// Include and instantiate text filter class on frontend pages.
-				include_once plugin_dir_path( __DIR__ ) . 'includes/class-black-studio-tinymce-text-filters.php';
-				self::$text_filters = Black_Studio_TinyMCE_Text_Filters::instance();
+				// Instantiate text filter class on frontend pages.
+				self::$text_filters = Utilities\Text_Filters::instance();
 			}
 			// Register action and filter hooks.
 			add_action( 'plugins_loaded', array( $this, 'load_compatibility' ), 50 );
@@ -215,7 +212,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			if ( ! is_blog_installed() ) {
 				return;
 			}
-			register_widget( 'WP_Widget_Black_Studio_TinyMCE' );
+			register_widget( 'Black_Studio_TinyMCE_Widget\\WP_Widget_Black_Studio_TinyMCE' );
 		}
 
 		/**
@@ -229,5 +226,5 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 			return 'object' === gettype( $widget ) && ( 'WP_Widget_Black_Studio_TinyMCE' === get_class( $widget ) || is_subclass_of( $widget, 'WP_Widget_Black_Studio_TinyMCE' ) );
 		}
 
-	} // END class Black_Studio_TinyMCE_Plugin
-} // END class_exists check
+	} // END class
+} // END class_exists
