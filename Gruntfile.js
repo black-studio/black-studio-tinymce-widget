@@ -82,7 +82,7 @@ module.exports = function( grunt ) {
 			},
 			options: {
 				bin: 'phpcs --exclude=Generic.Files.LineEndings',
-				standard: 'WordPress',
+				standard: 'WordPress-Extra',
 				verbose: true
 			}
 		},
