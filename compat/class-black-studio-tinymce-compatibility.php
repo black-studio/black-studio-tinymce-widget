@@ -158,6 +158,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility' ) ) {
 				'jetpack_after_the_deadline',
 				'wp_page_widget',
 				'nextgen_gallery',
+				'elementor',
 			);
 			$compatibility_plugins = apply_filters( 'black_studio_tinymce_load_compatibility_plugins', $compatibility_plugins );
 			if ( ! empty( $compatibility_plugins ) ) {
