@@ -95,12 +95,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 * @since 3.0.0
 		 */
 		public function enable_pages( $pages ) {
+			$action  = filter_input( INPUT_GET, 'action' );
+			$page    = filter_input( INPUT_GET, 'page' );
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) { // Input var ok.
+			if ( 'edit' === $action ) {
 				$pages[] = 'edit-tags.php';
 			}
-			if ( isset( $_GET['page'] ) && in_array( wp_unslash( $_GET['page'] ), array( 'pw-front-page', 'pw-search-page' ), true ) ) { // Input var ok.
+			if ( in_array( $page, array( 'pw-front-page', 'pw-search-page' ), true ) ) { // Input var ok.
 				$pages[] = 'admin.php';
 			}
 			return $pages;
@@ -116,7 +118,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wp_Page_Widget' 
 		 */
 		public function add_data( $instance, $widget ) {
 			if ( bstw()->check_widget( $widget ) && ! empty( $instance ) ) {
-				if ( isset( $_POST['action'] ) && 'pw-save-widget' === $_POST['action'] ) { // Input var ok.
+				$action = filter_input( INPUT_POST, 'action' );
+				if ( 'pw-save-widget' === $action ) {
 					$instance['wp_page_widget'] = true;
 				}
 			}

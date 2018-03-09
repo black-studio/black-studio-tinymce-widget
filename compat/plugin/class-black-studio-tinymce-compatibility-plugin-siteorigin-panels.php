@@ -149,9 +149,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Siteorigin_Panel
 		 * @since 3.0.0
 		 */
 		public function enable_pages( $pages ) {
+			$page    = filter_input( INPUT_GET, 'page' );
 			$pages[] = 'post-new.php';
 			$pages[] = 'post.php';
-			if ( isset( $_GET['page'] ) && 'so_panels_home_page' === $_GET['page'] ) { // Input var ok.
+			if ( 'so_panels_home_page' === $page ) {
 				$pages[] = 'themes.php';
 			}
 			return $pages;
