@@ -57,6 +57,8 @@ local.properties
 nbproject/
 .idea/
 config.codekit
+.ftpignore
+.ftpconfig
 
 # Misc #
 #######################
