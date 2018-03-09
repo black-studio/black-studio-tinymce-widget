@@ -180,7 +180,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 				if ( $this->removed_widget_text_filter ) {
 					if ( false === has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) && function_exists( 'icl_sw_filters_widget_text' ) ) {
 						add_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
-						$this->wpml_removed_widget_text_filter = false;
+						$this->removed_widget_text_filter = false;
 					}
 				}
 			}
