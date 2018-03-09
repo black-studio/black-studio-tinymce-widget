@@ -67,7 +67,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		protected function __construct() {
 			add_action( 'init', array( $this, 'init' ) );
 			add_action( 'black_studio_tinymce_before_widget', array( $this, 'widget_before' ), 10, 2 );
-			add_action( 'black_studio_tinymce_after_widget', array( $this, 'widget_after' ), 10, 2 );
+			add_action( 'black_studio_tinymce_after_widget', array( $this, 'widget_after' ) );
 			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'widget_update' ), 10, 2 );
 			add_action( 'black_studio_tinymce_before_editor', array( $this, 'check_deprecated_translations' ), 5, 2 );
 			add_filter( 'widget_text', array( $this, 'widget_text' ), 2, 3 );
@@ -162,12 +162,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugin_Wpml' ) ) {
 		 * @uses add_filter()
 		 * @uses has_filter()
 		 *
-		 * @param mixed[] $args     Array of arguments.
-		 * @param mixed[] $instance Widget instance.
 		 * @return void
 		 * @since 3.0.0
 		 */
-		public function widget_after( $args, $instance ) {
+		public function widget_after() {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				// Restore widget title's native WPML string translation filter if it was removed.
 				if ( $this->removed_widget_title_filter ) {
