@@ -58,6 +58,17 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// CSS linting with stylelint
+		stylelint: {
+			options: {
+				configFile: '.stylelintrc.json'
+			},
+			all: [
+				'<%= dirs.css %>/**/*.css',
+				'!**/*.min.css'
+			]
+		},
+
 		// Minify .css files
 		cssmin: {
 			minify: {
@@ -322,9 +333,10 @@ module.exports = function( grunt ) {
 	]);
 
 	grunt.registerTask( 'check', [
+		'phpcs',
 		'jshint',
 		'eslint',
-		'phpcs',
+		'stylelint',
 		'checktextdomain',
 		'checkwpversion'
 	]);
