@@ -118,7 +118,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Admin\\Admin_Pointer' ) ) {
 				bstw()->get_version(),
 				true
 			);
-			wp_localize_script( 'black-studio-tinymce-widget-pointer', 'bstw_pointers', $pointers );
+			wp_localize_script( 'black-studio-tinymce-widget-pointer', 'bstwPointers', $pointers );
 		}
 
 		/**

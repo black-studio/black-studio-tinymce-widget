@@ -1,76 +1,79 @@
 /* Black Studio TinyMCE Widget - JS */
 
-/* global bstw_data, tinymce, tinyMCEPreInit, QTags, quicktags, isRtl, ajaxurl */
+/* global bstwData, tinymce, tinyMCEPreInit, QTags, quicktags, isRtl, ajaxurl */
 
 var bstw;
 
-(function( $ ) {
+( function( $ ) {
 
 	// Return bstw instance given the textarea ID or any jQuery object inside the widget object
 	bstw = function( arg ) {
 
 		var id = null;
 
-		// ID initialization
-		if ( typeof arg === 'string' ) {
+		if ( 'string' === typeof arg ) {
+
+			// ID initialization
 			id = arg;
-		}
-		// jQuery object initialization
-		else if ( typeof arg === 'object' && arg instanceof jQuery ) {
-			id = $( 'textarea[id^=widget-black-studio-tinymce][id$=text]', arg.closest( bstw_data.container_selectors ) ).attr( 'id' );
+
+		} else if ( 'object' === typeof arg && arg instanceof jQuery ) {
+
+			// jQuery object initialization
+			id = $( 'textarea[id^=widget-black-studio-tinymce][id$=text]', arg.closest( bstwData.container_selectors ) ).attr( 'id' );
+
 		}
 
 		// Create and return instance
 		return {
 
 			// Activate editor
-			activate: function ( force_init ) {
-				force_init = typeof force_init !== 'undefined' ? force_init : true;
+			activate: function( forceInit ) {
+				var prevInstances, newInstance;
+				forceInit = 'undefined' !== typeof forceInit ? forceInit : true;
 				if ( ! $( '#' + id ).hasClass( 'active' ) ) {
 					if ( ! $( '#' + id ).hasClass( 'activating' ) ) {
 						$( '#' + id ).addClass( 'activating' );
 					}
-					if ( ! this.is_quicktags_configured() ) {
+					if ( ! this.isQuicktagsConfigured() ) {
 						tinyMCEPreInit.qtInit[ id ] = tinyMCEPreInit.qtInit['black-studio-tinymce-widget'];
 						tinyMCEPreInit.qtInit[ id ].id = id;
 					}
-					if ( ! this.is_quicktags_active() ) {
-						var prevInstances, newInstance;
+					if ( ! this.isQuicktagsActive() ) {
 						prevInstances = QTags.instances;
 						QTags.instances = [];
-						quicktags( tinyMCEPreInit.qtInit[ id ] );
+						quicktags( tinyMCEPreInit.qtInit[ id ]);
 						QTags._buttonsInit();
 						newInstance = QTags.instances[ id ];
 						QTags.instances = prevInstances;
 						QTags.instances[ id ] = newInstance;
 					}
-					if ( ! this.is_tinymce_configured() ) {
-						if ( 'undefined' !== typeof tinyMCEPreInit.mceInit['black-studio-tinymce-widget'] ) {
+					if ( ! this.isTinymceConfigured() ) {
+						if ( 'undefined' !== typeof tinyMCEPreInit.mceInit['black-studio-tinymce-widget']) {
 							tinyMCEPreInit.mceInit[ id ] = tinyMCEPreInit.mceInit['black-studio-tinymce-widget'];
 							tinyMCEPreInit.mceInit[ id ].selector = '#' + id;
 						}
 					}
-					if ( this.is_tinymce_configured() ) {
-						if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' && $( '#' + id ).is( ':visible' ) ) {
+					if ( this.isTinymceConfigured() ) {
+						if ( ! this.isTinymceActive() && 'visual' === this.getMode() && $( '#' + id ).is( ':visible' ) ) {
 							tinyMCEPreInit.mceInit[ id ].setup = function( ed ) {
+
 								// Real time preview (Customizer)
 								ed.on( 'keyup change', function() {
-									if ( bstw( id ).get_mode() === 'visual' ) {
-										bstw( id ).update_content();
+									if ( 'visual' === bstw( id ).getMode() ) {
+										bstw( id ).updateContent();
 									}
 									$( '#' + id ).change();
 								});
 								$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
 							};
-							if ( ! force_init ) {
+							if ( ! forceInit ) {
 								this.go();
+							}	else {
+								tinymce.init( tinyMCEPreInit.mceInit[ id ]);
 							}
-							else {
-								tinymce.init( tinyMCEPreInit.mceInit[ id ] );
-							}
-						} else if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' ) {
+						} else if ( ! this.isTinymceActive() && 'visual' === this.getMode() ) {
 							setTimeout( function() {
-								bstw( id ).activate( force_init );
+								bstw( id ).activate( forceInit );
 							}, 500 );
 						} else {
 							$( '#' + id ).addClass( 'active' ).removeClass( 'activating' );
@@ -83,17 +86,17 @@ var bstw;
 			// Deactivate editor
 			deactivate: function() {
 				if ( ! $( '#' + id ).hasClass( 'activating' ) ) {
-					if ( this.is_tinymce_active() ) {
+					if ( this.isTinymceActive() ) {
 						tinymce.get( id ).remove();
 					}
-					if ( this.is_tinymce_configured() ) {
+					if ( this.isTinymceConfigured() ) {
 						delete tinyMCEPreInit.mceInit[ id ];
 					}
-					if ( this.is_quicktags_active() ) {
-						$( '.quicktags-toolbar', this.get_widget_inside() ).remove();
+					if ( this.isQuicktagsActive() ) {
+						$( '.quicktags-toolbar', this.getWidgetInside() ).remove();
 						delete QTags.instances[ id ];
 					}
-					if ( this.is_quicktags_configured() ) {
+					if ( this.isQuicktagsConfigured() ) {
 						delete tinyMCEPreInit.qtInit[ id ];
 					}
 					$( '#' + id ).removeClass( 'active' );
@@ -102,17 +105,17 @@ var bstw;
 			},
 
 			// Update textarea content when in visual mode
-			update_content: function() {
+			updateContent: function() {
 				var content;
-				if ( this.is_tinymce_configured() ) {
-					if ( this.get_mode() === 'visual' ) {
+				if ( this.isTinymceConfigured() ) {
+					if ( 'visual' === this.getMode() ) {
 						content = tinymce.get( id ).save();
 						if ( tinyMCEPreInit.mceInit[ id ].wpautop ) {
 							content = window.switchEditors.pre_wpautop( content );
 						}
-						this.get_textarea().val( content);
-					} else if ( this.is_tinymce_active() ) {
-						content = this.get_textarea().val();
+						this.getTextarea().val( content );
+					} else if ( this.isTinymceActive() ) {
+						content = this.getTextarea().val();
 						if ( tinyMCEPreInit.mceInit[ id ].wpautop ) {
 							content = window.switchEditors.wpautop( content );
 						}
@@ -124,94 +127,96 @@ var bstw;
 
 			// Setup an editor mode
 			go: function( mode ) {
-				if ( 'undefined' === typeof mode) {
-					mode = this.get_mode();
+				if ( 'undefined' === typeof mode ) {
+					mode = this.getMode();
 				}
 				window.switchEditors.go( id, 'visual' === mode ? 'tmce' : 'html' );
 				return this;
 			},
 
 			// Get the current editor mode ( visual / html ) from the input value
-			get_mode: function() {
-				return  $( 'input[id^=widget-black-studio-tinymce][id$=type]', this.get_container() ).val();
+			getMode: function() {
+				return  $( 'input[id^=widget-black-studio-tinymce][id$=type]', this.getContainer() ).val();
 			},
 
 			// Set editor mode ( visual / html ) into the input value
-			set_mode: function( mode ) {
-				$( 'input[id^=widget-black-studio-tinymce][id$=type]', this.get_container() ).val( mode );
+			setMode: function( mode ) {
+				$( 'input[id^=widget-black-studio-tinymce][id$=type]', this.getContainer() ).val( mode );
 				return this;
 			},
 
 			// Get the jQuery container object containing the instance
-			get_container: function() {
-				return $( '#' + id ).closest( bstw_data.container_selectors );
+			getContainer: function() {
+				return $( '#' + id ).closest( bstwData.container_selectors );
 			},
 
 			// Get the div.widget jQuery object containing the instance
-			get_widget: function() {
+			getWidget: function() {
 				return $( '#' + id ).closest( 'div.widget' );
 			},
 
 			// Get the div.widget-inside jQuery object containing the instance
-			get_widget_inside: function() {
+			getWidgetInside: function() {
 				return $( '#' + id ).closest( 'div.widget-inside' );
 			},
 
 			// Get the textarea jQuery object related to the instance
-			get_textarea: function() {
+			getTextarea: function() {
 				return $( '#' + id );
 			},
 
 			// Check if the tinymce instance is active
-			is_tinymce_active: function() {
+			isTinymceActive: function() {
 				return 'object' === typeof tinymce && 'object' === typeof tinymce.get( id ) && null !== tinymce.get( id );
 			},
 
 			// Check if the tinymce instance is configured
-			is_tinymce_configured: function() {
+			isTinymceConfigured: function() {
 				return 'undefined' !== typeof tinyMCEPreInit.mceInit[ id ];
 			},
 
 			// Check if the quicktags instance is active
-			is_quicktags_active: function() {
+			isQuicktagsActive: function() {
 				return 'object' === typeof QTags.instances[ id ];
 			},
 
 			// Check if the quicktags instance is configured
-			is_quicktags_configured: function() {
+			isQuicktagsConfigured: function() {
 				return 'object' === typeof tinyMCEPreInit.qtInit[ id ];
 			},
 
 			// Checks and settings to run before opening the widget
 			prepare: function() {
+
 				// Check for widgets with duplicate ids
-				if ( $( '[name="' + this.get_textarea().attr( 'name' ) + '"]' ).size() > 1) {
-					if ( $( 'div.error', this.get_widget_inside() ).length === 0 ) {
-						this.get_widget_inside().prepend( '<div class="error"><strong>' + bstw_data.error_duplicate_id + '</strong></div>' );
+				if ( 1 < $( '[name="' + this.getTextarea().attr( 'name' ) + '"]' ).size() ) {
+					if ( 0 === $( 'div.error', this.getWidgetInside() ).length ) {
+						this.getWidgetInside().prepend( '<div class="error"><strong>' + bstwData.error_duplicate_id + '</strong></div>' );
 					}
 				}
+
 				// Fix CSS
-				this.get_widget().css( 'position', 'relative' ).css( 'z-index', '100000' ); // needed for small screens and for fullscreen mode
+				this.getWidget().css( 'position', 'relative' ).css( 'z-index', '100000' ); // needed for small screens and for fullscreen mode
 				$( '#wpbody-content' ).css( 'overflow', 'visible' ); // needed for small screens
 				return this;
 			},
 
 			// Responsive: adjust widget width if it can't fit into the screen
 			responsive: function() {
-				if ( this.get_widget_inside().is( ':visible' ) ) {
-					var target_width = parseInt( $( 'input[name=widget-width]', this.get_widget() ).val(), 10 ),
-						window_width = $( window ).width(),
-						widget_width = this.get_widget().parent().width(),
-						menu_width = parseInt( $( '#wpcontent' ).css( 'margin-left' ), 10 ),
-						isRTL = !! ( 'undefined' !== typeof isRtl && isRtl ),
-						margin;
-					if ( target_width + menu_width + 30 > window_width ) {
-						if ( this.get_widget().closest( 'div.widget-liquid-right' ).length ) {
+				var targetWidth, windowWidth, widgetWidth, menuWidth, isRTL, margin;
+				if ( this.getWidgetInside().is( ':visible' ) ) {
+					targetWidth = parseInt( $( 'input[name=widget-width]', this.getWidget() ).val(), 10 );
+					windowWidth = $( window ).width();
+					widgetWidth = this.getWidget().parent().width();
+					menuWidth = parseInt( $( '#wpcontent' ).css( 'margin-left' ), 10 );
+					isRTL = !! ( 'undefined' !== typeof isRtl && isRtl );
+					if ( targetWidth + menuWidth + 30 > windowWidth ) {
+						if ( this.getWidget().closest( 'div.widget-liquid-right' ).length ) {
 							margin = isRTL ? 'margin-right' : 'margin-left';
 						} else {
 							margin = isRTL ? 'margin-left' : 'margin-right';
 						}
-						this.get_widget().css( margin, ( widget_width - ( window_width - 30 - menu_width) ) + 'px' );
+						this.getWidget().css( margin, ( widgetWidth - ( windowWidth - 30 - menuWidth ) ) + 'px' );
 					}
 				}
 				return this;
@@ -221,19 +226,20 @@ var bstw;
 	};
 
 	// Document ready stuff
-	$( document ).ready(function() {
+	$( document ).ready( function() {
 
 		// Event handler for widget open button
 		$( document ).on( 'click', 'div.widget[id*=black-studio-tinymce] .widget-title, div.widget[id*=black-studio-tinymce] .widget-title-action', function() {
 			if ( ! $( this ).parents( '#available-widgets' ).length ) {
 				bstw( $( this ) ).prepare().responsive().activate( false );
+
 				// Note: the save event handler is intentionally attached to the save button instead of document
 				// to let the the textarea content be updated before the ajax request starts
-				$( 'input[name=savewidget]',  bstw( $( this ) ).get_widget() ).on( 'click', function() {
+				$( 'input[name=savewidget]',  bstw( $( this ) ).getWidget() ).on( 'click', function() {
 					var height = $( this ).closest( '.widget' ).find( '.wp-editor-wrap' ).height();
 					$( this ).closest( '.widget' ).find( '.wp-editor-wrap' ).height( height ).append( '<div class="bstw-loading"></div>' );
 					$( this ).closest( '.widget' ).find( '.bstw-loading' ).height( height ).show();
-					bstw( $( this ) ).update_content();
+					bstw( $( this ) ).updateContent();
 				});
 			}
 		});
@@ -245,7 +251,7 @@ var bstw;
 				bstw( $widget ).activate();
 			}
 		});
-		
+
 		// Event handler for widget updated
 		$( document ).on( 'widget-updated', function( event, $widget ) {
 			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
@@ -256,7 +262,7 @@ var bstw;
 
 		// Event handler for widget control focus and expand (triggered by shift+click on Customizer)
 		$( document ).on( 'expand', function( event ) {
-			var $widget = bstw( $( 'textarea[id^=widget-black-studio-tinymce][id$=text]', event.target ) ).get_widget();
+			var $widget = bstw( $( 'textarea[id^=widget-black-studio-tinymce][id$=text]', event.target ) ).getWidget();
 			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
 				event.preventDefault();
 				setTimeout( function() {
@@ -269,20 +275,20 @@ var bstw;
 		$( document ).on( 'widget-synced', function( event, $widget ) {
 			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
 				event.preventDefault();
-				if ( bstw( $widget ).get_mode() === 'visual' ) {
-					bstw( $widget ).update_content();
+				if ( 'visual' === bstw( $widget ).getMode() ) {
+					bstw( $widget ).updateContent();
 				}
 			}
 		});
 
 		// Event handler for visual switch button
 		$( document ).on( 'click', '[id^=widget-black-studio-tinymce][id$=tmce]', function() {
-			bstw( $( this ) ).set_mode( 'visual' );
+			bstw( $( this ) ).setMode( 'visual' );
 		});
 
 		// Event handler for html switch button
 		$( document ).on( 'click', '[id^=widget-black-studio-tinymce][id$=html]', function() {
-			bstw( $( this ) ).set_mode( 'html' );
+			bstw( $( this ) ).setMode( 'html' );
 		});
 
 		// Set active editor when clicking on media buttons
@@ -294,43 +300,44 @@ var bstw;
 
 		// Deactivate editor on drag & drop operations
 		$( document ).on( 'sortstart',  function( event, ui ) {
+			var openWidgetsSelectors;
 			if ( ! $( ui.item ).is( '.widget' ) && ! $( ui.item ).is( '.customize-control' ) ) {
 				return;
 			}
 			if ( $( ui.item ).is( '.ui-draggable' ) ) {
 				return;
 			}
-			var open_widgets_selectors = [
+			openWidgetsSelectors = [
 				'body.wp-customizer .expanded > div[id*=black-studio-tinymce].widget', // Customizer
 				'.widget-liquid-right div[id*=black-studio-tinymce].widget.open' // Widgets page
 			];
-			$( open_widgets_selectors.join( ', ' ) ).filter( ':has(.widget-inside:visible)' ).each(function() {
+			$( openWidgetsSelectors.join( ', ' ) ).filter( ':has(.widget-inside:visible)' ).each( function() {
 				$( '.widget-title', this ).trigger( 'click' );
 				bstw( $( this ) ).deactivate();
 			});
-			if ( ui.item.is( '[id*=black-studio-tinymce]' ) ){
+			if ( ui.item.is( '[id*=black-studio-tinymce]' ) ) {
 				bstw( ui.item.find( 'textarea[id^=widget-black-studio-tinymce]' ) ).deactivate();
 			}
 		});
 		$( document ).on( 'sortupdate',  function( event, ui ) {
-			if ( event !== null && ( ! $( ui.item ).is( '.widget' ) || $( ui.item ).is( '.ui-draggable' ) ) ) {
+			if ( null !== event && ( ! $( ui.item ).is( '.widget' ) || $( ui.item ).is( '.ui-draggable' ) ) ) {
 				return;
 			}
 			$( 'body' ).addClass( 'wait' );
-			setTimeout(function() {
-				$( 'textarea[id^=widget-black-studio-tinymce].active' ).each(function() {
+			setTimeout( function() {
+				$( 'textarea[id^=widget-black-studio-tinymce].active' ).each( function() {
 					bstw( $( this ) ).deactivate();
 				});
 				$( 'body' ).removeClass( 'wait' );
 			}, 1000 );
 		});
-		
+
 		// Support for moving widgets in Customizer without drag & drop
-		$( document ).on( 'click', 'body.wp-customizer div[id*=black-studio-tinymce].widget .move-widget-btn', function(){
-			$( 'body' ).addClass( 'wait' );
+		$( document ).on( 'click', 'body.wp-customizer div[id*=black-studio-tinymce].widget .move-widget-btn', function() {
 			var $btn = $( this );
-			setTimeout(function() {
-				$( 'textarea[id^=widget-black-studio-tinymce].active' ).each(function() {
+			$( 'body' ).addClass( 'wait' );
+			setTimeout( function() {
+				$( 'textarea[id^=widget-black-studio-tinymce].active' ).each( function() {
 					bstw( $( this ) ).deactivate();
 				});
 				bstw( $btn ).activate();
@@ -339,48 +346,48 @@ var bstw;
 		});
 
 		// External events
-		if ( 'object' === typeof bstw_data.activate_events && bstw_data.activate_events.length > 0 ) {
-			$( document ).on( bstw_data.activate_events.join( ' ' ), function( event ) {
+		if ( 'object' === typeof bstwData.activate_events && 0 < bstwData.activate_events.length ) {
+			$( document ).on( bstwData.activate_events.join( ' ' ), function( event ) {
 				bstw( $( event.target ) ).activate();
 			});
 		}
-		if ( 'object' === typeof bstw_data.deactivate_events && bstw_data.deactivate_events.length > 0 ) {
-			$( document ).on( bstw_data.deactivate_events.join( ' ' ), function( event ) {
+		if ( 'object' === typeof bstwData.deactivate_events && 0 < bstwData.deactivate_events.length ) {
+			$( document ).on( bstwData.deactivate_events.join( ' ' ), function( event ) {
 				bstw( $( event.target ) ).deactivate();
 			});
 		}
-		
+
 		// Event handler for window resize (needed for responsive behavior)
-		$( window ).resize(function() {
-			$( 'textarea[id^=widget-black-studio-tinymce]' ).each(function() {
+		$( window ).resize( function() {
+			$( 'textarea[id^=widget-black-studio-tinymce]' ).each( function() {
 				bstw( $( this ) ).responsive();
 			});
 		});
-		
+
 		// Event handler for dismission of "Visual Editor disabled" notice
 		$( document ).on( 'click', '.bstw-visual-editor-disabled-notice .notice-dismiss', function() {
 			$.ajax({
-        		url: ajaxurl,
-        		data: {
-            		action: 'bstw_visual_editor_disabled_dismiss_notice'
-        		}
-    		});
+				url: ajaxurl,
+				data: {
+					action: 'bstw_visual_editor_disabled_dismiss_notice'
+				}
+			});
 		});
 
 		// Deactivate quicktags toolbar on hidden base instance
 		$( '#qt_widget-black-studio-tinymce-__i__-text_toolbar' ).remove();
-		
+
 		// Plugin links toggle behavior
 		$( document ).on( 'click', '.bstw-links-icon', function( event ) {
 			event.preventDefault();
 			$( this ).closest( '.bstw-links' ).children( '.bstw-links-list' ).toggle();
 		});
-		
+
 		// Populate dummy post ID for embed preview
-		if ( typeof( wp.media.view.settings.post.id ) !== 'undefined' && wp.media.view.settings.post.id === 0 ) {
-			wp.media.view.settings.post.id = bstw_data.dummy_post_id;
+		if ( 'undefined' !== typeof( wp.media.view.settings.post.id ) && 0 === wp.media.view.settings.post.id ) {
+			wp.media.view.settings.post.id = bstwData.dummy_post_id;
 		}
-		
+
 	});
 
-})( jQuery ); // end self-invoked wrapper function
+}( jQuery ) ); // end self-invoked wrapper function

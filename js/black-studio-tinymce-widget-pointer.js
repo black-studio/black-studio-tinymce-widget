@@ -1,11 +1,11 @@
 /* Black Studio TinyMCE Widget - JS - Admin pointer */
 
-/* global bstw_pointers, ajaxurl */
+/* global bstwPointers, ajaxurl */
 
 jQuery( document ).ready( function( $ ) {
-	bstw_open_pointers( 0 );
-	function bstw_open_pointers( i ) {
-		var pointer = bstw_pointers.pointers[i],
+	bstwOpenPointers( 0 );
+	function bstwOpenPointers( i ) {
+		var pointer = bstwPointers.pointers[i],
 			options = $.extend( pointer.options, {
 			close: function() {
 				$.post( ajaxurl, {

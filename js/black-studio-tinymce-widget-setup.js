@@ -4,9 +4,9 @@
 
 ( function( $ ) {
 
-	function bstw_editor_setup( ed ) {
+	function bstwEditorSetup( ed ) {
 		ed.on( 'keyup change', function() {
-			if ( bstw( ed.id ).get_mode() === 'visual' ) {
+			if ( 'visual' === bstw( ed.id ).get_mode() ) {
 				bstw( ed.id ).update_content();
 			}
 			$( '#' + ed.id ).change();
@@ -14,11 +14,10 @@
 		$( '#' + ed.id ).addClass( 'active' ).removeClass( 'activating' );
 	}
 
-	var id;
-	for ( id in tinyMCEPreInit.mceInit ) {
-		if ( id.search( 'black-studio-tinymce' ) >= 0 ) {
-			tinyMCEPreInit.mceInit[ id ].setup = bstw_editor_setup;
+	for ( var id in tinyMCEPreInit.mceInit ) { // eslint-disable-line vars-on-top
+		if ( 0 <= id.search( 'black-studio-tinymce' ) ) {
+			tinyMCEPreInit.mceInit[ id ].setup = bstwEditorSetup;
 		}
 	}
 
-}( jQuery ));
+}( jQuery ) );

@@ -260,7 +260,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Admin\\Admin', false ) ) {
 				/* translators: error message shown when a duplicated widget ID is detected */
 				'error_duplicate_id'  => __( 'ERROR: Duplicate widget ID detected. To avoid content loss, please create a new widget with the same content and then delete this one.', 'black-studio-tinymce-widget' ),
 			);
-			wp_localize_script( apply_filters( 'black_studio_tinymce_widget_script', 'black-studio-tinymce-widget' ), 'bstw_data', $data );
+			wp_localize_script( apply_filters( 'black_studio_tinymce_widget_script', 'black-studio-tinymce-widget' ), 'bstwData', $data );
 		}
 
 		/**

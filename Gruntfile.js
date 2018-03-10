@@ -5,7 +5,7 @@ module.exports = function( grunt ) {
 	grunt.initConfig({
 
 		// Load package data
-		pkg: grunt.file.readJSON('package.json'),
+		pkg: grunt.file.readJSON( 'package.json' ),
 
 		// Set folder vars
 		dirs: {
@@ -45,7 +45,7 @@ module.exports = function( grunt ) {
 				banner: '/* <%= pkg.title %> */\n'
 			},
 			admin: {
-				files: [{
+				files: [ {
 					expand: true,
 					cwd: '<%= dirs.js %>/',
 					src: [
@@ -54,7 +54,7 @@ module.exports = function( grunt ) {
 					],
 					dest: '<%= dirs.js %>/',
 					ext: '.min.js'
-				}]
+				} ]
 			}
 		},
 
@@ -64,7 +64,7 @@ module.exports = function( grunt ) {
 				options: {
 					banner: '/* <%= pkg.title %> */'
 				},
-				files: [{
+				files: [ {
 					expand: true,
 					cwd: '<%= dirs.css %>/',
 					src: [
@@ -73,7 +73,7 @@ module.exports = function( grunt ) {
 					],
 					dest: '<%= dirs.css %>/',
 					ext: '.min.css'
-				}]
+				} ]
 			}
 		},
 
@@ -96,22 +96,22 @@ module.exports = function( grunt ) {
 		// Watch changes for assets
 		watch: {
 			js: {
-				files: ['<%= dirs.js %>/*.js'],
-				tasks: ['uglify'],
+				files: [ '<%= dirs.js %>/*.js' ],
+				tasks: [ 'uglify' ],
 				options: {
 					spawn: false
 				}
 			},
 			css: {
-				files: ['<%= dirs.css %>/*.css'],
-				tasks: ['cssmin'],
+				files: [ '<%= dirs.css %>/*.css' ],
+				tasks: [ 'cssmin' ],
 				options: {
 					spawn: false
 				}
 			},
 			readme: {
-				files: ['readme.txt'],
-				tasks: ['wp_readme_to_markdown'],
+				files: [ 'readme.txt' ],
+				tasks: [ 'wp_readme_to_markdown' ],
 				options: {
 					spawn: false
 				}
@@ -120,13 +120,13 @@ module.exports = function( grunt ) {
 
 		// Clean build dir
 		clean: {
-			main: ['build/<%= pkg.name %>']
+			main: [ 'build/<%= pkg.name %>' ]
 		},
 
 		// Copy the plugin to a versioned release directory
 		copy: {
 			main: {
-				src:  [
+				src: [
 					'**',
 					'!.git/**',
 					'!.gitignore',
@@ -157,11 +157,11 @@ module.exports = function( grunt ) {
 					eol: 'lf',
 					overwrite: true
 				},
-				files: [{
+				files: [ {
 					expand: true,
 					cwd: 'build/<%= pkg.name %>/',
-					src: ['**/*.{php,css,js,po,txt}']
-				}]
+					src: [ '**/*.{php,css,js,po,txt}' ]
+				} ]
 			}
 		},
 
@@ -174,7 +174,7 @@ module.exports = function( grunt ) {
 				},
 				expand: true,
 				cwd: 'build/<%= pkg.name %>/',
-				src: ['**/*'],
+				src: [ '**/*' ],
 				dest: '<%= pkg.name %>/'
 			}
 		},
@@ -184,9 +184,12 @@ module.exports = function( grunt ) {
 			target: {
 				options: {
 					domainPath: '/languages',
-					exclude: ['build/.*'],
+					exclude: [ 'build/.*' ],
 					potFilename: 'black-studio-tinymce-widget.pot',
 					processPot: function( pot ) {
+						var translation, deleteTranslation,
+							excludedStrings = [ 'Title:', 'Visual', 'HTML', 'Cheatin&#8217; uh?', 'Automatically add paragraphs' ],
+							excludedMeta = [ 'Plugin Name of the plugin/theme', 'Plugin URI of the plugin/theme', 'Author of the plugin/theme', 'Author URI of the plugin/theme' ];
 						pot.headers['report-msgid-bugs-to'] = 'https://github.com/black-studio/black-studio-tinymce-widget/issues\n';
 						pot.headers['plural-forms'] = 'nplurals=2; plural=n != 1;';
 						pot.headers['last-translator'] = 'Black Studio <info@blackstudio.it>\n';
@@ -199,23 +202,19 @@ module.exports = function( grunt ) {
 						pot.headers['x-poedit-bookmarks'] = '\n';
 						pot.headers['x-poedit-searchpath-0'] = '.\n';
 						pot.headers['x-textdomain-support'] = 'yes\n';
-						// Exclude string without textdomain and plugin's meta data
-						var translation, delete_translation,
-							excluded_strings = [ 'Title:', 'Visual', 'HTML', 'Cheatin&#8217; uh?', 'Automatically add paragraphs' ],
-							excluded_meta = [ 'Plugin Name of the plugin/theme', 'Plugin URI of the plugin/theme', 'Author of the plugin/theme', 'Author URI of the plugin/theme' ];
-						for ( translation in pot.translations[''] ) {
-							delete_translation = false;
-							if ( excluded_strings.indexOf( translation ) >= 0 ) {
-								delete_translation = true;
+						for ( translation in pot.translations['']) {
+							deleteTranslation = false;
+							if ( 0 <= excludedStrings.indexOf( translation ) ) {
+								deleteTranslation = true;
 								console.log( 'Excluded string: ' + translation );
 							}
-							if ( typeof pot.translations[''][translation].comments.extracted !== 'undefined' ) {
-								if ( excluded_meta.indexOf( pot.translations[''][translation].comments.extracted ) >= 0 ) {
-									delete_translation = true;
+							if ( 'undefined' !== typeof pot.translations[''][translation].comments.extracted ) {
+								if ( 0 <= excludedMeta.indexOf( pot.translations[''][translation].comments.extracted ) ) {
+									deleteTranslation = true;
 									console.log( 'Excluded meta: ' + pot.translations[''][translation].comments.extracted );
 								}
 							}
-							if ( delete_translation ) {
+							if ( deleteTranslation ) {
 								delete pot.translations[''][translation];
 							}
 						}
@@ -229,8 +228,8 @@ module.exports = function( grunt ) {
 
 		// Check plugin text domain
 		checktextdomain: {
-			options:{
-				text_domain: 'black-studio-tinymce-widget',
+			options: {
+				text_domain: 'black-studio-tinymce-widget', // eslint-disable-line camelcase
 				keywords: [
 					'__:1,2d',
 					'_e:1,2d',
@@ -247,10 +246,10 @@ module.exports = function( grunt ) {
 					'_n_noop:1,2,3d',
 					'_nx_noop:1,2,3c,4d'
 				],
-				report_missing: false
+				report_missing: false // eslint-disable-line camelcase
 			},
 			files: {
-				src:  [
+				src: [
 					'**/*.php',
 					'!node_modules/**',
 					'!build/**'
@@ -265,48 +264,48 @@ module.exports = function( grunt ) {
 				options: {
 					poDel: false
 				},
-				files: [{
+				files: [ {
 					expand: true,
 					cwd: '<%= dirs.languages %>',
-					src: ['*.po'],
+					src: [ '*.po' ],
 					dest: '<%= dirs.languages %>',
 					ext: '.mo',
 					nonull: true
-				}]
+				} ]
 			}
 		},
 
 		// Generate README.md from readme.txt
-		wp_readme_to_markdown: {
+		wp_readme_to_markdown: { // eslint-disable-line camelcase
 			readme: {
 				files: {
 					'README.md': 'readme.txt'
 				},
 				options: {
-					screenshot_url: 'https://raw.githubusercontent.com/black-studio/{plugin}/develop/assets/{screenshot}.png'
+					screenshot_url: 'https://raw.githubusercontent.com/black-studio/{plugin}/develop/assets/{screenshot}.png' // eslint-disable-line camelcase
 				}
 			}
 		},
 
 		// Check version
 		checkwpversion: {
-			options:{
+			options: {
 				readme: 'readme.txt',
 				plugin: 'black-studio-tinymce-widget.php'
 			},
-			plugin_vs_readme: { //Check plugin header version against stable tag in readme
+			pluginVsReadme: { //Check plugin header version against stable tag in readme
 				version1: 'plugin',
 				version2: 'readme',
 				compare: '=='
 			},
-			plugin_vs_grunt: { //Check plugin header version against package.json version
+			pluginVsGrunt: { //Check plugin header version against package.json version
 				version1: 'plugin',
 				version2: '<%= pkg.version %>',
 				compare: '=='
 			},
-			plugin_vs_internal: { //Check plugin header version against internal defined version
+			pluginVsInternal: { //Check plugin header version against internal defined version
 				version1: 'plugin',
-				version2: grunt.file.read('src/class-plugin.php').match( /version = '(.*)'/ )[1],
+				version2: grunt.file.read( 'src/class-plugin.php' ).match( /version = '(.*)'/ )[1],
 				compare: '=='
 			}
 		}
