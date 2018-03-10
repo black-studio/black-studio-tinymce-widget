@@ -47,8 +47,8 @@
 	left: 0;
 	right: 0;
 	top: 0;
-	bottom:0;
-	background-color:white;
+	bottom: 0;
+	background-color: #fff;
 	background-image: url(../../../../wp-admin/images/loading.gif);
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -75,7 +75,7 @@ div[id*="black-studio-tinymce"] .wp-editor-wrap {
 /* Icon for Customizer */
 
 #available-widgets [class*="black-studio-tinymce"] .widget-title:before {
-	content: "\f116"; 
+	content: "\f116";
 }
 
 
@@ -120,12 +120,14 @@ div[id*="black-studio-tinymce"] .mce-wp-fullscreen {
 }
 
 
-/* Fix z-index for thickbox dialog windows (used for media on old WP versions but also used by some plugins) */
-
-#TB_overlay, #TB_window {
+/* Fix z-index for thickbox dialog windows (used for media on old WP versions
+   but also used by some plugins) */
+/* stylelint-disable selector-id-pattern */
+#TB_overlay,
+#TB_window {
 	z-index: 999999 !important;
 }
-
+/* stylelint-enable */
 
 /* Fix z-index for media dialog windows (used on recent WP versions) */
 
@@ -158,8 +160,9 @@ div[id*="black-studio-tinymce"] .mce-wp-fullscreen {
 
 /* Change mouse cursor when waiting */
 
-body.wait, body.wait * {
-	cursor: wait !important;   
+body.wait,
+body.wait * {
+	cursor: wait !important;
 }
 
 
@@ -182,7 +185,7 @@ body.wait, body.wait * {
 .mce-menubar {
 	border-color: #e5e5e5 !important;
 	background: #fff !important;
-	border-width: 0px 0px 1px !important;
+	border-width: 0 0 1px !important;
 }
 
 
