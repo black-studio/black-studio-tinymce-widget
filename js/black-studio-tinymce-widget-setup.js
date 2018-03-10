@@ -6,8 +6,8 @@
 
 	function bstwEditorSetup( ed ) {
 		ed.on( 'keyup change', function() {
-			if ( 'visual' === bstw( ed.id ).get_mode() ) {
-				bstw( ed.id ).update_content();
+			if ( 'visual' === bstw( ed.id ).getMode() ) {
+				bstw( ed.id ).updateContent();
 			}
 			$( '#' + ed.id ).change();
 		});
