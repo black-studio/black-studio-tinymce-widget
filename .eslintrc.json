@@ -1,0 +1,6 @@
+{
+	"extends": "wordpress",
+	"rules": {
+		"linebreak-style": 0
+	}
+}

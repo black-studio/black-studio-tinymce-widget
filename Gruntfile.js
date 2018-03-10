@@ -26,6 +26,18 @@ module.exports = function( grunt ) {
 			]
 		},
 
+		// Javascript linting with eslint
+		eslint: {
+			options: {
+				configFile: '.eslintrc.json'
+			},
+			target: [
+				'Gruntfile.js',
+				'<%= dirs.js %>/**/*.js',
+				'!**/*.min.js'
+			]
+		},
+
 		// Minify .js files
 		uglify: {
 			options: {
@@ -306,9 +318,16 @@ module.exports = function( grunt ) {
 
 	// Register tasks
 	grunt.registerTask( 'default', [
-		'jshint',
 		'cssmin',
 		'uglify'
+	]);
+
+	grunt.registerTask( 'check', [
+		'jshint',
+		'eslint',
+		'phpcs',
+		'checktextdomain',
+		'checkwpversion'
 	]);
 
 	grunt.registerTask( 'languages', [
@@ -323,8 +342,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( 'build', [
 		'default',
-		'checkwpversion',
-		'checktextdomain',
+		'check',
 		'readme',
 		'clean',
 		'copy',
