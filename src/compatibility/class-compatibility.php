@@ -152,7 +152,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Compatibility'
 		 * @since 3.0.0
 		 */
 		public static function create_module_instance( $folder, $slug ) {
-			$class_name             = ucwords( $folder ) . '\\' . str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $slug ) ) );
+			$class_name             = 'Black_Studio_TinyMCE_Widget\\Compatibility\\' . ucwords( $folder ) . '\\' . str_replace( ' ', '_', ucwords( str_replace( '_', ' ', $slug ) ) );
 			self::$modules[ $slug ] = call_user_func( array( $class_name, 'instance' ) );
 		}
 

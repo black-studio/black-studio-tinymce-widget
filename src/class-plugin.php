@@ -194,8 +194,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Plugin', true ) ) {
 			// Flag to control load of compatibility code.
 			$load_compatibility = apply_filters( 'black_studio_tinymce_load_compatibility', true );
 			if ( $load_compatibility ) {
-				include_once plugin_dir_path( __DIR__ ) . 'compat/class-black-studio-tinymce-compatibility.php';
-				self::$compatibility = Black_Studio_TinyMCE_Compatibility::instance();
+				self::$compatibility = Compatibility\Compatibility::instance();
 			}
 		}
 
