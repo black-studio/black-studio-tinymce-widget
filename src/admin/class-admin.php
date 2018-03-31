@@ -317,7 +317,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Admin\\Admin', false ) ) {
 		public function wp_tiny_mce_init() {
 			$script = 'black-studio-tinymce-widget-setup';
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
-			echo "\t\t" . '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix, dirname( dirname( __FILE__ ) ) ) . '"></script>' . "\n"; // xss ok.
+			// phpcs:ignore WordPress.WP.EnqueuedResources
+			echo '<script type="text/javascript" src="' . plugins_url( 'js/' . $script . $suffix, dirname( dirname( __FILE__ ) ) ) . '"></script>' . "\n"; // xss ok.
 		}
 
 		/**
