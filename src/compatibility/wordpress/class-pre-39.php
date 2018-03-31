@@ -20,7 +20,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\WordPress\\Wor
 	 * @package Black_Studio_TinyMCE_Widget
 	 * @since 3.0.0
 	 */
-	final class Black_Studio_TinyMCE_Compatibility_WordPress_Pre_39 {
+	final class Pre_39 {
 
 		/**
 		 * The single instance of the class
