@@ -68,8 +68,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wpml',
 		 */
 		protected function __construct() {
 			add_action( 'init', array( $this, 'init' ) );
-			add_action( 'black_studio_tinymce_before_widget', array( $this, 'widget_before' ), 10, 2 );
-			add_action( 'black_studio_tinymce_after_widget', array( $this, 'widget_after' ) );
+			add_action( 'black_studio_tinymce_before_widget', array( $this, 'disable_title_translation' ), 10, 2 );
+			add_action( 'black_studio_tinymce_before_widget', array( $this, 'disable_text_translation' ), 10, 2 );
+			add_action( 'black_studio_tinymce_after_widget', array( $this, 'restore_title_translation' ) );
+			add_action( 'black_studio_tinymce_after_widget', array( $this, 'restore_text_translation' ) );
 			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'widget_update' ), 10, 2 );
 			add_action( 'black_studio_tinymce_before_editor', array( $this, 'check_deprecated_translations' ), 5, 2 );
 			add_filter( 'widget_text', array( $this, 'widget_text' ), 2, 3 );
@@ -120,7 +122,9 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wpml',
 		}
 
 		/**
-		 * Disable WPML String translation native behavior
+		 * Avoid native WPML string translation of widget titles
+		 * for widgets inserted in pages built with Page Builder (SiteOrigin panels)
+		 * and also when WPML Widgets is active and for WPML versions from 3.8.0 on
 		 *
 		 * @uses is_plugin_active()
 		 * @uses has_filter()
@@ -131,35 +135,42 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wpml',
 		 * @return void
 		 * @since 3.0.0
 		 */
-		public function widget_before( $args, $instance ) {
+		public function disable_title_translation( $args, $instance ) {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
-				/*
-				Avoid native WPML string translation of widget titles
-				for widgets inserted in pages built with Page Builder (SiteOrigin panels)
-				and also when WPML Widgets is active and for WPML versions from 3.8.0 on
-				*/
 				if ( false !== has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) ) {
 					if ( isset( $instance['panels_info'] ) || isset( $instance['wp_page_widget'] ) || is_plugin_active( 'wpml-widgets/wpml-widgets.php' ) || version_compare( $this->get_version(), '3.8.0' ) >= 0 ) {
 						remove_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
 						$this->removed_widget_title_filter = true;
 					}
 				}
+			}
+		}
 
-				/*
-				Avoid native WPML string translation of widget texts (for all widgets)
-				Note: Black Studio TinyMCE Widget already supports WPML string translation,
-				so this is needed to prevent duplicate translations
-				*/
+		/**
+		 * Avoid native WPML string translation of widget texts (for all widgets)
+		 * Note: Black Studio TinyMCE Widget already supports WPML string translation,
+		 * so this is needed to prevent duplicate translations
+		 *
+		 * @uses is_plugin_active()
+		 * @uses has_filter()
+		 * @uses remove_filter()
+		 *
+		 * @param mixed[] $args     Array of arguments.
+		 * @param mixed[] $instance Widget instance.
+		 * @return void
+		 * @since 3.0.0
+		 */
+		public function disable_text_translation( $args, $instance ) {
+			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				if ( false !== has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) ) {
 					remove_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
 					$this->removed_widget_text_filter = true;
 				}
 			}
-
 		}
 
 		/**
-		 * Re-Enable WPML String translation native behavior
+		 * Restore widget title's native WPML string translation filter if it was removed
 		 *
 		 * @uses add_filter()
 		 * @uses has_filter()
@@ -167,16 +178,28 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wpml',
 		 * @return void
 		 * @since 3.0.0
 		 */
-		public function widget_after() {
+		public function restore_title_translation() {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
-				// Restore widget title's native WPML string translation filter if it was removed.
 				if ( $this->removed_widget_title_filter ) {
 					if ( false === has_filter( 'widget_title', 'icl_sw_filters_widget_title' ) && function_exists( 'icl_sw_filters_widget_title' ) ) {
 						add_filter( 'widget_title', 'icl_sw_filters_widget_title', 0 );
 						$this->removed_widget_title_filter = false;
 					}
 				}
-				// Restore widget text's native WPML string translation filter if it was removed.
+			}
+		}
+
+		/**
+		 * Restore widget text's native WPML string translation filter if it was removed
+		 *
+		 * @uses add_filter()
+		 * @uses has_filter()
+		 *
+		 * @return void
+		 * @since 3.0.0
+		 */
+		public function restore_text_translation() {
+			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				if ( $this->removed_widget_text_filter ) {
 					if ( false === has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) && function_exists( 'icl_sw_filters_widget_text' ) ) {
 						add_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
@@ -260,7 +283,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wpml',
 						$wpml_st_url = admin_url( 'admin.php?page=wpml-string-translation%2Fmenu%2Fstring-translation.php&context=Widgets' );
 						echo '<div class="notice notice-warning inline"><p>';
 						/* translators: Warning displayed when deprecated translations of the current widget are detected */
-						echo sprintf( esc_html__( 'WARNING: This widget has one or more translations made using WPML String Translation, which is now a deprecated translation method. Starting from WPML 3.8 you should replicate this widget for each language and set the "Display on language" dropdown accordingly. Finally, you should delete the previously existing translations from %s.', 'black-studio-tinymce-widget' ), '<a href="' . esc_url( $wpml_st_url ) . '">WPML String Translation</a>' );
+						$warning = __( 'WARNING: This widget has one or more translations made using WPML String Translation, which is now a deprecated translation method. Starting from WPML 3.8 you should replicate this widget for each language and set the "Display on language" dropdown accordingly. Finally, you should delete the previously existing translations from %s.', 'black-studio-tinymce-widget' );
+						echo wp_kses_post( sprintf( esc_html( $warning ), '<a href="' . esc_url( $wpml_st_url ) . '">WPML String Translation</a>' ) );
 						echo '</p></div>';
 					}
 				}
