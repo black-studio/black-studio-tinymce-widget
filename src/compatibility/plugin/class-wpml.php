@@ -69,7 +69,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wpml',
 		protected function __construct() {
 			add_action( 'init', array( $this, 'init' ) );
 			add_action( 'black_studio_tinymce_before_widget', array( $this, 'disable_title_translation' ), 10, 2 );
-			add_action( 'black_studio_tinymce_before_widget', array( $this, 'disable_text_translation' ), 10, 2 );
+			add_action( 'black_studio_tinymce_before_widget', array( $this, 'disable_text_translation' ) );
 			add_action( 'black_studio_tinymce_after_widget', array( $this, 'restore_title_translation' ) );
 			add_action( 'black_studio_tinymce_after_widget', array( $this, 'restore_text_translation' ) );
 			add_filter( 'black_studio_tinymce_widget_update', array( $this, 'widget_update' ), 10, 2 );
@@ -155,12 +155,10 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Compatibility\\Plugin\\Wpml',
 		 * @uses has_filter()
 		 * @uses remove_filter()
 		 *
-		 * @param mixed[] $args     Array of arguments.
-		 * @param mixed[] $instance Widget instance.
 		 * @return void
 		 * @since 3.0.0
 		 */
-		public function disable_text_translation( $args, $instance ) {
+		public function disable_text_translation() {
 			if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
 				if ( false !== has_filter( 'widget_text', 'icl_sw_filters_widget_text' ) ) {
 					remove_filter( 'widget_text', 'icl_sw_filters_widget_text', 0 );
