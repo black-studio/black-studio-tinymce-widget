@@ -54,9 +54,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Admin\\Admin_Pointer' ) ) {
 		 * Class constructor
 		 *
 		 * @uses add_action()
-		 * @uses add_filter()
-		 * @uses get_option()
-		 * @uses get_bloginfo()
 		 *
 		 * @global object $wp_embed
 		 * @since 2.0.0
@@ -188,7 +185,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Admin\\Admin_Pointer' ) ) {
 			return $pointers;
 		}
 
-
-	} // END class Black_Studio_TinyMCE_Admin_Pointer
+	} // END class
 
 } // END class_exists check

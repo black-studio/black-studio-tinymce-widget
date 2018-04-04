@@ -55,6 +55,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Plugin', true ) ) {
 		protected static $admin_pointer = null;
 
 		/**
+		 * Instance of admin assets class
+		 *
+		 * @var object
+		 * @since 2.1.0
+		 */
+		protected static $admin_assets = null;
+
+		/**
 		 * Instance of compatibility class
 		 *
 		 * @var object
@@ -101,6 +109,16 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Plugin', true ) ) {
 		 */
 		public static function admin_pointer() {
 			return self::$admin_pointer;
+		}
+
+		/**
+		 * Return the instance of the admin assets class
+		 *
+		 * @return object
+		 * @since 3.0.0
+		 */
+		public static function admin_assets() {
+			return self::$admin_assets;
 		}
 
 		/**
@@ -161,6 +179,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Widget\\Plugin', true ) ) {
 				// Instantiate admin classes on admin pages.
 				self::$admin         = Admin\Admin::instance();
 				self::$admin_pointer = Admin\Admin_Pointer::instance();
+				self::$admin_assets  = Admin\Admin_Assets::instance();
 			} else {
 				// Instantiate text filter class on frontend pages.
 				self::$text_filters = Utilities\Text_Filters::instance();
