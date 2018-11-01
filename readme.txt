@@ -3,8 +3,9 @@ Contributors: black-studio, marcochiesi, thedarkmist
 Donate link: https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml
 Requires at least: 3.1
-Tested up to: 4.9
-Stable tag: 2.6.2
+Tested up to: 5.0
+Requires PHP: 5.2
+Stable tag: 2.6.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -12,22 +13,38 @@ The visual editor widget for WordPress.
 
 == Description ==
 
-This plugin adds a new `Visual Editor` widget type that allows you to insert rich text and media objects in your sidebars with no hassle. With Black Studio TinyMCE Widget you will be able to edit your widgets in a WYSIWYG manner using the native WordPress TinyMCE editor, just like you do in posts and pages. And if you are a developer you may still switch back and forth from Visual to HTML mode. For years the default WordPress text widget lacked functionalities and it required HTML knowledge, this plugin was born to overcome these limitations. The recent releases of WordPress (starting from version 4.8 released in June 2017), finally included a native visual text widget, but it's pretty minimal and it doesn't provide all the features available with Black Studio TinyMCE Widget, which still remains a must-have for advanced users.
+This plugin adds a new `Visual Editor` widget type that allows you to insert rich text and media objects in your sidebars with no hassle. With Black Studio TinyMCE Widget you will be able to edit your widgets in a WYSIWYG manner using the native WordPress TinyMCE editor, just like you do in posts and pages. And if you are a developer you may still switch back and forth from Visual to HTML mode. 
 
-= Features =
+For years the default WordPress text widget has been very basic and it required HTML knowledge to add formatting and images/media to the text. This plugin was born in 2011 to overcome these limitations. After a long time, in June 2017, version 4.8 of WordPress finally introduced a new text widget that included the ability to manage text widgets with the visual editor. The new widget available in WordPress core could now be used as a basic replacement of Black Studio TinyMCE Widget, but the plugin still offers some additional features, so it remains a must-have for advanced users.
 
-* Add rich text widgets to your sidebars and edit them using visual editor
+= Basic Features =
+
+* Add rich text widgets to your sidebars and edit them using the TinyMCE visual editor
 * Switch between Visual mode and HTML mode (including Quicktags toolbar)
-* Full featured TinyMCE Visual Editor (the same you have for pages and posts)
-* Compatible with 3rd party TinyMCE customization plugins (TinyMCE Advanced, WP Edit, ...)
-* Insert images/videos from WordPress Media Library
+* Insert images, videos, and other media from WordPress Media Library
 * Insert links to existing WordPress pages/posts or external resources
-* Support for fullscreen editing mode
+* Support for shortcodes, smilies and embed in widget text (including preview)
+* Support for Customizer with live preview and quick edit
 * Support for widgets accessibility mode
-* Support for WordPress networks (multi-site)
-* Support for WPML (multi-language)
-* Live preview in theme customizer
-* Available in 20+ languages
+* Compatible with multi-site (WordPress networks)
+* Compatible with the most common multi-language plugins
+* Compatible with Page Builder plugin by SiteOrigin
+* Translations available in 20+ languages
+
+= Advanced Features =
+
+These features are what makes this plugin better than the WordPress (4.8+) native widget:
+
+* Full featured TinyMCE Visual Editor (the same you have for pages and posts)
+* Wide text area for an enhanced editing experience
+* Compatible with 3rd party TinyMCE customization plugins (TinyMCE Advanced, WP Edit, ...)
+* Support for distraction-free (fullscreen) editing mode 
+* Option to "Automatically add paragraphs" to widget text
+
+= About the plugin =
+
+The story of the plugin was featured in a talk at WordCamp Europe 2018 in Belgrade.
+See the video [Once upon a time, there was a plugin...](https://wordpress.tv/2018/07/11/francesco-canovi-marco-chiesi-once-upon-a-time-there-was-a-plugin/) on WordPress.tv. 
 
 = Links =
 
@@ -35,12 +52,12 @@ This plugin adds a new `Visual Editor` widget type that allows you to insert ric
 * [Plugin's page](https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/)
 * [FAQ](https://wordpress.org/plugins/black-studio-tinymce-widget/faq/)
 * [Support forum](https://wordpress.org/support/plugin/black-studio-tinymce-widget)
-* Follow us on [Twitter](https://twitter.com/blackstudioita), [Facebook](https://www.facebook.com/blackstudiocomunicazione) and [LinkedIn](https://www.linkedin.com/company/black-studio)
+* Follow us on [Twitter](https://twitter.com/blackstudioita), [Facebook](https://www.facebook.com/blackstudiocomunicazione), [LinkedIn](https://www.linkedin.com/company/black-studio) and [GitHub](https://github.com/black-studio)
 
 = Get involved =
 
 * Developers can contribute to the source code on our [GitHub repository](https://github.com/black-studio/black-studio-tinymce-widget).
-* Translators can contribute through [Transifex](https://www.transifex.com/projects/p/black-studio-tinymce-widget/).
+* Translators can contribute through the [Official WordPress Translation platform](https://translate.wordpress.org/projects/wp-plugins/black-studio-tinymce-widget).
 * Users can contribute by leaving a 5 stars [review](https://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget#postform) or making a [donation](https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/).
 
 == Installation ==
@@ -53,6 +70,8 @@ This section describes how to install and use the plugin.
 4. Drag and drop the `Visual Editor` widget to the desired sidebar (or, if using Accessibility mode, click the `Add` link)
 5. Fill in title and (rich) text
 
+Note: the plugin doesn't have nor requires any settings.
+
 == Screenshots ==
 
 1. Black Studio TinyMCE Widget in Visual mode
@@ -60,6 +79,10 @@ This section describes how to install and use the plugin.
 3. Black Studio TinyMCE Widget combined with WP Edit plugin
 
 == Frequently Asked Questions ==
+
+= Purpose of the plugin =
+
+This plugin gives you the ability to use the WordPress visual editor (TinyMCE) in widgets as you do in posts and pages, but it doesn't affect the editor behavior itself or its functionalities. If you are looking for additional editor features, take a look at plugins like [WP Edit](https://wordpress.org/plugins/wp-edit/), [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/) or any other feature specific plugin you may need. Any additional TinyMCE plugin written following WordPress guidelines should work fine with Black Studio TinyMCE Widget.
 
 = Troubleshooting =
 
@@ -177,7 +200,7 @@ function remove_bstw_widget_text_filters() {
 }
 `
 
-= Plugin's data location and cleanup =
+= Plugin's data storage and cleanup =
 
 The widgets data are stored in serialized format inside a record in the `wp_options` table having `option_name` = `'widget_black-studio-tinymce'`. Widget data storage is handled by WordPress and not directly by the plugin. The widgets data are intentionally kept in the database upon plugin deactivation/deletion to avoid content loss. Additionally, the plugin may save some user preferences in the `wp_usermeta` table, in particular, the records having s key with the prefix `_bstw`.
 If you want to totally remove the plugin including its data, just uninstall it and then remove the above records from the database.
@@ -188,6 +211,10 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 `
 
 == Changelog ==
+
+= 2.6.3 (2018-11-01) =
+* Fixed buggy positioning on Customizer with large screens
+* Updated documentation
 
 = 2.6.2 (2018-02-27) =
 * Fixed conflict that was causing widget-specific warning messages to be moved to the top of the page
@@ -500,6 +527,6 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 == Upgrade Notice ==
 
-= 2.6.2 =
+= 2.6.3 =
 If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
 Important: Always ensure to backup your database before upgrading.
