@@ -17,7 +17,8 @@ module.exports = function( grunt ) {
 		// Javascript linting with jshint
 		jshint: {
 			options: {
-				jshintrc: '.jshintrc'
+				jshintrc: '.jshintrc',
+				reporterOutput: ''
 			},
 			all: [
 				'Gruntfile.js',
