@@ -5,7 +5,7 @@ Tags: widget, visual, editor, wysiwyg, html, text, tinymce, image, media, galler
 Requires at least: 3.1
 Tested up to: 5.0
 Requires PHP: 5.2
-Stable tag: 2.6.3
+Stable tag: 2.6.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -211,6 +211,9 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 `
 
 == Changelog ==
+
+= 2.6.4 (2018-11-29) =
+* Fixed z-index issue causing newly created widgets to go behind admin menu on small screens
 
 = 2.6.3 (2018-11-01) =
 * Fixed buggy positioning on Customizer with large screens
@@ -527,6 +530,6 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 == Upgrade Notice ==
 
-= 2.6.3 =
+= 2.6.4 =
 If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
 Important: Always ensure to backup your database before upgrading.
