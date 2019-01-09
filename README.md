@@ -5,7 +5,7 @@
 **Requires at least:** 3.1  
 **Tested up to:** 5.0  
 **Requires PHP:** 5.2  
-**Stable tag:** 2.6.4  
+**Stable tag:** 2.6.5  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl.html  
 
@@ -217,6 +217,9 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 
 ## Changelog ##
+
+### 2.6.5 (2019-01-09) ###
+* Fixed missing dashicons issue (compatibility with WP 5 Block editor and Page Builder by SiteOrigin)
 
 ### 2.6.4 (2018-11-29) ###
 * Fixed z-index issue causing newly created widgets to go behind admin menu on small screens
@@ -536,6 +539,6 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ## Upgrade Notice ##
 
-### 2.6.4 ###
+### 2.6.5 ###
 If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
 Important: Always ensure to backup your database before upgrading.
