@@ -457,43 +457,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function siteorigin_panels_enable_pages( $pages ) {
-			global $pagenow, $post;
-
-			// New Page/Post
-			if ( 'post-new.php' == $pagenow ) {
-				$post_type = isset( $_GET['post_type'] )? $_GET['post_type'] : 'post';
-				$post_types = siteorigin_panels_setting( 'post-types' );
-				$is_panels_type = in_array( $post_type, $post_types );
-				$use_block = isset( $_GET['block-editor'] );
-				$use_builder = isset( $_GET['siteorigin-page-builder'] );
-				$use_classic = siteorigin_panels_setting( 'use-classic' );
-				if ( ! $use_block && ( $use_classic || $use_builder ) && $is_panels_type ) {
-					$pages[] = 'post-new.php';
-
-				}
-			}
-
-			// Existing Page/Post
-			if ( 'post.php' == $pagenow ) {
-				$current_post = null;
-				if ( isset( $_GET['post'] ) ) {
-					$post_id = (int) $_GET['post'];
-				} elseif ( isset( $_POST['post_ID'] ) ) {
-					$post_id = (int) $_POST['post_ID'];
-				}
-				if ( ! empty( $post_id ) ) {
-					$current_post = get_post( $post_id );
-				}
-				// Set global $post so that it can be processed correctly by SiteOrigin Page Builder
-				$original_post = $post;
-				$post = $current_post;
-				if ( ! function_exists( 'use_block_editor_for_post' ) || ! use_block_editor_for_post( $post ) ) {
-					$pages[] = 'post.php';
-				}
-				$post = $original_post;
-			}
-
-			// Home Page edit
+			$pages[] = 'post-new.php';
+			$pages[] = 'post.php';
 			if ( isset( $_GET['page'] ) && 'so_panels_home_page' == $_GET['page'] ) {
 				$pages[] = 'themes.php';
 			}
