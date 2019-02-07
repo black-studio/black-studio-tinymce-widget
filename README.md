@@ -5,7 +5,7 @@
 **Requires at least:** 3.1  
 **Tested up to:** 5.0  
 **Requires PHP:** 5.2  
-**Stable tag:** 2.6.6  
+**Stable tag:** 2.6.7  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl.html  
 
@@ -217,6 +217,9 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 
 ## Changelog ##
+
+### 2.6.7 (2019-02-07) ###
+* Fix z-index issue with flyout admin menu
 
 ### 2.6.6 (2019-01-29) ###
 * Fixed issue that was causing lots of auto-drafts when used in conjunction with WP 5 Block Editor and Page Builder by SiteOrigin
@@ -542,6 +545,6 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ## Upgrade Notice ##
 
-### 2.6.6 ###
+### 2.6.7 ###
 If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
 Important: Always ensure to backup your database before upgrading.
