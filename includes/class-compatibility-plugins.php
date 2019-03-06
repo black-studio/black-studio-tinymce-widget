@@ -521,7 +521,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.5.0
 		 */
 		public function elementor() {
-			if ( 
+			if (
 				is_admin() &&
 				isset( $_REQUEST['action'] ) &&
 				in_array( $_REQUEST['action'], array( 'elementor', 'elementor_ajax' ) )

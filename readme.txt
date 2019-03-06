@@ -5,7 +5,7 @@ Tags: widget, visual, editor, wysiwyg, html, text, tinymce, image, media, galler
 Requires at least: 3.1
 Tested up to: 5.0
 Requires PHP: 5.2
-Stable tag: 2.6.7
+Stable tag: 2.6.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -212,8 +212,11 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 == Changelog ==
 
+= 2.6.8 (2019-03-06) =
+* Fixed compatibility issue with Elementor Page Builder
+
 = 2.6.7 (2019-02-07) =
-* Fix z-index issue with flyout admin menu
+* Fixed z-index issue with flyout admin menu
 
 = 2.6.6 (2019-01-29) =
 * Fixed issue that was causing lots of auto-drafts when used in conjunction with WP 5 Block Editor and Page Builder by SiteOrigin
@@ -539,6 +542,6 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 == Upgrade Notice ==
 
-= 2.6.7 =
+= 2.6.8 =
 If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
 Important: Always ensure to backup your database before upgrading.

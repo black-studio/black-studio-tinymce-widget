@@ -1,7 +1,7 @@
 {
   "name": "black-studio-tinymce-widget",
   "title": "Black Studio TinyMCE Widget",
-  "version": "2.6.7",
+  "version": "2.6.8",
   "repository": {
     "type": "git",
     "url": "git://github.com/black-studio/black-studio-tinymce-widget.git"
