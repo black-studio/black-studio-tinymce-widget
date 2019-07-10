@@ -3,9 +3,9 @@
 **Donate link:** https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/  
 **Tags:** widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml  
 **Requires at least:** 3.1  
-**Tested up to:** 5.0  
+**Tested up to:** 5.2  
 **Requires PHP:** 5.2  
-**Stable tag:** 2.6.8  
+**Stable tag:** 2.6.9  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl.html  
 
@@ -217,6 +217,9 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 
 ## Changelog ##
+
+### 2.6.9 (2019-07-10) ###
+* Fixed compatibility issue with WP Page Widget plugin
 
 ### 2.6.8 (2019-03-06) ###
 * Fixed compatibility issue with Elementor Page Builder
@@ -548,6 +551,6 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ## Upgrade Notice ##
 
-### 2.6.8 ###
+### 2.6.9 ###
 If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
 Important: Always ensure to backup your database before upgrading.
