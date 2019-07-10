@@ -350,6 +350,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Compatibility_Plugins' ) ) {
 		 * @since 2.0.0
 		 */
 		public function wp_page_widget_enqueue_script() {
+			if ( ! bstw()->admin()->enabled() ) return;
 			$main_script = apply_filters( 'black-studio-tinymce-widget-script', 'black-studio-tinymce-widget' );
 			$compat_script = 'wp-page-widget';
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
