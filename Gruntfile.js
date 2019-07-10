@@ -268,12 +268,12 @@ module.exports = function( grunt ) {
 				readme: 'readme.txt',
 				plugin: 'black-studio-tinymce-widget.php'
 			},
-			plugin_vs_readme: { //Check plugin header version againts stable tag in readme
+			plugin_vs_readme: { //Check plugin header version against stable tag in readme
 				version1: 'plugin',
 				version2: 'readme',
 				compare: '=='
 			},
-			plugin_vs_grunt: { //Check plugin header version against package.json version
+			plugin_vs_package: { //Check plugin header version against package.json version
 				version1: 'plugin',
 				version2: '<%= pkg.version %>',
 				compare: '=='
@@ -281,6 +281,11 @@ module.exports = function( grunt ) {
 			plugin_vs_internal: { //Check plugin header version against internal defined version
 				version1: 'plugin',
 				version2: grunt.file.read('black-studio-tinymce-widget.php').match( /version = '(.*)'/ )[1],
+				compare: '=='
+			},
+			tested_up_to: { //Check plugin header "Tested up to" against the same value in readme.txt
+				version1: grunt.file.read('readme.txt').match( /Tested up to: (.*)/ )[1],
+				version2: grunt.file.read('black-studio-tinymce-widget.php').match( /Tested up to: (.*)/ )[1],
 				compare: '=='
 			}
 		},
