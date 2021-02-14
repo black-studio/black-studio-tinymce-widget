@@ -7,7 +7,7 @@ Version: 2.6.9
 Author: Black Studio
 Author URI: https://www.blackstudio.it
 Requires at least: 3.1
-Tested up to: 5.3
+Tested up to: 5.6
 License: GPLv3
 Text Domain: black-studio-tinymce-widget
 Domain Path: /languages
