@@ -166,15 +166,18 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Plugin' ) ) {
 		protected function __construct() {
 			// Include required files
 			include_once( plugin_dir_path( __FILE__ ) . 'includes/class-widget.php' );
-			// Include and instantiate admin class on admin pages
-			if ( is_admin() ) {
+			// Include and instantiate admin class on admin pages and REST requests
+			if ( is_admin() || ( function_exists( 'wp_is_json_request' ) && wp_is_json_request() ) ) {
 				include_once( plugin_dir_path( __FILE__ ) . 'includes/class-admin.php' );
 				self::$admin = Black_Studio_TinyMCE_Admin::instance();
+			}
+			// Include and instantiate admin pointer class on admin pages
+			if ( is_admin() ) {
 				include_once( plugin_dir_path( __FILE__ ) . 'includes/class-admin-pointer.php' );
 				self::$admin_pointer = Black_Studio_TinyMCE_Admin_Pointer::instance();
 			}
 			// Include and instantiate text filter class on frontend pages
-			else {
+			if ( ! is_admin() ) {
 				include_once( plugin_dir_path( __FILE__ ) . 'includes/class-text-filters.php' );
 				self::$text_filters = Black_Studio_TinyMCE_Text_Filters::instance();
 			}

@@ -51,7 +51,7 @@ var bstw;
 						}
 					}
 					if ( this.is_tinymce_configured() ) {
-						if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' && $( '#' + id ).is( ':visible' ) ) {
+						if ( ! this.is_tinymce_active() && this.get_mode() === 'visual' && ( $( '#' + id ).is( ':visible' ) || typeof wp.blockEditor  !== 'undefined' ) ) {
 							tinyMCEPreInit.mceInit[ id ].setup = function( ed ) {
 								// Real time preview (Theme customizer)
 								ed.on( 'keyup change', function() {
@@ -240,7 +240,7 @@ var bstw;
 
 		// Event handler for widget added
 		$( document ).on( 'widget-added', function( event, $widget ) {
-			if ( $widget.is( '[id*=black-studio-tinymce]' ) ) {
+			if ( $widget.is( '[id*=black-studio-tinymce]' ) || $widget.has( '[id*=black-studio-tinymce]' ) ) {
 				event.preventDefault();
 				bstw( $widget ).activate();
 			}
