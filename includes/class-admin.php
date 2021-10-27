@@ -146,6 +146,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 * @since 2.7.0
 		 */
 		public function rest_api_init() {
+			$this->init_links();
+			add_action( 'black_studio_tinymce_before_editor', array( $this, 'display_links' ) ); // consider donating if you remove links
 			add_action( 'black_studio_tinymce_editor', array( $this, 'editor' ), 10, 4 );
 			add_action( 'black_studio_tinymce_after_editor', array( $this, 'fix_the_editor_content_filter' ) );
 		}
@@ -359,16 +361,14 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 		 */
 		public function init_links() {
 			$this->links = array(
-				/* translators: text used for plugin home link */
-				'https://wordpress.org/plugins/black-studio-tinymce-widget/' => __( 'Home', 'black-studio-tinymce-widget' ),
+				/* translators: text used for plugin page link */
+				'https://wordpress.org/plugins/black-studio-tinymce-widget/' => __( 'Plugin page', 'black-studio-tinymce-widget' ),
 				/* translators: text used for support faq link */
 				'https://wordpress.org/plugins/black-studio-tinymce-widget/faq/' => __( 'FAQ', 'black-studio-tinymce-widget' ),
 				/* translators: text used for support forum link */
 				'https://wordpress.org/support/plugin/black-studio-tinymce-widget' => __( 'Support', 'black-studio-tinymce-widget' ),
 				/* translators: text used for reviews link */
 				'https://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget' => __( 'Rate', 'black-studio-tinymce-widget' ),
-				/* translators: text used for follow on twitter link */
-				'https://twitter.com/blackstudioita' => __( 'Follow', 'black-studio-tinymce-widget' ),
 				/* translators: text used for donation link */
 				'https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/' => __( 'Donate', 'black-studio-tinymce-widget' ),
 			);
@@ -390,7 +390,8 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			}
 			echo "\t\t</span>\n";
 			/* translators: text used for the icon that shows the plugin links */
-			echo "\t\t<a class='bstw-links-icon icon16 icon-plugins' href='#' title='" . esc_attr( __( 'About Black Studio TinyMCE Widget plugin', 'black-studio-tinymce-widget' ) ) . "'></a>\n";
+			$link_title = esc_attr( __( 'About Black Studio TinyMCE Widget plugin', 'black-studio-tinymce-widget' ) );
+			echo "\t\t<a class='bstw-links-icon dashicons-before dashicons-admin-plugins' href='#' title='" . $link_title . "' aria-label='" . $link_title . "'></a>\n";
 			echo "\t</div>\n";
 		}
 

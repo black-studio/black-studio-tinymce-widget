@@ -16,17 +16,22 @@
 	left: 18px;
 }
 
-.bstw-links .icon16:before {
+.bstw-links .dashicons-before:before {
 	padding: 0;
 }
 
-.bstw-links .icon16 {
+.bstw-links .dashicons-before {
 	float: right;
 	padding: 3px 6px;
 	margin: -6px -8px 0 -2px;
 }
 
-.rtl .bstw-links .icon16 {
+.bstw-links .dashicons-before:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.rtl .bstw-links .dashicons-before {
 	float: left;
 	margin: -6px -2px 0 -8px;
 }
