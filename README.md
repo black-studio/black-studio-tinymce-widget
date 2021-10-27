@@ -1,11 +1,11 @@
 # Black Studio TinyMCE Widget #
-**Contributors:** black-studio, marcochiesi, thedarkmist  
+**Contributors:** [black-studio](https://profiles.wordpress.org/black-studio/), [marcochiesi](https://profiles.wordpress.org/marcochiesi/), [thedarkmist](https://profiles.wordpress.org/thedarkmist/)  
 **Donate link:** https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/  
 **Tags:** widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml  
 **Requires at least:** 3.1  
-**Tested up to:** 5.2  
+**Tested up to:** 5.8  
 **Requires PHP:** 5.2  
-**Stable tag:** 2.6.9  
+**Stable tag:** 2.7.0  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl.html  
 
@@ -24,6 +24,7 @@ For years the default WordPress text widget has been very basic and it required 
 * Insert images, videos, and other media from WordPress Media Library
 * Insert links to existing WordPress pages/posts or external resources
 * Support for shortcodes, smilies and embed in widget text (including preview)
+* Support for the Block-based Widgets Editor introduced with WordPress 5.8
 * Support for Customizer with live preview and quick edit
 * Support for widgets accessibility mode
 * Compatible with multi-site (WordPress networks)
@@ -217,6 +218,9 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 
 ## Changelog ##
+
+### 2.7.0 (2021-10-27) ###
+* Added compatibility with Block-based Widgets Editor (WordPress 5.8)
 
 ### 2.6.9 (2019-07-10) ###
 * Fixed compatibility issue with WP Page Widget plugin
@@ -551,6 +555,5 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ## Upgrade Notice ##
 
-### 2.6.9 ###
-If you're using WPML, double check our FAQ, as version 2.6 introduced some changes regarding widgets translations.
+### 2.7.0 ###
 Important: Always ensure to backup your database before upgrading.
