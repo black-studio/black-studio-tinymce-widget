@@ -202,7 +202,7 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			wp_enqueue_style(
 				$style,
 				plugins_url( 'css/' . $style . $suffix. '.css', dirname( __FILE__ ) ),
-				array(),
+				array( 'media-views' ),
 				bstw()->get_version()
 			);
 		}
