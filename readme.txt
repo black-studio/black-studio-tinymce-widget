@@ -3,9 +3,9 @@ Contributors: black-studio, marcochiesi, thedarkmist
 Donate link: https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
 Tags: widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml
 Requires at least: 3.1
-Tested up to: 5.8
+Tested up to: 6.0
 Requires PHP: 5.2
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -212,6 +212,9 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 `
 
 == Changelog ==
+
+= 2.7.1 (2022-07-01) =
+* Fixed issue on Media Library with new Block-based Widgets Editor
 
 = 2.7.0 (2021-10-27) =
 * Added compatibility with Block-based Widgets Editor (WordPress 5.8)
@@ -549,5 +552,5 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 == Upgrade Notice ==
 
-= 2.7.0 =
+= 2.7.1 =
 Important: Always ensure to backup your database before upgrading.
