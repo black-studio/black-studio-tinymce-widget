@@ -222,7 +222,15 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 			wp_enqueue_script( 'wpdialogs-popup' );
 			$this->enqueue_script();
 			$this->localize_script();
-			do_action( 'wp_enqueue_editor', array( 'tinymce' => true ) );
+			if ( function_exists( 'wp_enqueue_editor' ) ) {
+				wp_enqueue_editor();
+			}
+			else {
+				do_action( 'wp_enqueue_editor', array(
+					'tinymce'   => true,
+					'quicktags' => true,
+				) );
+			}
 		}
 
 		/**
