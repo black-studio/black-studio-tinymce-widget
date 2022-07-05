@@ -20,7 +20,6 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "^3.0.0",
     "grunt-lineending": "^1.0.0",
-    "grunt-potomo": "^3.5.0",
     "grunt-wp-deploy": "^2.1.2",
     "grunt-wp-i18n": "^1.0.3",
     "grunt-wp-readme-to-markdown": "^2.1.0",

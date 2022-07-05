@@ -233,23 +233,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		// Generate .mo files from .po files
-		potomo: {
-			dist: {
-				options: {
-					poDel: false
-				},
-				files: [{
-					expand: true,
-					cwd: '<%= dirs.languages %>',
-					src: ['*.po'],
-					dest: '<%= dirs.languages %>',
-					ext: '.mo',
-					nonull: true
-				}]
-			}
-		},
-
 		// Generate README.md from readme.txt
 		wp_readme_to_markdown: {
 			readme: {
@@ -328,8 +311,7 @@ module.exports = function( grunt ) {
 		'checktextdomain',
 		'makepot',
 		'exec:txpush',
-		'exec:txpull',
-		'potomo'
+		'exec:txpull'
 	]);
 
 	grunt.registerTask( 'readme', [
