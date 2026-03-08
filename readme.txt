@@ -1,7 +1,7 @@
 === Black Studio TinyMCE Widget ===
 Contributors: black-studio, marcochiesi, thedarkmist
 Donate link: https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/
-Tags: widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml
+Tags: widget, editor, visual, tinymce, wysiwyg
 Requires at least: 3.1
 Tested up to: 6.9
 Requires PHP: 5.2
