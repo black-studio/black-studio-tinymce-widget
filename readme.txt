@@ -5,7 +5,7 @@ Tags: widget, visual, editor, wysiwyg, html, text, tinymce, image, media, galler
 Requires at least: 3.1
 Tested up to: 6.9
 Requires PHP: 5.2
-Stable tag: 2.7.2
+Stable tag: 2.7.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -212,6 +212,9 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 `
 
 == Changelog ==
+
+= 2.7.3 (2024-07-07) =
+* Updated compatibility info with WordPress version
 
 = 2.7.2 (2022-07-05) =
 * Fixed compatibility issue with Toolset Types WYSIWYG fields
@@ -555,5 +558,5 @@ DELETE FROM wp_usermeta WHERE meta_key LIKE '_bstw%';
 
 == Upgrade Notice ==
 
-= 2.7.2 =
+= 2.7.3 =
 Important: Always ensure to backup your database before upgrading.
