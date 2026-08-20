@@ -1,11 +1,10 @@
 # Black Studio TinyMCE Widget #
 **Contributors:** [black-studio](https://profiles.wordpress.org/black-studio/), [marcochiesi](https://profiles.wordpress.org/marcochiesi/), [thedarkmist](https://profiles.wordpress.org/thedarkmist/)  
-**Donate link:** https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/  
-**Tags:** widget, visual, editor, wysiwyg, html, text, tinymce, image, media, gallery, embed, wpml  
-**Requires at least:** 3.1  
-**Tested up to:** 6.0  
+**Tags:** widget, editor, visual, tinymce, wysiwyg  
+**Requires at least:** 5.0  
+**Tested up to:** 7.1  
 **Requires PHP:** 5.2  
-**Stable tag:** 2.7.2  
+**Stable tag:** 2.7.4  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl.html  
 
@@ -218,6 +217,14 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 
 ## Changelog ##
+
+### 2.7.4 (2026-08-19) ###
+* Updated compatibility info with WordPress 7.1
+* Updated minimum required WordPress version to 5.0
+* Removed donation link
+
+### 2.7.3 (2024-07-07) ###
+* Updated compatibility info with WordPress version
 
 ### 2.7.2 (2022-07-05) ###
 * Fixed compatibility issue with Toolset Types WYSIWYG fields
@@ -561,5 +568,8 @@ You may use the following SQL queries for removal (Note: adjust table prefix acc
 
 ## Upgrade Notice ##
 
-### 2.7.2 ###
+### 2.7.4 ###
+Important: Always ensure to backup your database before upgrading.
+
+### 2.7.3 ###
 Important: Always ensure to backup your database before upgrading.

@@ -377,8 +377,6 @@ if ( ! class_exists( 'Black_Studio_TinyMCE_Admin' ) ) {
 				'https://wordpress.org/support/plugin/black-studio-tinymce-widget' => __( 'Support', 'black-studio-tinymce-widget' ),
 				/* translators: text used for reviews link */
 				'https://wordpress.org/support/view/plugin-reviews/black-studio-tinymce-widget' => __( 'Rate', 'black-studio-tinymce-widget' ),
-				/* translators: text used for donation link */
-				'https://www.blackstudio.it/en/wordpress-plugins/black-studio-tinymce-widget/' => __( 'Donate', 'black-studio-tinymce-widget' ),
 			);
 		}
 
